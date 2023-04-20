@@ -20,11 +20,13 @@
             <div class="klikattava">
                 <img src="kuvat/Kojonperä.jpg" height="256px" width="256px" onclick="lisääKänniä(klikkausVoima)">
             </div>
+            <br>
             <button onclick="saveGame();">Tallenna</button>
         </center>
 
         <div class="sectionFooer">
             <h5>NSK Clicker</h5>
+            <button onclick="resetGame();">Reset</button>
         </div>
     </div>
 
@@ -57,6 +59,16 @@
                     <p><span id="mankinenHinta">1000</span> kännipisteet</p>
                 </td>
                 <td id="määrä"><span id="mankinen">0</span></td>
+            </tr>
+        </table>
+        <table class="valikko unselectable" onclick="ostaPropelleriHattuTony()">
+            <tr>
+                <td id="image"><img src="kuvat/Propellerihattu  Tony.jpg"></td>
+                <td id="hintaJaNimi">
+                    <p>Propellerihattu Tony</p>
+                    <p><span id="propelleriHattuTonyHinta">10000</span> kännipisteet</p>
+                </td>
+                <td id="määrä"><span id="propelleriHattuTony">0</span></td>
             </tr>
         </table>
 

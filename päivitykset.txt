@@ -9,3 +9,6 @@ kaiken näköstä polishia
 
  0.0.4
  JÄRJETTÖMÄN taistelun jälkee savetoimii!
+
+ 0.0.5
+ uusi generaattori ja testataan resettaako pisteet kun pistän githubiin
