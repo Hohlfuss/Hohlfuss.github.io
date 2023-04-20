@@ -1,4 +1,4 @@
-var klikkausVoima = 100; // muista muuttaa
+var klikkausVoima = 1; // muista muuttaa
 var känniPisteet = 0;
 var tonninSeteliTonyHinta = 15;
 var tonninSeteliTony = 0;
@@ -60,22 +60,21 @@ function päivitäkps() {
 }
 
 function loadGame() {
-    var savedGame = JSON.parse(localStorage.getItem("saveGame"));
-    if (typeof savedGame.känniPisteet !== "undefined") känniPisteet = savedGame.känniPisteet;
+    var savedGame = JSON.parse(localStorage.getItem("Gamesave"));
     if (typeof savedGame.klikkausVoima !== "undefined") klikkausVoima = savedGame.klikkausVoima;
+    if (typeof savedGame.känniPisteet !== "undefined") känniPisteet = savedGame.känniPisteet;
     if (typeof savedGame.tonninSeteliTonyHinta !== "undefined") tonninSeteliTonyHinta = savedGame.tonninSeteliTonyHinta;
     if (typeof savedGame.tonninSeteliTony !== "undefined") tonninSeteliTony = savedGame.tonninSeteliTony;
     if (typeof savedGame.tonninSeteliVilleHinta !== "undefined") tonninSeteliVilleHinta = savedGame.tonninSeteliVilleHinta;
     if (typeof savedGame.tonninSeteliVille !== "undefined") tonninSeteliVille = savedGame.tonninSeteliVille;
     if (typeof savedGame.mankinenHinta !== "undefined") mankinenHinta = savedGame.mankinenHinta;
     if (typeof savedGame.mankinen !== "undefined") mankinen = savedGame.mankinen;
-    
 }
 
 function saveGame() {
     var gameSave = {
-        känniPisteet: känniPisteet,
         klikkausVoima: klikkausVoima,
+        känniPisteet: känniPisteet,
         tonninSeteliTonyHinta: tonninSeteliTonyHinta,
         tonninSeteliTony: tonninSeteliTony,
         tonninSeteliVilleHinta: tonninSeteliVilleHinta,
@@ -88,6 +87,10 @@ function saveGame() {
 
 window.onload = function() {
     loadGame();
+    päivitäkps();
+    document.getElementById("känniPisteet").innerHTML = känniPisteet;
+    document.getElementById("mankinenHinta").innerHTML = mankinenHinta;
+    document.getElementById("mankinen").innerHTML = mankinen;
 };
 
 setInterval (function() {
