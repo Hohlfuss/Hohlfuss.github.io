@@ -59,10 +59,23 @@ function päivitäkps() {
 
 }
 
+function loadGame() {
+    var savedGame = JSON.parse(localStorage.getItem("saveGame"));
+    if (typeof savedGame.känniPisteet !== "undefined") känniPisteet = savedGame.känniPisteet;
+    if (typeof savedGame.klikkausVoima !== "undefined") klikkausVoima = savedGame.klikkausVoima;
+    if (typeof savedGame.tonninSeteliTonyHinta !== "undefined") tonninSeteliTonyHinta = savedGame.tonninSeteliTonyHinta;
+    if (typeof savedGame.tonninSeteliTony !== "undefined") tonninSeteliTony = savedGame.tonninSeteliTony;
+    if (typeof savedGame.tonninSeteliVilleHinta !== "undefined") tonninSeteliVilleHinta = savedGame.tonninSeteliVilleHinta;
+    if (typeof savedGame.tonninSeteliVille !== "undefined") tonninSeteliVille = savedGame.tonninSeteliVille;
+    if (typeof savedGame.mankinenHinta !== "undefined") mankinenHinta = savedGame.mankinenHinta;
+    if (typeof savedGame.mankinen !== "undefined") mankinen = savedGame.mankinen;
+    
+}
+
 function saveGame() {
     var gameSave = {
-        klikkausVoima: klikkausVoima,
         känniPisteet: känniPisteet,
+        klikkausVoima: klikkausVoima,
         tonninSeteliTonyHinta: tonninSeteliTonyHinta,
         tonninSeteliTony: tonninSeteliTony,
         tonninSeteliVilleHinta: tonninSeteliVilleHinta,
@@ -72,6 +85,10 @@ function saveGame() {
     };
     localStorage.setItem("gameSave", JSON.stringify(gameSave));
 }
+
+window.onload = function() {
+    loadGame();
+};
 
 setInterval (function() {
     känniPisteet = känniPisteet + tonninSeteliTony;
@@ -83,6 +100,5 @@ setInterval (function() {
 
 setInterval (function() {
     saveGame();
-}, 30000 // 30sekkaa
-)
+}, 30000); // 30 sekkaa
 
