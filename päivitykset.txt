@@ -6,3 +6,6 @@ vitun css piti laittaa tony ja ville toimii ja näyttää paremmalta
 
 0.0.31
 kaiken näköstä polishia
+
+ 0.0.4
+ JÄRJETTÖMÄN taistelun jälkee savetoimii!

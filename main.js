@@ -60,7 +60,7 @@ function päivitäkps() {
 }
 
 function loadGame() {
-    var savedGame = JSON.parse(localStorage.getItem("Gamesave"));
+    var savedGame = JSON.parse(localStorage.getItem("gameSave"));
     if (typeof savedGame.klikkausVoima !== "undefined") klikkausVoima = savedGame.klikkausVoima;
     if (typeof savedGame.känniPisteet !== "undefined") känniPisteet = savedGame.känniPisteet;
     if (typeof savedGame.tonninSeteliTonyHinta !== "undefined") tonninSeteliTonyHinta = savedGame.tonninSeteliTonyHinta;
