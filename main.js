@@ -89,8 +89,13 @@ window.onload = function() {
     loadGame();
     päivitäkps();
     document.getElementById("känniPisteet").innerHTML = känniPisteet;
+    document.getElementById("tonninSeteliTonyHinta").innerHTML = tonninSeteliTonyHinta;
+    document.getElementById("tonninSeteliTony").innerHTML = tonninSeteliTony;
+    document.getElementById("tonninSeteliVilleHinta").innerHTML = tonninSeteliVilleHinta;
+    document.getElementById("tonninSeteliVille").innerHTML = tonninSeteliVille;
     document.getElementById("mankinenHinta").innerHTML = mankinenHinta;
     document.getElementById("mankinen").innerHTML = mankinen;
+    
 };
 
 setInterval (function() {
