@@ -22,9 +22,9 @@ body {
 }
 
 .klikattava  img {
-    position: relative;
-    width: 500px;
-    height: 400px;
+    position8: relative;
+    width: 488px;
+    height: 360px;
     transition: all .2s ease-in-out;
 
 }
@@ -37,7 +37,7 @@ body {
     transition: all .2s ease-in-out;
     border-radius: 10px;
     width: 100%;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     margin: 10px 0px 10px 0px;
 }
 
