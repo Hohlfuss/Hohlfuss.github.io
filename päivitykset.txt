@@ -12,3 +12,6 @@ kaiken näköstä polishia
 
  0.0.5
  uusi generaattori ja testataan resettaako pisteet kun pistän githubiin
+
+ 0.0.6 
+ kokopäivä koodausta hukkaan mutta lopuks pari pientä muutostas
