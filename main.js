@@ -38,7 +38,7 @@ function ostaTonninSeteliVille() {
 }
 
 function ostaMankinen() {
-    if (känniPisteet >= mankinen) {
+    if (känniPisteet >= mankinenHinta) {
         känniPisteet = känniPisteet - mankinenHinta;
         mankinen = mankinen + 1;
         mankinenHinta = Math.round(mankinenHinta * 1.50);
@@ -69,7 +69,7 @@ function lisääKänniä(känninMäärä) {
 }
 
 function päivitäkps() {
-    kps = tonninSeteliTony + tonninSeteliVille * 5 + mankinen * 50 + propelleriHattuTony * 100;
+    kps = tonninSeteliTony + tonninSeteliVille * 3 + mankinen * 20 + propelleriHattuTony * 50;
     document.getElementById("kps").innerHTML = kps;
 
 }
@@ -129,9 +129,9 @@ window.onload = function() {
 
 setInterval (function() {
     känniPisteet = känniPisteet + tonninSeteliTony;
-    känniPisteet = känniPisteet + tonninSeteliVille * 5;
-    känniPisteet = känniPisteet + mankinen * 50;
-    känniPisteet = känniPisteet + propelleriHattuTony * 100;
+    känniPisteet = känniPisteet + tonninSeteliVille * 3;
+    känniPisteet = känniPisteet + mankinen * 20;
+    känniPisteet = känniPisteet + propelleriHattuTony * 50;
     document.getElementById("känniPisteet").innerHTML = känniPisteet;
 
 }, 1000); //1000ms = 1 sekunti
