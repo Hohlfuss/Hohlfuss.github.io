@@ -10,6 +10,8 @@ var propelleriHattuTonyHinta = 10000
 var propelleriHattuTony = 0;
 var lihaksetHinta = 100000;
 var lihakset = 0;
+var rikuRillaaHinta = 1000000
+var rikuRillaa = 0;
 
 
 
@@ -78,13 +80,26 @@ function ostaLihakset() {
     }
 }
 
+function ostaRikuRillaa() {
+    if (känniPisteet >= rikuRillaaHinta) {
+        känniPisteet = känniPisteet - rikuRillaaHinta;
+        rikuRillaa = rikuRillaa + 1;
+        rikuRillaaHinta = Math.round(rikuRillaaHinta * 2.50);
+
+        document.getElementById("känniPisteet").innerHTML = känniPisteet;
+        document.getElementById("rikuRillaaHinta").innerHTML = rikuRillaaHinta;
+        document.getElementById("rikuRillaa").innerHTML = rikuRillaa;
+        päivitäkps();
+    }
+}
+
 function lisääKänniä(känninMäärä) {
     känniPisteet = känniPisteet + känninMäärä;
     document.getElementById("känniPisteet").innerHTML = känniPisteet;
 }
 
 function päivitäkps() {
-    kps = tonninSeteliTony + tonninSeteliVille * 3 + mankinen * 20 + propelleriHattuTony * 50 + lihakset * 100;
+    kps = tonninSeteliTony + tonninSeteliVille * 3 + mankinen * 20 + propelleriHattuTony * 50 + lihakset * 100 + rikuRillaa * 250;
     document.getElementById("kps").innerHTML = kps;
 
 }
@@ -103,6 +118,8 @@ function loadGame() {
     if (typeof savedGame.propelleriHattuTony !== "undefined") propelleriHattuTony = savedGame.propelleriHattuTony;
     if (typeof savedGame.lihaksetHinta !== "undefined") lihaksetHinta = savedGame.lihaksetHinta;
     if (typeof savedGame.lihakset !== "undefined") lihakset = savedGame.lihakset;
+    if (typeof savedGame.rikuRillaaHinta !== "undefined") rikuRillaaHinta = savedGame.lrikuRillaaHinta;
+    if (typeof savedGame.rikuRillaa !== "undefined") liharikuRillaakset = savedGame.rikuRillaa;
 }
 
 function saveGame() {
@@ -118,7 +135,9 @@ function saveGame() {
         propelleriHattuTonyHinta: propelleriHattuTonyHinta,
         propelleriHattuTony: propelleriHattuTony,
         lihaksetHinta: lihaksetHinta,
-        lihakset: lihakset
+        lihakset: lihakset,
+        rikuRillaaHinta: rikuRillaaHinta,
+        rikuRillaa: rikuRillaa
     };
     localStorage.setItem("gameSave", JSON.stringify(gameSave));
 }
@@ -145,6 +164,8 @@ window.onload = function() {
     document.getElementById("propelleriHattuTony").innerHTML = propelleriHattuTony;
     document.getElementById("lihaksetyHinta").innerHTML = lihaksetHinta;
     document.getElementById("lihakset").innerHTML = lihakset;
+    document.getElementById("rikuRillaaHinta").innerHTML = rikuRillaaHinta;
+    document.getElementById("rikuRillaa").innerHTML = rikuRillaa;
     
 };
 
@@ -154,6 +175,7 @@ setInterval (function() {
     känniPisteet = känniPisteet + mankinen * 20;
     känniPisteet = känniPisteet + propelleriHattuTony * 50;
     känniPisteet = känniPisteet + lihakset * 100;
+    känniPisteet = känniPisteet + rikuRillaa * 250;
     document.getElementById("känniPisteet").innerHTML = känniPisteet;
 
 }, 1000); //1000ms = 1 sekunti

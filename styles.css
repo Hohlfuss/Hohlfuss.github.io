@@ -22,9 +22,9 @@ body {
 }
 
 .klikattava  img {
-    position8: relative;
-    width: 488px;
-    height: 360px;
+    position: relative;
+    width: 333px;
+    height: 222px;
     transition: all .2s ease-in-out;
 
 }
@@ -51,8 +51,8 @@ body {
 }
 
 .valikko img {
-    height: 120px;
-    width: 120px;
+    height: 80px;
+    width: 100px;
 }
 
 .valikko #hintaJaNimi p {
@@ -72,11 +72,13 @@ body {
 }
 
 .sectionFooter {
-    margin-top: 20%;
+    margin-top: 15%;
+    color: aliceblue;
 }
 
 .unselectable {
     user-select: none;
 }
+
 
     
