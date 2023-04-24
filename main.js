@@ -4,7 +4,7 @@ var game = {
     score: 0,
     totalScore: 0,
     totalClicks: 0,
-    clickValue: 10000,
+    clickValue: 1,
     version: 0.001,
     
     addToScore: function(amount) {
