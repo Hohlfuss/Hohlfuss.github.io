@@ -18,3 +18,7 @@ kaiken näköstä polishia
 
  0.061
  pikku polish josolis parempi puhelimella
+
+0.2.1
+kaikki javaScript aivan uusiksi kaikki on objecteja ja arreytä ja on vitusti helpompi lisätä kaikkee. 
+myös tuli upgrade napit mutta niitä on vasta 2 kappaletta 2 ekaaan generaattoriin. 

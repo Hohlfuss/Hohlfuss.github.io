@@ -1,146 +1,227 @@
-var klikkausVoima = 1; // muista muuttaa
-var känniPisteet = 0;
-var tonninSeteliTonyHinta = 15;
-var tonninSeteliTony = 0;
-var tonninSeteliVilleHinta = 100;
-var tonninSeteliVille = 0;
-var mankinenHinta = 1000;
-var mankinen = 0;
-var propelleriHattuTonyHinta = 10000
-var propelleriHattuTony = 0;
-var lihaksetHinta = 100000;
-var lihakset = 0;
-var rikuRillaaHinta = 1000000
-var rikuRillaa = 0;
 
 
+var game = {
+    score: 0,
+    totalScore: 0,
+    totalClicks: 0,
+    clickValue: 10000,
+    version: 0.001,
+    
+    addToScore: function(amount) {
+        this.score += amount;
+        this.totalScore += amount;
+        display.updateScore();
+    },
 
-function ostaTonninSeteliTony() {
-    if (känniPisteet >= tonninSeteliTonyHinta) {
-        känniPisteet = känniPisteet - tonninSeteliTonyHinta;
-        tonninSeteliTony = tonninSeteliTony + 1;
-        tonninSeteliTonyHinta = Math.round(tonninSeteliTonyHinta * 1.15);
-
-        document.getElementById("känniPisteet").innerHTML = känniPisteet;
-        document.getElementById("tonninSeteliTonyHinta").innerHTML = tonninSeteliTonyHinta;
-        document.getElementById("tonninSeteliTony").innerHTML = tonninSeteliTony;
-        päivitäkps();
+    getScorePerSecond: function() {
+        var scorePerSecond = 0;
+        for (i = 0; i < building.name.length; i++) {
+            scorePerSecond += building.income[i] * building.count[i];
+        }
+        return scorePerSecond;
     }
-}
 
-function ostaTonninSeteliVille() {
-    if (känniPisteet >= tonninSeteliVilleHinta) {
-        känniPisteet = känniPisteet - tonninSeteliVilleHinta;
-        tonninSeteliVille = tonninSeteliVille + 1;
-        tonninSeteliVilleHinta = Math.round(tonninSeteliVilleHinta * 1.20);
+};
 
-        document.getElementById("känniPisteet").innerHTML = känniPisteet;
-        document.getElementById("tonninSeteliVilleHinta").innerHTML = tonninSeteliVilleHinta;
-        document.getElementById("tonninSeteliVille").innerHTML = tonninSeteliVille;
-        päivitäkps();
+var building = {
+    name: [
+        "TonninSeteliTony",
+        "TonninSeteliVille",
+        "PropelleriHattuTony",
+        "Markus",
+        "Kim",
+        "Lihakset",
+        "RikuRillaa",
+        "RommiaVesipyssyllä"
+    ],
+    image: [
+        "tony.jpg",
+        "ville.jpg",
+        "propelleriHattuTony.jpg",
+        "markus.jpg",
+        "kim.jpg",
+        "lihakset.jpg",
+        "rikuRillaa.jpg",
+        "rommia.jpg"
+    ],
+    count: [0, 0, 0, 0, 0, 0, 0, 0],
+    income: [
+        1,
+        3,
+        5,
+        10,
+        20,
+        50,
+        100,
+        200
+    ],
+    cost: [
+        10,
+        300,
+        750,
+        1800,
+        5000,
+        20000,
+        100000,
+        1000000
+    ],
+
+    purchase: function(index) {
+        if(game.score >= this.cost[index]) {
+            game.score -= this.cost[index];
+            this.count[index]++;
+            this.cost[index] = parseInt(this.cost[index]) * 1.20;
+            display.updateScore();
+            display.updateShop();
+            display.updateUpgrades();
+        }
     }
-}
+};
 
-function ostaMankinen() {
-    if (känniPisteet >= mankinenHinta) {
-        känniPisteet = känniPisteet - mankinenHinta;
-        mankinen = mankinen + 1;
-        mankinenHinta = Math.round(mankinenHinta * 1.50);
+var upgrade = {
+    name: [
+        "TonyUpgrade!",
+        "TonyUpgrade2!",
+        "VilleUpgrade!",
+        "VilleUpgrade2!"
+    ],
+    description: [
+        "TonninSeteliTonyt ovat tuplasti tehokkaampia",
+        "TonninSeteliTonyt ovat tuplasti tehokkaampia",
+        "TonninSeteliVillet ovat tuplasti tehokkaampia",
+        "TonninSeteliVillet ovat tuplasti tehokkaampia"
+    ],
+    image: [
+        "tonyUpgrade.jpg",
+        "tonyUpgrade2.jpg",
+        "villeUpgrade.jpg",
+        "villeUpgrade2.jpg"
+    ],
+    type: [
+        "building",
+        "building",
+        "building",
+        "building"
 
-        document.getElementById("känniPisteet").innerHTML = känniPisteet;
-        document.getElementById("mankinenHinta").innerHTML = mankinenHinta;
-        document.getElementById("mankinen").innerHTML = mankinen;
-        päivitäkps();
+    ],
+    cost: [
+        "3000",
+        "6000",
+        "6000",
+        "12000"
+    ],
+    buildingIndex: [
+        0,
+        0,
+        1,
+        1
+    ],
+    requirement: [
+        5,
+        10,
+        5,
+        10
+    ],
+    bonus: [
+        2,
+        2,
+        2,
+        2
+    ],
+    purchased: [false, false, false, false],
+
+    purchase: function(index) {
+        if (!this.purchased[index] && game.score >= this.cost[index]) {
+            if (this.type[index] == "building" && building.count [this.buildingIndex[index]] >= this.requirement[index]) {
+                game.score -= this.cost[index];
+                building.income[this.buildingIndex[index]] *= this.bonus[index];
+                this.purchased[index] = true;
+
+                display.updateUpgrades();
+                display.updateScore();
+            } else if (this.type[index] == "click" && game.totalClicks >= this.requirement[index]) {
+                game.score -= this.cost[index];
+                game.clickValue *= this.bonus[index];
+                this.purchased[index] = true;
+
+                display.updateUpgrades();
+                display.updateScore();
+            }
+        }
     }
-}
+};
 
-function ostaPropelleriHattuTony() {
-    if (känniPisteet >= propelleriHattuTonyHinta) {
-        känniPisteet = känniPisteet - propelleriHattuTonyHinta;
-        propelleriHattuTony = propelleriHattuTony + 1;
-        propelleriHattuTonyHinta = Math.round(propelleriHattuTonyHinta * 2);
+var display = {
+    updateScore: function() {
+        document.getElementById("score").innerHTML = game.score.toFixed(0);
+        document.getElementById("scorepersecond").innerHTML = game.getScorePerSecond();
+        document.title = game.score.toFixed(0) + "Kännipistettä - NSK clicker"
+    },
 
-        document.getElementById("känniPisteet").innerHTML = känniPisteet;
-        document.getElementById("propelleriHattuTonyHinta").innerHTML = propelleriHattuTonyHinta;
-        document.getElementById("propelleriHattuTony").innerHTML = propelleriHattuTony;
-        päivitäkps();
+    updateShop: function() {
+        document.getElementById("shopContainer").innerHTML = "";
+        for (i = 0; i < building.name.length; i++) {
+            document.getElementById("shopContainer").innerHTML += '<table class="shopButton unselectable" onclick="building.purchase('+i+')"><tr><td id="image"><img src="images/'+building.image[i]+'"></td><td id="nameAndCost"><p>'+building.name[i]+'</p><p><span>'+building.cost[i].toFixed(0)+'</span>kännipistettä</p></td><td id="amount"><span>'+building.count[i]+'</span></td></tr></table>';
+        }
+    },
+
+    updateUpgrades: function() {
+        document.getElementById("upgradeContainer").innerHTML = "";
+        for (i = 0; i < upgrade.name.length; i++) {
+            if (!upgrade.purchased[i]) {
+                if (upgrade.type[i] == "building" && building.count[upgrade.buildingIndex[i]] >= upgrade.requirement[i]) {
+                    document.getElementById("upgradeContainer").innerHTML += '<img src="images/'+upgrade.image[i]+'"title="'+upgrade.name[i]+' &#10; '+upgrade.description[i]+' &#10; ('+upgrade.cost[i]+' kännipistettä)" onclick="upgrade.purchase('+i+')">';
+                } else if (upgrade.type[i] == "click" && game.totalClicks >= upgrade.requirement[i]) {
+                    document.getElementById("upgradeContainer").innerHTML += '<img src="images/'+upgrade.image[i]+'"title="'+upgrade.name[i]+' &#10; '+upgrade.description[i]+' &#10; ('+upgrade.cost[i]+' kännipistettä)" onclick="upgrade.purchase('+i+')">';
+                }
+            }
+        }
     }
-}
+};
 
-function ostaLihakset() {
-    if (känniPisteet >= lihaksetHinta) {
-        känniPisteet = känniPisteet - lihaksetHinta;
-        lihakset = lihakset + 1;
-        lihaksetHinta = Math.round(lihaksetHinta * 2.20);
-
-        document.getElementById("känniPisteet").innerHTML = känniPisteet;
-        document.getElementById("lihaksetHinta").innerHTML = lihaksetHinta;
-        document.getElementById("lihakset").innerHTML = lihakset;
-        päivitäkps();
-    }
-}
-
-function ostaRikuRillaa() {
-    if (känniPisteet >= rikuRillaaHinta) {
-        känniPisteet = känniPisteet - rikuRillaaHinta;
-        rikuRillaa = rikuRillaa + 1;
-        rikuRillaaHinta = Math.round(rikuRillaaHinta * 2.50);
-
-        document.getElementById("känniPisteet").innerHTML = känniPisteet;
-        document.getElementById("rikuRillaaHinta").innerHTML = rikuRillaaHinta;
-        document.getElementById("rikuRillaa").innerHTML = rikuRillaa;
-        päivitäkps();
-    }
-}
-
-function lisääKänniä(känninMäärä) {
-    känniPisteet = känniPisteet + känninMäärä;
-    document.getElementById("känniPisteet").innerHTML = känniPisteet;
-}
-
-function päivitäkps() {
-    kps = tonninSeteliTony + tonninSeteliVille * 3 + mankinen * 20 + propelleriHattuTony * 50 + lihakset * 100 + rikuRillaa * 250;
-    document.getElementById("kps").innerHTML = kps;
-
+function saveGame() {
+    var gameSave = {
+        score: game.score,
+        totalScore: game.totalScore,
+        totalClicks: game.totalClicks,
+        clickValue: game.clickValue,
+        version: game.version,
+        buildingCount: building.count,
+        buildingIncome: building.income,
+        buildingCost: building.cost,
+        upgradePurchased: upgrade.purchased
+    };
+    localStorage.setItem("gameSave", JSON.stringify(gameSave));
 }
 
 function loadGame() {
     var savedGame = JSON.parse(localStorage.getItem("gameSave"));
-    if (typeof savedGame.klikkausVoima !== "undefined") klikkausVoima = savedGame.klikkausVoima;
-    if (typeof savedGame.känniPisteet !== "undefined") känniPisteet = savedGame.känniPisteet;
-    if (typeof savedGame.tonninSeteliTonyHinta !== "undefined") tonninSeteliTonyHinta = savedGame.tonninSeteliTonyHinta;
-    if (typeof savedGame.tonninSeteliTony !== "undefined") tonninSeteliTony = savedGame.tonninSeteliTony;
-    if (typeof savedGame.tonninSeteliVilleHinta !== "undefined") tonninSeteliVilleHinta = savedGame.tonninSeteliVilleHinta;
-    if (typeof savedGame.tonninSeteliVille !== "undefined") tonninSeteliVille = savedGame.tonninSeteliVille;
-    if (typeof savedGame.mankinenHinta !== "undefined") mankinenHinta = savedGame.mankinenHinta;
-    if (typeof savedGame.mankinen !== "undefined") mankinen = savedGame.mankinen;
-    if (typeof savedGame.propelleriHattuTonyHinta !== "undefined") propelleriHattuTonyHinta = savedGame.propelleriHattuTonyHinta;
-    if (typeof savedGame.propelleriHattuTony !== "undefined") propelleriHattuTony = savedGame.propelleriHattuTony;
-    if (typeof savedGame.lihaksetHinta !== "undefined") lihaksetHinta = savedGame.lihaksetHinta;
-    if (typeof savedGame.lihakset !== "undefined") lihakset = savedGame.lihakset;
-    if (typeof savedGame.rikuRillaaHinta !== "undefined") rikuRillaaHinta = savedGame.lrikuRillaaHinta;
-    if (typeof savedGame.rikuRillaa !== "undefined") liharikuRillaakset = savedGame.rikuRillaa;
-}
-
-function saveGame() {
-    var gameSave = {
-        klikkausVoima: klikkausVoima,
-        känniPisteet: känniPisteet,
-        tonninSeteliTonyHinta: tonninSeteliTonyHinta,
-        tonninSeteliTony: tonninSeteliTony,
-        tonninSeteliVilleHinta: tonninSeteliVilleHinta,
-        tonninSeteliVille: tonninSeteliVille,
-        mankinenHinta: mankinenHinta,
-        mankinen: mankinen,
-        propelleriHattuTonyHinta: propelleriHattuTonyHinta,
-        propelleriHattuTony: propelleriHattuTony,
-        lihaksetHinta: lihaksetHinta,
-        lihakset: lihakset,
-        rikuRillaaHinta: rikuRillaaHinta,
-        rikuRillaa: rikuRillaa
-    };
-    localStorage.setItem("gameSave", JSON.stringify(gameSave));
-}
+    if(localStorage.getItem("gameSave") !== null) {
+        if (typeof savedGame.score !=="undefined") game.score = savedGame.score;
+        if (typeof savedGame.totalScore !=="undefined") game.totalScore = savedGame.totalScore;
+        if (typeof savedGame.totalClicks !=="undefined") game.totalClicks = savedGame.totalClicks;
+        if (typeof savedGame.clickValue !=="undefined") game.clickValue = savedGame.clickValue;
+        if (typeof savedGame.buildingCount !=="undefined") game.buildingCount = savedGame.buildingCount;
+            for (i = 0; i < savedGame.buildingCount.length; i++) {
+                building.count[i] = savedGame.buildingCount[i];
+            }
+        }
+        if (typeof savedGame.buildingIncome !== "undefined") {
+            for (i = 0; i < savedGame.buildingIncome.length; i++) {
+                building.income[i] = savedGame.buildingIncome[i];
+            }
+        }
+        if (typeof savedGame.buildingCost !== "undefined") {
+            for (i = 0; i < savedGame.buildingCost.length; i++) {
+                building.cost[i] = savedGame.buildingCost[i];
+            }
+        } 
+        if (typeof savedGame.upgradePurchased !== "undefined") {
+            for (i = 0; i < savedGame.upgradePurchased.length; i++) {
+                upgrade.purchased[i] = savedGame.upgradePurchased[i];
+            }
+        }   
+    }    
 
 function resetGame() {
     if (confirm("Oletko rumilus varma että haluat nollata pelin?")) {
@@ -150,37 +231,29 @@ function resetGame() {
     }
 }
 
+document.getElementById("clicker").addEventListener("click", function() {
+    game.totalClicks++;
+    game.addToScore(game.clickValue);
+}, false);
+
 window.onload = function() {
     loadGame();
-    päivitäkps();
-    document.getElementById("känniPisteet").innerHTML = känniPisteet;
-    document.getElementById("tonninSeteliTonyHinta").innerHTML = tonninSeteliTonyHinta;
-    document.getElementById("tonninSeteliTony").innerHTML = tonninSeteliTony;
-    document.getElementById("tonninSeteliVilleHinta").innerHTML = tonninSeteliVilleHinta;
-    document.getElementById("tonninSeteliVille").innerHTML = tonninSeteliVille;
-    document.getElementById("mankinenHinta").innerHTML = mankinenHinta;
-    document.getElementById("mankinen").innerHTML = mankinen;
-    document.getElementById("propelleriHattuTonyHinta").innerHTML = propelleriHattuTonyHinta;
-    document.getElementById("propelleriHattuTony").innerHTML = propelleriHattuTony;
-    document.getElementById("lihaksetyHinta").innerHTML = lihaksetHinta;
-    document.getElementById("lihakset").innerHTML = lihakset;
-    document.getElementById("rikuRillaaHinta").innerHTML = rikuRillaaHinta;
-    document.getElementById("rikuRillaa").innerHTML = rikuRillaa;
-    
+    display.updateScore();
+    display.updateUpgrades();
+    display.updateShop();
 };
 
-setInterval (function() {
-    känniPisteet = känniPisteet + tonninSeteliTony;
-    känniPisteet = känniPisteet + tonninSeteliVille * 3;
-    känniPisteet = känniPisteet + mankinen * 20;
-    känniPisteet = känniPisteet + propelleriHattuTony * 50;
-    känniPisteet = känniPisteet + lihakset * 100;
-    känniPisteet = känniPisteet + rikuRillaa * 250;
-    document.getElementById("känniPisteet").innerHTML = känniPisteet;
+setInterval(function() {
+    game.score += game.getScorePerSecond();
+    game.totalScore += game.getScorePerSecond();
+    display.updateScore();
+}, 1000); // 1 sekka
 
-}, 1000); //1000ms = 1 sekunti
+setInterval (function() {
+    display.updateScore();
+    display.updateUpgrades();
+}, 10000); 
 
 setInterval (function() {
     saveGame();
-}, 30000); // 30 sekkaa
-
+}, 30000); // 30 sekk

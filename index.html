@@ -4,93 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NSK clicker/idle/incremental</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="main.js"></script>
-    
+    <title>NSK clicker</title>
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <div class="vasen">
+    <div class="sectionLeft">
         <center>
-            <div class="pistelaatikko unselectable">
-                <span id="känniPisteet">0</span> Kännipisteet<br>
-                <span id="kps">0</span> kps
+            <div class="scoreContainer unselectable">
+                <span id="score">0</span> kännipistettä<br>
+                <span id="scorepersecond">0</span>kps
             </div>
             <br>
-            <div class="klikattava">
-                <img src="kuvat/tänääKaljaa.jpg" height="256px" width="256px" onclick="lisääKänniä(klikkausVoima)">
+            <div class="clickContainer unselectable">
+                <img src="images/Kojonperä.jpg" height="296px" width="256px" id="clicker">
+                <br>
+            
             </div>
-            <br>
-            <button onclick="saveGame();">Tallenna</button>
         </center>
+
         <div class="sectionFooter">
             <h5>NSK Clicker</h5>
-            <button onclick="resetGame();">Reset</button>
+            <button onclick="resetGame();">Resettaa</button>
+            <p> tässä on kyllä 30 sekunnin välein auto savekin</p>
+            <br>
+            <button onclick="saveGame();">Tallenna</button>
         </div>
     </div>
 
-    <div class="oikea">
-        <table class="valikko unselectable" onclick="ostaTonninSeteliTony()">
-            <tr>
-                <td id="image"><img src="kuvat/tony.jpg"></td>
-                <td id="hintaJaNimi">
-                    <p>TonninSeteliTony</p>
-                    <p><span id="tonninSeteliTonyHinta">15</span> kännipisteet</p>
-                </td>
-                <td id="määrä"><span id="tonninSeteliTony">0</span></td>
-            </tr>
-        </table>
-        <table class="valikko unselectable" onclick="ostaTonninSeteliVille()">
-            <tr>
-                <td id="image"><img src="kuvat/ville.jpg"></td>
-                <td id="hintaJaNimi">
-                    <p>TonninSeteliVille</p>
-                    <p><span id="tonninSeteliVilleHinta">100</span> kännipisteet</p>
-                </td>
-                <td id="määrä"><span id="tonninSeteliVille">0</span></td>
-            </tr>
-        </table>
-        <table class="valikko unselectable" onclick="ostaMankinen()">
-            <tr>
-                <td id="image"><img src="kuvat/markus.jpg"></td>
-                <td id="hintaJaNimi">
-                    <p>Mankinen</p>
-                    <p><span id="mankinenHinta">1000</span> kännipisteet</p>
-                </td>
-                <td id="määrä"><span id="mankinen">0</span></td>
-            </tr>
-        </table>
-        <table class="valikko unselectable" onclick="ostaPropelleriHattuTony()">
-            <tr>
-                <td id="image"><img src="kuvat/propelleriHattuTony.jpg"></td>
-                <td id="hintaJaNimi">
-                    <p>Propellerihattu Tony</p>
-                    <p><span id="propelleriHattuTonyHinta">10000</span> kännipisteet</p>
-                </td>
-                <td id="määrä"><span id="propelleriHattuTony">0</span></td>
-            </tr>
-        </table>
-        <table class="valikko unselectable" onclick="ostaLihakset()">
-            <tr> 
-                <td id="image"><img src="kuvat/lihakset.jpg""></td>
-                <td id="hintaJaNimi">
-                    <p>Lihakset</p>
-                    <p><span id="lihakset">100000</span> kännipisteet</p>
-                </td>
-                <td id="määrä"><span id="lihakset">0</span></td>
-            </tr>
-        </table>
-        <table class="valikko unselectable" onclick="ostaRikuRillaa()">
-            <tr> 
-                <td id="image"><img src="kuvat/rikuRillaa.jpg""></td>
-                <td id="hintaJaNimi">
-                    <p>Riku Grillaa</p>
-                    <p><span id="rikuRillaa">1000000</span> kännipisteet</p>
-                </td>
-                <td id="määrä"><span id="rikuRillaa">0</span></td>
-            </tr>
-        </table>
-
-
+    <div class="sectionRight">
+        <div id="upgradeContainer"></div>
+        <div id="shopContainer"></div>
+    </div>
+    <script src="main.js"></script>
+    
 </body>
 </html>
