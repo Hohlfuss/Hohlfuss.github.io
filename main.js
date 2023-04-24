@@ -70,7 +70,7 @@ var building = {
         if(game.score >= this.cost[index]) {
             game.score -= this.cost[index];
             this.count[index]++;
-            this.cost[index] = parseInt(this.cost[index]) * 1.20;
+            this.cost[index] = parseInt(this.cost[index]) * 1.50;
             display.updateScore();
             display.updateShop();
             display.updateUpgrades();
