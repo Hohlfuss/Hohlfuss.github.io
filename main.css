@@ -13,7 +13,8 @@ body {
 }
 
 .scoreContainer {
-    background-color: rgb(237, 19, 19);
+    color: aqua;
+    background-color: rgba(8, 6, 6, 0.118);
     width: 50%;
     padding: 10px;
     border-radius: 5px;
@@ -70,6 +71,8 @@ body {
 }
 
 .sectionFooter {
+    color: aqua;
+    width: 20%;
     margin-top: 20%;
 }
 
@@ -81,6 +84,6 @@ body {
 }
 
 #upgradeContainer img {
-    height: 128px;
-    width: 128px;
+    height: 50px;
+    width: 50px;
 }
