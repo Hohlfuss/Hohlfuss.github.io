@@ -15,6 +15,9 @@ body {
   border: 2px solid rgb(0, 0, 0);
   cursor: pointer;
   font-size: 22px;
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
 }
 
 .fighterButton #image {
@@ -64,6 +67,9 @@ header {
   font-size: 30px;
   color: rgb(255, 255, 255);
   text-align: center;
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
 }
 
 #upgradeContainer img {
@@ -74,4 +80,22 @@ header {
 #achievementContainer img {
   height: 64px;
   width: 64px;
+}
+
+#progressBarContainer {
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
+  height: 10px;
+  background-color: #ddd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.progressBar {
+  height: 100%;
+  background-color: #4CAF50;
+  border-radius: 4px;
+  width: 0%;
+  transition: width 0.5s ease;
 }

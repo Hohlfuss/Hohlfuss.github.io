@@ -9,7 +9,7 @@ const game = {
     getHampaitaPerSekunti: function () {
         this.hampaitaPerSekunti = this.totalPower * this.globalMulti;
         return this.hampaitaPerSekunti;
-    }
+    },
 };
 const fighter = {
     name: [
@@ -542,6 +542,43 @@ const fighter = {
         15,
         0
     ],
+    unlocked: [
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+    ],
     purchase: function (index) {
         if (game.hampaita >= this.cost[index]) {
             game.hampaita -= this.cost[index];
@@ -570,13 +607,34 @@ const upgrade = {
         "Sean O'malleylle T1 hanskat",
         "Jon Jonesille T1 hanskat",
         "Alexander Volkanovskille T1 hanskat",
+        "Alex Pereiraille T1 hanskat",
+        "Islam Makhacheville T1 hanskat",
+        "Max Hollowayille T1 hanskat",
+        "Tom Aspinallille T1 hanskat",
+        "Israel Adesanyalle T1 hanskat",
+        "Charles Oliveiralle T1 hanskat",
+        "Sean Stricklandille T1 hanskat",
+        "Justin Gaethjeille T1 hanskat",
+        "Dustin Poirierille T1 hanskat",
+        "Paulo Costalle T1 hanskat",
+        "Jiri Prochazkalle T1 hanskat",
+        "Johnny Walkerille T1 hanskat",
+        "Valentina Shevchenkolle T1 hanskat",
+        "Colby Covingtonille T2 hanskat",
+        "Kamaru Usmanille T1 hanskat",
+        "Shavkat Rakhmonoville T1 hanskat",
+        "Sean O'malleylle T1 hanskat",
+        "Jon Jonesille T1 hanskat",
+        "Alexander Volkanovskille T1 hanskat",
         "Colby Covingtonille T2 hanskat",
         "Kamaru Usmanille T2 hanskat",
         "Shavkat Rakhmonoville T2 hanskat",
         "Sean O'malleylle T2 hanskat",
         "Jon Jonesille T2 hanskat",
         "Alexander Volkanovskille T2 hanskat",
-        "työtön T1"
+        "työtön T1",
+        "työtön T2",
+        "työtön T3"
     ],
     description: [
         "Colby Covington 2x voimakkaampi",
@@ -585,12 +643,27 @@ const upgrade = {
         "Sean O'malley 2x voimakkaampi",
         "Jon Jones 2x voimakkaampi",
         "Alexander Volkanovski 2x voimakkaampi",
+        "Alex Pereira 2x voimakkaampi",
+        "Islam Makhachev 2x voimakkaampi",
+        "Max Holloway 2x voimakkaampi",
+        "Tom Aspinallille T1 hanskat",
+        "Israel Adesanya 2x voimakkaampi",
+        "Charles Oliveira 2x voimakkaampi",
+        "Sean Strickland 2x voimakkaampi",
+        "Justin Gaethji  2x voimakkaampi",
+        "Dustin Poirier 2x voimakkaampi",
+        "Paulo Costa 2x voimakkaampi",
+        "Jiri Prochazka 2x voimakkaampi",
+        "Johnny Walker 2x voimakkaampi",
+        "Valentina Shevchenko 2x voimakkaampi", ,
         "Colby Covington 2x voimakkaampi",
         "Kamaru Usman 2x voimakkaampi",
         "Shavkat Rakhmonov 2x voimakkaampi",
         "Sean O'malley 2x voimakkaampi",
         "Jon Jones 2x voimakkaampi",
         "Alexander Volkanovski 2x voimakkaampi",
+        "Hieman enemmän poweria",
+        "Hieman enemmän poweria",
         "Hieman enemmän poweria"
     ],
     image: [
@@ -606,6 +679,21 @@ const upgrade = {
         "t1Hanskat.png",
         "t1Hanskat.png",
         "t1Hanskat.png",
+        "t1Hanskat.png",
+        "t1Hanskat.png",
+        "t1Hanskat.png",
+        "t1Hanskat.png",
+        "t1Hanskat.png",
+        "t1Hanskat.png",
+        "t1Hanskat.png",
+        "t1Hanskat.png",
+        "t1Hanskat.png",
+        "t1Hanskat.png",
+        "t1Hanskat.png",
+        "t1Hanskat.png",
+        "t1Hanskat.png",
+        "t1Työtön.png",
+        "t1Työtön.png",
         "t1Työtön.png"
     ],
     type: [
@@ -621,6 +709,21 @@ const upgrade = {
         "fighter",
         "fighter",
         "fighter",
+        "fighter",
+        "fighter",
+        "fighter",
+        "fighter",
+        "fighter",
+        "fighter",
+        "fighter",
+        "fighter",
+        "fighter",
+        "fighter",
+        "fighter",
+        "fighter",
+        "fighter",
+        "click",
+        "click",
         "click"
     ],
     cost: [
@@ -630,13 +733,33 @@ const upgrade = {
         3000,
         3000,
         3000,
+        3000,
+        3000,
+        3000,
+        3000,
+        3000,
+        3000,
+        3000,
+        3000,
+        3000,
+        3000,
+        3000,
+        3000,
+        3000,
+        3000,
+        3000,
+        3000,
+        3000,
+        3000,
         12000,
         12000,
         12000,
         12000,
         12000,
         12000,
-        1000
+        1000,
+        20000,
+        300000
     ],
     fighterIndex: [
         0,
@@ -651,6 +774,21 @@ const upgrade = {
         9,
         10,
         11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        -1,
+        -1,
         -1
     ],
     requirement: [
@@ -660,13 +798,33 @@ const upgrade = {
         50,
         50,
         50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
         100,
         100,
         100,
         100,
         100,
         100,
-        100
+        100,
+        1000,
+        10000
     ],
     bonus: [
         2,
@@ -681,9 +839,57 @@ const upgrade = {
         2,
         2,
         2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1.1,
+        1.1,
         1.1
     ],
-    purchased: [false, false, false, false, false, false, false],
+    purchased: [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+    ],
     purchase: function (index) {
         if (!this.purchased[index] && game.hampaita >= this.cost[index]) {
             if (this.type[index] == "fighter" && fighter.level[this.fighterIndex[index]] >= this.requirement[index]) {
@@ -782,7 +988,9 @@ const display = {
     updatefighter: function () {
         document.getElementById("fighterContainer").innerHTML = "";
         for (let i = 0; i < fighter.name.length; i++) {
-            document.getElementById("fighterContainer").innerHTML += '<table class="fighterButton unselectable" onclick="fighter.purchase(' + i + ')"><tr><td id="image"><img src="./assets/' + fighter.image[i] + '"></td><td id="nameAndCost"><p>' + fighter.name[i] + '</p><p>Power: <span>' + (fighter.power[i] * fighter.level[i]).toFixed(2) + '</span></p><p><span>' + Math.trunc(fighter.cost[i]) + '</span> hammasta</p></td><td id="amount"><span>' + fighter.level[i] + '</span></td></tr></table>';
+            if (fighter.unlocked[i]) {
+                document.getElementById("fighterContainer").innerHTML += '<table class="fighterButton unselectable" onclick="fighter.purchase(' + i + ')"><tr><td id="image"><img src="./assets/' + fighter.image[i] + '"></td><td id="nameAndCost"><p>' + fighter.name[i] + '</p><p>Power: <span>' + (fighter.power[i] * fighter.level[i]).toFixed(2) + '</span></p><p><span>' + Math.trunc(fighter.cost[i]) + '</span> hammasta</p><div id="progressBarContainer"><div id="progressBar" class="progressBar"></div></div></td><td id="amount"><span>' + fighter.level[i] + '</span></td></tr></table>';
+            }
         }
     },
     updateUpgrades: function () {
@@ -807,7 +1015,7 @@ const display = {
           }
         }
           */
-    }
+    },
 };
 function saveGame() {
     let gameSave = {
@@ -891,7 +1099,6 @@ setInterval(() => {
 setInterval(() => {
     display.updateHampaita();
     display.updateUpgrades();
-    display.updatefighter();
 }, 10000);
 const clickerBtn = document.getElementById("clicker");
 clickerBtn.addEventListener("click", function () {
