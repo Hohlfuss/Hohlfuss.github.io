@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MMA Idle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body id="clicker">
+
+  <header>
+    <p>Hampaita: <span id="hampaita">0</span></p>
+    <p>Hampaita/s: <span id="hampaitaPerSekunti">0</span></p>
+  </header>
+
+  <div>
+    <div id="upgradeContainer"></div>
+    <div id="fighterContainer"></div>
+    <div id="achievementContainer"></div>
+  </div>
+
+  <button onclick="saveGame()">Save</button>
+  <button onclick="resetGame()">Reset</button>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
