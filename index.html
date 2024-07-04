@@ -12,13 +12,97 @@
 <body id="clicker">
 
   <header>
-    <p>Hampaita: <span id="hampaita">0</span></p>
-    <p>Hampaita/s: <span id="hampaitaPerSekunti">0</span></p>
+    <p>Hampaita: <span class="number" id="hampaita">0</span></p>
+    <p>Hampaita/s: <span class="number" id="hampaitaPerSekunti">0</span></p>
   </header>
 
   <div>
+    <div id="ascendContainer">
+      <div></div>
+    </div>
     <div id="upgradeContainer"></div>
-    <div id="fighterContainer"></div>
+    <div id="fighterContainer">
+      <div class="fighterButton unselectable" id="colbyCovington">
+        <table class="osta" id="colbyCovingtonOsta">
+          <tr>
+            <td class="image">
+              <img src="./assets/colbyCovington.png" alt="">
+            </td>
+            <td class="nameAndCost">
+              <p>Colby Covington</p>
+              <p>Total Power: <span id="colbyCovingtonTotalPower"></span></p>
+              <p>Power: <span id="colbyCovingtonPower"></span></p>
+              <p>Cost: <span id="colbyCovingtonCost" class="number"></span></p>
+            </td>
+            <td id="colbyCovingtonLevel" class="level"></td>
+          </tr>
+          <div class="progressBar" id="colbyCovingtonProgressBar">xp: <span id="colbyCovingtonCurrentXp">0</span>/<span id="colbyCovingtonMaxXp">0</span></div>
+        </table>
+        <div class="train" id="colbyCovingtonTrain">
+          <p>Train</p>
+        </div>
+      </div>
+      <div class="fighterButton unselectable" id="kamaruUsman">
+        <table class="osta" id="kamaruUsmanOsta">
+          <tr>
+            <td class="image">
+              <img src="./assets/kamaruUsman.png" alt="">
+            </td>
+            <td class="nameAndCost">
+              <p>Kamaru Usman</p>
+              <p>Total Power: <span id="kamaruUsmanTotalPower"></span></p>
+              <p>Power: <span id="kamaruUsmanPower"></span></p>
+              <p>Cost: <span id="kamaruUsmanCost" class="number"></span></p>
+            </td>
+            <td id="kamaruUsmanLevel" class="level"></td>
+          </tr>
+          <div class="progressBar" id="kamaruUsmanProgressBar">xp: <span id="kamaruUsmanCurrentXp">0</span>/<span id="kamaruUsmanMaxXp">0</span></div>
+        </table>
+        <div class="train" id="kamaruUsmanTrain">
+          <p>Train</p>
+        </div>
+      </div>
+      <div class="fighterButton unselectable" id="shavkatRakhmonov">
+        <table class="osta" id="shavkatRakhmonovOsta">
+          <tr>
+            <td class="image">
+              <img src="./assets/shavkatRakhmonov.png" alt="">
+            </td>
+            <td class="nameAndCost">
+              <p>Shavkat Rakhmonov</p>
+              <p>Total Power: <span id="shavkatRakhmonovTotalPower"></span></p>
+              <p>Power: <span id="shavkatRakhmonovPower"></span></p>
+              <p>Cost: <span id="shavkatRakhmonovCost" class="number"></span></p>
+            </td>
+            <td id="shavkatRakhmonovLevel" class="level"></td>
+          </tr>
+          <div class="progressBar" id="shavkatRakhmonovProgressBar">xp: <span id="shavkatRakhmonovCurrentXp">0</span>/<span id="shavkatRakhmonovMaxXp">0</span></div>
+        </table>
+        <div class="train" id="shavkatRakhmonovTrain">
+          <p>Train</p>
+        </div>
+      </div>
+      <div class="fighterButton unselectable" id="seanOmalley">
+        <table class="osta" id="seanOmalleyOsta">
+          <tr>
+            <td class="image">
+              <img src="./assets/seanOmalley.png" alt="">
+            </td>
+            <td class="nameAndCost">
+              <p>Sean O'malley</p>
+              <p>Total Power: <span id="seanOmalleyTotalPower"></span></p>
+              <p>Power: <span id="seanOmalleyPower"></span></p>
+              <p>Cost: <span id="seanOmalleyCost" class="number"></span></p>
+            </td>
+            <td id="seanOmalleyLevel" class="level"></td>
+          </tr>
+          <div class="progressBar" id="seanOmalleyProgressBar">xp: <span id="seanOmalleyCurrentXp">0</span>/<span id="seanOmalleyMaxXp">0</span></div>
+        </table>
+        <div class="train" id="seanOmalleyTrain">
+          <p>Train</p>
+        </div>
+      </div>
+    </div>
     <div id="achievementContainer"></div>
   </div>
 
