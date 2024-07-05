@@ -4,5 +4,8 @@ progress baarit melkei toimii
 0.0.3
 sain ve palkit vihdoi toimiin ja ne muistaa mihin jäi jatkoin xp systeemiä ja alottelin ascendaus systeemiä
 
+0.0.4
+progressbarit kunnossa xp ja rank systeemi alottelen ascendaus systeemiä ja seuraavaa valuuttaa ja sillä ostettavia bonuksia ja ottelioita
+
 todo:
 tars saada textiä achievementteihin ja upgradeihi

@@ -3,32 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ascension</title>
+  <title>Ottelijat</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="clicker">
-
+<body>
+  
   <nav>
     <a href="./index.html" class="navigointi">Koti</a>
     <a href="./ascend.html" class="navigointi">Shop</a>
   </nav>
-  
-  <header>
-    <p>Verta: <span class="number" id="verta">0</span></p>
-  </header>
 
-  <div id="shopContainer">
-    <h1>Shop</h1>
-    <div id="ottelijaShop">
-      <h2>Uusi ottelija</h2>
-      <a href="./hahmot.html"><div class="shopButton" id="valitseItse">Valitse itse: <span id="valintaHinta"></span> verta</div></a>
-      <div class="shopButton">Satunnainen: <span id="satunnainenHinta"></span> verta</div>
+  <div id="hahmotContainer">
+    <div id="jonJonesBuy" class="fighterListItem">
+      <img src="./assets/jonJones.png" alt="">
+      <p>Jon Jones</p>
+      <p>Cost: <span id="jonJonesCost">10 </span>verta</p>
     </div>
   </div>
   
-  <script src="main.js"></script>
 </body>
 </html>

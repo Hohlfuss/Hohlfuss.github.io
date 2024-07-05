@@ -27,6 +27,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -51,6 +52,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -75,6 +77,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -99,6 +102,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -123,6 +127,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -147,6 +152,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -171,6 +177,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -195,6 +202,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -219,6 +227,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -243,6 +252,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -267,6 +277,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -291,6 +302,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -315,6 +327,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -339,6 +352,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -363,6 +377,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -387,6 +402,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -411,6 +427,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -435,6 +452,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -459,6 +477,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -483,6 +502,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -507,6 +527,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -531,6 +552,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -555,6 +577,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -579,6 +602,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -603,6 +627,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -627,6 +652,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -651,6 +677,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -675,6 +702,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -699,6 +727,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -723,6 +752,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -747,6 +777,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -771,6 +802,7 @@ interface Fighter {
     intervalId: number;
     currentXp: number;
     maxXp: number;
+    rank: number;
     stats: {
       wins: number;
       losses: number;
@@ -847,6 +879,11 @@ interface Elementit {
 
   seanOmalleyCurrentXpElement: HTMLDivElement;
   seanOmalleyMaxXpElement: HTMLDivElement;
+
+  colbyCovingtonRank: HTMLDivElement;
+  kamaruUsmanRank: HTMLDivElement;
+  shavkatRakhmonovRank: HTMLDivElement;
+  seanOmalleyRank: HTMLDivElement;
 }
 
 interface Functioita {
@@ -887,6 +924,24 @@ interface Upgrade {
   seanOmalleyHanskantT1Purchase: () => void;
 }
 
+interface  Achievement {
+  name: string[];
+  description: string[];
+  image: string[];
+  type: string[];
+  cost: number[];
+  requirement: number[];
+  objectIndex: number[];
+  awarded: boolean[];
+  earn: (index: number) => void;
+}
+
+interface Display {
+  updateUi: () => void;
+  calculatePower: () => void;
+  updateAchievement: () => void;
+}
+
 let game: Game = {
   version: "0.0.3",
   totalClicks: 0,
@@ -914,6 +969,7 @@ let fighter: Fighter = {
     intervalId: 1,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 17,
       losses: 4,
@@ -938,6 +994,7 @@ let fighter: Fighter = {
     intervalId: 2,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 20,
       losses: 4,
@@ -962,6 +1019,7 @@ let fighter: Fighter = {
     intervalId: 3,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 18,
       losses: 0,
@@ -986,6 +1044,7 @@ let fighter: Fighter = {
     intervalId: 4,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 18,
       losses: 1,
@@ -1010,6 +1069,7 @@ let fighter: Fighter = {
     intervalId: 5,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 27,
       losses: 1,
@@ -1034,6 +1094,7 @@ let fighter: Fighter = {
     intervalId: 6,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 26,
       losses: 4,
@@ -1058,6 +1119,7 @@ let fighter: Fighter = {
     intervalId: 7,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 11,
       losses: 2,
@@ -1082,6 +1144,7 @@ let fighter: Fighter = {
     intervalId: 8,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 26,
       losses: 1,
@@ -1106,6 +1169,7 @@ let fighter: Fighter = {
     intervalId: 9,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 26,
       losses: 7,
@@ -1130,6 +1194,7 @@ let fighter: Fighter = {
     intervalId: 10,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 14,
       losses: 3,
@@ -1154,6 +1219,7 @@ let fighter: Fighter = {
     intervalId: 11,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 24,
       losses: 3,
@@ -1178,6 +1244,7 @@ let fighter: Fighter = {
     intervalId: 12,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 34,
       losses: 10,
@@ -1202,6 +1269,7 @@ let fighter: Fighter = {
     intervalId: 13,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 29,
       losses: 6,
@@ -1226,6 +1294,7 @@ let fighter: Fighter = {
     intervalId: 14,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 26,
       losses: 5,
@@ -1250,6 +1319,7 @@ let fighter: Fighter = {
     intervalId: 15,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 30,
       losses: 9,
@@ -1274,6 +1344,7 @@ let fighter: Fighter = {
     intervalId: 16,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 14,
       losses: 4,
@@ -1298,6 +1369,7 @@ let fighter: Fighter = {
     intervalId: 17,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 30,
       losses: 5,
@@ -1322,6 +1394,7 @@ let fighter: Fighter = {
     intervalId: 18,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 21,
       losses: 9,
@@ -1346,6 +1419,7 @@ let fighter: Fighter = {
     intervalId: 19,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 23,
       losses: 4,
@@ -1370,6 +1444,7 @@ let fighter: Fighter = {
     intervalId: 20,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 23,
       losses: 3,
@@ -1394,6 +1469,7 @@ let fighter: Fighter = {
     intervalId: 21,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 17,
       losses: 2,
@@ -1418,6 +1494,7 @@ let fighter: Fighter = {
     intervalId: 22,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 22,
       losses: 7,
@@ -1442,6 +1519,7 @@ let fighter: Fighter = {
     intervalId: 23,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 15,
       losses: 0,
@@ -1466,6 +1544,7 @@ let fighter: Fighter = {
     intervalId: 24,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 16,
       losses: 1,
@@ -1490,6 +1569,7 @@ let fighter: Fighter = {
     intervalId: 25,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 17,
       losses: 7,
@@ -1514,6 +1594,7 @@ let fighter: Fighter = {
     intervalId: 26,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 15,
       losses: 6,
@@ -1538,6 +1619,7 @@ let fighter: Fighter = {
     intervalId: 27,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 19,
       losses: 6,
@@ -1562,6 +1644,7 @@ let fighter: Fighter = {
     intervalId: 28,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 29,
       losses: 12,
@@ -1586,6 +1669,7 @@ let fighter: Fighter = {
     intervalId: 29,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 22,
       losses: 10,
@@ -1610,6 +1694,7 @@ let fighter: Fighter = {
     intervalId: 30,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 22,
       losses: 3,
@@ -1634,6 +1719,7 @@ let fighter: Fighter = {
     intervalId: 31,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 26,
       losses: 11,
@@ -1658,6 +1744,7 @@ let fighter: Fighter = {
     intervalId: 32,
     currentXp: 0,
     maxXp: 100,
+    rank: 0,
     stats: {
       wins: 22,
       losses: 3,
@@ -1734,6 +1821,11 @@ const elementit: Elementit = {
 
   seanOmalleyCurrentXpElement: document.getElementById("seanOmalleyCurrentXp") as HTMLDivElement,
   seanOmalleyMaxXpElement: document.getElementById("seanOmalleyMaxXp") as HTMLDivElement,
+
+  colbyCovingtonRank: document.getElementById("colbyCovingtonRank") as HTMLDivElement,
+  kamaruUsmanRank: document.getElementById("kamaruUsmanRank") as HTMLDivElement,
+  shavkatRakhmonovRank: document.getElementById("shavkatRakhmonovRank") as HTMLDivElement,
+  seanOmalleyRank: document.getElementById("seanOmalleyRank") as HTMLDivElement,
 }
 
 const functioita: Functioita = {
@@ -1745,7 +1837,7 @@ const functioita: Functioita = {
       if (colbyCovingtonProgressBarElement) {
         fighter.colbyCovington.isActive = true;
         game.activeFighters++;
-        document.getElementById("colbyCovingtonTrain")!.style.backgroundColor = "green";
+        elementit.colbyCovingtonTrain!.style.backgroundColor = "green";
         fighter.colbyCovington.intervalId = setInterval(() => {
           fighter.colbyCovington.progress += 0.2;
             if (colbyCovingtonProgressBarElement) {
@@ -1755,11 +1847,18 @@ const functioita: Functioita = {
             }
 
             if (fighter.colbyCovington.progress >= 100) {
-              fighter.colbyCovington.currentXp += 1;
+              fighter.colbyCovington.currentXp++;
+              if (fighter.colbyCovington.currentXp >= fighter.colbyCovington.maxXp) {
+                fighter.colbyCovington.progress = 0;
+                fighter.colbyCovington.currentXp = 0;
+                fighter.colbyCovington.rank++;
+                fighter.colbyCovington.maxXp *= 1.1;
+                elementit.colbyCovingtonRank!.innerHTML = `${fighter.colbyCovington.rank}`;
+              }
               fighter.colbyCovington.progress = 0;
             }
         display.updateUi();
-      }, 100);
+      }, 10);
     }
   }),
 
@@ -1771,7 +1870,7 @@ const functioita: Functioita = {
       if (kamaruUsmanProgressBarElement) {
         fighter.kamaruUsman.isActive = true;
         game.activeFighters++;
-        document.getElementById("kamaruUsmanTrain")!.style.backgroundColor = "green";
+        elementit.kamaruUsmanTrain!.style.backgroundColor = "green";
         fighter.kamaruUsman.intervalId = setInterval(() => {
           fighter.kamaruUsman.progress += 0.2;
             if (kamaruUsmanProgressBarElement) {
@@ -1781,11 +1880,18 @@ const functioita: Functioita = {
             }
 
             if (fighter.kamaruUsman.progress >= 100) {
-              fighter.kamaruUsman.currentXp += 1;
+              fighter.kamaruUsman.currentXp++;
+              if (fighter.kamaruUsman.currentXp >= fighter.kamaruUsman.maxXp) {
+                fighter.kamaruUsman.progress = 0;
+                fighter.kamaruUsman.currentXp = 0;
+                fighter.kamaruUsman.rank++;
+                fighter.kamaruUsman.maxXp *= 1.1;
+                elementit.kamaruUsmanRank!.innerHTML = `${fighter.kamaruUsman.rank}`;
+              }
               fighter.kamaruUsman.progress = 0;
             }
         display.updateUi();
-      }, 100);
+      }, 10);
     }
   }),
 
@@ -1797,7 +1903,7 @@ const functioita: Functioita = {
       if (shavkatRakhmonovProgressBarElement) {
         fighter.shavkatRakhmonov.isActive = true;
         game.activeFighters++;
-        document.getElementById("shavkatRakhmonovTrain")!.style.backgroundColor = "green";
+        elementit.shavkatRakhmonovTrain!.style.backgroundColor = "green";
         fighter.shavkatRakhmonov.intervalId = setInterval(() => {
           fighter.shavkatRakhmonov.progress += 0.2;
             if (shavkatRakhmonovProgressBarElement) {
@@ -1807,11 +1913,18 @@ const functioita: Functioita = {
             }
 
             if (fighter.shavkatRakhmonov.progress >= 100) {
-              fighter.shavkatRakhmonov.currentXp += 1;
+              fighter.shavkatRakhmonov.currentXp++;
+              if (fighter.shavkatRakhmonov.currentXp >= fighter.shavkatRakhmonov.maxXp) {
+                fighter.shavkatRakhmonov.progress = 0;
+                fighter.shavkatRakhmonov.currentXp = 0;
+                fighter.shavkatRakhmonov.rank++;
+                fighter.shavkatRakhmonov.maxXp *= 1.1;
+                elementit.shavkatRakhmonovRank!.innerHTML = `${fighter.shavkatRakhmonov.rank}`;
+              }
               fighter.shavkatRakhmonov.progress = 0;
             }
         display.updateUi();
-      }, 100);
+      }, 10);
     }
   }),
 
@@ -1823,7 +1936,7 @@ const functioita: Functioita = {
       if (seanOmalleyProgressBarElement) {
         fighter.seanOmalley.isActive = true;
         game.activeFighters++;
-        document.getElementById("seanOmalleyTrain")!.style.backgroundColor = "green";
+        elementit.seanOmalleyTrain!.style.backgroundColor = "green";
         fighter.seanOmalley.intervalId = setInterval(() => {
           fighter.seanOmalley.progress += 0.2;
             if (seanOmalleyProgressBarElement) {
@@ -1833,44 +1946,21 @@ const functioita: Functioita = {
             }
 
             if (fighter.seanOmalley.progress >= 100) {
-              fighter.seanOmalley.currentXp += 1;
+              fighter.seanOmalley.currentXp++;
+              if (fighter.seanOmalley.currentXp >= fighter.seanOmalley.maxXp) {
+                fighter.seanOmalley.progress = 0;
+                fighter.seanOmalley.currentXp = 0;
+                fighter.seanOmalley.rank++;
+                fighter.seanOmalley.maxXp *= 1.1;
+                elementit.seanOmalleyRank!.innerHTML = `${fighter.seanOmalley.rank}`;
+              }
               fighter.seanOmalley.progress = 0;
             }
         display.updateUi();
-      }, 100);
+      }, 10);
     }
   }),
-
-  /*
-  calculateColbyCovingtonPower: (() => {
-    let winRatio = fighter.colbyCovington.stats.wins / (fighter.colbyCovington.stats.losses === 0 ? 1 : fighter.colbyCovington.stats.losses);
-    fighter.colbyCovington.power = (winRatio - fighter.colbyCovington.stats.nc + fighter.colbyCovington.stats.winsByKnockout + fighter.colbyCovington.stats.winsBySubmission + fighter.colbyCovington.stats.firstRoundFinishes);
-    fighter.colbyCovington.totalPower = fighter.colbyCovington.power * fighter.colbyCovington.level * game.globalMulti;
-    game.totalPower += fighter.colbyCovington.totalPower;
-  }),
-
-  calculateKamaruUsmanPower: (() => {
-    let winRatio = fighter.kamaruUsman.stats.wins / (fighter.kamaruUsman.stats.losses === 0 ? 1 : fighter.kamaruUsman.stats.losses);
-    fighter.kamaruUsman.power = (winRatio - fighter.kamaruUsman.stats.nc + fighter.kamaruUsman.stats.winsByKnockout + fighter.kamaruUsman.stats.winsBySubmission + fighter.kamaruUsman.stats.firstRoundFinishes) / 1000;
-    fighter.kamaruUsman.totalPower = fighter.kamaruUsman.power * fighter.kamaruUsman.level * game.globalMulti;
-    game.totalPower += fighter.kamaruUsman.totalPower;
-  }),
-
-  calculateShavkatRakhmonovPower: (() => {
-    let winRatio = fighter.shavkatRakhmonov.stats.wins / (fighter.shavkatRakhmonov.stats.losses === 0 ? 1 : fighter.shavkatRakhmonov.stats.losses);
-    fighter.shavkatRakhmonov.power = (winRatio - fighter.shavkatRakhmonov.stats.nc + fighter.shavkatRakhmonov.stats.winsByKnockout + fighter.shavkatRakhmonov.stats.winsBySubmission + fighter.shavkatRakhmonov.stats.firstRoundFinishes) / 1000;
-    fighter.shavkatRakhmonov.totalPower = fighter.shavkatRakhmonov.power * fighter.shavkatRakhmonov.level * game.globalMulti;
-    game.totalPower += fighter.shavkatRakhmonov.totalPower;
-  }),
-
-  calculateSeanOmalleyPower: (() => {
-    let winRatio = fighter.seanOmalley.stats.wins / (fighter.seanOmalley.stats.losses === 0 ? 1 : fighter.seanOmalley.stats.losses);
-    fighter.seanOmalley.power = (winRatio - fighter.seanOmalley.stats.nc + fighter.seanOmalley.stats.winsByKnockout + fighter.seanOmalley.stats.winsBySubmission + fighter.seanOmalley.stats.firstRoundFinishes) / 1000;
-    fighter.seanOmalley.totalPower = fighter.seanOmalley.power * fighter.seanOmalley.level * game.globalMulti;
-    game.totalPower += fighter.seanOmalley.totalPower;
-  }),
-  */
-
+  
   getHampaitaPerSekunti: function() {
     game.totalPower = fighter.colbyCovington.totalPower + fighter.kamaruUsman.totalPower + fighter.shavkatRakhmonov.totalPower + fighter.seanOmalley.totalPower;
     game.hampaitaPerSekunti = game.totalPower;
@@ -2274,7 +2364,7 @@ let upgrade: Upgrade = {
   },
 }
 
-const achievement = {
+const achievement: Achievement = {
   name: [
     "t1Työtön",
     "t2Työtön",
@@ -2344,7 +2434,7 @@ const achievement = {
   }
 }
 
-const display = {
+const display: Display = {
   updateUi: (() => {
     const ascendBtn = document.getElementById("ascendContainer");
     if (ascendBtn) {
@@ -2507,13 +2597,23 @@ window.onload = function() {
   utility.loadGame();
   display.updateUi();
   display.updateAchievement();
-};
+}
 
-setInterval(() => {
-  functioita.getHampaitaPerSekunti();
-  game.hampaita += game.hampaitaPerSekunti / 10_000;
-  display.updateUi();
-}, 100);
+let startHampaitaPerSekunti
+let intervalRunning = false;
+
+let startHampaitaPersekunti = () => {
+  if (!intervalRunning) {
+    intervalRunning = true;
+    startHampaitaPerSekunti = setInterval(() => {
+    functioita.getHampaitaPerSekunti();
+    game.hampaita += game.hampaitaPerSekunti / 10_000;
+    display.updateUi();
+  }, 100)
+  } else {
+    console.log("Interval is already running");
+  }
+};
 
 setInterval(() => {
   for (let i = 0; i < achievement.name.length; i++) {
@@ -2563,7 +2663,7 @@ elementit.colbyCovingtonBtn.addEventListener("click", () => {
     fighter.colbyCovington.totalPower = fighter.colbyCovington.power * fighter.colbyCovington.level;
     game.totalPower += fighter.colbyCovington.totalPower;
 
-    //functioita.calculateColbyCovingtonPower();
+    startHampaitaPersekunti();
     display.updateUi();
   }
 });
@@ -2579,7 +2679,7 @@ elementit.kamaruUsmanBtn.addEventListener("click", () => {
     fighter.kamaruUsman.totalPower = fighter.kamaruUsman.power * fighter.kamaruUsman.level;
     game.totalPower += fighter.kamaruUsman.totalPower;
 
-    //functioita.calculateKamaruUsmanPower();
+    startHampaitaPersekunti();
     display.updateUi();
   }
 });
@@ -2595,7 +2695,7 @@ elementit.shavkatRakhmonovBtn.addEventListener("click", () => {
     fighter.shavkatRakhmonov.totalPower = fighter.shavkatRakhmonov.power * fighter.shavkatRakhmonov.level;
     game.totalPower += fighter.shavkatRakhmonov.totalPower;
 
-    //functioita.calculateShavkatRakhmonovPower();
+    startHampaitaPersekunti();
     display.updateUi();
   }
 });
@@ -2611,7 +2711,7 @@ elementit.seanOmalleyBtn.addEventListener("click", () => {
     fighter.seanOmalley.totalPower = fighter.seanOmalley.power * fighter.seanOmalley.level;
     game.totalPower += fighter.seanOmalley.totalPower;
 
-    //functioita.calculateShavkatRakhmonovPower();
+    startHampaitaPersekunti();
     display.updateUi();
   }
 });
@@ -2633,13 +2733,18 @@ elementit.seanOmalleyTrain.addEventListener("click", () => {
 });
 
 elementit.resetTrainers.addEventListener("click", () => {
-  utility.pysäytäKaikki();
+  game.activeFighters = 0;
+
+  fighter.colbyCovington.isActive = false;
+  fighter.kamaruUsman.isActive = false;
+  fighter.shavkatRakhmonov.isActive = false;
+  fighter.seanOmalley.isActive = false;
+
+  startHampaitaPersekunti();
 });
 
 elementit.ascendBtn.addEventListener("click", () => {
-  if (game.hampaita >= ascendObject.raja) {
     utility.ascend();
-  }
 });
 
 elementit.reset.addEventListener("click", () => {
