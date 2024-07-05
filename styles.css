@@ -200,7 +200,7 @@ table:hover {
   font-weight: 100;
   font-style: normal;
   color: black;
-  background-color: lightblue;
+  background-color: darkcyan;
   transition: all .2s ease-in-out;
   cursor: pointer;
   font-size: 10px;
@@ -273,5 +273,9 @@ h2 {
 #upgradeContainer {
   width: 60%;
   margin-left: 20%;
+}
+
+button {
+  margin: 30px;
 }
 
