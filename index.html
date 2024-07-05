@@ -9,8 +9,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body id="clicker">
+<body class="clicker">
 
+  <nav>
+    <a href="./index.html" class="navigointi">Koti</a>
+    <a href="./ascend.html" class="navigointi">Shop</a>
+  </nav>
+  
   <header>
     <p>Hampaita: <span class="number" id="hampaita">0</span></p>
     <p>Hampaita/s: <span class="number" id="hampaitaPerSekunti">0</span></p>
@@ -106,8 +111,9 @@
     <div id="achievementContainer"></div>
   </div>
 
-  <button onclick="saveGame()">Save</button>
-  <button onclick="resetGame()">Reset</button>
+  <button id="save">Save</button>
+  <button id="reset">Reset</button><br>
+  <button id="resetTrainers">Reset Trainers</button>
 
   <script src="main.js"></script>
 </body>

@@ -1,49 +1,1678 @@
 
 
-interface FighterFightHistory {
-  wins: number;
-  losses: number;
-  nc: number;
-  winsByKnockout: number;
-  winsBySubmission: number;
-  firstRoundFinishes: number;
+
+interface Game {
+  version: string;
+  totalClicks: number;
+  globalMulti: number;
+  hampaita: number;
+  hampaitaPerSekunti: number;
+  totalPower: number;
+  maxActive: number;
+  activeFighters: number;
 }
 
 interface Fighter {
-  name: string[];
-  image: string[];
-  level: number[];
-  cost: number[];
-  costMulti: number[];
-  stats: FighterFightHistory[];
-  power: number[];
-  weightClass: string[];
-  weightClassRanking: number[];
-  unlocked: boolean[];
-  isActive: boolean[];
-  mastery: number[];
-  xp: number[];
-  progress: number[];
-  progressBarElement: HTMLElement[];
-  intervalId: number[];
-  handleClick: (i: number) => void;
-  calculatePower: () => void;
-  //progressBar: (i: number) => void;
+  colbyCovington: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  kamaruUsman: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  shavkatRakhmonov: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  seanOmalley: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  jonJones: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  alexanderVolkanovski: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  alexPereira: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  islamMakhachev: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  maxHolloway: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  tomAspinall: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  israelAdesanya: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  charlesOliveira: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  seanStrickland: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  justinGaethje: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  dustinPoirier: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  pauloCosta: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  jiriProchazka: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  johnnyWalker: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  valentinaShevchenko: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  belalMuhammad: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  jackDellaMaddalena: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  gilbertBurns: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  ianGarry: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  seanBrady: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  stephenThompson: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  geoffNeal: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  joaquinBuckley: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  neilMagny: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  vincenteLuque: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  michaelPage: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  kevinHolland: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
+  leonEdwards: {
+    name: string;
+    level: number;
+    cost: number;
+    totalPower: number;
+    power: number;
+    weightClass: string;
+    weightClassRanking: number;
+    unlocked: boolean;
+    isActive: boolean;
+    mastery: number;
+    progress: number;
+    intervalId: number;
+    currentXp: number;
+    maxXp: number;
+    stats: {
+      wins: number;
+      losses: number;
+      nc: number;
+      winsByKnockout: number;
+      winsBySubmission: number;
+      firstRoundFinishes: number;
+    };
+  }
 }
 
-let game = {
-  version: "0.0.0.3",
+interface FighterArray extends Array<Fighter> {}
+
+const fighters: FighterArray = [
+  {
+    colbyCovington: {
+      name: "Colby Covington",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "welterweight",
+      weightClassRanking: 4,
+      unlocked: true,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 1,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 17,
+        losses: 4,
+        nc: 0,
+        winsByKnockout: 4,
+        winsBySubmission: 4,
+        firstRoundFinishes: 3,
+      },
+    },
+    kamaruUsman: {
+      name: "Kamaru Usman",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "welterweight",
+      weightClassRanking: 1,
+      unlocked: true,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 2,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 20,
+        losses: 4,
+        nc: 0,
+        winsByKnockout: 9,
+        winsBySubmission: 1,
+        firstRoundFinishes: 3,
+      },
+    },
+    shavkatRakhmonov: {
+      name: "Shavkat Rakhmonov",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "welterweight",
+      weightClassRanking: 3,
+      unlocked: true,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 3,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 18,
+        losses: 0,
+        nc: 0,
+        winsByKnockout: 8,
+        winsBySubmission: 10,
+        firstRoundFinishes: 9,
+      },
+    },
+    seanOmalley: {
+      name: "Sean O'Malley",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "bantamweight",
+      weightClassRanking: 0,
+      unlocked: true,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 4,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 18,
+        losses: 1,
+        nc: 0,
+        winsByKnockout: 12,
+        winsBySubmission: 0,
+        firstRoundFinishes: 9,
+      },
+    },
+    jonJones: {
+      name: "Jon Jones",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "heavyWeight",
+      weightClassRanking: 0,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 5,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 27,
+        losses: 1,
+        nc: 0,
+        winsByKnockout: 10,
+        winsBySubmission: 0,
+        firstRoundFinishes: 7,
+      }
+    },
+    alexanderVolkanovski: {
+      name: "Alexander Volkanovski",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "featherWeight",
+      weightClassRanking: 0,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 6,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 26,
+        losses: 4,
+        nc: 0,
+        winsByKnockout: 13,
+        winsBySubmission: 3,
+        firstRoundFinishes: 7,
+      }
+    },
+    alexPereira: {
+      name: "Alex Pereira",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "lightHeavyWeight",
+      weightClassRanking: 0,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 7,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 11,
+        losses: 2,
+        nc: 0,
+        winsByKnockout: 9,
+        winsBySubmission: 0,
+        firstRoundFinishes: 4,
+      }
+    },
+    islamMakhachev: {
+      name: "Islam Makhachev",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "lightWeight",
+      weightClassRanking: 0,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 8,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 26,
+        losses: 1,
+        nc: 0,
+        winsByKnockout: 14,
+        winsBySubmission: 5,
+        firstRoundFinishes: 12,
+      }
+    },
+    maxHolloway: {
+      name: "Max Holloway",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "lightWeight",
+      weightClassRanking: 9,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 9,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 26,
+        losses: 7,
+        nc: 0,
+        winsByKnockout: 12,
+        winsBySubmission: 2,
+        firstRoundFinishes: 0,
+      }
+    },
+    tomAspinall: {
+      name: "Tom Aspinall",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "heavyWeight",
+      weightClassRanking: 1,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 10,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 14,
+        losses: 3,
+        nc: 0,
+        winsByKnockout: 11,
+        winsBySubmission: 3,
+        firstRoundFinishes: 13,
+      }
+    },
+    israelAdesanya: {
+      name: "Israel Adesanya",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "middleWeight",
+      weightClassRanking: 2,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 11,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 24,
+        losses: 3,
+        nc: 0,
+        winsByKnockout: 16,
+        winsBySubmission: 0,
+        firstRoundFinishes: 6,
+      }
+    },
+    charlesOliveira: {
+      name: "Charles Oliveira",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "lightWeight",
+      weightClassRanking: 2,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 12,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 34,
+        losses: 10,
+        nc: 0,
+        winsByKnockout: 10,
+        winsBySubmission: 21,
+        firstRoundFinishes: 0,
+      }
+    },
+    seanStrickland: {
+      name: "Sean Strickland",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "middleWeight",
+      weightClassRanking: 1,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 13,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 29,
+        losses: 6,
+        nc: 0,
+        winsByKnockout: 11,
+        winsBySubmission: 4,
+        firstRoundFinishes: 9,
+      }
+    },
+    justinGaethje: {
+      name: "Justin Gaethje",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "featherWeight",
+      weightClassRanking: 3,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 14,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 26,
+        losses: 5,
+        nc: 0,
+        winsByKnockout: 20,
+        winsBySubmission: 0,
+        firstRoundFinishes: 9,
+      }
+    },
+    dustinPoirier: {
+      name: "Dustin Poirier",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "lightWeight",
+      weightClassRanking: 4,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 15,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 30,
+        losses: 9,
+        nc: 0,
+        winsByKnockout: 16,
+        winsBySubmission: 7,
+        firstRoundFinishes: 13,
+      }
+    },
+    pauloCosta: {
+      name: "Paulo Costa",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "middleWeight",
+      weightClassRanking: 8,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 16,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 14,
+        losses: 4,
+        nc: 0,
+        winsByKnockout: 11,
+        winsBySubmission: 1,
+        firstRoundFinishes: 9,
+      }
+    },
+    jiriProchazka: {
+      name: "Jiri Prochazka",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "lightHeavyWeight",
+      weightClassRanking: 1,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 17,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 30,
+        losses: 5,
+        nc: 1,
+        winsByKnockout: 26,
+        winsBySubmission: 3,
+        firstRoundFinishes: 23,
+      }
+    },
+    johnnyWalker: {
+      name: "Johnny Walker",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "lightHeavyWeight",
+      weightClassRanking: 7,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 18,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 21,
+        losses: 9,
+        nc: 0,
+        winsByKnockout: 16,
+        winsBySubmission: 3,
+        firstRoundFinishes: 17,
+      }
+    },
+    valentinaShevchenko: {
+      name: "Valentina Shevchenko",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "womensFlyweight",
+      weightClassRanking: 1,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 19,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 23,
+        losses: 4,
+        nc: 1,
+        winsByKnockout: 8,
+        winsBySubmission: 7,
+        firstRoundFinishes: 6,
+      }
+    },
+    belalMuhammad: {
+      name: "Belal Muhammad",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "welterWeight",
+      weightClassRanking: 2,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 20,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 23,
+        losses: 3,
+        nc: 0,
+        winsByKnockout: 5,
+        winsBySubmission: 1,
+        firstRoundFinishes: 0,
+      }
+    },
+    jackDellaMaddalena: {
+      name: "Jack Della Maddalena",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "welterWeight",
+      weightClassRanking: 5,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 21,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 17,
+        losses: 2,
+        nc: 0,
+        winsByKnockout: 12,
+        winsBySubmission: 2,
+        firstRoundFinishes: 8,
+      }
+    },
+    gilbertBurns: {
+      name: "Gilbert Burns",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "welterWeight",
+      weightClassRanking: 6,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 22,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 22,
+        losses: 7,
+        nc: 0,
+        winsByKnockout: 6,
+        winsBySubmission: 9,
+        firstRoundFinishes: 11,
+      }
+    },
+    ianGarry: {
+      name: "Ian Garry",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "welterWeight",
+      weightClassRanking: 7,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 23,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 15,
+        losses: 0,
+        nc: 0,
+        winsByKnockout: 7,
+        winsBySubmission: 1,
+        firstRoundFinishes: 4,
+      }
+    },
+    seanBrady: {
+      name: "Sean Brady",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "welterWeight",
+      weightClassRanking: 8,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 24,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 16,
+        losses: 1,
+        nc: 0,
+        winsByKnockout: 3,
+        winsBySubmission: 5,
+        firstRoundFinishes: 3,
+      }
+    },
+    stephenThompson: {
+      name: "Stephen Thompson",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "welterWeight",
+      weightClassRanking: 9,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 25,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 17,
+        losses: 7,
+        nc: 1,
+        winsByKnockout: 8,
+        winsBySubmission: 1,
+        firstRoundFinishes: 5,
+      }
+    },
+    geoffNeal: {
+      name: "Geoff Neal",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "welterWeight",
+      weightClassRanking: 10,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 26,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 15,
+        losses: 6,
+        nc: 0,
+        winsByKnockout: 9,
+        winsBySubmission: 2,
+        firstRoundFinishes: 6,
+      }
+    },
+    joaquinBuckley: {
+      name: "Joaquin Buckley",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "welterWeight",
+      weightClassRanking: 11,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 27,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 19,
+        losses: 6,
+        nc: 0,
+        winsByKnockout: 13,
+        winsBySubmission: 0,
+        firstRoundFinishes: 4,
+      }
+    },
+    neilMagny: {
+      name: "Neil Magny",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "welterWeight",
+      weightClassRanking: 12,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 28,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 29,
+        losses: 12,
+        nc: 0,
+        winsByKnockout: 8,
+        winsBySubmission: 4,
+        firstRoundFinishes: 0,
+      }
+    },
+    vincenteLuque: {
+      name: "Vicente Luque",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "welterWeight",
+      weightClassRanking: 13,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 29,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 22,
+        losses: 10,
+        nc: 1,
+        winsByKnockout: 11,
+        winsBySubmission: 8,
+        firstRoundFinishes: 13,
+      }
+    },
+    michaelPage: {
+      name: "Michael Page",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "welterWeight",
+      weightClassRanking: 14,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 30,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 22,
+        losses: 3,
+        nc: 0,
+        winsByKnockout: 13,
+        winsBySubmission: 3,
+        firstRoundFinishes: 13,
+      }
+    },
+    kevinHolland: {
+      name: "Kevin Holland",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "welterWeight",
+      weightClassRanking: 15,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 31,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 26,
+        losses: 11,
+        nc: 0,
+        winsByKnockout: 14,
+        winsBySubmission: 8,
+        firstRoundFinishes: 13,
+      }
+    },
+    leonEdwards: {
+      name: "Leon Edwards",
+      level: 0,
+      cost: 10,
+      totalPower: 0,
+      power: 0,
+      weightClass: "welterWeight",
+      weightClassRanking: 0,
+      unlocked: false,
+      isActive: false,
+      mastery: 0,
+      progress: 0,
+      intervalId: 32,
+      currentXp: 0,
+      maxXp: 100,
+      stats: {
+        wins: 22,
+        losses: 3,
+        nc: 0,
+        winsByKnockout: 7,
+        winsBySubmission: 3,
+        firstRoundFinishes: 5,
+      }
+    }
+  }
+]
+
+interface AscendObject {
+  raja: number;
+  verta: number;
+  valintaHinta: number;
+  satunnainenHinta: number;
+  ascendCount: number;
+}
+
+interface Elementit {
+  clicker: HTMLCollectionOf<Element>;
+  ascendBtn: HTMLDivElement;
+  resetTrainers: HTMLButtonElement;
+  upgradeContainerElement: HTMLDivElement;
+  reset: HTMLButtonElement;
+  save: HTMLButtonElement;
+
+  colbyCovingtonBtn: HTMLDivElement;
+  kamaruUsmanBtn: HTMLDivElement;
+  shavkatRakhmonovBtn: HTMLDivElement;
+  seanOmalleyBtn: HTMLDivElement;
+
+  colbyCovingtonTrain: HTMLDivElement;
+  kamaruUsmanTrain: HTMLDivElement;
+  shavkatRakhmonovTrain: HTMLDivElement;
+  seanOmalleyTrain: HTMLDivElement;
+
+  vertaElement: HTMLDivElement;
+  valintaHintaElement: HTMLDivElement;
+  satunnainenHintaElement: HTMLDivElement;
+  hampaitaElement: HTMLDivElement;
+  hampaitaPerSekuntiElement: HTMLDivElement;
+
+  colbyCovingtonPowerElement: HTMLDivElement;
+  colbyCovingtonCostElement: HTMLDivElement;
+  colbyCovingtonLevelElement: HTMLDivElement;
+
+  kamaruUsmanPowerElement: HTMLDivElement;
+  kamaruUsmanCostElement: HTMLDivElement;
+  kamaruUsmanLevelElement: HTMLDivElement;
+
+  shavkatRakhmonovPowerElement: HTMLDivElement;
+  shavkatRakhmonovCostElement: HTMLDivElement;
+  shavkatRakhmonovLevelElement: HTMLDivElement;
+
+  seanOmalleyPowerElement: HTMLDivElement;
+  seanOmalleyCostElement: HTMLDivElement;
+  seanOmalleyLevelElement: HTMLDivElement;
+
+  colbyCovingtonTotalPowerElement: HTMLDivElement;
+  kamaruUsmanTotalPowerElement: HTMLDivElement;
+  shavkatRakhmonovTotalPowerElement: HTMLDivElement;
+  seanOmalleyTotalPowerElement: HTMLDivElement;
+
+  colbyCovingtonCurrentXpElement: HTMLDivElement;
+  colbyCovingtonMaxXpElement: HTMLDivElement;
+
+  kamaruUsmanCurrentXpElement: HTMLDivElement;
+  kamaruUsmanMaxXpElement: HTMLDivElement;
+
+  shavkatRakhmonovCurrentXpElement: HTMLDivElement;
+  shavkatRakhmonovMaxXpElement: HTMLDivElement;
+
+  seanOmalleyCurrentXpElement: HTMLDivElement;
+  seanOmalleyMaxXpElement: HTMLDivElement;
+}
+
+interface Functioita {
+  colbyCovingtonPurchaseUpgrade: (index: number) => void;
+  colbyCovingtonProgress: () => void;
+  kamaruUsmanProgress: () => void;
+  shavkatRakhmonovProgress: () => void;
+  seanOmalleyProgress: () => void;
+  calculateColbyCovingtonPower: () => void;
+  calculateKamaruUsmanPower: () => void;
+  calculateShavkatRakhmonovPower: () => void;
+  calculateSeanOmalleyPower: () => void;
+  getHampaitaPerSekunti: () => void;
+}
+
+interface Utility {
+  ascend: () => void;
+  pysäytäKaikki: () => void;
+  saveGame: () => void;
+  loadGame: () => void;
+  resetGame: () => void;
+}
+
+interface Upgrade {
+  name: string[];
+  description: string[];
+  image: string[];
+  type: string[];
+  cost: number[];
+  fighterIndex: number[];
+  requirement: number[];
+  bonus: number[];
+  purchased: boolean[];
+  colbyCovingtonHanskantT1Purchase: () => void;
+  kamaruUsmanHanskantT1Purchase: () => void;
+  shavkatRakhmonovHanskantT1Purchase: () => void;
+  seanOmalleyHanskantT1Purchase: () => void;
+}
+
+let game: Game = {
+  version: "0.0.3",
   totalClicks: 0,
   globalMulti: 1.1,
   hampaita: 50,
   hampaitaPerSekunti: 0,
   totalPower: 0,
-};
+  maxActive: 1,
+  activeFighters: 0,
+}
 
-let maxActive = 1;
-let activeFighters: number = 0;
-
-let fighter = {
+let fighter: Fighter = {
   colbyCovington: {
     name: "Colby Covington",
     level: 0,
@@ -56,7 +1685,6 @@ let fighter = {
     isActive: false,
     mastery: 0,
     progress: 0,
-    progressBarWidth: document.getElementById("colbyCovingtonProgressBar")!.style.width,
     intervalId: 1,
     currentXp: 0,
     maxXp: 100,
@@ -81,7 +1709,6 @@ let fighter = {
     isActive: false,
     mastery: 0,
     progress: 0,
-    progressBarElement: document.getElementById("kamaruUsmanProgressBar") as HTMLDivElement,
     intervalId: 2,
     currentXp: 0,
     maxXp: 100,
@@ -105,9 +1732,7 @@ let fighter = {
     unlocked: true,
     isActive: false,
     mastery: 0,
-    xp: 0,
     progress: 0,
-    progressBarElement: document.getElementById("shavkatRakhmonovProgressBar") as HTMLDivElement,
     intervalId: 3,
     currentXp: 0,
     maxXp: 100,
@@ -131,9 +1756,7 @@ let fighter = {
     unlocked: true,
     isActive: false,
     mastery: 0,
-    xp: 0,
     progress: 0,
-    progressBarElement: document.getElementById("seanOmalleyProgressBar") as HTMLDivElement,
     intervalId: 4,
     currentXp: 0,
     maxXp: 100,
@@ -146,468 +1769,670 @@ let fighter = {
       firstRoundFinishes: 9,
     },
   },
-}
-
-let ascend = {
-  treshold: 1000,
-}
-
-let calculations = {
-  calculateColbyCovingtonPower: (() => {
-    let winRatio = fighter.colbyCovington.stats.wins / (fighter.colbyCovington.stats.losses === 0 ? 1 : fighter.colbyCovington.stats.losses);
-    fighter.colbyCovington.power = (winRatio - fighter.colbyCovington.stats.nc + fighter.colbyCovington.stats.winsByKnockout + fighter.colbyCovington.stats.winsBySubmission + fighter.colbyCovington.stats.firstRoundFinishes) / 1000;
-    fighter.colbyCovington.totalPower = fighter.colbyCovington.power * fighter.colbyCovington.level;
-    game.totalPower += fighter.colbyCovington.power;
-  }),
-  calculateKamaruUsmanPower: (() => {
-    let winRatio = fighter.kamaruUsman.stats.wins / (fighter.kamaruUsman.stats.losses === 0 ? 1 : fighter.kamaruUsman.stats.losses);
-    fighter.kamaruUsman.power = (winRatio - fighter.kamaruUsman.stats.nc + fighter.kamaruUsman.stats.winsByKnockout + fighter.kamaruUsman.stats.winsBySubmission + fighter.kamaruUsman.stats.firstRoundFinishes) / 1000;
-    fighter.kamaruUsman.totalPower = fighter.kamaruUsman.power * fighter.kamaruUsman.level;
-    game.totalPower += fighter.kamaruUsman.power;
-  }),
-  calculateShavkatRakhmonovPower: (() => {
-    let winRatio = fighter.shavkatRakhmonov.stats.wins / (fighter.shavkatRakhmonov.stats.losses === 0 ? 1 : fighter.shavkatRakhmonov.stats.losses);
-    fighter.shavkatRakhmonov.power = (winRatio - fighter.shavkatRakhmonov.stats.nc + fighter.shavkatRakhmonov.stats.winsByKnockout + fighter.shavkatRakhmonov.stats.winsBySubmission + fighter.shavkatRakhmonov.stats.firstRoundFinishes) / 1000;
-    fighter.shavkatRakhmonov.totalPower = fighter.shavkatRakhmonov.power * fighter.shavkatRakhmonov.level;
-    game.totalPower += fighter.shavkatRakhmonov.power;
-  }),
-  calculateSeanOmalleyPower: (() => {
-    let winRatio = fighter.seanOmalley.stats.wins / (fighter.seanOmalley.stats.losses === 0 ? 1 : fighter.seanOmalley.stats.losses);
-    fighter.seanOmalley.power = (winRatio - fighter.seanOmalley.stats.nc + fighter.seanOmalley.stats.winsByKnockout + fighter.seanOmalley.stats.winsBySubmission + fighter.seanOmalley.stats.firstRoundFinishes) / 1000;
-    fighter.seanOmalley.totalPower = fighter.seanOmalley.power * fighter.seanOmalley.level;
-    game.totalPower += fighter.seanOmalley.power;
-  }),
-  getHampaitaPerSekunti: function() {
-    game.hampaitaPerSekunti = game.totalPower * game.globalMulti;
-    return game.hampaitaPerSekunti;
-  },
-}
-
-/*
-const fighter: Fighter = {
-  name: [
-    "Colby Covington",
-    "Kamaru Usman",
-    "Shavkat Rakhmonov",
-    "Sean O'malley",
-    "Jon Jones",
-    "Alexander Volkanovski",
-    "Alex Pereira",
-    "Islam Makhachev",
-    "Max Holloway",
-    "Tom Aspinall",
-    "Israel Adesanya",
-    "Charles Oliveira",
-    "Sean Strickland",
-    "Justin Gaethje",
-    "Dustin Poirier",
-    "Paulo Costa",
-    "Jiri Prochazka",
-    "Johnny Walker",
-    "Valentina Shevchenko",
-
-    "Belal Muhammad",
-    "Jack Della Maddalena",
-    "Gilbert Burns",
-    "Ian Garry",
-    "Sean Brady",
-    "Stephen Thompson",
-    "Geoff Neal",
-    "Joaquin Buckley",
-    "Neil Magny",
-    "Vicente Luque",
-    "Michael Page",
-    "Kevin Holland",
-    "Leon Edwards"
-  ],
-  image: [
-    "colbyCovington.png",
-    "kamaruUsman.png",
-    "shavkatRakhmonov.png",
-    "seanOmalley.png",
-    "jonJones.png",
-    "alexanderVolkanovski.png",
-    "alexPereira.png",
-    "islamMakhachev.png",
-    "maxHolloway.png",
-    "tomAspinall.png",
-    "israelAdesanya.png",
-    "charlesOliveira.png",
-    "seanStrickland.png",
-    "justinGaethje.png",
-    "dustinPoirier.png",
-    "pauloCosta.png",
-    "jiriProchazka.png",
-    "johnnyWalker.png",
-    "valentinaShevchenko.png",
-
-    "belalMuhammad.png",
-    "jackDellaMaddalena.png",
-    "gilbertBurns.png",
-    "ianGarry.png",
-    "seanBrady.png",
-    "stephenThompson.png",
-    "geoffNeal.png",
-    "joaquinBuckley.png",
-    "neilMagny.png",
-    "vicenteLuque.png",
-    "michaelPage.png",
-    "kevinHolland.png",
-    "leonEdwards.png"
-  ],
-  level: [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0
-  ],
-  cost: [
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10
-  ],
-  costMulti: [
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1,
-    1.1
-  ],
-  stats: [
-    {
-      wins: 17,
-      losses: 4,
-      nc: 0,
-      winsByKnockout: 4,
-      winsBySubmission: 4,
-      firstRoundFinishes: 3,
-    },
-    {
-      wins: 20,
-      losses: 4,
-      nc: 0,
-      winsByKnockout: 9,
-      winsBySubmission: 1,
-      firstRoundFinishes: 3,
-    },
-    {
-      wins: 18,
-      losses: 0,
-      nc: 0,
-      winsByKnockout: 8,
-      winsBySubmission: 10,
-      firstRoundFinishes: 9,
-    },
-    {
-      wins: 18,
-      losses: 1,
-      nc: 0,
-      winsByKnockout: 12,
-      winsBySubmission: 0,
-      firstRoundFinishes: 9,
-    },
-    {
+  jonJones: {
+    name: "Jon Jones",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "heavyWeight",
+    weightClassRanking: 0,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 5,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 27,
       losses: 1,
       nc: 0,
       winsByKnockout: 10,
       winsBySubmission: 0,
       firstRoundFinishes: 7,
-    },
-    {
+    }
+  },
+  alexanderVolkanovski: {
+    name: "Alexander Volkanovski",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "featherWeight",
+    weightClassRanking: 0,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 6,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 26,
       losses: 4,
       nc: 0,
       winsByKnockout: 13,
       winsBySubmission: 3,
       firstRoundFinishes: 7,
-    },
-    {
+    }
+  },
+  alexPereira: {
+    name: "Alex Pereira",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "lightHeavyWeight",
+    weightClassRanking: 0,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 7,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 11,
       losses: 2,
       nc: 0,
       winsByKnockout: 9,
       winsBySubmission: 0,
       firstRoundFinishes: 4,
-    },
-    {
+    }
+  },
+  islamMakhachev: {
+    name: "Islam Makhachev",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "lightWeight",
+    weightClassRanking: 0,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 8,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 26,
       losses: 1,
       nc: 0,
       winsByKnockout: 14,
       winsBySubmission: 5,
       firstRoundFinishes: 12,
-    },
-    {
+    }
+  },
+  maxHolloway: {
+    name: "Max Holloway",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "lightWeight",
+    weightClassRanking: 9,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 9,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 26,
       losses: 7,
       nc: 0,
       winsByKnockout: 12,
       winsBySubmission: 2,
       firstRoundFinishes: 0,
-    },
-    {
+    }
+  },
+  tomAspinall: {
+    name: "Tom Aspinall",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "heavyWeight",
+    weightClassRanking: 1,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 10,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 14,
       losses: 3,
       nc: 0,
       winsByKnockout: 11,
       winsBySubmission: 3,
       firstRoundFinishes: 13,
-    },
-    {
+    }
+  },
+  israelAdesanya: {
+    name: "Israel Adesanya",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "middleWeight",
+    weightClassRanking: 2,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 11,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 24,
       losses: 3,
       nc: 0,
       winsByKnockout: 16,
       winsBySubmission: 0,
       firstRoundFinishes: 6,
-    },
-    {
+    }
+  },
+  charlesOliveira: {
+    name: "Charles Oliveira",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "lightWeight",
+    weightClassRanking: 2,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 12,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 34,
       losses: 10,
       nc: 0,
       winsByKnockout: 10,
       winsBySubmission: 21,
       firstRoundFinishes: 0,
-    },
-    {
+    }
+  },
+  seanStrickland: {
+    name: "Sean Strickland",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "middleWeight",
+    weightClassRanking: 1,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 13,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 29,
       losses: 6,
       nc: 0,
       winsByKnockout: 11,
       winsBySubmission: 4,
       firstRoundFinishes: 9,
-    },
-    {
+    }
+  },
+  justinGaethje: {
+    name: "Justin Gaethje",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "featherWeight",
+    weightClassRanking: 3,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 14,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 26,
       losses: 5,
       nc: 0,
       winsByKnockout: 20,
       winsBySubmission: 0,
       firstRoundFinishes: 9,
-    },
-    {
+    }
+  },
+  dustinPoirier: {
+    name: "Dustin Poirier",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "lightWeight",
+    weightClassRanking: 4,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 15,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 30,
       losses: 9,
       nc: 0,
       winsByKnockout: 16,
       winsBySubmission: 7,
       firstRoundFinishes: 13,
-    },
-    {
+    }
+  },
+  pauloCosta: {
+    name: "Paulo Costa",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "middleWeight",
+    weightClassRanking: 8,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 16,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 14,
       losses: 4,
       nc: 0,
       winsByKnockout: 11,
       winsBySubmission: 1,
       firstRoundFinishes: 9,
-    },
-    {
+    }
+  },
+  jiriProchazka: {
+    name: "Jiri Prochazka",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "lightHeavyWeight",
+    weightClassRanking: 1,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 17,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 30,
       losses: 5,
       nc: 1,
       winsByKnockout: 26,
       winsBySubmission: 3,
       firstRoundFinishes: 23,
-    },
-    {
+    }
+  },
+  johnnyWalker: {
+    name: "Johnny Walker",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "lightHeavyWeight",
+    weightClassRanking: 7,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 18,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 21,
       losses: 9,
       nc: 0,
       winsByKnockout: 16,
       winsBySubmission: 3,
       firstRoundFinishes: 17,
-    },
-    {
+    }
+  },
+  valentinaShevchenko: {
+    name: "Valentina Shevchenko",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "womensFlyweight",
+    weightClassRanking: 1,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 19,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 23,
       losses: 4,
       nc: 1,
       winsByKnockout: 8,
       winsBySubmission: 7,
       firstRoundFinishes: 6,
-    },
-
-    {
+    }
+  },
+  belalMuhammad: {
+    name: "Belal Muhammad",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "welterWeight",
+    weightClassRanking: 2,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 20,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 23,
       losses: 3,
       nc: 0,
       winsByKnockout: 5,
       winsBySubmission: 1,
       firstRoundFinishes: 0,
-    },
-    {
+    }
+  },
+  jackDellaMaddalena: {
+    name: "Jack Della Maddalena",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "welterWeight",
+    weightClassRanking: 5,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 21,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 17,
       losses: 2,
       nc: 0,
       winsByKnockout: 12,
       winsBySubmission: 2,
       firstRoundFinishes: 8,
-    },
-    {
+    }
+  },
+  gilbertBurns: {
+    name: "Gilbert Burns",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "welterWeight",
+    weightClassRanking: 6,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 22,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 22,
       losses: 7,
       nc: 0,
       winsByKnockout: 6,
       winsBySubmission: 9,
       firstRoundFinishes: 11,
-    },
-    {
+    }
+  },
+  ianGarry: {
+    name: "Ian Garry",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "welterWeight",
+    weightClassRanking: 7,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 23,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 15,
       losses: 0,
       nc: 0,
       winsByKnockout: 7,
       winsBySubmission: 1,
       firstRoundFinishes: 4,
-    },
-    {
+    }
+  },
+  seanBrady: {
+    name: "Sean Brady",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "welterWeight",
+    weightClassRanking: 8,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 24,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 16,
       losses: 1,
       nc: 0,
       winsByKnockout: 3,
       winsBySubmission: 5,
       firstRoundFinishes: 3,
-    },
-    {
+    }
+  },
+  stephenThompson: {
+    name: "Stephen Thompson",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "welterWeight",
+    weightClassRanking: 9,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 25,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 17,
       losses: 7,
       nc: 1,
       winsByKnockout: 8,
       winsBySubmission: 1,
       firstRoundFinishes: 5,
-    },
-    {
+    }
+  },
+  geoffNeal: {
+    name: "Geoff Neal",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "welterWeight",
+    weightClassRanking: 10,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 26,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 15,
       losses: 6,
       nc: 0,
       winsByKnockout: 9,
       winsBySubmission: 2,
       firstRoundFinishes: 6,
-    },
-    {
+    }
+  },
+  joaquinBuckley: {
+    name: "Joaquin Buckley",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "welterWeight",
+    weightClassRanking: 11,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 27,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 19,
       losses: 6,
       nc: 0,
       winsByKnockout: 13,
       winsBySubmission: 0,
       firstRoundFinishes: 4,
-    },
-    {
+    }
+  },
+  neilMagny: {
+    name: "Neil Magny",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "welterWeight",
+    weightClassRanking: 12,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 28,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 29,
       losses: 12,
       nc: 0,
       winsByKnockout: 8,
       winsBySubmission: 4,
       firstRoundFinishes: 0,
-    },
-    {
+    }
+  },
+  vincenteLuque: {
+    name: "Vicente Luque",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "welterWeight",
+    weightClassRanking: 13,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 29,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 22,
       losses: 10,
       nc: 1,
       winsByKnockout: 11,
       winsBySubmission: 8,
       firstRoundFinishes: 13,
-    },
-    {
+    }
+  },
+  michaelPage: {
+    name: "Michael Page",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "welterWeight",
+    weightClassRanking: 14,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 30,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 22,
       losses: 3,
       nc: 0,
       winsByKnockout: 13,
       winsBySubmission: 3,
       firstRoundFinishes: 13,
-    },
-    {
+    }
+  },
+  kevinHolland: {
+    name: "Kevin Holland",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "welterWeight",
+    weightClassRanking: 15,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 31,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 26,
       losses: 11,
       nc: 0,
       winsByKnockout: 14,
       winsBySubmission: 8,
       firstRoundFinishes: 13,
-    },
-    {
+    }
+  },
+  leonEdwards: {
+    name: "Leon Edwards",
+    level: 0,
+    cost: 10,
+    totalPower: 0,
+    power: 0,
+    weightClass: "welterWeight",
+    weightClassRanking: 0,
+    unlocked: false,
+    isActive: false,
+    mastery: 0,
+    progress: 0,
+    intervalId: 32,
+    currentXp: 0,
+    maxXp: 100,
+    stats: {
       wins: 22,
       losses: 3,
       nc: 0,
@@ -615,489 +2440,307 @@ const fighter: Fighter = {
       winsBySubmission: 3,
       firstRoundFinishes: 5,
     }
-  ],
-  power: [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0
-  ],
-  weightClass: [
-    "welterWeight",
-    "welterWeight",
-    "welterWeight",
-    "bantamWeight",
-    "heavyWeight",
-    "featherWeight",
-    "lightHeavyWeight",
-    "lightWeight",
-    "lightWeight",
-    "heavyWeight",
-    "middleWeight",
-    "lightWeight",
-    "middleWeight",
-    "featherWeight",
-    "lightWeight",
-    "middleWeight",
-    "lightHeavyWeight",
-    "lightHeavyWeight",
-    "womensFlyweight",
+  }
+}
 
-    "welterWeight",
-    "welterWeight",
-    "welterWeight",
-    "welterWeight",
-    "welterWeight",
-    "welterWeight",
-    "welterWeight",
-    "welterWeight",
-    "welterWeight",
-    "welterWeight",
-    "welterWeight",
-    "welterWeight",
-    "welterWeight"
-  ],
-  weightClassRanking: [
-    4,
-    1,
-    3,
-    0,
-    0,
-    0,
-    0,
-    0,
-    9,
-    1,
-    2,
-    2,
-    1,
-    3,
-    4,
-    8,
-    1,
-    7,
-    1,
+let ascendObject: AscendObject = {
+  raja: 1000,
+  verta: 0,
+  valintaHinta: 100,
+  satunnainenHinta: 50,
+  ascendCount: 0,
+}
 
-    2,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    0
-  ],
-  unlocked: [
-    true,
-    true,
-    true,
-    true,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ],
-  isActive: [
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false
-  ],
-  mastery: [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0
-  ],
-  xp: [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0
-  ],
-  progress: [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0
-  ],
-  progressBarElement: [
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-  ],
-  intervalId: [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,  
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    25,
-    26,
-    27,
-    28,
-    29,
-    30, 
-    31
-  ],
-  handleClick: (i: number) => {
-    if (game.hampaita >= fighter.cost[i]) {
-        game.hampaita -= fighter.cost[i];
-        fighter.cost[i] *= fighter.costMulti[i];
-        fighter.level[i]++;
-          if (maxActive > activeFighters.length) {
-            fighter.isActive[i] = true;
-            activeFighters.push(i);
-            progress(i);
-          }
+const elementit: Elementit = {
+  clicker: document.getElementsByClassName("clicker"),
+  ascendBtn: document.getElementById("ascendContainer") as HTMLDivElement,
+  resetTrainers: document.getElementById("resetTrainers") as HTMLButtonElement,
+  upgradeContainerElement: document.getElementById("upgradeContainer") as HTMLDivElement,
+  reset: document.getElementById("reset") as HTMLButtonElement,
+  save: document.getElementById("save") as HTMLButtonElement,
+
+  colbyCovingtonBtn: document.getElementById("colbyCovingtonOsta") as HTMLDivElement,
+  kamaruUsmanBtn: document.getElementById("kamaruUsmanOsta") as HTMLDivElement,
+  shavkatRakhmonovBtn: document.getElementById("shavkatRakhmonovOsta") as HTMLDivElement,
+  seanOmalleyBtn: document.getElementById("seanOmalleyOsta") as HTMLDivElement,
+
+  colbyCovingtonTrain: document.getElementById("colbyCovingtonTrain") as HTMLDivElement,
+  kamaruUsmanTrain: document.getElementById("kamaruUsmanTrain") as HTMLDivElement,
+  shavkatRakhmonovTrain: document.getElementById("shavkatRakhmonovTrain") as HTMLDivElement,
+  seanOmalleyTrain: document.getElementById("seanOmalleyTrain") as HTMLDivElement,
+
+  vertaElement: document.getElementById("verta") as HTMLDivElement,
+  valintaHintaElement: document.getElementById("valintaHinta") as HTMLDivElement,
+  satunnainenHintaElement: document.getElementById("satunnainenHinta") as HTMLDivElement,
+  hampaitaElement: document.getElementById("hampaita") as HTMLDivElement,
+  hampaitaPerSekuntiElement: document.getElementById("hampaitaPerSekunti") as HTMLDivElement,
+
+  colbyCovingtonPowerElement: document.getElementById("colbyCovingtonPower") as HTMLDivElement,
+  colbyCovingtonCostElement: document.getElementById("colbyCovingtonCost") as HTMLDivElement,
+  colbyCovingtonLevelElement: document.getElementById("colbyCovingtonLevel") as HTMLDivElement,
+
+  kamaruUsmanPowerElement: document.getElementById("kamaruUsmanPower") as HTMLDivElement,
+  kamaruUsmanCostElement: document.getElementById("kamaruUsmanCost") as HTMLDivElement,
+  kamaruUsmanLevelElement: document.getElementById("kamaruUsmanLevel") as HTMLDivElement,
+
+  shavkatRakhmonovPowerElement: document.getElementById("shavkatRakhmonovPower") as HTMLDivElement,
+  shavkatRakhmonovCostElement: document.getElementById("shavkatRakhmonovCost") as HTMLDivElement,
+  shavkatRakhmonovLevelElement: document.getElementById("shavkatRakhmonovLevel") as HTMLDivElement,
+
+  seanOmalleyPowerElement: document.getElementById("seanOmalleyPower") as HTMLDivElement,
+  seanOmalleyCostElement: document.getElementById("seanOmalleyCost") as HTMLDivElement,
+  seanOmalleyLevelElement: document.getElementById("seanOmalleyLevel") as HTMLDivElement,
+
+  colbyCovingtonTotalPowerElement: document.getElementById("colbyCovingtonTotalPower") as HTMLDivElement,
+  kamaruUsmanTotalPowerElement: document.getElementById("kamaruUsmanTotalPower") as HTMLDivElement,
+  shavkatRakhmonovTotalPowerElement: document.getElementById("shavkatRakhmonovTotalPower") as HTMLDivElement,
+  seanOmalleyTotalPowerElement: document.getElementById("seanOmalleyTotalPower") as HTMLDivElement,
+
+  colbyCovingtonCurrentXpElement: document.getElementById("colbyCovingtonCurrentXp") as HTMLDivElement,
+  colbyCovingtonMaxXpElement: document.getElementById("colbyCovingtonMaxXp") as HTMLDivElement,
+
+  kamaruUsmanCurrentXpElement: document.getElementById("kamaruUsmanCurrentXp") as HTMLDivElement,
+  kamaruUsmanMaxXpElement: document.getElementById("kamaruUsmanMaxXp") as HTMLDivElement,
+
+  shavkatRakhmonovCurrentXpElement: document.getElementById("shavkatRakhmonovCurrentXp") as HTMLDivElement,
+  shavkatRakhmonovMaxXpElement: document.getElementById("shavkatRakhmonovMaxXp") as HTMLDivElement,
+
+  seanOmalleyCurrentXpElement: document.getElementById("seanOmalleyCurrentXp") as HTMLDivElement,
+  seanOmalleyMaxXpElement: document.getElementById("seanOmalleyMaxXp") as HTMLDivElement,
+}
+
+const functioita = {
+  /*colbyCovingtonPurchaseUpgrade: function(i) {
+    for (let i = 0; i < upgrade.name.length; i++) {
+      if (!upgrade.purchased[i] && game.hampaita >= upgrade.cost[i]) {
+        if (upgrade.type[i] == "fighter" && fighter.colbyCovington.level >= upgrade.requirement[i]) {
+          game.hampaita -= upgrade.cost[i];
+          fighter.colbyCovington.power *= upgrade.bonus[i];
+          upgrade.purchased[i] = true;
+          
+          <'img src="./assets/'+upgrade.image[i]+'" title="'+upgrade.name[i]+' &#10; '+upgrade.description[i]+' &#10; ('+upgrade.cost[i]+' hammasta)" onclick="upgrade.purchase('+i+')">';
+          display.updateUi();
+        } else if (upgrade.type[i] == "click" && game.totalClicks >= upgrade.requirement[i]) {
+          game.hampaita -= upgrade.cost[i];
+          game.globalMulti *= upgrade.bonus[i];
+          upgrade.purchased[i] = true;
+          display.updateUi();
+        }
+      }
     }
-  },
-  calculatePower: function() {
-    game.totalPower = 0;
-    for (let i = 0; i < this.name.length; i++) {
-      let winRatio = this.stats[i].wins / (this.stats[i].losses === 0 ? 1 : this.stats[i].losses);
-      this.power[i] = (winRatio - this.stats[i].nc + this.stats[i].winsByKnockout + this.stats[i].winsBySubmission + this.stats[i].firstRoundFinishes) / 1000;
-      game.totalPower += this.power[i] * this.level[i];
+  },*/
+  
+  colbyCovingtonProgress: (() => {
+    if (game.activeFighters >= game.maxActive) {
+      return;
     }
+    let colbyCovingtonProgressBarElement = document.getElementById("colbyCovingtonProgressBar");
+      if (colbyCovingtonProgressBarElement) {
+        fighter.colbyCovington.isActive = true;
+        game.activeFighters++;
+        document.getElementById("colbyCovingtonTrain")!.style.backgroundColor = "green";
+        fighter.colbyCovington.intervalId = setInterval(() => {
+          fighter.colbyCovington.progress += 0.2;
+            if (colbyCovingtonProgressBarElement) {
+              colbyCovingtonProgressBarElement.style.width = `${fighter.colbyCovington.progress}%`;
+            } else {
+              console.error("Progress bar element is undefined or null");
+            }
+
+            if (fighter.colbyCovington.progress >= 100) {
+              fighter.colbyCovington.currentXp += 1;
+              fighter.colbyCovington.progress = 0;
+            }
+        display.updateUi();
+      }, 100);
+    }
+  }),
+
+  kamaruUsmanProgress: (() => {
+    if (game.activeFighters >= game.maxActive) {
+      return;
+    }
+    let kamaruUsmanProgressBarElement = document.getElementById("kamaruUsmanProgressBar");
+      if (kamaruUsmanProgressBarElement) {
+        fighter.kamaruUsman.isActive = true;
+        game.activeFighters++;
+        document.getElementById("kamaruUsmanTrain")!.style.backgroundColor = "green";
+        fighter.kamaruUsman.intervalId = setInterval(() => {
+          fighter.kamaruUsman.progress += 0.2;
+            if (kamaruUsmanProgressBarElement) {
+              kamaruUsmanProgressBarElement.style.width = `${fighter.kamaruUsman.progress}%`;
+            } else {
+              console.error("Progress bar element is undefined or null");
+            }
+
+            if (fighter.kamaruUsman.progress >= 100) {
+              fighter.kamaruUsman.currentXp += 1;
+              fighter.kamaruUsman.progress = 0;
+            }
+        display.updateUi();
+      }, 100);
+    }
+  }),
+
+  shavkatRakhmonovProgress: (() => {
+    if (game.activeFighters >= game.maxActive) {
+      return;
+    }
+    let shavkatRakhmonovProgressBarElement = document.getElementById("shavkatRakhmonovProgressBar");
+      if (shavkatRakhmonovProgressBarElement) {
+        fighter.shavkatRakhmonov.isActive = true;
+        game.activeFighters++;
+        document.getElementById("shavkatRakhmonovTrain")!.style.backgroundColor = "green";
+        fighter.shavkatRakhmonov.intervalId = setInterval(() => {
+          fighter.shavkatRakhmonov.progress += 0.2;
+            if (shavkatRakhmonovProgressBarElement) {
+              shavkatRakhmonovProgressBarElement.style.width = `${fighter.shavkatRakhmonov.progress}%`;
+            } else {
+              console.error("Progress bar element is undefined or null");
+            }
+
+            if (fighter.shavkatRakhmonov.progress >= 100) {
+              fighter.shavkatRakhmonov.currentXp += 1;
+              fighter.shavkatRakhmonov.progress = 0;
+            }
+        display.updateUi();
+      }, 100);
+    }
+  }),
+
+  seanOmalleyProgress: (() => {
+    if (game.activeFighters >= game.maxActive) {
+      return;
+    }
+    let seanOmalleyProgressBarElement = document.getElementById("seanOmalleyProgressBar");
+      if (seanOmalleyProgressBarElement) {
+        fighter.seanOmalley.isActive = true;
+        game.activeFighters++;
+        document.getElementById("seanOmalleyTrain")!.style.backgroundColor = "green";
+        fighter.seanOmalley.intervalId = setInterval(() => {
+          fighter.seanOmalley.progress += 0.2;
+            if (seanOmalleyProgressBarElement) {
+              seanOmalleyProgressBarElement.style.width = `${fighter.seanOmalley.progress}%`;
+            } else {
+              console.error("Progress bar element is undefined or null");
+            }
+
+            if (fighter.seanOmalley.progress >= 100) {
+              fighter.seanOmalley.currentXp += 1;
+              fighter.seanOmalley.progress = 0;
+            }
+        display.updateUi();
+      }, 100);
+    }
+  }),
+
+  calculateColbyCovingtonPower: (() => {
+    let winRatio = fighter.colbyCovington.stats.wins / (fighter.colbyCovington.stats.losses === 0 ? 1 : fighter.colbyCovington.stats.losses);
+    fighter.colbyCovington.power = (winRatio - fighter.colbyCovington.stats.nc + fighter.colbyCovington.stats.winsByKnockout + fighter.colbyCovington.stats.winsBySubmission + fighter.colbyCovington.stats.firstRoundFinishes) / 1000;
+    fighter.colbyCovington.totalPower = fighter.colbyCovington.power * fighter.colbyCovington.level;
+    game.totalPower += fighter.colbyCovington.power;
+  }),
+
+  calculateKamaruUsmanPower: (() => {
+    let winRatio = fighter.kamaruUsman.stats.wins / (fighter.kamaruUsman.stats.losses === 0 ? 1 : fighter.kamaruUsman.stats.losses);
+    fighter.kamaruUsman.power = (winRatio - fighter.kamaruUsman.stats.nc + fighter.kamaruUsman.stats.winsByKnockout + fighter.kamaruUsman.stats.winsBySubmission + fighter.kamaruUsman.stats.firstRoundFinishes) / 1000;
+    fighter.kamaruUsman.totalPower = fighter.kamaruUsman.power * fighter.kamaruUsman.level;
+    game.totalPower += fighter.kamaruUsman.power;
+  }),
+
+  calculateShavkatRakhmonovPower: (() => {
+    let winRatio = fighter.shavkatRakhmonov.stats.wins / (fighter.shavkatRakhmonov.stats.losses === 0 ? 1 : fighter.shavkatRakhmonov.stats.losses);
+    fighter.shavkatRakhmonov.power = (winRatio - fighter.shavkatRakhmonov.stats.nc + fighter.shavkatRakhmonov.stats.winsByKnockout + fighter.shavkatRakhmonov.stats.winsBySubmission + fighter.shavkatRakhmonov.stats.firstRoundFinishes) / 1000;
+    fighter.shavkatRakhmonov.totalPower = fighter.shavkatRakhmonov.power * fighter.shavkatRakhmonov.level;
+    game.totalPower += fighter.shavkatRakhmonov.power;
+  }),
+
+  calculateSeanOmalleyPower: (() => {
+    let winRatio = fighter.seanOmalley.stats.wins / (fighter.seanOmalley.stats.losses === 0 ? 1 : fighter.seanOmalley.stats.losses);
+    fighter.seanOmalley.power = (winRatio - fighter.seanOmalley.stats.nc + fighter.seanOmalley.stats.winsByKnockout + fighter.seanOmalley.stats.winsBySubmission + fighter.seanOmalley.stats.firstRoundFinishes) / 1000;
+    fighter.seanOmalley.totalPower = fighter.seanOmalley.power * fighter.seanOmalley.level;
+    game.totalPower += fighter.seanOmalley.power;
+  }),
+
+  getHampaitaPerSekunti: function() {
+    game.hampaitaPerSekunti = game.totalPower * game.globalMulti;
+    return game.hampaitaPerSekunti;
   },
-};
-*/
-
-function colbyCovingtonProgress() {
-  if (activeFighters >= maxActive) {
-    return;
-  }
-  let colbyCovingtonProgressBarElement = document.getElementById("colbyCovingtonProgressBar");
-    if (colbyCovingtonProgressBarElement) {
-      fighter.colbyCovington.isActive = true;
-      activeFighters++;
-      document.getElementById("colbyCovingtonTrain")!.style.backgroundColor = "green";
-      fighter.colbyCovington.intervalId = setInterval(() => {
-        fighter.colbyCovington.progress += 0.2;
-          if (colbyCovingtonProgressBarElement) {
-            //console.log("1");
-            colbyCovingtonProgressBarElement.style.width = `${fighter.colbyCovington.progress}%`;
-          } else {
-            console.error("Progress bar element is undefined or null");
-          }
-
-          if (fighter.colbyCovington.progress >= 100) {
-            fighter.colbyCovington.currentXp += 1;
-            fighter.colbyCovington.progress = 0;
-          }
-      display.updateUi();
-    }, 100);
-  }
 }
 
-function kamaruUsmanProgress() {
-  if (activeFighters >= maxActive) {
-    return;
-  }
-  let kamaruUsmanProgressBarElement = document.getElementById("kamaruUsmanProgressBar");
-    if (kamaruUsmanProgressBarElement) {
-      fighter.kamaruUsman.isActive = true;
-      activeFighters++;
-      document.getElementById("kamaruUsmanTrain")!.style.backgroundColor = "green";
-      fighter.kamaruUsman.intervalId = setInterval(() => {
-        fighter.kamaruUsman.progress += 0.2;
-          if (kamaruUsmanProgressBarElement) {
-            //console.log("1");
-            kamaruUsmanProgressBarElement.style.width = `${fighter.kamaruUsman.progress}%`;
-          } else {
-            console.error("Progress bar element is undefined or null");
-          }
+const utility: Utility = {
+  ascend: (() => {
+    ascendObject.raja * 5;
+    ascendObject.verta = (game.hampaita *= 0.01);
+    ascendObject.ascendCount++;
+    utility.saveGame();
+    utility.pysäytäKaikki();
+    window.location.href = "./ascend.html";
+  }),
+  pysäytäKaikki: (() => {
+    game.activeFighters = 0;
 
-          if (fighter.kamaruUsman.progress >= 100) {
-            fighter.kamaruUsman.currentXp += 1;
-            fighter.kamaruUsman.progress = 0;
-          }
+    fighter.colbyCovington.isActive = false;
+    fighter.kamaruUsman.isActive = false;
+    fighter.shavkatRakhmonov.isActive = false;
+    fighter.seanOmalley.isActive = false;
+
+    clearInterval(fighter.colbyCovington.intervalId)
+    clearInterval(fighter.kamaruUsman.intervalId)
+    clearInterval(fighter.shavkatRakhmonov.intervalId)
+    clearInterval(fighter.seanOmalley.intervalId)
+    console.log("Pysäytetty")
+  }),
+  saveGame: (() => {
+    console.log("Saving game");
+    let gameSave = {
+      game: game,
+      fighter: fighter,
+      ascendObject: ascendObject
+    };
+    localStorage.setItem("gameSave", JSON.stringify(gameSave));
+  }),
+  loadGame: (() => {
+    const gameSave = localStorage.getItem("gameSave");
+    if (gameSave === null) {
+      console.error("No game save found");
+      return;
+    }
+    try {
+      const parsedGameSave = JSON.parse(gameSave);
+      if (parsedGameSave === null) {
+        console.error("Game save is null");
+        return;
+      }
+      if (typeof parsedGameSave !== "object") {
+        console.error("Game save is not an object");
+        return;
+      }
+      game = parsedGameSave.game;
+      fighter = parsedGameSave.fighter;
+      ascendObject = parsedGameSave.ascendObject;
+
+      display.calculatePower();
       display.updateUi();
-    }, 100);
-  }
+
+      game.activeFighters = 0;
+
+      fighter.colbyCovington.isActive = false;
+      fighter.kamaruUsman.isActive = false;
+      fighter.shavkatRakhmonov.isActive = false;
+      fighter.seanOmalley.isActive = false;
+
+    } catch (error) {
+      console.error("Error while loading game save:", error);
+    }
+  }),
+  resetGame: (() => {
+    localStorage.removeItem("gameSave");
+    location.reload();
+  }),
 }
 
-function shavkatRakhmonovProgress() {
-  if (activeFighters >= maxActive) {
-    return;
-  }
-  let shavkatRakhmonovProgressBarElement = document.getElementById("shavkatRakhmonovProgressBar");
-    if (shavkatRakhmonovProgressBarElement) {
-      fighter.shavkatRakhmonov.isActive = true;
-      activeFighters++;
-      document.getElementById("shavkatRakhmonovTrain")!.style.backgroundColor = "green";
-      fighter.shavkatRakhmonov.intervalId = setInterval(() => {
-        fighter.shavkatRakhmonov.progress += 0.2;
-          if (shavkatRakhmonovProgressBarElement) {
-            //console.log("1");
-            shavkatRakhmonovProgressBarElement.style.width = `${fighter.shavkatRakhmonov.progress}%`;
-          } else {
-            console.error("Progress bar element is undefined or null");
-          }
-
-          if (fighter.shavkatRakhmonov.progress >= 100) {
-            fighter.shavkatRakhmonov.currentXp += 1;
-            fighter.shavkatRakhmonov.progress = 0;
-          }
-      display.updateUi();
-    }, 100);
-  }
-}
-
-function seanOmalleyProgress() {
-  if (activeFighters >= maxActive) {
-    return;
-  }
-  let seanOmalleyProgressBarElement = document.getElementById("seanOmalleyProgressBar");
-    if (seanOmalleyProgressBarElement) {
-      fighter.seanOmalley.isActive = true;
-      activeFighters++;
-      document.getElementById("seanOmalleyTrain")!.style.backgroundColor = "green";
-      fighter.seanOmalley.intervalId = setInterval(() => {
-        fighter.seanOmalley.progress += 0.2;
-          if (seanOmalleyProgressBarElement) {
-            //console.log("1");
-            seanOmalleyProgressBarElement.style.width = `${fighter.seanOmalley.progress}%`;
-          } else {
-            console.error("Progress bar element is undefined or null");
-          }
-
-          if (fighter.seanOmalley.progress >= 100) {
-            fighter.seanOmalley.currentXp += 1;
-            fighter.seanOmalley.progress = 0;
-          }
-      display.updateUi();
-    }, 100);
-  }
-}
-
-const upgrade = {
+let upgrade: Upgrade = {
   name: [
     "Colby Covingtonille T1 hanskat",
     "Kamaru Usmanille T1 hanskat",
@@ -1228,30 +2871,30 @@ const upgrade = {
     "click"
   ],
   cost: [
-    3_000,
-    3_000,
-    3_000,
-    3_000,
-    3_000,
-    3_000,
-    3_000,
-    3_000,
-    3_000,
-    3_000,
-    3_000,
-    3_000,
-    3_000,
-    3_000,
-    3_000,
-    3_000,
-    3_000,
-    3_000,
-    3_000,
-    3_000,
-    3_000,
-    3_000,
-    3_000,
-    3_000,
+    1_000,
+    1_000,
+    1_000,
+    1_000,
+    1_000,
+    1_000,
+    1_000,
+    1_000,
+    1_000,
+    1_000,
+    1_000,
+    1_000,
+    1_000,
+    1_000,
+    1_000,
+    1_000,
+    1_000,
+    1_000,
+    1_000,
+    1_000,
+    1_000,
+    1_000,
+    1_000,
+    1_000,
     12_000,
     12_000,
     12_000,
@@ -1293,30 +2936,30 @@ const upgrade = {
     -1
   ],
   requirement: [
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
     100,
     100,
     100,
@@ -1391,29 +3034,37 @@ const upgrade = {
     false, 
     false
   ],
-  colbyCovingtonPurchaseUpgrade: function(index: number) {
-    if (!this.purchased[index] && game.hampaita >= this.cost[index]) {
-      if (this.type[index] == "fighter" && fighter.colbyCovington.level >= this.requirement[index]) {
-        game.hampaita -= this.cost[index];
-        fighter.colbyCovington.power *= this.bonus[index];
-        this.purchased[index] = true;
-
-        //display.updateColbyCovingtonUpgrades();
-        display.updateUi();
-      } else if (this.type[index] == "click" && game.totalClicks >= this.requirement[index]) {
-        game.hampaita -= this.cost[index];
-        game.globalMulti *= this.bonus[index];
-        this.purchased[index] = true;
-
-        //display.updateColbyCovingtonUpgrades();
-        display.updateUi();
-      }
+  colbyCovingtonHanskantT1Purchase: () => {
+    if (fighter.colbyCovington.level >= upgrade.requirement[0]) {
+      game.hampaita -= upgrade.cost[0];
+      fighter.colbyCovington.power *= upgrade.bonus[0];
+      upgrade.purchased[0] = true;
     }
-  }
+  },
+  kamaruUsmanHanskantT1Purchase: () => {
+    if (fighter.kamaruUsman.level >= upgrade.requirement[1]) {
+      game.hampaita -= upgrade.cost[1];
+      fighter.kamaruUsman.power *= upgrade.bonus[1];
+      upgrade.purchased[1] = true;
+    }
+  },
+  shavkatRakhmonovHanskantT1Purchase: () => {
+    if (fighter.shavkatRakhmonov.level >= upgrade.requirement[2]) {
+      game.hampaita -= upgrade.cost[2];
+      fighter.shavkatRakhmonov.power *= upgrade.bonus[2];
+      upgrade.purchased[2] = true;
+    }
+  },
+  seanOmalleyHanskantT1Purchase: () => {
+    if (fighter.seanOmalley.level >= upgrade.requirement[3]) {
+      game.hampaita -= upgrade.cost[3];
+      fighter.seanOmalley.power *= upgrade.bonus[3];
+      upgrade.purchased[3] = true;
+    }
+  },
 }
 
-/*
-const achievement = {
+/*const achievement = {
   name: [
     "t1Työtön",
     "t2Työtön",
@@ -1485,230 +3136,160 @@ const achievement = {
 */
 
 const display = {
-  updateUi: function() {
-    document.getElementById("hampaita")!.innerHTML = game.hampaita.toFixed(0);
-    document.getElementById("hampaitaPerSekunti")!.innerHTML = game.hampaitaPerSekunti.toFixed(2);
-
-    document.getElementById("colbyCovingtonPower")!.innerHTML = fighter.colbyCovington.power.toFixed(2);
-    document.getElementById("colbyCovingtonCost")!.innerHTML = fighter.colbyCovington.cost.toFixed(2);
-    document.getElementById("colbyCovingtonLevel")!.innerHTML = fighter.colbyCovington.level.toFixed(0);
-
-    document.getElementById("kamaruUsmanPower")!.innerHTML = fighter.kamaruUsman.power.toFixed(2);
-    document.getElementById("kamaruUsmanCost")!.innerHTML = fighter.kamaruUsman.cost.toFixed(2);
-    document.getElementById("kamaruUsmanLevel")!.innerHTML = fighter.kamaruUsman.level.toFixed(0);
-
-    document.getElementById("shavkatRakhmonovPower")!.innerHTML = fighter.shavkatRakhmonov.power.toFixed(2);
-    document.getElementById("shavkatRakhmonovCost")!.innerHTML = fighter.shavkatRakhmonov.cost.toFixed(2);
-    document.getElementById("shavkatRakhmonovLevel")!.innerHTML = fighter.shavkatRakhmonov.level.toFixed(0);
-
-    document.getElementById("seanOmalleyPower")!.innerHTML = fighter.seanOmalley.power.toFixed(2);
-    document.getElementById("seanOmalleyCost")!.innerHTML = fighter.seanOmalley.cost.toFixed(2);
-    document.getElementById("seanOmalleyLevel")!.innerHTML = fighter.seanOmalley.level.toFixed(0);
-
-    calculations.getHampaitaPerSekunti();
-
-    document.getElementById("colbyCovingtonTotalPower")!.innerHTML = fighter.colbyCovington.totalPower.toFixed(2);
-    document.getElementById("kamaruUsmanTotalPower")!.innerHTML = fighter.kamaruUsman.totalPower.toFixed(2);
-    document.getElementById("shavkatRakhmonovTotalPower")!.innerHTML = fighter.shavkatRakhmonov.totalPower.toFixed(2);
-    document.getElementById("seanOmalleyTotalPower")!.innerHTML = fighter.seanOmalley.totalPower.toFixed(2);
-
-    document.getElementById("colbyCovingtonCurrentXp")!.innerHTML = fighter.colbyCovington.currentXp.toLocaleString();
-    document.getElementById("colbyCovingtonMaxXp")!.innerHTML = fighter.colbyCovington.maxXp.toLocaleString();
-    document.getElementById("kamaruUsmanCurrentXp")!.innerHTML = fighter.kamaruUsman.currentXp.toLocaleString();
-    document.getElementById("kamaruUsmanMaxXp")!.innerHTML = fighter.kamaruUsman.maxXp.toLocaleString();
-    document.getElementById("shavkatRakhmonovCurrentXp")!.innerHTML = fighter.shavkatRakhmonov.currentXp.toLocaleString();
-    document.getElementById("shavkatRakhmonovMaxXp")!.innerHTML = fighter.shavkatRakhmonov.maxXp.toLocaleString();
-    document.getElementById("seanOmalleyCurrentXp")!.innerHTML = fighter.seanOmalley.currentXp.toLocaleString();
-    document.getElementById("seanOmalleyMaxXp")!.innerHTML = fighter.seanOmalley.maxXp.toLocaleString();
-    
+  updateUi: (() => {
     const ascendBtn = document.getElementById("ascendContainer");
       if (ascendBtn) {
-        if (game.hampaita >= ascend.treshold) {
+        if (game.hampaita >= ascendObject.raja) {
           ascendBtn.style.display = "block";
           ascendBtn.innerHTML = "ASCEND";
         } else {
           ascendBtn.style.display = "none";
         }
       }
-    //document.getElementById("colbyCovingtonProgressBar")!.style.width = `${fighter.colbyCovington.progressBarWidth}%`;
-  },
-  
+    if (elementit.vertaElement) {
+      elementit.vertaElement.innerHTML = ascendObject.verta.toLocaleString();
+    }
+
+    if (elementit.valintaHintaElement) {
+      elementit.valintaHintaElement.innerHTML = ascendObject.valintaHinta.toLocaleString();
+    }
+
+    if (elementit.satunnainenHintaElement) {
+      elementit.satunnainenHintaElement.innerHTML = ascendObject.satunnainenHinta.toLocaleString();
+    }
+
+    if (game.hampaita) {
+      elementit.hampaitaElement.innerHTML = game.hampaita.toLocaleString();
+    }
+
+    if (game.hampaitaPerSekunti) {
+      elementit.hampaitaPerSekuntiElement.innerHTML = game.hampaitaPerSekunti.toLocaleString();
+    }
+
+    if (elementit.colbyCovingtonPowerElement) {
+      elementit.colbyCovingtonPowerElement.innerHTML = fighter.colbyCovington.power.toLocaleString();
+    }
+
+    if (elementit.colbyCovingtonCostElement) {
+      elementit.colbyCovingtonCostElement.innerHTML = fighter.colbyCovington.cost.toLocaleString();
+    }
+
+    if (elementit.colbyCovingtonLevelElement) {
+      elementit.colbyCovingtonLevelElement.innerHTML = fighter.colbyCovington.level.toLocaleString();
+    }
+
+    if (elementit.kamaruUsmanPowerElement) {
+      elementit.kamaruUsmanPowerElement.innerHTML = fighter.kamaruUsman.power.toLocaleString();
+    }
+
+    if (elementit.kamaruUsmanCostElement) {
+      elementit.kamaruUsmanCostElement.innerHTML = fighter.kamaruUsman.cost.toLocaleString();
+    }
+
+    if (elementit.kamaruUsmanLevelElement) {
+      elementit.kamaruUsmanLevelElement.innerHTML = fighter.kamaruUsman.level.toLocaleString();
+    }
+
+    if (elementit.shavkatRakhmonovPowerElement) {
+      elementit.shavkatRakhmonovPowerElement.innerHTML = fighter.shavkatRakhmonov.power.toLocaleString();
+    }
+
+    if (elementit.shavkatRakhmonovCostElement) {
+      elementit.shavkatRakhmonovCostElement.innerHTML = fighter.shavkatRakhmonov.cost.toLocaleString();
+    }
+
+    if (elementit.shavkatRakhmonovLevelElement) {
+      elementit.shavkatRakhmonovLevelElement.innerHTML = fighter.shavkatRakhmonov.level.toLocaleString();
+    }
+
+    if (elementit.seanOmalleyPowerElement) {
+      elementit.seanOmalleyPowerElement.innerHTML = fighter.seanOmalley.power.toLocaleString();
+    }
+
+    if (elementit.seanOmalleyCostElement) {
+      elementit.seanOmalleyCostElement.innerHTML = fighter.seanOmalley.cost.toLocaleString();
+    }
+
+    if (elementit.seanOmalleyLevelElement) {
+      elementit.seanOmalleyLevelElement.innerHTML = fighter.seanOmalley.level.toLocaleString();
+    }
+
+    if (elementit.colbyCovingtonTotalPowerElement) {
+      elementit.colbyCovingtonTotalPowerElement.innerHTML = fighter.colbyCovington.totalPower.toLocaleString();
+    }
+
+    if (elementit.kamaruUsmanTotalPowerElement) {
+      elementit.kamaruUsmanTotalPowerElement.innerHTML = fighter.kamaruUsman.totalPower.toLocaleString();
+    }
+
+    if (elementit.shavkatRakhmonovTotalPowerElement) {
+      elementit.shavkatRakhmonovTotalPowerElement.innerHTML = fighter.shavkatRakhmonov.totalPower.toLocaleString();
+    }
+
+    if (elementit.seanOmalleyTotalPowerElement) {
+      elementit.seanOmalleyTotalPowerElement.innerHTML = fighter.seanOmalley.totalPower.toLocaleString();
+    }
+
+    if (elementit.colbyCovingtonCurrentXpElement) {
+      elementit.colbyCovingtonCurrentXpElement.innerHTML = fighter.colbyCovington.currentXp.toLocaleString();
+    }
+
+    if (elementit.colbyCovingtonMaxXpElement) {
+      elementit.colbyCovingtonMaxXpElement.innerHTML = fighter.colbyCovington.maxXp.toLocaleString();
+    }
+
+    if (elementit.kamaruUsmanCurrentXpElement) {
+      elementit.kamaruUsmanCurrentXpElement.innerHTML = fighter.kamaruUsman.currentXp.toLocaleString();
+    }
+
+    if (elementit.kamaruUsmanMaxXpElement) {
+      elementit.kamaruUsmanMaxXpElement.innerHTML = fighter.kamaruUsman.maxXp.toLocaleString();
+    }
+
+    if (elementit.shavkatRakhmonovCurrentXpElement) {
+      elementit.shavkatRakhmonovCurrentXpElement.innerHTML = fighter.shavkatRakhmonov.currentXp.toLocaleString();
+    }
+
+    if (elementit.shavkatRakhmonovMaxXpElement) {
+      elementit.shavkatRakhmonovMaxXpElement.innerHTML = fighter.shavkatRakhmonov.maxXp.toLocaleString();
+    }
+
+    if (elementit.seanOmalleyCurrentXpElement) {
+      elementit.seanOmalleyCurrentXpElement.innerHTML = fighter.seanOmalley.currentXp.toLocaleString();
+    }
+
+    if (elementit.seanOmalleyMaxXpElement) {
+      elementit.seanOmalleyMaxXpElement.innerHTML = fighter.seanOmalley.maxXp.toLocaleString();
+    }
+
+    if (elementit.upgradeContainerElement) {
+      elementit.upgradeContainerElement.innerHTML += "";
+    }
+  }),
   calculatePower: () => {
-    calculations.calculateColbyCovingtonPower();
-    calculations.calculateKamaruUsmanPower();
-    calculations.calculateShavkatRakhmonovPower();
-    calculations.calculateSeanOmalleyPower();
-  },
-  /*
-  updateColbyCovingtonUpgrades: function(): void {
-    const upgradeContainer = document.getElementById("upgradeContainer");
-    if (!upgradeContainer) {
-      return;
-    }
-
-    for (let i = 0; i < upgrade.name.length; i++) {
-      const { purchased, type, requirement, cost, image, name, description } = upgrade[i];
-      if (!purchased && type === "fighter" && fighter.colbyCovington.level >= requirement[0]) {
-        const img = document.createElement("img");
-        img.src = `./assets/${image[i]}`;
-        img.title = `${name[i]} \n ${description[i]} \n (${cost[i]} hammasta)`;
-        img.onclick = () => upgrade.colbyCovingtonPurchaseUpgrade(i);
-        upgradeContainer.appendChild(img);
-      }
-    }
+    functioita.calculateColbyCovingtonPower();
+    functioita.calculateKamaruUsmanPower();
+    functioita.calculateShavkatRakhmonovPower();
+    functioita.calculateSeanOmalleyPower();
   }
-    */
-}
-
-/*
-updatefighter: function() {
-  const fighterContainer = document.getElementById("fighterContainer");
-
-  if (!fighterContainer) {
-    console.error("Fighter container not found");
-    return;
-  }
-
-  fighterContainer.innerHTML = "";
-
-  for (let i = 0; i < fighter.name.length; i++) {
-    if (fighter.unlocked[i] == true) {
-      const fighterButton = document.createElement('div');
-      fighterButton.classList.add('fighterButton', "unselectable");
-      fighterButton.setAttribute('onclick', `fighter.handleClick(${i})`);
-      fighterContainer.appendChild(fighterButton);
-
-      const fighterTable = document.createElement('table');
-      fighterButton.appendChild(fighterTable);
-
-      const fighterRow = document.createElement('tr');
-      fighterTable.appendChild(fighterRow);
-
-      const fighterImage = document.createElement('td');
-      fighterImage.id = 'image';
-
-      const fighterImageElement = document.createElement('img');
-      fighterImageElement.src = `./assets/${fighter.image[i]}`;
-      fighterImage.appendChild(fighterImageElement);
-      fighterRow.appendChild(fighterImage);
-
-      const fighterNameAndCost = document.createElement('td');
-      fighterNameAndCost.id = 'nameAndCost';
-      fighterRow.appendChild(fighterNameAndCost);
-
-      const fighterName = document.createElement('p');
-      fighterName.textContent = fighter.name[i];
-      fighterNameAndCost.appendChild(fighterName);
-
-      const fighterPower = document.createElement('p');
-      fighterPower.textContent = `Power: ${(fighter.power[i] * fighter.level[i]).toFixed(2)}`;
-      fighterNameAndCost.appendChild(fighterPower);
-
-      const fighterCost = document.createElement('p');
-      fighterCost.textContent = `${Math.trunc(fighter.cost[i])} hammasta`;
-      fighterNameAndCost.appendChild(fighterCost);
-
-      const fighterLevel = document.createElement('td');
-      fighterLevel.id = 'level';
-      const fighterLevelSpan = document.createElement('span');
-      fighterLevelSpan.textContent = `${fighter.level[i]}`;
-      fighterLevel.appendChild(fighterLevelSpan);
-      fighterRow.appendChild(fighterLevel);
-    }
-  }
-  
-  const fighterButtons = Array.from(fighterContainer.querySelectorAll('.fighterButton')); // Create a copy of fighter buttons
-
-  for (let i = 0; i < fighter.name.length; i++) {
-    if (fighter.unlocked[i]) {
-      const progressBarElement = document.createElement('div');
-      progressBarElement.classList.add('progress-bar');
-
-      const currentButton = fighterButtons.shift(); // Remove the first element from the copy
-
-      if (!currentButton) {
-        console.error(`Fighter button for fighter ${i} not found`);
-        continue;
-      }
-
-      currentButton.appendChild(progressBarElement);
-      fighter.progressBarElement[i] = progressBarElement;
-    }
-  }
-},
-*/
-
-  /*
-  updateAchievement: function() {
-    document.getElementById("achievementContainer")!.innerHTML = "";
-    /*
-    for (let i = 0; i < achievement.name.length; i++) {
-      if (achievement.awarded[i]) {
-        document.getElementById("achievementContainer")!.innerHTML += '<img src="./assets/'+achievement.image[i]+'" title="'+achievement.name[i]+' &#10; '+achievement.description[i]+'">';
-      }
-    }
-  */
-
-    
-function saveGame() {
-  let gameSave = {
-    game: game,
-    fighter: fighter,
-  };
-  localStorage.setItem("gameSave", JSON.stringify(gameSave));
-}
-
-function loadGame() {
-  const gameSave = localStorage.getItem("gameSave");
-  if (gameSave === null) {
-    console.error("No game save found");
-    return;
-  }
-  try {
-    const parsedGameSave = JSON.parse(gameSave);
-    if (parsedGameSave === null) {
-      console.error("Game save is null");
-      return;
-    }
-    if (typeof parsedGameSave !== "object") {
-      console.error("Game save is not an object");
-      return;
-    }
-    game = parsedGameSave.game;
-    fighter = parsedGameSave.fighter;
-
-    display.calculatePower();
-    display.updateUi();
-
-    fighter.colbyCovington.isActive = false;
-    fighter.kamaruUsman.isActive = false;
-    fighter.shavkatRakhmonov.isActive = false;
-    fighter.seanOmalley.isActive = false;
-
-  } catch (error) {
-    console.error("Error while loading game save:", error);
-  }
-}
-
-function resetGame() {
-  localStorage.removeItem("gameSave");
-  location.reload();
 }
 
 window.onload = function() {
-  loadGame();
+  utility.loadGame();
   display.updateUi();
-  //display.updateColbyCovingtonUpgrades();
   //display.updatefighter();
   //display.updateAchievement();
 };
 
 setInterval( () => {
-  game.hampaita += game.hampaitaPerSekunti / 10;
+  functioita.getHampaitaPerSekunti();
+  game.hampaita += game.hampaitaPerSekunti / 100;
   display.updateUi();
 }, 100);
 
-setInterval( () => {
+setInterval(() => {
+  
+}, 1_000);
   /*
   for (let i = 0; i < achievement.name.length; i++) {
     if (achievement.type[i] == "click" && game.totalClicks >= achievement.requirement[i]) achievement.earn(i);
@@ -1716,100 +3297,106 @@ setInterval( () => {
     else if (achievement.type[i] == "fighter" && fighter.level[achievement.objectIndex[i]] >= achievement.requirement[i]) achievement.earn(i);
   }
     */
-  //display.updateColbyCovingtonUpgrades();
   //display.updateAchievement();
-}, 1_000);
-
-setInterval( () => {
-  saveGame();
-}, 30_000);
 
 setInterval ( () => {
+  elementit.upgradeContainerElement.innerHTML = "";
+  if (!upgrade.purchased[0]) {
+    if (upgrade.type[0] == "fighter" && fighter.colbyCovington.level >= upgrade.requirement[0]) {
+      elementit.upgradeContainerElement.innerHTML += '<img src="./assets/' + upgrade.image[0] + '" title="' + upgrade.name[0] + ' &#10; ' + upgrade.description[0] + ' &#10; (' + upgrade.cost[0] + ' hammasta)" onclick="upgrade.purchase(' + 0 + ')">';
+    } else if (upgrade.type[0] == "click" && game.totalClicks >= upgrade.requirement[0]) {
+      elementit.upgradeContainerElement.innerHTML += '<img src="./assets/' + upgrade.image[0] + '" title="' + upgrade.name[0] + ' &#10; ' + upgrade.description[0] + ' &#10; (' + upgrade.cost[0] + ' hammasta)" onclick="upgrade.purchase(' + 0 + ')">';
+    }
+  }
   display.updateUi();
-  //display.updateColbyCovingtonUpgrades();
 }, 10_000);
 
-const clickerBtn = document.getElementById("clicker")as HTMLDivElement;
-const colbyCovingtonBtn = document.getElementById("colbyCovingtonOsta")as HTMLDivElement;
-const kamaruUsmanBtn = document.getElementById("kamaruUsman")as HTMLDivElement;
-const shavkatRakhmonovBtn = document.getElementById("shavkatRakhmonov")as HTMLDivElement;
-const seanOmalleyBtn = document.getElementById("seanOmalley")as HTMLDivElement;
+setInterval( () => {
+  utility.saveGame();
+}, 30_000);
 
-const colbyCovingtonTrain = document.getElementById("colbyCovingtonTrain")as HTMLDivElement;
-const kamaruUsmanTrain = document.getElementById("kamaruUsmanTrain")as HTMLDivElement;
-const shavkatRakhmonovTrain = document.getElementById("shavkatRakhmonovTrain")as HTMLDivElement;
-const seanOmalleyTrain = document.getElementById("seanOmalleyTrain")as HTMLDivElement;
+for (let i = 0; i < elementit.clicker.length; i++) {
+  elementit.clicker[i].addEventListener("click", function() {
+    game.totalClicks++;
+  });
+}
 
-const ascendBtn = document.getElementById("asendContainer")as HTMLDivElement;
-
-clickerBtn.addEventListener("click", function() {
-  game.totalClicks++;
-}, false);
-
-colbyCovingtonBtn.addEventListener("click", () => {
+elementit.colbyCovingtonBtn.addEventListener("click", () => {
   if (game.hampaita >= fighter.colbyCovington.cost) {
     game.hampaita -= fighter.colbyCovington.cost;
     fighter.colbyCovington.level++;
     fighter.colbyCovington.cost *= 1.2;
 
-    calculations.calculateColbyCovingtonPower();
+    functioita.calculateColbyCovingtonPower();
     display.updateUi();
   }
 });
 
-kamaruUsmanBtn.addEventListener("click", () => {
+elementit.kamaruUsmanBtn.addEventListener("click", () => {
   if (game.hampaita >= fighter.kamaruUsman.cost) {
     game.hampaita -= fighter.kamaruUsman.cost;
     fighter.kamaruUsman.level++;
     fighter.kamaruUsman.cost *= 1.2;
 
-    calculations.calculateKamaruUsmanPower();
+    functioita.calculateKamaruUsmanPower();
     display.updateUi();
   }
 });
 
-shavkatRakhmonovBtn.addEventListener("click", () => {
+elementit.shavkatRakhmonovBtn.addEventListener("click", () => {
   if (game.hampaita >= fighter.shavkatRakhmonov.cost) {
     game.hampaita -= fighter.shavkatRakhmonov.cost;
     fighter.shavkatRakhmonov.level++;
     fighter.shavkatRakhmonov.cost *= 1.2;
 
-    calculations.calculateShavkatRakhmonovPower();
+    functioita.calculateShavkatRakhmonovPower();
     display.updateUi();
   }
 });
 
-seanOmalleyBtn.addEventListener("click", () => {
+elementit.seanOmalleyBtn.addEventListener("click", () => {
   if (game.hampaita >= fighter.seanOmalley.cost) {
     game.hampaita -= fighter.seanOmalley.cost;
     fighter.seanOmalley.level++;
     fighter.seanOmalley.cost *= 1.2;
 
-    calculations.calculateSeanOmalleyPower();
+    functioita.calculateSeanOmalleyPower();
     display.updateUi();
   }
 });
 
-colbyCovingtonTrain.addEventListener("click", () => {
-  colbyCovingtonProgress();
+elementit.colbyCovingtonTrain.addEventListener("click", () => {
+  functioita.colbyCovingtonProgress();
 });
 
-kamaruUsmanTrain.addEventListener("click", () => {
-  kamaruUsmanProgress();
+elementit.kamaruUsmanTrain.addEventListener("click", () => {
+  functioita.kamaruUsmanProgress();
 });
 
-shavkatRakhmonovTrain.addEventListener("click", () => {
-  shavkatRakhmonovProgress();
+elementit.shavkatRakhmonovTrain.addEventListener("click", () => {
+  functioita.shavkatRakhmonovProgress();
 });
 
-seanOmalleyTrain.addEventListener("click", () => {
-  seanOmalleyProgress();
+elementit.seanOmalleyTrain.addEventListener("click", () => {
+  functioita.seanOmalleyProgress();
 });
 
-ascendBtn.addEventListener("click", () => {
-  if (game.hampaita >= ascend.treshold) {
-    ascend.treshold *= 5;
+elementit.resetTrainers.addEventListener("click", () => {
+  utility.pysäytäKaikki();
+});
+
+elementit.ascendBtn.addEventListener("click", () => {
+  if (game.hampaita >= ascendObject.raja) {
+    utility.ascend();
   }
-})
+});
+
+elementit.reset.addEventListener("click", () => {
+  utility.resetGame();
+});
+
+elementit.save.addEventListener("click", () => {
+  utility.saveGame();
+});
 
 

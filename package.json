@@ -1,0 +1,19 @@
+{
+  "name": "orloc",
+  "version": "0.0.3",
+  "description": "incremental mma game",
+  "main": "main.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hohlfuss/Hohlfuss.github.io.git"
+  },
+  "author": "Hohlfuss",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hohlfuss/Hohlfuss.github.io/issues"
+  },
+  "homepage": "https://github.com/Hohlfuss/Hohlfuss.github.io#readme"
+}

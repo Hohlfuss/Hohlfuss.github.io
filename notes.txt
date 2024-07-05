@@ -1,7 +1,7 @@
-0.0.0.2
+0.0.2
 progress baarit melkei toimii
 
-0.0.0.3
+0.0.3
 sain ve palkit vihdoi toimiin ja ne muistaa mihin jäi jatkoin xp systeemiä ja alottelin ascendaus systeemiä
 
 todo:
