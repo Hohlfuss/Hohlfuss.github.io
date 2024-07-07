@@ -1,100 +1,61 @@
 body {
-  background-color: rgb(22, 22, 22);
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  color: white;
+  height: 100vh;
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 100;
+  font-size: 18px;
 }
 
 #fighterContainer {
-  margin-top: 200px;
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  color: white;
 }
 
-.fighterButton {
-  font-family: "Bebas Neue", sans-serif;
-  font-weight: 100;
-  font-style: normal;
-  color: rgb(255, 255, 255);
-  background-color: rgb(55, 55, 55);
-  transition: all .2s ease-in-out;
-  border-radius: 10px;
-  border: 2px solid rgb(0, 0, 0);
-  cursor: pointer;
-  font-size: 16px;
+.parentDivForOttelijat {
+  display: flex;
+  flex-direction: column;
   width: 90%;
   margin-left: 5%;
-  height: 197px;
-  margin-bottom: 20px;
+  height: 200px;
+  margin-top: 30px;
+  background-color: rgb(33, 33, 33);
 }
 
-/*
-.train {
-  width: 30px;
-  height: 89%;
-  background-color: rgba(255, 0, 0, 0.361);
-  border-radius: 10px;
-  border: 3px solid black;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  float: bottom;
-  font-size: 27px;
-  background-color: rgb(111, 111, 111);
-  transition: all .2s ease-in-out;
-}
-  */
-.train {
+.ottelijaDiv {
   display: flex;
-  position: relative;
-  bottom: 100%;
-  right: 0;
-  width: 40px;
-  height: 90%;
-  background-color: rgba(255, 0, 0, 0.361);
-  border-radius: 5px;
-  border: 2px solid black;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  float: right;
-  font-size: 20px;
-  font-weight: 100;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(33, 33, 33, 0);
+  user-select: none;
+}
+
+.ottelijaDiv:hover {
+  background-color: rgb(77, 77, 44);
   transition: all .2s ease-in-out;
 }
 
-.train:active {
-  transform: scale(0.9);
+.ottelijaInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 50%;
+  height: 100%;
 }
 
 .level {
-  height: 100%;
-  width: 20px;
-  justify-content: center;
+  display: flex;
+  font-size: 40px;
   align-items: center;
-  text-align: center;
-}
-
-.fighterButton .image {
-  width: 26%;
-}
-
-.fighterButton:hover {
-  background-color: rgb(111, 111, 111);
-  transition: all .2s ease-in-out;
-}
-  
-
-.fighterButton img {
-  height: 110%;
-  width: 110px;
-}
-
-.fighterButton .level {
-  font-size: 37px;
+  width: 10%;
+  justify-content: center;
   color: powderblue;
-  font-family: "Bebas Neue", sans-serif;
-  width: 15%;
-  margin-bottom: 10px;
-}
-
-.unselectable {
-  user-select: none;
 }
 
 header {
@@ -114,21 +75,78 @@ header {
   height: 49px;
 }
 
-#upgradeContainer img {
-  height: 64px;
-  width: 64px;
+a, button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
 }
 
-#achievementContainer img {
-  height: 64px;
-  width: 64px;
-}
-
-.number {
-  font-family: "Bebas Neue", sans-serif;
+.navigointi, button {
+  font-family: Arial, Helvetica, sans-serif;
   font-weight: 100;
   font-style: normal;
-  color: lightsteelblue;
+  color: black;
+  background-color: darkseagreen;
+  transition: all .2s ease-in-out;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 10px;
+  height: 40px;
+  width: 40px;
+  margin-bottom: 10px;
+}
+
+button {
+  margin-top: 88px;
+}
+
+nav {
+  position: fixed;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+  align-items: center;
+  text-align: center;
+  background-color: rgba(128, 128, 128, 0);
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 100;
+  height: 100vh;
+  width: 40px;
+}
+
+.ottelijaInfo p {
+  font-size: 16px;
+  margin: 0px;
+  margin-bottom: 5px; 
+}
+
+.ottelijaInfo p:first-of-type {
+  font-size: 25px;
+}
+
+.train {
+  display: flex;
+  width: 30%;
+  background-color: brown;
+  border-radius: 5px;
+  border: 2px solid black;
+  font-size: 30px;
+}
+
+.trainProgressBar {
+  display: flex;
+  max-width: 249px;
+  height: 100%;
+  width: 0%;
+  background-color: darkgreen;
+  border-radius: 5px;
+}
+
+.train:active {
+  transform: scale(0.9);
 }
 
 .progressBar {
@@ -138,26 +156,19 @@ header {
   border-radius: 5px;
 }
 
-.nameAndCost p {
-  font-weight: 100;
-  font-size: 14px;
+.xpBox {
+  width: 0%;
+  font-size: 10px;
+  display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  border-radius: 10px;
+  border: 2px solid rgb(0, 0, 0);
 }
 
-.nameAndCost p:first-of-type {
-  font-weight: 100;
-  border: 4px solid black;
-  border-radius: 5px;
-}
-
-table {
-  width: 77%;
-}
-
-table:hover {
-  cursor: pointer;
+img {
+  height: 100%;
 }
 
 #ascendContainer {
@@ -195,55 +206,6 @@ table:hover {
   margin-left: 20%;
 }
 
-.navigointi {
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 100;
-  font-style: normal;
-  color: black;
-  background-color: darkcyan;
-  transition: all .2s ease-in-out;
-  cursor: pointer;
-  font-size: 10px;
-  height: 40px;
-  width: 40px;
-  margin-bottom: 10px;
-}
-
-nav {
-  position: fixed;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: baseline;
-  align-items: center;
-  text-align: center;
-  background-color: rgba(128, 128, 128, 0);
-  font-family: "Bebas Neue", sans-serif;
-  font-weight: 100;
-  height: 100vh;
-  width: 40px;
-}
-
-a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  text-decoration: none;
-}
-
-h1 {
-  font-size: 40px;
-  font-family: "Bebas Neue", sans-serif;
-  font-weight: 100;
-  font-style: normal;
-  color: rgb(255, 255, 255);
-}
-
-h2 {
-  font-size: 20px;
-}
-
 #ottelijaShop {
   display: flex;
   flex-direction: column;
@@ -268,51 +230,5 @@ h2 {
   font-style: normal;
   color: rgb(0, 0, 0);
   cursor: pointer;
-}
-
-#upgradeContainer {
-  width: 60%;
-  margin-left: 20%;
-}
-
-button {
-  margin: 30px;
-}
-
-.xpBox {
-  width: 99%;
-  font-size: 10px;
-}
-
-.rank {
-  font-size: 12px;
-}
-
-.fighterListItem {
-  width: 20%;
-  height: 160px;
-  margin-left: 40%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background-color: rgb(128, 128, 128);
-  border-radius: 5px;
-  margin-bottom: 10px;
-  font-family: "Bebas Neue", sans-serif;
-  font-weight: 100;
-  font-style: normal;
-  color: rgb(0, 0, 0);
-  cursor: pointer;
-  font-size: 10px;
-}
-
-.fighterListItem img {
-  width: 50%;
-  height: 50%;
-  object-fit: contain;
-  object-position: center;
-  border-radius: 5px;
 }
 

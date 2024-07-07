@@ -7,5 +7,14 @@ sain ve palkit vihdoi toimiin ja ne muistaa mihin jäi jatkoin xp systeemiä ja 
 0.0.4
 progressbarit kunnossa xp ja rank systeemi alottelen ascendaus systeemiä ja seuraavaa valuuttaa ja sillä ostettavia bonuksia ja ottelioita
 
+0.1.0
+alkaa oleen siirto uuteenersioon valmista
+joku 4 riviä html ja kaikki luodaan dynaaamisesti js:llä
+progressbarit viä keske mutta ostaminen ja domiin kaikkien
+piirtäminen toimii. 
+
+0.1.1
+ascendaaminen toimii ja sillä voi saada uusia ottelijoita
+
 todo:
 tars saada textiä achievementteihin ja upgradeihi
