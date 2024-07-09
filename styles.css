@@ -154,6 +154,7 @@ nav {
   width: 0%;
   background-color: dodgerblue;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .xpBox {

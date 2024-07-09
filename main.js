@@ -328,6 +328,36 @@ let ottelijat = {
             6,
             0
         ]
+    },
+    tags: {
+        continent: [
+            "northAmerica",
+            "africa",
+            "asia",
+            "northAmerica",
+            "northAmerica",
+            "australia",
+            "southAmerica",
+            "asia",
+            "northAmerica",
+            "europe",
+            "northAmerica",
+            "southAmerica"
+        ],
+        special: [
+            "pelle",
+            "niceGuy",
+            "dagestanGoblin",
+            "starPower",
+            "pelle",
+            "niceGuy",
+            "chad",
+            "dagestanGoblin",
+            "chad",
+            "niceGuy",
+            "pelle",
+            "niceGuy"
+        ]
     }
 };
 let game = {
@@ -463,12 +493,12 @@ if (elementit.fighterContainer) {
                 level.classList.add("level");
                 level.innerHTML = ottelijat.level[i].toLocaleString();
                 ottelijaElement.appendChild(level);
-                const train = document.createElement("div");
-                train.classList.add("train");
-                ottelijaElement.appendChild(train);
-                const trainProgressBar = document.createElement("div");
-                trainProgressBar.classList.add("trainProgressBar");
-                train.appendChild(trainProgressBar);
+                //const train = document.createElement("div");
+                //train.classList.add("train");
+                //ottelijaElement.appendChild(train);
+                //const trainProgressBar = document.createElement("div");
+                //trainProgressBar.classList.add("trainProgressBar");
+                //train.appendChild(trainProgressBar);
                 const nimiP = document.createElement("p");
                 const totalPowerP = document.createElement("p");
                 const powerP = document.createElement("p");
@@ -481,24 +511,24 @@ if (elementit.fighterContainer) {
                 ottelijaInfo.appendChild(totalPowerP);
                 ottelijaInfo.appendChild(powerP);
                 ottelijaInfo.appendChild(hintaP);
-                const xpBox = document.createElement("div");
-                xpBox.classList.add("xpBox");
                 const progressBar = document.createElement("div");
+                //progressBar.classList.add("xpBox");
+                //const progressBar = document.createElement("div");
                 progressBar.classList.add("progressBar");
-                parentDivForOttelijat.appendChild(xpBox);
-                xpBox.appendChild(progressBar);
-                xpBox.innerHTML = `${(ottelijat.currentXp[i] + "/" + ottelijat.maxXp[i])}`;
+                //xpBox.appendChild(progressBar);
+                parentDivForOttelijat.appendChild(progressBar);
+                progressBar.innerHTML = `${(ottelijat.currentXp[i] + "/" + ottelijat.maxXp[i])}`;
                 //xpBox.style.flexGrow = "1";
-                xpBox.setAttribute('data-fighter-index', [i].toString());
+                //xpBox.setAttribute('data-fighter-index', [i].toString());
                 ottelijat.eiPiirretty[i] = false;
                 function handleClick(event) {
                     const target = event.target;
-                    const targetOttelija = target.closest('.ottelijaDiv');
+                    const targetProgressBar = target.closest('.progressBar');
                     ottelijat.isActive[i] = true;
                     game.activeFighters++;
                     ottelijat.intervalId[i] = setInterval(() => {
                         ottelijat.progress[i] += 1.1;
-                        const targetProgressBar = target.closest('.parentDivForOttelijat').querySelector('.progressBar');
+                        //const targetProgressBar = target!.closest('.parentDivForOttelijat').querySelector('.progressBar');
                         targetProgressBar.style.width = `${(ottelijat.progress[i])}%`;
                         if (ottelijat.progress[i] >= 100) {
                             ottelijat.currentXp[i]++;
@@ -512,8 +542,7 @@ if (elementit.fighterContainer) {
                         }
                     }, 100);
                     //if (!target || !target.parentElement) return;
-                    if (!targetOttelija)
-                        return;
+                    //if (!targetOttelija) return;
                     const index = Array.from(parentDivForOttelijat.children).indexOf(parentDivForOttelijat);
                     const asd = Array.from(parentDivForOttelijat.children).indexOf(parentDivForOttelijat);
                     ostaOttelija(index);
@@ -527,7 +556,7 @@ if (elementit.fighterContainer) {
                     game.activeFighters++;
                     ottelijat.intervalId[i] = setInterval(() => {
                         ottelijat.progress[i] += 0.1;
-                        trainProgressBar.style.width = `${(ottelijat.progress[i])}%`;
+                        progressBar.style.width = `${(ottelijat.progress[i])}%`;
                         if (ottelijat.progress[i] >= 100) {
                             ottelijat.currentXp[i]++;
                             if (ottelijat.currentXp[i] >= ottelijat.maxXp[i]) {
@@ -548,7 +577,7 @@ if (elementit.fighterContainer) {
                         let winratio = ottelijat.stats.wins[i] / (ottelijat.stats.losses[i] === 0 ? 1 : ottelijat.stats.losses[i]);
                         ottelijat.power[i] = ((winratio - ottelijat.stats.nc[i] + ottelijat.stats.winsByKnockout[i] + ottelijat.stats.winsBySubmission[i] + ottelijat.stats.firstRoundFinishes[i]) * game.globalMulti) / 1000;
                         ottelijat.totalPower[i] = ottelijat.power[i] * ottelijat.level[i];
-                        game.hampaitaPerSekunti = ottelijat.totalPower[i];
+                        game.hampaitaPerSekunti += ottelijat.totalPower[i];
                         level.innerHTML = ottelijat.level[i].toLocaleString();
                         hintaP.innerHTML = "Hinta: " + ottelijat.hinta[i].toFixed(2);
                         powerP.innerHTML = "Power: " + ottelijat.power[i].toFixed(2);

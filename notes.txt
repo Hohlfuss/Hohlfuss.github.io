@@ -16,5 +16,8 @@ piirtäminen toimii.
 0.1.1
 ascendaaminen toimii ja sillä voi saada uusia ottelijoita
 
+0.1.2
+korjasin bugin liittyen hampaitapersekunti ja aloin lisään tageja
+
 todo:
 tars saada textiä achievementteihin ja upgradeihi
