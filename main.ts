@@ -1,797 +1,968 @@
-window.onload = function() {
-  utility.loadGame();
-  updateUi();
-  //display.updateAchievement();
+
+
+type Game = {
+    version: string
+    hampaita: number
 }
 
-interface Ottelijat {
-  nimi: string[];
-  level: number[];
-  hinta: number[];
-  totalPower: number[];
-  power: number[];
-  unlocked: boolean[];
-  isActive: boolean[];
-  mastery: number[];
-  progress: number[];
-  intervalId: number[];
-  currentXp: number[];
-  maxXp: number[];
-  rank: number[];
-  img: string[];
-  id: string[];
-  eiPiirretty: boolean[];
-  progressBarElement: any;
-  stats: {
-    wins: number[];
-    losses: number[];
-    nc: number[];
-    winsByKnockout: number[];
-    winsBySubmission: number[];
-    firstRoundFinishes: number[];
-  },
+type Ottelijat = {
+    nimi: string[];
+    level: number[];
+    hinta: number[];
+    totalPower: number[];
+    power: number[];
+    isUnlocked: boolean[];
+    isActive: boolean[];
+    mastery: number[];
+    progress: number[];
+    intervalId: number[];
+    xp: number[];
+    xpThreshold: number[];
+    rank: number[];
+    img: string[];
+    id: string[];
+    eiPiirretty: boolean[];
+    progressBarElement: any;
+    step: number[];
+    stats: {
+        wins: number[];
+        losses: number[];
+        nc: number[];
+        winsByKnockout: number[];
+        winsBySubmission: number[];
+        firstRoundFinishes: number[];
+    },
+    tags: {
+        pelle: boolean[];
+        niceGuy: boolean[];
+        dagestanGoblin: boolean[];
+        afrikanMafia: boolean[];
+        lookingAss: boolean[];
+        chad: boolean[];
+    }
 }
 
-interface Game {
-  version: string;
-  totalClicks: number;
-  globalMulti: number;
-  hampaita: number;
-  hampaitaPerSekunti: number;
-  totalPower: number;
-  maxActive: number;
-  activeFighters: number;
-}
-
-interface AscendObject {
-  raja: number;
-  verta: number;
-  valintaHinta: number;
-  satunnainenHinta: number;
-  ascendCount: number;
-}
-
-interface Elementit {
-  fighterContainer: HTMLDivElement;
-  clicker: HTMLCollectionOf<HTMLDivElement>;
-  ascendBtn: HTMLDivElement;
-  resetTrainers: HTMLButtonElement;
-  upgradeContainerElement: HTMLDivElement;
-  reset: HTMLButtonElement;
-  save: HTMLButtonElement;
-  achievement: HTMLDivElement;
-  vertaElement: HTMLDivElement;
-  valintaHintaElement: HTMLDivElement;
-  satunnainenHintaElement: HTMLDivElement;
-  hampaitaElement: HTMLDivElement;
-  hampaitaPerSekuntiElement: HTMLDivElement;
-  satunnainenBtn: HTMLDivElement;
-}
-
-interface Utility {
-  ascend: () => void;
-  pysäytäKaikki: () => void;
-  saveGame: () => void;
-  loadGame: () => void;
-  resetGame: () => void;
-}
-
-let ottelijat: Ottelijat = {
-  nimi: [
-    "Colby Covington",
-    "Kamaru Usman",
-    "Shavkat Rakhmonov",
-    "Sean O'malley",
-    "Jon Jones",
-    "Alexander Volkanovski",
-    "Alex Pereira",
-    "Islam Makhachev",
-    "Max Holloway",
-    "Tom Aspinall",
-    "Israel Adesanya",
-    "Charles Oliveira"
-  ],
-  level: [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0
-  ],
-  hinta: [
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10
-  ],
-  totalPower: [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0
-  ],
-  power: [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0
-  ],
-  unlocked: [
-    true,
-    true,
-    true,
-    true,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false
-  ],
-  isActive: [
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false
-  ],
-  mastery: [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0
-  ],
-  progress: [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0
-  ],
-  intervalId: [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12
-  ],
-  currentXp: [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0
-  ],
-  maxXp: [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0
-  ],
-  rank: [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0
-  ],
-  img: [
-    "./assets/colbyCovington.png",
-    "./assets/kamaruUsman.png",
-    "./assets/shavkatRakhmonov.png",
-    "./assets/seanOmalley.png",
-    "./assets/jonJones.png",
-    "./assets/alexanderVolkanovski.png",
-    "./assets/alexPereira.png",
-    "./assets/islamMakhachev.png",
-    "./assets/maxHolloway.png",
-    "./assets/tomAspinall.png",
-    "./assets/israelAdesanya.png",
-    "./assets/charlesOliveira.png"
-  ],
-  id: [
-    "colbyCovington",
-    "kamaruUsman",
-    "shavkatRakhmonov",
-    "seanO'malley",
-    "jonJones",
-    "alexanderVolkanovski",
-    "alexPereira",
-    "islamMakhachev",
-    "maxHolloway",
-    "tomAspinall",
-    "israelAdesanya",
-    "charlesOliveira"
-  ],
-  eiPiirretty: [
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true
-  ],
-  progressBarElement: [
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null
-  ],
-  stats: {
-    wins: [
-      17,
-      20,
-      18,
-      18,
-      27,
-      26,
-      11,
-      26,
-      26,
-      14,
-      24,
-      34
-    ],
-    losses: [
-      4,
-      4,
-      0,
-      1,
-      1,
-      4,
-      2,
-      1,
-      7,
-      3,
-      3,
-      10,
-    ],
-    nc: [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    winsByKnockout: [
-      4,
-      9,
-      8,
-      12,
-      10,
-      13,
-      9,
-      14,
-      12,
-      11,
-      16,
-      10
-    ],
-    winsBySubmission: [
-      4,
-      1,
-      10,
-      0,
-      0,
-      3,
-      0,
-      5,
-      2,
-      3,
-      0,
-      21
-    ],
-    firstRoundFinishes: [
-      3,
-      3,
-      9,
-      9,
-      7,
-      7,
-      4,
-      12,
-      0,
-      13,
-      6,
-      0
-    ]
-  },
-  tags: {
-    continent: [
-      "northAmerica",
-      "africa",
-      "asia",
-      "northAmerica",
-      "northAmerica",
-      "australia",
-      "southAmerica",
-      "asia",
-      "northAmerica",
-      "europe",
-      "northAmerica",
-      "southAmerica"
-    ],
-    special: [
-      "pelle",
-      "niceGuy",
-      "dagestanGoblin",
-      "starPower",
-      "pelle",
-      "niceGuy",
-      "chad",
-      "dagestanGoblin",
-      "chad",
-      "niceGuy",
-      "pelle",
-      "niceGuy"
-    ]
-  }
+type Shop = {
+    avaaSatunnainenHinta: number;
 }
 
 let game: Game = {
-  version: "0.1.1",
-  totalClicks: 0,
-  globalMulti: 1.1,
-  hampaita: 50,
-  hampaitaPerSekunti: 0,
-  totalPower: 0,
-  maxActive: 1,
-  activeFighters: 0,
+    version: "0.0.3",
+    hampaita: 0
 }
 
-let ascendObject: AscendObject = {
-  raja: 600,
-  verta: 0,
-  valintaHinta: 100,
-  satunnainenHinta: 10,
-  ascendCount: 0,
-}
-
-function satunnainen() {
-  if (ascendObject.verta >= ascendObject.satunnainenHinta) {
-    ascendObject.verta -= ascendObject.satunnainenHinta;
-    ascendObject.satunnainenHinta *= 1.5;
-
-    const randomIndex = Math.floor(Math.random() * (ottelijat.unlocked.length - 1));
-    if (ottelijat.unlocked[randomIndex] === false) {
-      ottelijat.unlocked[randomIndex] = true;
-    } else {
-      console.log("Already unlocked");
-      satunnainen();
+let ottelijat: Ottelijat = {
+    nimi: [
+      "Colby Covington",
+      "Kamaru Usman",
+      "Shavkat Rakhmonov",
+      "Sean O'malley",
+      "Jon Jones",
+      "Alexander Volkanovski",
+      "Alex Pereira",
+      "Islam Makhachev",
+      "Max Holloway",
+      "Tom Aspinall",
+      "Israel Adesanya",
+      "Charles Oliveira"
+    ],
+    level: [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    hinta: [
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10
+    ],
+    totalPower: [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    power: [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    isUnlocked: [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    isActive: [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    mastery: [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    progress: [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    intervalId: [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    xp: [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    xpThreshold: [
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10
+    ],
+    rank: [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    img: [
+      "./assets/colbyCovington.png",
+      "./assets/kamaruUsman.png",
+      "./assets/shavkatRakhmonov.png",
+      "./assets/seanOmalley.png",
+      "./assets/jonJones.png",
+      "./assets/alexanderVolkanovski.png",
+      "./assets/alexPereira.png",
+      "./assets/islamMakhachev.png",
+      "./assets/maxHolloway.png",
+      "./assets/tomAspinall.png",
+      "./assets/israelAdesanya.png",
+      "./assets/charlesOliveira.png"
+    ],
+    id: [
+      "colbyCovington",
+      "kamaruUsman",
+      "shavkatRakhmonov",
+      "seanO'malley",
+      "jonJones",
+      "alexanderVolkanovski",
+      "alexPereira",
+      "islamMakhachev",
+      "maxHolloway",
+      "tomAspinall",
+      "israelAdesanya",
+      "charlesOliveira"
+    ],
+    eiPiirretty: [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    progressBarElement: [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    step: [
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1
+    ],
+    stats: {
+      wins: [
+        17,
+        20,
+        18,
+        18,
+        27,
+        26,
+        11,
+        26,
+        26,
+        14,
+        24,
+        34
+      ],
+      losses: [
+        4,
+        4,
+        0,
+        1,
+        1,
+        4,
+        2,
+        1,
+        7,
+        3,
+        3,
+        10,
+      ],
+      nc: [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      winsByKnockout: [
+        4,
+        9,
+        8,
+        12,
+        10,
+        13,
+        9,
+        14,
+        12,
+        11,
+        16,
+        10
+      ],
+      winsBySubmission: [
+        4,
+        1,
+        10,
+        0,
+        0,
+        3,
+        0,
+        5,
+        2,
+        3,
+        0,
+        21
+      ],
+      firstRoundFinishes: [
+        3,
+        3,
+        9,
+        9,
+        7,
+        7,
+        4,
+        12,
+        0,
+        13,
+        6,
+        0
+      ]
+    },
+    tags: {
+      pelle: [
+        true,
+        false,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      niceGuy: [
+        false,
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        true
+      ],
+      dagestanGoblin: [
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      afrikanMafia: [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      lookingAss: [
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      chad: [
+        false,
+        false,
+        true,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
     }
-    window.location.href = "./index.html";
-    utility.saveGame();
-  }
 }
 
-const elementit: Elementit = {
-  fighterContainer: document.getElementById("fighterContainer") as HTMLDivElement,
-  clicker: document.getElementsByClassName("clicker") as HTMLCollectionOf<HTMLDivElement>,
-  ascendBtn: document.getElementById("ascendContainer") as HTMLDivElement,
-  resetTrainers: document.getElementById("resetTrainers") as HTMLButtonElement,
-  upgradeContainerElement: document.getElementById("upgradeContainer") as HTMLDivElement,
-  reset: document.getElementById("reset") as HTMLButtonElement,
-  save: document.getElementById("save") as HTMLButtonElement,
-  achievement: document.getElementById("achievements") as HTMLDivElement,
-  vertaElement: document.getElementById("verta") as HTMLDivElement,
-  valintaHintaElement: document.getElementById("valintaHinta") as HTMLDivElement,
-  satunnainenHintaElement: document.getElementById("satunnainenHinta") as HTMLDivElement,
-  hampaitaElement: document.getElementById("hampaita") as HTMLDivElement,
-  hampaitaPerSekuntiElement: document.getElementById("hampaitaPerSekunti") as HTMLDivElement,
-  satunnainenBtn: document.getElementById("satunnainenBtn") as HTMLDivElement
+let shop: Shop = {
+    avaaSatunnainenHinta: 10
 }
 
-const utility: Utility = {
-  ascend: (() => {
-    ascendObject.raja *= 2.5;
-    ascendObject.verta = (game.hampaita *= 0.01);
-    ascendObject.ascendCount++;
-    utility.saveGame();
-    window.location.href = "./ascend.html";
-  }),
-  pysäytäKaikki: (() => {
-    game.activeFighters = 0;
+const hampaita = document.getElementById('hampaita');
+const save = document.getElementById('save');
+const load = document.getElementById('load');
+const reset = document.getElementById('reset');
 
-    for (let i = 0; i < ottelijat.nimi.length; i++) {
-      ottelijat.isActive[i] = false;
-      clearInterval(ottelijat.intervalId[i]);
-    }
-    console.log("Pysäytetty")
-  }),
-  saveGame: (() => {
-    console.log("Saving game");
-    let gameSave = {
-      game: game,
-      ottelijat: ottelijat,
-      ascendObject: ascendObject
-    };
-    localStorage.setItem("gameSave", JSON.stringify(gameSave));
-  }),
-  loadGame: (() => {
-    const gameSave = localStorage.getItem("gameSave");
-    if (gameSave === null) {
-      console.error("No game save found");
-      return;
-    }
-    try {
-      const parsedGameSave = JSON.parse(gameSave);
-      if (parsedGameSave === null) {
-        console.error("Game save is null");
-        return;
-      }
-      if (typeof parsedGameSave !== "object") {
-        console.error("Game save is not an object");
-        return;
-      }
-      game = parsedGameSave.game;
-      ottelijat = parsedGameSave.ottelijat;
-      ascendObject = parsedGameSave.ascendObject;
+const shopElement = document.getElementById('shop');
+const shopItems = Array.from(document.querySelectorAll('.shopItem')) as HTMLElement[];
+const avaaSatunnainenElement = document.getElementById('avaaSatunnainen');
 
-      for (let i = 0; i < ottelijat.nimi.length; i++) {
-        ottelijat.eiPiirretty[i] = true;
-      }
+const colbyCovington = document.getElementById("colbyCovington");
+const colbyCovingtonXp = document.getElementById('colbyCovingtonXp');
+const colbyCovingtonXpThreshold = document.getElementById('colbyCovingtonXpThreshold');
+const colbyCovingtonLevel = document.getElementById('colbyCovingtonLevel');
 
-      updateUi();
+const kamaruUsman = document.getElementById("kamaruUsman");
+const kamaruUsmanXp = document.getElementById('kamaruUsmanXp');
+const kamaruUsmanXpThreshold = document.getElementById('kamaruUsmanXpThreshold');
+const kamaruUsmanLevel = document.getElementById('kamaruUsmanLevel');
 
-    } catch (error) {
-      console.error("Error while loading game save:", error);
-    }
-  }),
-  resetGame: (() => {
-    localStorage.removeItem("gameSave");
-    location.reload();
-  }),
-}
+const shavkatRakhmonov = document.getElementById("shavkatRakhmonov");
+const shavkatRakhmonovXp = document.getElementById('shavkatRakhmonovXp');
+const shavkatRakhmonovXpThreshold = document.getElementById('shavkatRakhmonovXpThreshold');
+const shavkatRakhmonovLevel = document.getElementById('shavkatRakhmonovLevel');
 
-const trainTargetId = `trainasd`;
+const seanOmalley = document.getElementById("seanOmalley");
+const seanOmalleyXp = document.getElementById('seanOmalleyXp');
+const seanOmalleyXpThreshold = document.getElementById('seanOmalleyXpThreshold');
+const seanOmalleyLevel = document.getElementById('seanOmalleyLevel');
 
-function changeColor() {
-  document.getElementById("trainasd")!.style.backgroundColor = "green";
-}
+const jonJones = document.getElementById("jonJones");
+const jonJonesXp = document.getElementById('jonJonesXp');
+const jonJonesXpThreshold = document.getElementById('jonJonesXpThreshold');
+const jonJonesLevel = document.getElementById('jonJonesLevel');
 
-if (elementit.fighterContainer) {
-  setInterval(() => {
-    for (let i = 0; i < ottelijat.nimi.length; i++) {
-      if (ottelijat.unlocked[i] && ottelijat.eiPiirretty[i]) {
-        const parentDivForOttelijat = document.createElement("div");
-        parentDivForOttelijat.classList.add("parentDivForOttelijat");
+const alexanderVolkanovski = document.getElementById("alexanderVolkanovski");
+const alexanderVolkanovskiXp = document.getElementById('alexanderVolkanovskiXp');
+const alexanderVolkanovskiXpThreshold = document.getElementById('alexanderVolkanovskiXpThreshold');
+const alexanderVolkanovskiLevel = document.getElementById('alexanderVolkanovskiLevel');
 
-        elementit.fighterContainer!.appendChild(parentDivForOttelijat);
+const alexPereira = document.getElementById("alexPereira");
+const alexPereiraXp = document.getElementById('alexPereiraXp');
+const alexPereiraXpThreshold = document.getElementById('alexPereiraXpThreshold');
+const alexPereiraLevel = document.getElementById('alexPereiraLevel');
 
-        const ottelijaElement = document.createElement("div");
-        ottelijaElement.classList.add("ottelijaDiv");
-        ottelijaElement.addEventListener("click", handleClick);
+const islamMakhachev = document.getElementById("islamMakhachev");
+const islamMakhachevXp = document.getElementById('islamMakhachevXp');
+const islamMakhachevXpThreshold = document.getElementById('islamMakhachevXpThreshold');
+const islamMakhachevLevel = document.getElementById('islamMakhachevLevel');
 
-        parentDivForOttelijat.appendChild(ottelijaElement);
+const maxHolloway = document.getElementById("maxHolloway");
+const maxHollowayXp = document.getElementById('maxHollowayXp');
+const maxHollowayXpThreshold = document.getElementById('maxHollowayXpThreshold');
+const maxHollowayLevel = document.getElementById('maxHollowayLevel');
 
-        const img = document.createElement("img");
-        img.src = ottelijat.img[i];
-        img.classList.add("ottelijaImg");
-        ottelijaElement.appendChild(img);
+const tomAspinall = document.getElementById("tomAspinall");
+const tomAspinallXp = document.getElementById('tomAspinallXp');
+const tomAspinallXpThreshold = document.getElementById('tomAspinallXpThreshold');
+const tomAspinallLevel = document.getElementById('tomAspinallLevel');
 
-        const ottelijaInfo = document.createElement("div");
-        ottelijaInfo.classList.add("ottelijaInfo");
-        ottelijaElement.appendChild(ottelijaInfo);
+const israelAdesanya = document.getElementById("israelAdesanya");
+const israelAdesanyaXp = document.getElementById('israelAdesanyaXp');
+const israelAdesanyaXpThreshold = document.getElementById('israelAdesanyaXpThreshold');
+const israelAdesanyaLevel = document.getElementById('israelAdesanyaLevel');
 
-        const level = document.createElement("div");
-        level.classList.add("level");
-        level.innerHTML = ottelijat.level[i].toLocaleString();
-        ottelijaElement.appendChild(level);
+const charlesOliveira = document.getElementById("charlesOliveira");
+const charlesOliveiraXp = document.getElementById('charlesOliveiraXp');
+const charlesOliveiraXpThreshold = document.getElementById('charlesOliveiraXpThreshold');
+const charlesOliveiraLevel = document.getElementById('charlesOliveiraLevel');
 
-        //const train = document.createElement("div");
-        //train.classList.add("train");
-        //ottelijaElement.appendChild(train);
+let colbyCovingtonInterval: NodeJS.Timeout | null = null;
+let kamaruUsmanInterval: NodeJS.Timeout | null = null;
+let shavkatRakhmonovInterval: NodeJS.Timeout | null = null;
+let seanOmalleyInterval: NodeJS.Timeout | null = null;
+let jonJonesInterval: NodeJS.Timeout | null = null;
+let alexanderVolkanovskiInterval: NodeJS.Timeout | null = null;
+let alexPereiraInterval: NodeJS.Timeout | null = null;
+let islamMakhachevInterval: NodeJS.Timeout | null = null;
+let maxHollowayInterval: NodeJS.Timeout | null = null;
+let tomAspinallInterval: NodeJS.Timeout | null = null;
+let israelAdesanyaInterval: NodeJS.Timeout | null = null;
+let charlesOliveiraInterval: NodeJS.Timeout | null = null;
 
-        //const trainProgressBar = document.createElement("div");
-        //trainProgressBar.classList.add("trainProgressBar");
-        //train.appendChild(trainProgressBar);
+function updateUi() {
 
-        const nimiP = document.createElement("p");
-        const totalPowerP = document.createElement("p");
-        const powerP = document.createElement("p");
-        const hintaP = document.createElement("p");
+    colbyCovingtonXp!.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
+    colbyCovingtonXpThreshold!.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
+    colbyCovingtonLevel!.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
+    
+    kamaruUsmanXp!.innerHTML = ottelijat.xp[1].toFixed(0).toLocaleString();
+    kamaruUsmanXpThreshold!.innerHTML = ottelijat.xpThreshold[1].toFixed(0).toLocaleString();
+    kamaruUsmanLevel!.innerHTML = ottelijat.level[1].toFixed(0).toLocaleString();
 
-        nimiP.innerHTML = ottelijat.nimi[i];
-        totalPowerP.innerHTML = "TOTAL POWER: " + ottelijat.totalPower[i].toFixed(2);
-        powerP.innerHTML = "Power: " + ottelijat.power[i].toFixed(2);
-        hintaP.innerHTML = "Hinta: " + ottelijat.hinta[i].toFixed(2);
+    shavkatRakhmonovXp!.innerHTML = ottelijat.xp[2].toFixed(0).toLocaleString();
+    shavkatRakhmonovXpThreshold!.innerHTML = ottelijat.xpThreshold[2].toFixed(0).toLocaleString();
+    shavkatRakhmonovLevel!.innerHTML = ottelijat.level[2].toFixed(0).toLocaleString();
+    
+    seanOmalleyXp!.innerHTML = ottelijat.xp[3].toFixed(0).toLocaleString();
+    seanOmalleyXpThreshold!.innerHTML = ottelijat.xpThreshold[3].toFixed(0).toLocaleString();
+    seanOmalleyLevel!.innerHTML = ottelijat.level[3].toFixed(0).toLocaleString();
+  
+    jonJonesXp!.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
+    jonJonesXpThreshold!.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
+    jonJonesLevel!.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
 
-        ottelijaInfo.appendChild(nimiP);
-        ottelijaInfo.appendChild(totalPowerP);
-        ottelijaInfo.appendChild(powerP);
-        ottelijaInfo.appendChild(hintaP);
+    alexanderVolkanovskiXp!.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
+    alexanderVolkanovskiXpThreshold!.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
+    alexanderVolkanovskiLevel!.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
 
-        const progressBar = document.createElement("div");
-        //progressBar.classList.add("xpBox");
-        //const progressBar = document.createElement("div");
-        progressBar.classList.add("progressBar");
-        //xpBox.appendChild(progressBar);
-        parentDivForOttelijat.appendChild(progressBar);
+    alexPereiraXp!.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
+    alexPereiraXpThreshold!.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
+    alexPereiraLevel!.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
 
-        progressBar.innerHTML = `${(ottelijat.currentXp[i] +"/"+ ottelijat.maxXp[i])}`;
-        //xpBox.style.flexGrow = "1";
-        //xpBox.setAttribute('data-fighter-index', [i].toString());
-        ottelijat.eiPiirretty[i] = false;
-        
-        function handleClick(event: MouseEvent) {
-          const target = event.target as any;
-          const targetProgressBar = target!.closest('.progressBar');
-          ottelijat.isActive[i] = true;
-          game.activeFighters++;
-          ottelijat.intervalId[i] = setInterval(() => {
-            ottelijat.progress[i] += 1.1;
-            //const targetProgressBar = target!.closest('.parentDivForOttelijat').querySelector('.progressBar');
-            targetProgressBar.style.width = `${(ottelijat.progress[i])}%`;
-            if (ottelijat.progress[i] >= 100) {
-              ottelijat.currentXp[i]++;
-              if (ottelijat.currentXp[i] >= ottelijat.maxXp[i]) {
-                ottelijat.progress[i] = 0;
-                ottelijat.currentXp[i] = 0;
-                ottelijat.rank[i]++;
-                ottelijat.maxXp[i] *= 1.1;
-              }
-              ottelijat.progress[i] = 0;
-            }
-          }, 100);
-          
-          //if (!target || !target.parentElement) return;
-        
-          //if (!targetOttelija) return;
-        
-          const index = Array.from(parentDivForOttelijat!.children).indexOf(parentDivForOttelijat);
-          const asd = Array.from(parentDivForOttelijat.children).indexOf(parentDivForOttelijat);
-          ostaOttelija(index);
-          startProgressBar(asd);
-        }
+    islamMakhachevXp!.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
+    islamMakhachevXpThreshold!.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
+    islamMakhachevLevel!.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
 
-        function startProgressBar(asd: number) {
-          if (game.activeFighters >= game.maxActive) {
-            return;
-          }
-          ottelijat.isActive[i] = true;
-          game.activeFighters++;
-          ottelijat.intervalId[i] = setInterval(() => {
-            ottelijat.progress[i] += 0.1;
-            progressBar.style.width = `${(ottelijat.progress[i])}%`;
-            if (ottelijat.progress[i] >= 100) {
-              ottelijat.currentXp[i]++;
-              if (ottelijat.currentXp[i] >= ottelijat.maxXp[i]) {
-                ottelijat.progress[i] = 0;
-                ottelijat.currentXp[i] = 0;
-                ottelijat.rank[i]++;
-                ottelijat.maxXp[i] *= 1.1;
-              }
-              ottelijat.progress[i] = 0;
-            }
-          }, 100);
-        }
-        
-        function ostaOttelija(index: number) {
-          if (game.hampaita >= ottelijat.hinta[i]) {
-            game.hampaita -= ottelijat.hinta[i];
-            ottelijat.level[i]++;
-            ottelijat.hinta[i] *= 1.2;
+    maxHollowayXp!.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
+    maxHollowayXpThreshold!.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
+    maxHollowayLevel!.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
 
-            let winratio = ottelijat.stats.wins[i] / (ottelijat.stats.losses[i] === 0 ? 1 : ottelijat.stats.losses[i]);
-            ottelijat.power[i] = ((winratio - ottelijat.stats.nc[i] + ottelijat.stats.winsByKnockout[i] + ottelijat.stats.winsBySubmission[i] + ottelijat.stats.firstRoundFinishes[i]) * game.globalMulti) / 1000;
-            ottelijat.totalPower[i] = ottelijat.power[i] * ottelijat.level[i];
-            game.hampaitaPerSekunti += ottelijat.totalPower[i];
+    tomAspinallXp!.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
+    tomAspinallXpThreshold!.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
+    tomAspinallLevel!.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
 
-            level.innerHTML = ottelijat.level[i].toLocaleString();
-            hintaP.innerHTML = "Hinta: " + ottelijat.hinta[i].toFixed(2);
-            powerP.innerHTML = "Power: " + ottelijat.power[i].toFixed(2);
-            totalPowerP.innerHTML = "TOTAL POWER: " + ottelijat.totalPower[i].toFixed(2);
-          }
-        }
+    israelAdesanyaXp!.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
+    israelAdesanyaXpThreshold!.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
+    israelAdesanyaLevel!.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
 
-        /*
-        function startProgressBar(asd: number) {
-          if (game.activeFighters >= game.maxActive) {
-            return;
-          }
-          ottelijat.isActive[asd] = true;
-          game.activeFighters++;
-          ottelijat.intervalId[i] = setInterval(() => {
-            ottelijat.progress[i] += 0.1;
-            trainProgressBar.style.width = `${(ottelijat.progress[i])}%`;
-            if (ottelijat.progress[i] >= 100) {
-              ottelijat.currentXp[i]++;
-              if (ottelijat.currentXp[i] >= ottelijat.maxXp[i]) {
-                ottelijat.progress[i] = 0;
-                ottelijat.currentXp[i] = 0;
-                ottelijat.rank[i]++;
-                ottelijat.maxXp[i] *= 1.1;
-              }
-              ottelijat.progress[i] = 0;
-            }
-          }, 100);
-        } */
-      }
-    }
-    game.hampaita += game.hampaitaPerSekunti / 10;
-    updateUi();
-  }, 100);
-}
+    charlesOliveiraXp!.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
+    charlesOliveiraXpThreshold!.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
+    charlesOliveiraLevel!.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
+
+    hampaita!.innerHTML = game.hampaita.toFixed(0).toLocaleString();
+    avaaSatunnainenElement!.innerHTML = shop.avaaSatunnainenHinta.toFixed(0).toLocaleString();
+};
 
 setInterval(() => {
+  for (let i = 0; i < ottelijat.isUnlocked.length; i++) {
+    if (ottelijat.isUnlocked[i] === true) {
+      document.getElementById!(ottelijat.id[i] + "Container")!.style.display = "block";
+    }
+  }
   updateUi();
 }, 100);
 
-function updateUi() {
-  if (elementit.hampaitaElement) {
-    elementit.hampaitaElement.innerHTML = game.hampaita.toFixed(2).toLocaleString();
-  }
+function avaaSatunnainen() {
+  if (game.hampaita >= shop.avaaSatunnainenHinta) {
+    game.hampaita -= shop.avaaSatunnainenHinta;
+    shop.avaaSatunnainenHinta *= 10;
 
-  if (elementit.hampaitaPerSekuntiElement) {
-    elementit.hampaitaPerSekuntiElement.innerHTML = game.hampaitaPerSekunti.toFixed(2).toLocaleString();
-  }
-
-  if (elementit.valintaHintaElement) {
-    elementit.valintaHintaElement.innerHTML = ascendObject.valintaHinta.toLocaleString();
-  }
-
-  if (elementit.satunnainenHintaElement) {
-    elementit.satunnainenHintaElement.innerHTML = ascendObject.satunnainenHinta.toLocaleString();
-  }
-
-  if (elementit.ascendBtn) {
-    if (game.hampaita >= ascendObject.raja) {
-      elementit.ascendBtn.style.display = "block";
-      elementit.ascendBtn.innerHTML = "Ascend";
+    const randomIndex = Math.floor(Math.random() * (ottelijat.isUnlocked.length - 1));
+    if (ottelijat.isUnlocked[randomIndex] === false) {
+      ottelijat.isUnlocked[randomIndex] = true;
+      console.log("Unlocked", randomIndex);
+      saveGame();
     } else {
-      elementit.ascendBtn.style.display = "none";
+      console.log("Already unlocked");
+      avaaSatunnainen();
     }
+    window.location.href = "./index.html";
+    saveGame();
   }
+};
 
-  if (elementit.vertaElement) {
-    if (ascendObject.ascendCount > 0) {
-      elementit.vertaElement.innerHTML = "block";
-      elementit.vertaElement.innerHTML = ascendObject.verta.toFixed(2).toLocaleString();
-    } else {
-      elementit.vertaElement.innerHTML = "none";
+function saveGame() {
+    console.log("Saving game");
+    let gameSave = {
+        game: game,
+        ottelijat: ottelijat,
+        shop: shop
+    };
+    localStorage.setItem("gameSave", JSON.stringify(gameSave));
+}
+
+function loadGame() {
+    const gameSave = localStorage.getItem("gameSave");
+    if (gameSave === null) {
+        console.error("No game save found");
+        return;
     }
-    elementit.vertaElement.innerHTML = ascendObject.verta.toLocaleString();
-  }
+    const parsedGameSave = JSON.parse(gameSave);
+    game = parsedGameSave.game;
+    ottelijat = parsedGameSave.ottelijat;
+    shop = parsedGameSave.shop;
+    updateUi();
+    console.log("Loaded game");
 }
 
-setInterval(() => {
-  utility.saveGame();
-}, 30_000);
-
-for (let i = 0; i < elementit.clicker.length; i++) {
-  elementit.clicker[i].addEventListener("click", function() {
-    game.totalClicks++;
-  });
+function resetGame() {
+    localStorage.removeItem("gameSave");
+    location.reload();
 }
 
-if (elementit.reset) {
-  elementit.reset.addEventListener("click", function() {
-    utility.resetGame();
-  });
+shopElement!.addEventListener("click", (() => {
+    shopItems.forEach(item => {
+        item.style.display = item.style.display === 'none' ? 'none' : 'block';
+    });
+}));
+
+colbyCovington!.addEventListener("click", (() => {
+    if (!colbyCovingtonInterval) {
+        colbyCovingtonInterval = setInterval(() => {
+            if (ottelijat.progress[0] >= 100) {
+                ottelijat.progress[0] = 0;
+                ottelijat.xp[0] += 1;
+                updateUi();
+                if (ottelijat.xp[0] >= ottelijat.xpThreshold[0]) {
+                    ottelijat.xp[0] = 0;
+                    ottelijat.xpThreshold[0] *= 1.5;
+                    ottelijat.level[0] += 1;
+                };
+                game.hampaita += 1;
+                updateUi();
+            } else {
+                ottelijat.progress[0] += ottelijat.step[0]
+                document.getElementById('colbyCovingtonBar')!.style.width = `${ottelijat.progress[0]}%`
+            }}, 10);
+            updateUi();
+        }
+}));
+
+kamaruUsman!.addEventListener("click", (() => {
+    if (!kamaruUsmanInterval) {
+        kamaruUsmanInterval = setInterval(() => {
+            if (ottelijat.progress[1] >= 100) {
+                ottelijat.progress[1] = 0;
+                ottelijat.xp[1] += 1;
+                updateUi();
+                if (ottelijat.xp[1] >= ottelijat.xpThreshold[1]) {
+                    ottelijat.xp[1] = 0;
+                    ottelijat.xpThreshold[1] *= 1.5;
+                    ottelijat.level[1] += 1;
+                };
+                game.hampaita += 1;
+                updateUi();
+            } else {
+                ottelijat.progress[1] += ottelijat.step[1]
+                document.getElementById('kamaruUsmanBar')!.style.width = `${ottelijat.progress[1]}%`
+            }}, 10);
+            updateUi();
+        }
+}));
+
+shavkatRakhmonov!.addEventListener("click", (() => {
+    if (!shavkatRakhmonovInterval) {
+        shavkatRakhmonovInterval = setInterval(() => {
+            if (ottelijat.progress[2] >= 100) {
+                ottelijat.progress[2] = 0;
+                ottelijat.xp[2] += 1;
+                updateUi();
+                if (ottelijat.xp[2] >= ottelijat.xpThreshold[2]) {
+                    ottelijat.xp[2] = 0;
+                    ottelijat.xpThreshold[2] *= 1.5;
+                    ottelijat.level[2] += 1;
+                };
+                game.hampaita += 1;
+                updateUi();
+            } else {
+                ottelijat.progress[2] += ottelijat.step[2]
+                document.getElementById('shavkatRakhmonovBar')!.style.width = `${ottelijat.progress[2]}%`
+            }}, 10);
+            updateUi();
+        }
+}));
+
+seanOmalley!.addEventListener("click", (() => {
+    if (!seanOmalleyInterval) {
+        seanOmalleyInterval = setInterval(() => {
+            if (ottelijat.progress[3] >= 100) {
+                ottelijat.progress[3] = 0;
+                ottelijat.xp[3] += 1;
+                updateUi();
+                if (ottelijat.xp[3] >= ottelijat.xpThreshold[3]) {
+                    ottelijat.xp[3] = 0;
+                    ottelijat.xpThreshold[3] *= 1.5;
+                    ottelijat.level[3] += 1;
+                };
+                game.hampaita += 1;
+                updateUi();
+            } else {
+                ottelijat.progress[3] += ottelijat.step[3]
+                document.getElementById('seanOmalleyBar')!.style.width = `${ottelijat.progress[3]}%`
+            }}, 10);
+            updateUi();
+        }
+}));
+
+jonJones!.addEventListener("click", (() => {
+    if (!jonJonesInterval) {
+        jonJonesInterval = setInterval(() => {
+            if (ottelijat.progress[4] >= 100) {
+                ottelijat.progress[4] = 0;
+                ottelijat.xp[4] += 1;
+                updateUi();
+                if (ottelijat.xp[4] >= ottelijat.xpThreshold[4]) {
+                    ottelijat.xp[4] = 0;
+                    ottelijat.xpThreshold[4] *= 1.5;
+                    ottelijat.level[4] += 1;
+                };
+                game.hampaita += 1;
+                updateUi();
+            } else {
+                ottelijat.progress[4] += ottelijat.step[4]
+                document.getElementById('jonJonesBar')!.style.width = `${ottelijat.progress[4]}%`
+            }}, 10);
+            updateUi();
+        }
+}));
+
+alexanderVolkanovski!.addEventListener("click", (() => {
+    if (!alexanderVolkanovskiInterval) {
+        alexanderVolkanovskiInterval = setInterval(() => {
+            if (ottelijat.progress[5] >= 100) {
+                ottelijat.progress[5] = 0;
+                ottelijat.xp[5] += 1;
+                updateUi();
+                if (ottelijat.xp[5] >= ottelijat.xpThreshold[5]) {
+                    ottelijat.xp[5] = 0;
+                    ottelijat.xpThreshold[5] *= 1.5;
+                    ottelijat.level[5] += 1;
+                };
+                game.hampaita += 1;
+                updateUi();
+            } else {
+                ottelijat.progress[5] += ottelijat.step[5]
+                document.getElementById('alexanderVolkanovskiBar')!.style.width = `${ottelijat.progress[5]}%`
+            }}, 10);
+            updateUi();
+        }
+}));
+
+alexPereira!.addEventListener("click", (() => {
+    if (!alexPereiraInterval) {
+        alexPereiraInterval = setInterval(() => {
+            if (ottelijat.progress[6] >= 100) {
+                ottelijat.progress[6] = 0;
+                ottelijat.xp[6] += 1;
+                updateUi();
+                if (ottelijat.xp[6] >= ottelijat.xpThreshold[6]) {
+                    ottelijat.xp[6] = 0;
+                    ottelijat.xpThreshold[6] *= 1.5;
+                    ottelijat.level[6] += 1;
+                };
+                game.hampaita += 1;
+                updateUi();
+            } else {
+                ottelijat.progress[6] += ottelijat.step[6]
+                document.getElementById('alexPereiraBar')!.style.width = `${ottelijat.progress[6]}%`
+            }}, 10);
+            updateUi();
+        }
+}));
+
+islamMakhachev!.addEventListener("click", (() => {
+    if (!islamMakhachevInterval) {
+        islamMakhachevInterval = setInterval(() => {
+            if (ottelijat.progress[7] >= 100) {
+                ottelijat.progress[7] = 0;
+                ottelijat.xp[7] += 1;
+                updateUi();
+                if (ottelijat.xp[7] >= ottelijat.xpThreshold[7]) {
+                    ottelijat.xp[7] = 0;
+                    ottelijat.xpThreshold[7] *= 1.5;
+                    ottelijat.level[7] += 1;
+                };
+                game.hampaita += 1;
+                updateUi();
+            } else {
+                ottelijat.progress[7] += ottelijat.step[7]
+                document.getElementById('islamMakhachevBar')!.style.width = `${ottelijat.progress[7]}%`
+            }}, 10);
+            updateUi();
+        }
+}));
+
+maxHolloway!.addEventListener("click", (() => {
+    if (!maxHollowayInterval) {
+        maxHollowayInterval = setInterval(() => {
+            if (ottelijat.progress[8] >= 100) {
+                ottelijat.progress[8] = 0;
+                ottelijat.xp[8] += 1;
+                updateUi();
+                if (ottelijat.xp[8] >= ottelijat.xpThreshold[8]) {
+                    ottelijat.xp[8] = 0;
+                    ottelijat.xpThreshold[8] *= 1.5;
+                    ottelijat.level[8] += 1;
+                };
+                game.hampaita += 1;
+                updateUi();
+            } else {
+                ottelijat.progress[8] += ottelijat.step[8]
+                document.getElementById('maxHollowayBar')!.style.width = `${ottelijat.progress[8]}%`
+            }}, 10);
+            updateUi();
+        }
+}));
+
+tomAspinall!.addEventListener("click", (() => {
+    if (!tomAspinallInterval) {
+        tomAspinallInterval = setInterval(() => {
+            if (ottelijat.progress[9] >= 100) {
+                ottelijat.progress[9] = 0;
+                ottelijat.xp[9] += 1;
+                updateUi();
+                if (ottelijat.xp[9] >= ottelijat.xpThreshold[9]) {
+                    ottelijat.xp[9] = 0;
+                    ottelijat.xpThreshold[9] *= 1.5;
+                    ottelijat.level[9] += 1;
+                };
+                game.hampaita += 1;
+                updateUi();
+            } else {
+                ottelijat.progress[9] += ottelijat.step[9]
+                document.getElementById('tomAspinallBar')!.style.width = `${ottelijat.progress[9]}%`
+            }}, 10);
+            updateUi();
+        }
+}));
+
+israelAdesanya!.addEventListener("click", (() => {
+    if (!israelAdesanyaInterval) {
+        israelAdesanyaInterval = setInterval(() => {
+            if (ottelijat.progress[10] >= 100) {
+                ottelijat.progress[10] = 0;
+                ottelijat.xp[10] += 1;
+                updateUi();
+                if (ottelijat.xp[10] >= ottelijat.xpThreshold[10]) {
+                    ottelijat.xp[10] = 0;
+                    ottelijat.xpThreshold[10] *= 1.5;
+                    ottelijat.level[10] += 1;
+                };
+                game.hampaita += 1;
+                updateUi();
+            } else {
+                ottelijat.progress[10] += ottelijat.step[10]
+                document.getElementById('israelAdesanyaBar')!.style.width = `${ottelijat.progress[10]}%`
+            }}, 10);
+            updateUi();
+        }
+}));
+
+charlesOliveira!.addEventListener("click", (() => {
+    if (!charlesOliveiraInterval) {
+        charlesOliveiraInterval = setInterval(() => {
+            if (ottelijat.progress[11] >= 100) {
+                ottelijat.progress[11] = 0;
+                ottelijat.xp[11] += 1;
+                updateUi();
+                if (ottelijat.xp[11] >= ottelijat.xpThreshold[11]) {
+                    ottelijat.xp[11] = 0;
+                    ottelijat.xpThreshold[11] *= 1.5;
+                    ottelijat.level[11] += 1;
+                };
+                game.hampaita += 1;
+                updateUi();
+            } else {
+                ottelijat.progress[11] += ottelijat.step[11]
+                document.getElementById('charlesOliveiraBar')!.style.width = `${ottelijat.progress[11]}%`
+            }}, 10);
+            updateUi();
+        }
+}));
+
+save!.addEventListener("click", (() => {
+    saveGame();
+}));
+
+load!.addEventListener("click", (() => {
+    loadGame();
+}));
+
+reset!.addEventListener("click", (() => {
+    resetGame();
+}));
+
+avaaSatunnainenElement!.addEventListener("click", (() => {
+    avaaSatunnainen();
+    updateUi();
+}));
+
+window.onload = function() {
+    loadGame();
+    //updateUi();
 }
-
-if (elementit.save) {
-  elementit.save.addEventListener("click", function() {
-    utility.saveGame();
-  });
-}
-
-if (elementit.ascendBtn) {
-  elementit.ascendBtn.addEventListener("click", function() {
-    utility.ascend();
-  });
-}
-
-if (elementit.satunnainenBtn) {
-  elementit.satunnainenBtn.addEventListener("click", function() {
-    satunnainen();
-  });
-}
-
-
-

@@ -1,36 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IncrementalMMA</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMaProgressBar</title>
+    <link rel="stylesheet" href="resetCSS.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body class="clicker">
-  
-  <nav>
-    <a href="./index.html" class="navigointi">Koti</a>
-    <a href="./ascend.html" class="navigointi">Shop</a>
-    <button id="save">Save</button>
-    <button id="reset">Reset</button><br>
-    <button id="resetTrainers">Reset Trainers</button>
-  </nav>
-  
-  <header>
-    <p>Hampaita: <span class="number" id="hampaita">0</span></p>
-    <p>Hampaita/s: <span class="number" id="hampaitaPerSekunti">0</span></p>
-    <p>Verta: <span class="number" id="verta">0</span></p>
-  </header>
+<body>
 
-  
-  <div id="ascendContainer"></div>
-  <div id="upgradeContainer"></div>
-  <div id="fighterContainer"></div>
-  <div id="achievementContainer"></div>
+    <nav>
+      <a href="./index.html" class="navigointi">Koti</a>
+      <!--<a href="./ascend.html" class="navigointi">Shop</a> -->
+      <button id="save">Save</button>
+      <button id="load">Load</button>
+      <button id="reset">Reset</button>
+      <!--<button id="resetTrainers">Reset Trainers</button>-->
+    </nav>
 
-  <script src="main.js"></script>
+    <header>
+        <p>hampaita: <span id="hampaita">0</span>&#x1F9B7;</p>
+    </header>
+
+    <div id="shop">
+        <h1>Shop</h1>
+        <p class="shopItem" id="avaaSatunnainen">Avaa satunnainen ottelija: <span id="avaaSatunnainenOttelijaHinta">10&#x1F9B7;</span></p>
+        <p class="shopItem">items</p>
+        <p class="shopItem">items</p>
+        <p class="shopItem">items</p>
+    </div>
+
+    <div id="app">
+        <div class="ottelijaContainer" id="colbyCovingtonContainer">
+            <div class="ottelija" id="colbyCovington">
+                <img src="./assets/colbyCovington.png" alt="">
+                <div class="ottelijaInfo" id="colbyCovingtonInfo">
+                    <h2>Colby Covington</h2>
+                    <p>xp: <span id="colbyCovingtonXp">0</span>/<span id="colbyCovingtonXpThreshold">10</span></p>
+                    <p>level: <span id="colbyCovingtonLevel">0</span></p>
+                </div>
+            </div>
+            <div id="colbyCovingtonBarContainer">
+                <div id="colbyCovingtonBar"></div>
+            </div>
+        </div>
+        <div class="ottelijaContainer" id="kamaruUsmanContainer">
+            <div class="ottelija" id="kamaruUsman">
+                <img src="./assets/kamaruUsman.png" alt="">
+                <div class="ottelijaInfo" id="kamaruUsmanInfo">
+                    <h2>Kamaru Usman</h2>
+                    <p>xp: <span id="kamaruUsmanXp">0</span>/<span id="kamaruUsmanXpThreshold">10</span></p>
+                    <p>level: <span id="kamaruUsmanLevel">0</span></p>
+                </div>
+            </div>
+            <div id="kamaruUsmanBarContainer">
+                <div id="kamaruUsmanBar"></div>
+            </div>
+        </div>
+        <div class="ottelijaContainer" id="shavkatRakhmonovContainer">
+            <div class="ottelija" id="shavkatRakhmonov">
+                <img src="./assets/shavkatRakhmonov.png" alt="">
+                <div class="ottelijaInfo" id="shavkatRakhmonovInfo">
+                    <h2>Shavkat Rakhmonov</h2>
+                    <p>xp: <span id="shavkatRakhmonovXp">0</span>/<span id="shavkatRakhmonovXpThreshold">10</span></p>
+                    <p>level: <span id="shavkatRakhmonovLevel">0</span></p>
+                </div>
+            </div>
+            <div id="shavkatRakhmonovBarContainer">
+                <div id="shavkatRakhmonovBar"></div>
+            </div>
+        </div>
+        <div class="ottelijaContainer" id="seanOmalleyContainer">
+            <div class="ottelija" id="seanOmalley">
+                <img src="./assets/seanOmalley.png" alt="">
+                <div class="ottelijaInfo" id="seanOmalleyInfo">
+                    <h2>Sean O'malley</h2>
+                    <p>xp: <span id="seanOmalleyXp">0</span>/<span id="seanOmalleyXpThreshold">10</span></p>
+                    <p>level: <span id="seanOmalleyLevel">0</span></p>
+                </div>
+            </div>
+            <div id="seanOmalleyBarContainer">
+                <div id="seanOmalleyBar"></div>
+            </div>
+        </div>
+        <div class="ottelijaContainer" id="jonJonesContainer">
+            <div class="ottelija" id="jonJones">
+                <img src="./assets/jonJones.png" alt="">
+                <div class="ottelijaInfo" id="jonJonesInfo">
+                    <h2>Jon Jones</h2>
+                    <p>xp: <span id="jonJonesXp">0</span>/<span id="jonJonesXpThreshold">10</span></p>
+                    <p>level: <span id="jonJonesLevel">0</span></p>
+                </div>
+            </div>
+            <div id="jonJonesBarContainer">
+                <div id="jonJonesBar"></div>
+            </div>
+        </div>
+        <div class="ottelijaContainer" id="alexanderVolkanovskiContainer">
+            <div class="ottelija" id="alexanderVolkanovski">
+                <img src="./assets/alexanderVolkanovski.png" alt="">
+                <div class="ottelijaInfo" id="alexanderVolkanovskiInfo">
+                    <h2>Alexander Volkanovski</h2>
+                    <p>xp: <span id="alexanderVolkanovskiXp">0</span>/<span id="alexanderVolkanovskiXpThreshold">10</span></p>
+                    <p>level: <span id="alexanderVolkanovskiLevel">0</span></p>
+                </div>
+            </div>
+            <div id="alexanderVolkanovskiBarContainer">
+                <div id="alexanderVolkanovskiBar"></div>
+            </div>
+        </div>
+        <div class="ottelijaContainer" id="alexPereiraContainer">
+            <div class="ottelija" id="alexPereira">
+                <img src="./assets/alexPereira.png" alt="">
+                <div class="ottelijaInfo" id="alexPereiraInfo">
+                    <h2>Alex Pereira</h2>
+                    <p>xp: <span id="alexPereiraXp">0</span>/<span id="alexPereiraXpThreshold">10</span></p>
+                    <p>level: <span id="alexPereiraLevel">0</span></p>
+                </div>
+            </div>
+            <div id="alexPereiraBarContainer">
+                <div id="alexPereiraBar"></div>
+            </div>
+        </div>
+        <div class="ottelijaContainer" id="islamMakhachevContainer">
+            <div class="ottelija" id="islamMakhachev">
+                <img src="./assets/islamMakhachev.png" alt="">
+                <div class="ottelijaInfo" id="islamMakhachevInfo">
+                    <h2>Islam Makhachev</h2>
+                    <p>xp: <span id="islamMakhachevXp">0</span>/<span id="islamMakhachevXpThreshold">10</span></p>
+                    <p>level: <span id="islamMakhachevLevel">0</span></p>
+                </div>
+            </div>
+            <div id="islamMakhachevBarContainer">
+                <div id="islamMakhachevBar"></div>
+            </div>
+        </div>
+        <div class="ottelijaContainer" id="maxHollowayContainer">
+            <div class="ottelija" id="maxHolloway">
+                <img src="./assets/maxHolloway.png" alt="">
+                <div class="ottelijaInfo" id="maxHollowayInfo">
+                    <h2>Max Holloway</h2>
+                    <p>xp: <span id="maxHollowayXp">0</span>/<span id="maxHollowayXpThreshold">10</span></p>
+                    <p>level: <span id="maxHollowayLevel">0</span></p>
+                </div>
+            </div>
+            <div id="maxHollowayBarContainer">
+                <div id="maxHollowayBar"></div>
+            </div>
+        </div>
+        <div class="ottelijaContainer" id="tomAspinallContainer">
+            <div class="ottelija" id="tomAspinall">
+                <img src="./assets/tomAspinall.png" alt="">
+                <div class="ottelijaInfo" id="tomAspinallInfo">
+                    <h2>Tom Aspinall</h2>
+                    <p>xp: <span id="tomAspinallXp">0</span>/<span id="tomAspinallXpThreshold">10</span></p>
+                    <p>level: <span id="tomAspinallLevel">0</span></p>
+                </div>
+            </div>
+            <div id="tomAspinallBarContainer">
+                <div id="tomAspinallBar"></div>
+            </div>
+        </div>
+        <div class="ottelijaContainer" id="israelAdesanyaContainer">
+            <div class="ottelija" id="israelAdesanya">
+                <img src="./assets/israelAdesanya.png" alt="">
+                <div class="ottelijaInfo" id="israelAdesanyaInfo">
+                    <h2>Israel Adesanya</h2>
+                    <p>xp: <span id="israelAdesanyaXp">0</span>/<span id="israelAdesanyaXpThreshold">10</span></p>
+                    <p>level: <span id="israelAdesanyaLevel">0</span></p>
+                </div>
+            </div>
+            <div id="israelAdesanyaBarContainer">
+                <div id="israelAdesanyaBar"></div>
+            </div>
+        </div>
+        <div class="ottelijaContainer" id="charlesOliveiraContainer">
+            <div class="ottelija" id="charlesOliveira">
+                <img src="./assets/charlesOliveira.png" alt="">
+                <div class="ottelijaInfo" id="charlesOliveiraInfo">
+                    <h2>Charles Oliveira</h2>
+                    <p>xp: <span id="charlesOliveiraXp">0</span>/<span id="charlesOliveiraXpThreshold">10</span></p>
+                    <p>level: <span id="charlesOliveiraLevel">0</span></p>
+                </div>
+            </div>
+            <div id="charlesOliveiraBarContainer">
+                <div id="charlesOliveiraBar"></div>
+            </div>
+        </div>
+
+    <script src="main.js"></script>
 </body>
 </html>
