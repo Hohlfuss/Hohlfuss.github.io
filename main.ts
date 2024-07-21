@@ -3,6 +3,9 @@
 type Game = {
     version: string
     hampaita: number
+    hampaitaPerSekunti: number
+    aktiivisiaOttelijoita: number
+    maxOttelijat: number
 }
 
 type Ottelijat = {
@@ -44,11 +47,15 @@ type Ottelijat = {
 
 type Shop = {
     avaaSatunnainenHinta: number;
+    avaaValitsemaHinta: number;
 }
 
 let game: Game = {
-    version: "0.0.3",
-    hampaita: 0
+    version: "0.0.5",
+    hampaita: 0,
+    hampaitaPerSekunti: 0,
+    aktiivisiaOttelijoita: 0,
+    maxOttelijat: 2
 }
 
 let ottelijat: Ottelijat = {
@@ -109,18 +116,18 @@ let ottelijat: Ottelijat = {
       0
     ],
     power: [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
     ],
     isUnlocked: [
       true,
@@ -207,18 +214,18 @@ let ottelijat: Ottelijat = {
       0
     ],
     xpThreshold: [
-      10,
-      10,
-      10,
-      10,
-      10,
-      10,
-      10,
-      10,
-      10,
-      10,
-      10,
-      10
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
     ],
     rank: [
       0,
@@ -479,10 +486,12 @@ let ottelijat: Ottelijat = {
 }
 
 let shop: Shop = {
-    avaaSatunnainenHinta: 10
+    avaaSatunnainenHinta: 10,
+    avaaValitsemaHinta: 100
 }
 
 const hampaita = document.getElementById('hampaita');
+const hampaitaPerSekuntiElement = document.getElementById('hampaitaPerSekunti');
 const save = document.getElementById('save');
 const load = document.getElementById('load');
 const reset = document.getElementById('reset');
@@ -490,6 +499,9 @@ const reset = document.getElementById('reset');
 const shopElement = document.getElementById('shop');
 const shopItems = Array.from(document.querySelectorAll('.shopItem')) as HTMLElement[];
 const avaaSatunnainenElement = document.getElementById('avaaSatunnainen');
+const avaaSatunnainenHinta = document.getElementById('avaaSatunnainenHinta');
+const avaaValitsemaElement = document.getElementById('avaaValitsema');
+//const avaaValitsemaHinta = document.getElementById('avaaValitsemaHinta');
 
 const colbyCovington = document.getElementById("colbyCovington");
 const colbyCovingtonXp = document.getElementById('colbyCovingtonXp');
@@ -551,21 +563,20 @@ const charlesOliveiraXp = document.getElementById('charlesOliveiraXp');
 const charlesOliveiraXpThreshold = document.getElementById('charlesOliveiraXpThreshold');
 const charlesOliveiraLevel = document.getElementById('charlesOliveiraLevel');
 
-let colbyCovingtonInterval: NodeJS.Timeout | null = null;
-let kamaruUsmanInterval: NodeJS.Timeout | null = null;
-let shavkatRakhmonovInterval: NodeJS.Timeout | null = null;
-let seanOmalleyInterval: NodeJS.Timeout | null = null;
-let jonJonesInterval: NodeJS.Timeout | null = null;
-let alexanderVolkanovskiInterval: NodeJS.Timeout | null = null;
-let alexPereiraInterval: NodeJS.Timeout | null = null;
-let islamMakhachevInterval: NodeJS.Timeout | null = null;
-let maxHollowayInterval: NodeJS.Timeout | null = null;
-let tomAspinallInterval: NodeJS.Timeout | null = null;
-let israelAdesanyaInterval: NodeJS.Timeout | null = null;
-let charlesOliveiraInterval: NodeJS.Timeout | null = null;
+let colbyCovingtonInterval: NodeJS.Timer | null = null;
+let kamaruUsmanInterval: NodeJS.Timer | null = null;
+let shavkatRakhmonovInterval: NodeJS.Timer | null = null;
+let seanOmalleyInterval: NodeJS.Timer | null = null;
+let jonJonesInterval: NodeJS.Timer | null = null;
+let alexanderVolkanovskiInterval: NodeJS.Timer | null = null;
+let alexPereiraInterval: NodeJS.Timer | null = null;
+let islamMakhachevInterval: NodeJS.Timer | null = null;
+let maxHollowayInterval: NodeJS.Timer | null = null;
+let tomAspinallInterval: NodeJS.Timer | null = null;
+let israelAdesanyaInterval: NodeJS.Timer | null = null;
+let charlesOliveiraInterval: NodeJS.Timer | null = null;
 
 function updateUi() {
-
     colbyCovingtonXp!.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
     colbyCovingtonXpThreshold!.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
     colbyCovingtonLevel!.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
@@ -582,55 +593,65 @@ function updateUi() {
     seanOmalleyXpThreshold!.innerHTML = ottelijat.xpThreshold[3].toFixed(0).toLocaleString();
     seanOmalleyLevel!.innerHTML = ottelijat.level[3].toFixed(0).toLocaleString();
   
-    jonJonesXp!.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
-    jonJonesXpThreshold!.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
-    jonJonesLevel!.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
+    jonJonesXp!.innerHTML = ottelijat.xp[4].toFixed(0).toLocaleString();
+    jonJonesXpThreshold!.innerHTML = ottelijat.xpThreshold[4].toFixed(0).toLocaleString();
+    jonJonesLevel!.innerHTML = ottelijat.level[4].toFixed(0).toLocaleString();
 
-    alexanderVolkanovskiXp!.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
-    alexanderVolkanovskiXpThreshold!.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
-    alexanderVolkanovskiLevel!.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
+    alexanderVolkanovskiXp!.innerHTML = ottelijat.xp[5].toFixed(0).toLocaleString();
+    alexanderVolkanovskiXpThreshold!.innerHTML = ottelijat.xpThreshold[5].toFixed(0).toLocaleString();
+    alexanderVolkanovskiLevel!.innerHTML = ottelijat.level[5].toFixed(0).toLocaleString();
 
-    alexPereiraXp!.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
-    alexPereiraXpThreshold!.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
-    alexPereiraLevel!.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
+    alexPereiraXp!.innerHTML = ottelijat.xp[6].toFixed(0).toLocaleString();
+    alexPereiraXpThreshold!.innerHTML = ottelijat.xpThreshold[6].toFixed(0).toLocaleString();
+    alexPereiraLevel!.innerHTML = ottelijat.level[6].toFixed(0).toLocaleString();
 
-    islamMakhachevXp!.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
-    islamMakhachevXpThreshold!.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
-    islamMakhachevLevel!.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
+    islamMakhachevXp!.innerHTML = ottelijat.xp[7].toFixed(0).toLocaleString();
+    islamMakhachevXpThreshold!.innerHTML = ottelijat.xpThreshold[7].toFixed(0).toLocaleString();
+    islamMakhachevLevel!.innerHTML = ottelijat.level[7].toFixed(0).toLocaleString();
 
-    maxHollowayXp!.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
-    maxHollowayXpThreshold!.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
-    maxHollowayLevel!.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
+    maxHollowayXp!.innerHTML = ottelijat.xp[8].toFixed(0).toLocaleString();
+    maxHollowayXpThreshold!.innerHTML = ottelijat.xpThreshold[8].toFixed(0).toLocaleString();
+    maxHollowayLevel!.innerHTML = ottelijat.level[8].toFixed(0).toLocaleString();
 
-    tomAspinallXp!.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
-    tomAspinallXpThreshold!.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
-    tomAspinallLevel!.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
+    tomAspinallXp!.innerHTML = ottelijat.xp[9].toFixed(0).toLocaleString();
+    tomAspinallXpThreshold!.innerHTML = ottelijat.xpThreshold[9].toFixed(0).toLocaleString();
+    tomAspinallLevel!.innerHTML = ottelijat.level[9].toFixed(0).toLocaleString();
 
-    israelAdesanyaXp!.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
-    israelAdesanyaXpThreshold!.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
-    israelAdesanyaLevel!.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
+    israelAdesanyaXp!.innerHTML = ottelijat.xp[10].toFixed(0).toLocaleString();
+    israelAdesanyaXpThreshold!.innerHTML = ottelijat.xpThreshold[10].toFixed(0).toLocaleString();
+    israelAdesanyaLevel!.innerHTML = ottelijat.level[10].toFixed(0).toLocaleString();
 
-    charlesOliveiraXp!.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
-    charlesOliveiraXpThreshold!.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
-    charlesOliveiraLevel!.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
+    charlesOliveiraXp!.innerHTML = ottelijat.xp[11].toFixed(0).toLocaleString();
+    charlesOliveiraXpThreshold!.innerHTML = ottelijat.xpThreshold[11].toFixed(0).toLocaleString();
+    charlesOliveiraLevel!.innerHTML = ottelijat.level[11].toFixed(0).toLocaleString();
 
     hampaita!.innerHTML = game.hampaita.toFixed(0).toLocaleString();
-    avaaSatunnainenElement!.innerHTML = shop.avaaSatunnainenHinta.toFixed(0).toLocaleString();
+    hampaitaPerSekuntiElement!.innerHTML = game.hampaitaPerSekunti.toFixed(0).toLocaleString();
+    avaaSatunnainenHinta!.innerHTML = shop.avaaSatunnainenHinta.toFixed(0).toLocaleString();
+    //avaaValitsemaHinta!.innerHTML = shop.avaaValitsemaHinta.toFixed(0).toLocaleString();
 };
 
 setInterval(() => {
+  let totalPower = 0;
   for (let i = 0; i < ottelijat.isUnlocked.length; i++) {
     if (ottelijat.isUnlocked[i] === true) {
       document.getElementById!(ottelijat.id[i] + "Container")!.style.display = "block";
+      totalPower += ottelijat.power[i] / 10;
     }
   }
+  game.hampaitaPerSekunti = totalPower
   updateUi();
 }, 100);
+
+setInterval(() => {
+  saveGame();
+}, 30_000);
 
 function avaaSatunnainen() {
   if (game.hampaita >= shop.avaaSatunnainenHinta) {
     game.hampaita -= shop.avaaSatunnainenHinta;
     shop.avaaSatunnainenHinta *= 10;
+    shop.avaaValitsemaHinta *= 5;
 
     const randomIndex = Math.floor(Math.random() * (ottelijat.isUnlocked.length - 1));
     if (ottelijat.isUnlocked[randomIndex] === false) {
@@ -641,10 +662,21 @@ function avaaSatunnainen() {
       console.log("Already unlocked");
       avaaSatunnainen();
     }
-    window.location.href = "./index.html";
+    //window.location.href = "./index.html";
     saveGame();
+    console.log("power", ottelijat.power[randomIndex]);
   }
 };
+
+function avaaValitsema() {
+  if (game.hampaita >= shop.avaaValitsemaHinta) {
+    game.hampaita -= shop.avaaValitsemaHinta;
+    shop.avaaValitsemaHinta *= 10;
+    shop.avaaSatunnainenHinta *= 5;
+    window.location.href = "./lukitutOttelijat.html";
+    saveGame();
+  }
+}
 
 function saveGame() {
     console.log("Saving game");
@@ -667,7 +699,7 @@ function loadGame() {
     ottelijat = parsedGameSave.ottelijat;
     shop = parsedGameSave.shop;
     updateUi();
-    console.log("Loaded game");
+    console.log("Game loaded");
 }
 
 function resetGame() {
@@ -677,271 +709,307 @@ function resetGame() {
 
 shopElement!.addEventListener("click", (() => {
     shopItems.forEach(item => {
-        item.style.display = item.style.display === 'none' ? 'none' : 'block';
+        item.style.display = item.style.display === 'none' ? 'block' : 'none';
     });
 }));
 
 colbyCovington!.addEventListener("click", (() => {
     if (!colbyCovingtonInterval) {
-        colbyCovingtonInterval = setInterval(() => {
-            if (ottelijat.progress[0] >= 100) {
-                ottelijat.progress[0] = 0;
-                ottelijat.xp[0] += 1;
-                updateUi();
-                if (ottelijat.xp[0] >= ottelijat.xpThreshold[0]) {
-                    ottelijat.xp[0] = 0;
-                    ottelijat.xpThreshold[0] *= 1.5;
-                    ottelijat.level[0] += 1;
-                };
-                game.hampaita += 1;
-                updateUi();
-            } else {
-                ottelijat.progress[0] += ottelijat.step[0]
-                document.getElementById('colbyCovingtonBar')!.style.width = `${ottelijat.progress[0]}%`
-            }}, 10);
-            updateUi();
+        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+          colbyCovingtonInterval = setInterval(() => {
+            game.aktiivisiaOttelijoita++;
+              if (ottelijat.progress[0] >= 100) {
+                  ottelijat.progress[0] = 0;
+                  ottelijat.xp[0] += 1;
+                  updateUi();
+                  if (ottelijat.xp[0] >= ottelijat.xpThreshold[0]) {
+                      ottelijat.xp[0] = 0;
+                      ottelijat.xpThreshold[0] *= 1.2;
+                      ottelijat.level[0] += 1;
+                  };
+                  game.hampaita += ottelijat.power[0];
+                  updateUi();
+              } else {
+                  ottelijat.progress[0] += ottelijat.step[0]
+                  document.getElementById('colbyCovingtonBar')!.style.width = `${ottelijat.progress[0]}%`
+              }}, 10);
+              updateUi();
+          }
         }
 }));
 
 kamaruUsman!.addEventListener("click", (() => {
     if (!kamaruUsmanInterval) {
-        kamaruUsmanInterval = setInterval(() => {
-            if (ottelijat.progress[1] >= 100) {
-                ottelijat.progress[1] = 0;
-                ottelijat.xp[1] += 1;
-                updateUi();
-                if (ottelijat.xp[1] >= ottelijat.xpThreshold[1]) {
-                    ottelijat.xp[1] = 0;
-                    ottelijat.xpThreshold[1] *= 1.5;
-                    ottelijat.level[1] += 1;
-                };
-                game.hampaita += 1;
-                updateUi();
-            } else {
-                ottelijat.progress[1] += ottelijat.step[1]
-                document.getElementById('kamaruUsmanBar')!.style.width = `${ottelijat.progress[1]}%`
-            }}, 10);
-            updateUi();
+        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+          kamaruUsmanInterval = setInterval(() => {
+            game.aktiivisiaOttelijoita++;
+              if (ottelijat.progress[1] >= 100) {
+                  ottelijat.progress[1] = 0;
+                  ottelijat.xp[1] += 1;
+                  updateUi();
+                  if (ottelijat.xp[1] >= ottelijat.xpThreshold[1]) {
+                      ottelijat.xp[1] = 0;
+                      ottelijat.xpThreshold[1] *= 1.2;
+                      ottelijat.level[1] += 1;
+                  };
+                  game.hampaita += ottelijat.power[1];
+                  updateUi();
+              } else {
+                  ottelijat.progress[1] += ottelijat.step[1]
+                  document.getElementById('kamaruUsmanBar')!.style.width = `${ottelijat.progress[1]}%`
+              }}, 10);
+              updateUi();
+          }
         }
 }));
 
 shavkatRakhmonov!.addEventListener("click", (() => {
     if (!shavkatRakhmonovInterval) {
-        shavkatRakhmonovInterval = setInterval(() => {
-            if (ottelijat.progress[2] >= 100) {
-                ottelijat.progress[2] = 0;
-                ottelijat.xp[2] += 1;
-                updateUi();
-                if (ottelijat.xp[2] >= ottelijat.xpThreshold[2]) {
-                    ottelijat.xp[2] = 0;
-                    ottelijat.xpThreshold[2] *= 1.5;
-                    ottelijat.level[2] += 1;
-                };
-                game.hampaita += 1;
-                updateUi();
-            } else {
-                ottelijat.progress[2] += ottelijat.step[2]
-                document.getElementById('shavkatRakhmonovBar')!.style.width = `${ottelijat.progress[2]}%`
-            }}, 10);
-            updateUi();
+        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+          shavkatRakhmonovInterval = setInterval(() => {
+            game.aktiivisiaOttelijoita++;
+              if (ottelijat.progress[2] >= 100) {
+                  ottelijat.progress[2] = 0;
+                  ottelijat.xp[2] += 1;
+                  updateUi();
+                  if (ottelijat.xp[2] >= ottelijat.xpThreshold[2]) {
+                      ottelijat.xp[2] = 0;
+                      ottelijat.xpThreshold[2] *= 1.2;
+                      ottelijat.level[2] += 1;
+                  };
+                  game.hampaita += ottelijat.power[2];
+                  updateUi();
+              } else {
+                  ottelijat.progress[2] += ottelijat.step[2]
+                  document.getElementById('shavkatRakhmonovBar')!.style.width = `${ottelijat.progress[2]}%`
+              }}, 10);
+              updateUi();
+          }
         }
 }));
 
 seanOmalley!.addEventListener("click", (() => {
     if (!seanOmalleyInterval) {
-        seanOmalleyInterval = setInterval(() => {
-            if (ottelijat.progress[3] >= 100) {
-                ottelijat.progress[3] = 0;
-                ottelijat.xp[3] += 1;
-                updateUi();
-                if (ottelijat.xp[3] >= ottelijat.xpThreshold[3]) {
-                    ottelijat.xp[3] = 0;
-                    ottelijat.xpThreshold[3] *= 1.5;
-                    ottelijat.level[3] += 1;
-                };
-                game.hampaita += 1;
-                updateUi();
-            } else {
-                ottelijat.progress[3] += ottelijat.step[3]
-                document.getElementById('seanOmalleyBar')!.style.width = `${ottelijat.progress[3]}%`
-            }}, 10);
-            updateUi();
+        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+          seanOmalleyInterval = setInterval(() => {
+            game.aktiivisiaOttelijoita++;
+              if (ottelijat.progress[3] >= 100) {
+                  ottelijat.progress[3] = 0;
+                  ottelijat.xp[3] += 1;
+                  updateUi();
+                  if (ottelijat.xp[3] >= ottelijat.xpThreshold[3]) {
+                      ottelijat.xp[3] = 0;
+                      ottelijat.xpThreshold[3] *= 1.2;
+                      ottelijat.level[3] += 1;
+                  };
+                  game.hampaita += ottelijat.power[3];
+                  updateUi();
+              } else {
+                  ottelijat.progress[3] += ottelijat.step[3]
+                  document.getElementById('seanOmalleyBar')!.style.width = `${ottelijat.progress[3]}%`
+              }}, 10);
+              updateUi();
+          }
         }
 }));
 
 jonJones!.addEventListener("click", (() => {
     if (!jonJonesInterval) {
-        jonJonesInterval = setInterval(() => {
-            if (ottelijat.progress[4] >= 100) {
-                ottelijat.progress[4] = 0;
-                ottelijat.xp[4] += 1;
-                updateUi();
-                if (ottelijat.xp[4] >= ottelijat.xpThreshold[4]) {
-                    ottelijat.xp[4] = 0;
-                    ottelijat.xpThreshold[4] *= 1.5;
-                    ottelijat.level[4] += 1;
-                };
-                game.hampaita += 1;
-                updateUi();
-            } else {
-                ottelijat.progress[4] += ottelijat.step[4]
-                document.getElementById('jonJonesBar')!.style.width = `${ottelijat.progress[4]}%`
-            }}, 10);
-            updateUi();
+        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+          jonJonesInterval = setInterval(() => {
+            game.aktiivisiaOttelijoita++;
+              if (ottelijat.progress[4] >= 100) {
+                  ottelijat.progress[4] = 0;
+                  ottelijat.xp[4] += 1;
+                  updateUi();
+                  if (ottelijat.xp[4] >= ottelijat.xpThreshold[4]) {
+                      ottelijat.xp[4] = 0;
+                      ottelijat.xpThreshold[4] *= 1.2;
+                      ottelijat.level[4] += 1;
+                  };
+                  game.hampaita += ottelijat.power[4];
+                  updateUi();
+              } else {
+                  ottelijat.progress[4] += ottelijat.step[4]
+                  document.getElementById('jonJonesBar')!.style.width = `${ottelijat.progress[4]}%`
+              }}, 10);
+              updateUi();
+          }
         }
 }));
 
 alexanderVolkanovski!.addEventListener("click", (() => {
     if (!alexanderVolkanovskiInterval) {
-        alexanderVolkanovskiInterval = setInterval(() => {
-            if (ottelijat.progress[5] >= 100) {
-                ottelijat.progress[5] = 0;
-                ottelijat.xp[5] += 1;
-                updateUi();
-                if (ottelijat.xp[5] >= ottelijat.xpThreshold[5]) {
-                    ottelijat.xp[5] = 0;
-                    ottelijat.xpThreshold[5] *= 1.5;
-                    ottelijat.level[5] += 1;
-                };
-                game.hampaita += 1;
-                updateUi();
-            } else {
-                ottelijat.progress[5] += ottelijat.step[5]
-                document.getElementById('alexanderVolkanovskiBar')!.style.width = `${ottelijat.progress[5]}%`
-            }}, 10);
-            updateUi();
+        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+          alexanderVolkanovskiInterval = setInterval(() => {
+            game.aktiivisiaOttelijoita++;
+              if (ottelijat.progress[5] >= 100) {
+                  ottelijat.progress[5] = 0;
+                  ottelijat.xp[5] += 1;
+                  updateUi();
+                  if (ottelijat.xp[5] >= ottelijat.xpThreshold[5]) {
+                      ottelijat.xp[5] = 0;
+                      ottelijat.xpThreshold[5] *= 1.2;
+                      ottelijat.level[5] += 1;
+                  };
+                  game.hampaita += ottelijat.power[5];
+                  updateUi();
+              } else {
+                  ottelijat.progress[5] += ottelijat.step[5]
+                  document.getElementById('alexanderVolkanovskiBar')!.style.width = `${ottelijat.progress[5]}%`
+              }}, 10);
+              updateUi();
+          }
         }
 }));
 
 alexPereira!.addEventListener("click", (() => {
     if (!alexPereiraInterval) {
-        alexPereiraInterval = setInterval(() => {
-            if (ottelijat.progress[6] >= 100) {
-                ottelijat.progress[6] = 0;
-                ottelijat.xp[6] += 1;
-                updateUi();
-                if (ottelijat.xp[6] >= ottelijat.xpThreshold[6]) {
-                    ottelijat.xp[6] = 0;
-                    ottelijat.xpThreshold[6] *= 1.5;
-                    ottelijat.level[6] += 1;
-                };
-                game.hampaita += 1;
-                updateUi();
-            } else {
-                ottelijat.progress[6] += ottelijat.step[6]
-                document.getElementById('alexPereiraBar')!.style.width = `${ottelijat.progress[6]}%`
-            }}, 10);
-            updateUi();
+        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+          alexPereiraInterval = setInterval(() => {
+            game.aktiivisiaOttelijoita++;
+              if (ottelijat.progress[6] >= 100) {
+                  ottelijat.progress[6] = 0;
+                  ottelijat.xp[6] += 1;
+                  updateUi();
+                  if (ottelijat.xp[6] >= ottelijat.xpThreshold[6]) {
+                      ottelijat.xp[6] = 0;
+                      ottelijat.xpThreshold[6] *= 1.2;
+                      ottelijat.level[6] += 1;
+                  };
+                  game.hampaita += ottelijat.power[6];
+                  updateUi();
+              } else {
+                  ottelijat.progress[6] += ottelijat.step[6]
+                  document.getElementById('alexPereiraBar')!.style.width = `${ottelijat.progress[6]}%`
+              }}, 10);
+              updateUi();
+          }
         }
 }));
 
 islamMakhachev!.addEventListener("click", (() => {
     if (!islamMakhachevInterval) {
-        islamMakhachevInterval = setInterval(() => {
-            if (ottelijat.progress[7] >= 100) {
-                ottelijat.progress[7] = 0;
-                ottelijat.xp[7] += 1;
-                updateUi();
-                if (ottelijat.xp[7] >= ottelijat.xpThreshold[7]) {
-                    ottelijat.xp[7] = 0;
-                    ottelijat.xpThreshold[7] *= 1.5;
-                    ottelijat.level[7] += 1;
-                };
-                game.hampaita += 1;
-                updateUi();
-            } else {
-                ottelijat.progress[7] += ottelijat.step[7]
-                document.getElementById('islamMakhachevBar')!.style.width = `${ottelijat.progress[7]}%`
-            }}, 10);
-            updateUi();
+        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+          islamMakhachevInterval = setInterval(() => {
+            game.aktiivisiaOttelijoita++;
+              if (ottelijat.progress[7] >= 100) {
+                  ottelijat.progress[7] = 0;
+                  ottelijat.xp[7] += 1;
+                  updateUi();
+                  if (ottelijat.xp[7] >= ottelijat.xpThreshold[7]) {
+                      ottelijat.xp[7] = 0;
+                      ottelijat.xpThreshold[7] *= 1.2;
+                      ottelijat.level[7] += 1;
+                  };
+                  game.hampaita += ottelijat.power[7];
+                  updateUi();
+              } else {
+                  ottelijat.progress[7] += ottelijat.step[7]
+                  document.getElementById('islamMakhachevBar')!.style.width = `${ottelijat.progress[7]}%`
+              }}, 10);
+              updateUi();
+          }
         }
 }));
 
 maxHolloway!.addEventListener("click", (() => {
     if (!maxHollowayInterval) {
-        maxHollowayInterval = setInterval(() => {
-            if (ottelijat.progress[8] >= 100) {
-                ottelijat.progress[8] = 0;
-                ottelijat.xp[8] += 1;
-                updateUi();
-                if (ottelijat.xp[8] >= ottelijat.xpThreshold[8]) {
-                    ottelijat.xp[8] = 0;
-                    ottelijat.xpThreshold[8] *= 1.5;
-                    ottelijat.level[8] += 1;
-                };
-                game.hampaita += 1;
-                updateUi();
-            } else {
-                ottelijat.progress[8] += ottelijat.step[8]
-                document.getElementById('maxHollowayBar')!.style.width = `${ottelijat.progress[8]}%`
-            }}, 10);
-            updateUi();
+        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+          maxHollowayInterval = setInterval(() => {
+            game.aktiivisiaOttelijoita++;
+              if (ottelijat.progress[8] >= 100) {
+                  ottelijat.progress[8] = 0;
+                  ottelijat.xp[8] += 1;
+                  updateUi();
+                  if (ottelijat.xp[8] >= ottelijat.xpThreshold[8]) {
+                      ottelijat.xp[8] = 0;
+                      ottelijat.xpThreshold[8] *= 1.2;
+                      ottelijat.level[8] += 1;
+                  };
+                  game.hampaita += ottelijat.power[8];
+                  updateUi();
+              } else {
+                  ottelijat.progress[8] += ottelijat.step[8]
+                  document.getElementById('maxHollowayBar')!.style.width = `${ottelijat.progress[8]}%`
+              }}, 10);
+              updateUi();
+          }
         }
 }));
 
 tomAspinall!.addEventListener("click", (() => {
     if (!tomAspinallInterval) {
-        tomAspinallInterval = setInterval(() => {
-            if (ottelijat.progress[9] >= 100) {
-                ottelijat.progress[9] = 0;
-                ottelijat.xp[9] += 1;
-                updateUi();
-                if (ottelijat.xp[9] >= ottelijat.xpThreshold[9]) {
-                    ottelijat.xp[9] = 0;
-                    ottelijat.xpThreshold[9] *= 1.5;
-                    ottelijat.level[9] += 1;
-                };
-                game.hampaita += 1;
-                updateUi();
-            } else {
-                ottelijat.progress[9] += ottelijat.step[9]
-                document.getElementById('tomAspinallBar')!.style.width = `${ottelijat.progress[9]}%`
-            }}, 10);
-            updateUi();
+        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+          tomAspinallInterval = setInterval(() => {
+            game.aktiivisiaOttelijoita++;
+              if (ottelijat.progress[9] >= 100) {
+                  ottelijat.progress[9] = 0;
+                  ottelijat.xp[9] += 1;
+                  updateUi();
+                  if (ottelijat.xp[9] >= ottelijat.xpThreshold[9]) {
+                      ottelijat.xp[9] = 0;
+                      ottelijat.xpThreshold[9] *= 1.2;
+                      ottelijat.level[9] += 1;
+                  };
+                  game.hampaita += ottelijat.power[9];
+                  updateUi();
+              } else {
+                  ottelijat.progress[9] += ottelijat.step[9]
+                  document.getElementById('tomAspinallBar')!.style.width = `${ottelijat.progress[9]}%`
+              }}, 10);
+              updateUi();
+          }
         }
 }));
 
 israelAdesanya!.addEventListener("click", (() => {
     if (!israelAdesanyaInterval) {
-        israelAdesanyaInterval = setInterval(() => {
-            if (ottelijat.progress[10] >= 100) {
-                ottelijat.progress[10] = 0;
-                ottelijat.xp[10] += 1;
-                updateUi();
-                if (ottelijat.xp[10] >= ottelijat.xpThreshold[10]) {
-                    ottelijat.xp[10] = 0;
-                    ottelijat.xpThreshold[10] *= 1.5;
-                    ottelijat.level[10] += 1;
-                };
-                game.hampaita += 1;
-                updateUi();
-            } else {
-                ottelijat.progress[10] += ottelijat.step[10]
-                document.getElementById('israelAdesanyaBar')!.style.width = `${ottelijat.progress[10]}%`
-            }}, 10);
-            updateUi();
+        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+          israelAdesanyaInterval = setInterval(() => {
+            game.aktiivisiaOttelijoita++;
+              if (ottelijat.progress[10] >= 100) {
+                  ottelijat.progress[10] = 0;
+                  ottelijat.xp[10] += 1;
+                  updateUi();
+                  if (ottelijat.xp[10] >= ottelijat.xpThreshold[10]) {
+                      ottelijat.xp[10] = 0;
+                      ottelijat.xpThreshold[10] *= 1.2;
+                      ottelijat.level[10] += 1;
+                  };
+                  game.hampaita += ottelijat.power[10];
+                  updateUi();
+              } else {
+                  ottelijat.progress[10] += ottelijat.step[10]
+                  document.getElementById('israelAdesanyaBar')!.style.width = `${ottelijat.progress[10]}%`
+              }}, 10);
+              updateUi();
+          }
         }
 }));
 
 charlesOliveira!.addEventListener("click", (() => {
     if (!charlesOliveiraInterval) {
-        charlesOliveiraInterval = setInterval(() => {
-            if (ottelijat.progress[11] >= 100) {
-                ottelijat.progress[11] = 0;
-                ottelijat.xp[11] += 1;
-                updateUi();
-                if (ottelijat.xp[11] >= ottelijat.xpThreshold[11]) {
-                    ottelijat.xp[11] = 0;
-                    ottelijat.xpThreshold[11] *= 1.5;
-                    ottelijat.level[11] += 1;
-                };
-                game.hampaita += 1;
-                updateUi();
-            } else {
-                ottelijat.progress[11] += ottelijat.step[11]
-                document.getElementById('charlesOliveiraBar')!.style.width = `${ottelijat.progress[11]}%`
-            }}, 10);
-            updateUi();
+        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+          charlesOliveiraInterval = setInterval(() => {
+            game.aktiivisiaOttelijoita++;
+              if (ottelijat.progress[11] >= 100) {
+                  ottelijat.progress[11] = 0;
+                  ottelijat.xp[11] += 1;
+                  updateUi();
+                  if (ottelijat.xp[11] >= ottelijat.xpThreshold[11]) {
+                      ottelijat.xp[11] = 0;
+                      ottelijat.xpThreshold[11] *= 1.2;
+                      ottelijat.level[11] += 1;
+                  };
+                  game.hampaita += ottelijat.power[11];
+                  updateUi();
+              } else {
+                  ottelijat.progress[11] += ottelijat.step[11]
+                  document.getElementById('charlesOliveiraBar')!.style.width = `${ottelijat.progress[11]}%`
+              }}, 10);
+              updateUi();
+          }
         }
 }));
 
@@ -960,6 +1028,10 @@ reset!.addEventListener("click", (() => {
 avaaSatunnainenElement!.addEventListener("click", (() => {
     avaaSatunnainen();
     updateUi();
+}));
+
+avaaValitsemaElement!.addEventListener("click", (() => {
+    avaaValitsema();
 }));
 
 window.onload = function() {

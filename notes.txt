@@ -1,3 +1,17 @@
 0.0.3
 
 nyt on kaikki 12 ottelijaa ja kaikki toimii tähän mennessä
+
+0.0.4
+
+alan sählään noilla servereillä
+
+9.0.4a
+
+koko yö meni bunin ja honon servereiden kans kikkaillessa en oo varma edistykö yhtää
+
+todo:
+
+  -valitse ostettava
+  -hoitaa loppuun hampaitaPerSekunti, maxOttelijat ja aktiiviset
+  -tagi bonukset

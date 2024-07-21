@@ -70,7 +70,15 @@ h2 {
 #colbyCovingtonBarContainer,
 #kamaruUsmanBarContainer,
 #shavkatRakhmonovBarContainer,
-#seanOmalleyBarContainer {
+#seanOmalleyBarContainer,
+#jonJonesBarContainer,
+#alexanderVolkanovskiBarContainer,
+#alexPereiraBarContainer,
+#islamMakhachevBarContainer,
+#maxHollowayBarContainer,
+#tomAspinallBarContainer,
+#israelAdesanyaBarContainer,
+#charlesOliveiraBarContainer {
     display: flex;
     width: 100%;
     height: 10%;
@@ -122,20 +130,24 @@ header {
     top: 0;
     margin-top: 0%;
     background-color: rgba(99, 99, 99, 0.5);
-    height: 25px;
+    height: 5%;
 }
 
 header p {
     font-family: "Bebas Neue", sans-serif;
     font-size: 20px;
-    color: darkgoldenrod;
     z-index: 1;
     margin-left: 40%;
     top: 0;
-    height: 100px;
+    height: 50px;
     border: 0;
     margin-top: 0;
     margin-bottom: 0;
+}
+
+header p,
+#avaaSatunainenHinta {
+    color: ivory;
 }
 
 #shop {
@@ -205,7 +217,7 @@ a, button {
   font-size: 10px;
   height: 40px;
   width: 40px;
-  margin-top: 80px;
+  margin-top: 50px;
 }
 
 nav {
@@ -213,7 +225,7 @@ nav {
   left: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
   justify-content: baseline;
   align-items: center;
   text-align: center;
