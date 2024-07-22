@@ -1,17 +1,21 @@
 0.0.3
-
 nyt on kaikki 12 ottelijaa ja kaikki toimii tähän mennessä
 
 0.0.4
-
 alan sählään noilla servereillä
 
-9.0.4a
-
+0.0.4a
 koko yö meni bunin ja honon servereiden kans kikkaillessa en oo varma edistykö yhtää
+
+0.0.4b
+pikkuhiljaa päästään takasi
+
+0.0.5
+alotellaan upgradeja uudestaan
+
+0.0.6
 
 todo:
 
   -valitse ostettava
-  -hoitaa loppuun hampaitaPerSekunti, maxOttelijat ja aktiiviset
   -tagi bonukset

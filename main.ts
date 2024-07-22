@@ -1,5 +1,4 @@
 
-
 type Game = {
     version: string
     hampaita: number
@@ -9,71 +8,353 @@ type Game = {
 }
 
 type Ottelijat = {
-    nimi: string[];
-    level: number[];
-    hinta: number[];
-    totalPower: number[];
-    power: number[];
-    isUnlocked: boolean[];
-    isActive: boolean[];
-    mastery: number[];
-    progress: number[];
-    intervalId: number[];
-    xp: number[];
-    xpThreshold: number[];
-    rank: number[];
-    img: string[];
-    id: string[];
-    eiPiirretty: boolean[];
-    progressBarElement: any;
-    step: number[];
-    stats: {
-        wins: number[];
-        losses: number[];
-        nc: number[];
-        winsByKnockout: number[];
-        winsBySubmission: number[];
-        firstRoundFinishes: number[];
-    },
-    tags: {
-        pelle: boolean[];
-        niceGuy: boolean[];
-        dagestanGoblin: boolean[];
-        afrikanMafia: boolean[];
-        lookingAss: boolean[];
-        chad: boolean[];
-    }
+  nimi: string[];
+  level: number[];
+  hinta: number[];
+  totalPower: number[];
+  power: number[];
+  isUnlocked: boolean[];
+  isActive: boolean[];
+  mastery: number[];
+  progress: number[];
+  intervalId: number[];
+  xp: number[];
+  xpThreshold: number[];
+  rank: number[];
+  img: string[];
+  id: string[];
+  eiPiirretty: boolean[];
+  //progressBarElement: any;
+  step: number[];
+  pelleCount: number[];
+  stats: {
+    wins: number[];
+    losses: number[];
+    nc: number[];
+    winsByKnockout: number[];
+    winsBySubmission: number[];
+    firstRoundFinishes: number[];
+  },
+  tags: {
+    pelle: boolean[];
+    niceGuy: boolean[];
+    dagestanGoblin: boolean[];
+    afrikanMafia: boolean[];
+    lookingAss: boolean[];
+    chad: boolean[];
+  }
 }
 
 type Shop = {
-    avaaSatunnainenHinta: number;
-    avaaValitsemaHinta: number;
+  avaaSatunnainenHinta: number;
+  avaaValitsemaHinta: number;
+}
+
+type Upgrades = {
+  nimi: string[];
+  kuvaus: string[];
+  kuva: string[];
+  tyyppi: string[];
+  hinta: number[];
+  ottelijaIndex: number[];
+  tag: string[];
+  vaatimus: number[];
+  bonus: number[];
+  ostettu: boolean[];
+  osta: (index: number) => void;
 }
 
 let game: Game = {
-    version: "0.0.5",
-    hampaita: 0,
-    hampaitaPerSekunti: 0,
-    aktiivisiaOttelijoita: 0,
-    maxOttelijat: 2
+  version: "0.0.5",
+  hampaita: 0,
+  hampaitaPerSekunti: 0,
+  aktiivisiaOttelijoita: 0,
+  maxOttelijat: 2
 }
 
 let ottelijat: Ottelijat = {
-    nimi: [
-      "Colby Covington",
-      "Kamaru Usman",
-      "Shavkat Rakhmonov",
-      "Sean O'malley",
-      "Jon Jones",
-      "Alexander Volkanovski",
-      "Alex Pereira",
-      "Islam Makhachev",
-      "Max Holloway",
-      "Tom Aspinall",
-      "Israel Adesanya",
-      "Charles Oliveira"
+  nimi: [
+  "Colby Covington",
+  "Kamaru Usman",
+  "Shavkat Rakhmonov",
+  "Sean O'malley",
+  "Jon Jones",
+  "Alexander Volkanovski",
+  "Alex Pereira",
+  "Islam Makhachev",
+  "Max Holloway",
+  "Tom Aspinall",
+  "Israel Adesanya",
+  "Charles Oliveira"
+  ],
+  level: [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0
+  ],
+  hinta: [
+  10,
+  10,
+  10,
+  10,
+  10,
+  10,
+  10,
+  10,
+  10,
+  10,
+  10,
+  10
+  ],
+  totalPower: [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0
+  ],
+  power: [
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1
+  ],
+  isUnlocked: [
+  true,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false
+  ],
+  isActive: [
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false
+  ],
+  mastery: [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0
+  ],
+  progress: [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0
+  ],
+  intervalId: [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12
+  ],
+  xp: [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0
+  ],
+  xpThreshold: [
+  5,
+  5,
+  5,
+  5,
+  5,
+  5,
+  5,
+  5,
+  5,
+  5,
+  5,
+  5
+  ],
+  rank: [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0
+  ],
+  img: [
+  "./assets/colbyCovington.png",
+  "./assets/kamaruUsman.png",
+  "./assets/shavkatRakhmonov.png",
+  "./assets/seanOmalley.png",
+  "./assets/jonJones.png",
+  "./assets/alexanderVolkanovski.png",
+  "./assets/alexPereira.png",
+  "./assets/islamMakhachev.png",
+  "./assets/maxHolloway.png",
+  "./assets/tomAspinall.png",
+  "./assets/israelAdesanya.png",
+  "./assets/charlesOliveira.png"
+  ],
+  id: [
+  "colbyCovington",
+  "kamaruUsman",
+  "shavkatRakhmonov",
+  "seanO'malley",
+  "jonJones",
+  "alexanderVolkanovski",
+  "alexPereira",
+  "islamMakhachev",
+  "maxHolloway",
+  "tomAspinall",
+  "israelAdesanya",
+  "charlesOliveira"
+  ],
+  eiPiirretty: [
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true
+  ],
+  /*progressBarElement: [
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null
+  ],*/
+  step: [
+  0.1,
+  0.1,
+  0.1,
+  0.1,
+  0.1,
+  0.1,
+  0.1,
+  0.1,
+  0.1,
+  0.1,
+  0.1,
+  0.1
+  ],
+  stats: {
+    wins: [
+      17,
+      20,
+      18,
+      18,
+      27,
+      26,
+      11,
+      26,
+      26,
+      14,
+      24,
+      34
     ],
-    level: [
+    losses: [
+      4,
+      4,
+      0,
+      1,
+      1,
+      4,
+      2,
+      1,
+      7,
+      3,
+      3,
+      10,
+    ],
+    nc: [
       0,
       0,
       0,
@@ -87,549 +368,210 @@ let ottelijat: Ottelijat = {
       0,
       0
     ],
-    hinta: [
+    winsByKnockout: [
+      4,
+      9,
+      8,
+      12,
       10,
-      10,
-      10,
-      10,
-      10,
-      10,
-      10,
-      10,
-      10,
-      10,
-      10,
+      13,
+      9,
+      14,
+      12,
+      11,
+      16,
       10
     ],
-    totalPower: [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    power: [
+    winsBySubmission: [
+      4,
       1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1
-    ],
-    isUnlocked: [
-      true,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-    ],
-    isActive: [
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-    ],
-    mastery: [
+      10,
       0,
       0,
+      3,
       0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    progress: [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    intervalId: [
-      1,
+      5,
       2,
       3,
-      4,
-      5,
-      6,
-      7,
-      8,
+      0,
+      21
+    ],
+    firstRoundFinishes: [
+      3,
+      3,
       9,
-      10,
-      11,
-      12
-    ],
-    xp: [
+      9,
+      7,
+      7,
+      4,
+      12,
       0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
+      13,
+      6,
       0
+    ]
+  },
+  pelleCount: [
+    0,
+  ],
+  tags: {
+    pelle: [
+      true,
+      false,
+      false,
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false
     ],
-    xpThreshold: [
-      5,
-      5,
-      5,
-      5,
-      5,
-      5,
-      5,
-      5,
-      5,
-      5,
-      5,
-      5
-    ],
-    rank: [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    img: [
-      "./assets/colbyCovington.png",
-      "./assets/kamaruUsman.png",
-      "./assets/shavkatRakhmonov.png",
-      "./assets/seanOmalley.png",
-      "./assets/jonJones.png",
-      "./assets/alexanderVolkanovski.png",
-      "./assets/alexPereira.png",
-      "./assets/islamMakhachev.png",
-      "./assets/maxHolloway.png",
-      "./assets/tomAspinall.png",
-      "./assets/israelAdesanya.png",
-      "./assets/charlesOliveira.png"
-    ],
-    id: [
-      "colbyCovington",
-      "kamaruUsman",
-      "shavkatRakhmonov",
-      "seanO'malley",
-      "jonJones",
-      "alexanderVolkanovski",
-      "alexPereira",
-      "islamMakhachev",
-      "maxHolloway",
-      "tomAspinall",
-      "israelAdesanya",
-      "charlesOliveira"
-    ],
-    eiPiirretty: [
+    niceGuy: [
+      false,
       true,
+      false,
+      false,
+      false,
       true,
+      false,
+      false,
+      false,
       true,
-      true,
-      true,
-      true,
-      true,
-      true,
-      true,
-      true,
-      true,
+      false,
       true
     ],
-    progressBarElement: [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
+    dagestanGoblin: [
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false
     ],
-    step: [
-      0.1,
-      0.1,
-      0.1,
-      0.1,
-      0.1,
-      0.1,
-      0.1,
-      0.1,
-      0.1,
-      0.1,
-      0.1,
-      0.1
+    afrikanMafia: [
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false
     ],
-    stats: {
-      wins: [
-        17,
-        20,
-        18,
-        18,
-        27,
-        26,
-        11,
-        26,
-        26,
-        14,
-        24,
-        34
-      ],
-      losses: [
-        4,
-        4,
-        0,
-        1,
-        1,
-        4,
-        2,
-        1,
-        7,
-        3,
-        3,
-        10,
-      ],
-      nc: [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      winsByKnockout: [
-        4,
-        9,
-        8,
-        12,
-        10,
-        13,
-        9,
-        14,
-        12,
-        11,
-        16,
-        10
-      ],
-      winsBySubmission: [
-        4,
-        1,
-        10,
-        0,
-        0,
-        3,
-        0,
-        5,
-        2,
-        3,
-        0,
-        21
-      ],
-      firstRoundFinishes: [
-        3,
-        3,
-        9,
-        9,
-        7,
-        7,
-        4,
-        12,
-        0,
-        13,
-        6,
-        0
-      ]
-    },
-    tags: {
-      pelle: [
-        true,
-        false,
-        false,
-        true,
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        true,
-        false
-      ],
-      niceGuy: [
-        false,
-        true,
-        false,
-        false,
-        false,
-        true,
-        false,
-        false,
-        false,
-        true,
-        false,
-        true
-      ],
-      dagestanGoblin: [
-        false,
-        false,
-        true,
-        false,
-        false,
-        false,
-        false,
-        true,
-        false,
-        false,
-        false,
-        false
-      ],
-      afrikanMafia: [
-        false,
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        true,
-        false
-      ],
-      lookingAss: [
-        false,
-        false,
-        false,
-        true,
-        false,
-        false,
-        false,
-        true,
-        false,
-        false,
-        false,
-        false
-      ],
-      chad: [
-        false,
-        false,
-        true,
-        false,
-        true,
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    }
+    lookingAss: [
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false
+    ],
+    chad: [
+      false,
+      false,
+      true,
+      false,
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  }
 }
 
 let shop: Shop = {
-    avaaSatunnainenHinta: 10,
-    avaaValitsemaHinta: 100
+  avaaSatunnainenHinta: 10,
+  avaaValitsemaHinta: 100
 }
 
-const hampaita = document.getElementById('hampaita');
-const hampaitaPerSekuntiElement = document.getElementById('hampaitaPerSekunti');
-const save = document.getElementById('save');
-const load = document.getElementById('load');
-const reset = document.getElementById('reset');
+let upgrades: Upgrades = {
+  nimi: [
+    "Pelle Tier 1 Hanskat",
+    "Kamaru Usman Tier 1 Hanskat",
+    "Shavkat Rakhmonov Tier 1 Hanskat",
+    "Sean O'malley Tier 1 Hanskat",
+    "Jon Jones Tier 1 Hanskat",
+    "Alexander Volkanovski Tier 1 Hanskat",
+    "Alex Pereira Tier 1 Hanskat",
+    "Islam Makhachev Tier 1 Hanskat",
+    "Max Holloway Tier 1 Hanskat",
+    "Tom Aspinall Tier 1 Hanskat",
+    "Israel Adesanya Tier 1 Hanskat",
+    "Charles Oliveira Tier 1 Hanskat",
+  ],
+  kuvaus: [
+    "Pellet 2x nopeempia",
+  ],
+  kuva: [
+    "hanskat.png",
+  ],
+  tyyppi: [
+    "ottelija",
+  ],
+  hinta: [
+    600,
+  ],
+  ottelijaIndex: [
+    0 && 3 && 4 && 10,
+  ],
+  tag: [
+    "pelle",
+  ],
+  vaatimus: [
+    5,
+  ],
+  bonus: [
+    2,
+  ],
+  ostettu: [
+    false,
+  ],
+  osta: function(index) {
+    if (!this.ostettu[index] && game.hampaita >= this.hinta[index]) {
+      if (this.tag[index] === "pelle" && ottelijat.pelleCount[this.ottelijaIndex[index]] >= this.vaatimus[index]) {
+        game.hampaita -= this.hinta[index];
+        ottelijat.step[this.ottelijaIndex[index]] *= this.bonus[index];
+        this.ostettu[index] = true;
+      }
+    }
+  }
+}
 
-const shopElement = document.getElementById('shop');
-const shopItems = Array.from(document.querySelectorAll('.shopItem')) as HTMLElement[];
-const avaaSatunnainenElement = document.getElementById('avaaSatunnainen');
-const avaaSatunnainenHinta = document.getElementById('avaaSatunnainenHinta');
-const avaaValitsemaElement = document.getElementById('avaaValitsema');
-//const avaaValitsemaHinta = document.getElementById('avaaValitsemaHinta');
-
-const colbyCovington = document.getElementById("colbyCovington");
-const colbyCovingtonXp = document.getElementById('colbyCovingtonXp');
-const colbyCovingtonXpThreshold = document.getElementById('colbyCovingtonXpThreshold');
-const colbyCovingtonLevel = document.getElementById('colbyCovingtonLevel');
-
-const kamaruUsman = document.getElementById("kamaruUsman");
-const kamaruUsmanXp = document.getElementById('kamaruUsmanXp');
-const kamaruUsmanXpThreshold = document.getElementById('kamaruUsmanXpThreshold');
-const kamaruUsmanLevel = document.getElementById('kamaruUsmanLevel');
-
-const shavkatRakhmonov = document.getElementById("shavkatRakhmonov");
-const shavkatRakhmonovXp = document.getElementById('shavkatRakhmonovXp');
-const shavkatRakhmonovXpThreshold = document.getElementById('shavkatRakhmonovXpThreshold');
-const shavkatRakhmonovLevel = document.getElementById('shavkatRakhmonovLevel');
-
-const seanOmalley = document.getElementById("seanOmalley");
-const seanOmalleyXp = document.getElementById('seanOmalleyXp');
-const seanOmalleyXpThreshold = document.getElementById('seanOmalleyXpThreshold');
-const seanOmalleyLevel = document.getElementById('seanOmalleyLevel');
-
-const jonJones = document.getElementById("jonJones");
-const jonJonesXp = document.getElementById('jonJonesXp');
-const jonJonesXpThreshold = document.getElementById('jonJonesXpThreshold');
-const jonJonesLevel = document.getElementById('jonJonesLevel');
-
-const alexanderVolkanovski = document.getElementById("alexanderVolkanovski");
-const alexanderVolkanovskiXp = document.getElementById('alexanderVolkanovskiXp');
-const alexanderVolkanovskiXpThreshold = document.getElementById('alexanderVolkanovskiXpThreshold');
-const alexanderVolkanovskiLevel = document.getElementById('alexanderVolkanovskiLevel');
-
-const alexPereira = document.getElementById("alexPereira");
-const alexPereiraXp = document.getElementById('alexPereiraXp');
-const alexPereiraXpThreshold = document.getElementById('alexPereiraXpThreshold');
-const alexPereiraLevel = document.getElementById('alexPereiraLevel');
-
-const islamMakhachev = document.getElementById("islamMakhachev");
-const islamMakhachevXp = document.getElementById('islamMakhachevXp');
-const islamMakhachevXpThreshold = document.getElementById('islamMakhachevXpThreshold');
-const islamMakhachevLevel = document.getElementById('islamMakhachevLevel');
-
-const maxHolloway = document.getElementById("maxHolloway");
-const maxHollowayXp = document.getElementById('maxHollowayXp');
-const maxHollowayXpThreshold = document.getElementById('maxHollowayXpThreshold');
-const maxHollowayLevel = document.getElementById('maxHollowayLevel');
-
-const tomAspinall = document.getElementById("tomAspinall");
-const tomAspinallXp = document.getElementById('tomAspinallXp');
-const tomAspinallXpThreshold = document.getElementById('tomAspinallXpThreshold');
-const tomAspinallLevel = document.getElementById('tomAspinallLevel');
-
-const israelAdesanya = document.getElementById("israelAdesanya");
-const israelAdesanyaXp = document.getElementById('israelAdesanyaXp');
-const israelAdesanyaXpThreshold = document.getElementById('israelAdesanyaXpThreshold');
-const israelAdesanyaLevel = document.getElementById('israelAdesanyaLevel');
-
-const charlesOliveira = document.getElementById("charlesOliveira");
-const charlesOliveiraXp = document.getElementById('charlesOliveiraXp');
-const charlesOliveiraXpThreshold = document.getElementById('charlesOliveiraXpThreshold');
-const charlesOliveiraLevel = document.getElementById('charlesOliveiraLevel');
-
-let colbyCovingtonInterval: NodeJS.Timer | null = null;
-let kamaruUsmanInterval: NodeJS.Timer | null = null;
-let shavkatRakhmonovInterval: NodeJS.Timer | null = null;
-let seanOmalleyInterval: NodeJS.Timer | null = null;
-let jonJonesInterval: NodeJS.Timer | null = null;
-let alexanderVolkanovskiInterval: NodeJS.Timer | null = null;
-let alexPereiraInterval: NodeJS.Timer | null = null;
-let islamMakhachevInterval: NodeJS.Timer | null = null;
-let maxHollowayInterval: NodeJS.Timer | null = null;
-let tomAspinallInterval: NodeJS.Timer | null = null;
-let israelAdesanyaInterval: NodeJS.Timer | null = null;
-let charlesOliveiraInterval: NodeJS.Timer | null = null;
-
-function updateUi() {
-    colbyCovingtonXp!.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
-    colbyCovingtonXpThreshold!.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
-    colbyCovingtonLevel!.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
-    
-    kamaruUsmanXp!.innerHTML = ottelijat.xp[1].toFixed(0).toLocaleString();
-    kamaruUsmanXpThreshold!.innerHTML = ottelijat.xpThreshold[1].toFixed(0).toLocaleString();
-    kamaruUsmanLevel!.innerHTML = ottelijat.level[1].toFixed(0).toLocaleString();
-
-    shavkatRakhmonovXp!.innerHTML = ottelijat.xp[2].toFixed(0).toLocaleString();
-    shavkatRakhmonovXpThreshold!.innerHTML = ottelijat.xpThreshold[2].toFixed(0).toLocaleString();
-    shavkatRakhmonovLevel!.innerHTML = ottelijat.level[2].toFixed(0).toLocaleString();
-    
-    seanOmalleyXp!.innerHTML = ottelijat.xp[3].toFixed(0).toLocaleString();
-    seanOmalleyXpThreshold!.innerHTML = ottelijat.xpThreshold[3].toFixed(0).toLocaleString();
-    seanOmalleyLevel!.innerHTML = ottelijat.level[3].toFixed(0).toLocaleString();
-  
-    jonJonesXp!.innerHTML = ottelijat.xp[4].toFixed(0).toLocaleString();
-    jonJonesXpThreshold!.innerHTML = ottelijat.xpThreshold[4].toFixed(0).toLocaleString();
-    jonJonesLevel!.innerHTML = ottelijat.level[4].toFixed(0).toLocaleString();
-
-    alexanderVolkanovskiXp!.innerHTML = ottelijat.xp[5].toFixed(0).toLocaleString();
-    alexanderVolkanovskiXpThreshold!.innerHTML = ottelijat.xpThreshold[5].toFixed(0).toLocaleString();
-    alexanderVolkanovskiLevel!.innerHTML = ottelijat.level[5].toFixed(0).toLocaleString();
-
-    alexPereiraXp!.innerHTML = ottelijat.xp[6].toFixed(0).toLocaleString();
-    alexPereiraXpThreshold!.innerHTML = ottelijat.xpThreshold[6].toFixed(0).toLocaleString();
-    alexPereiraLevel!.innerHTML = ottelijat.level[6].toFixed(0).toLocaleString();
-
-    islamMakhachevXp!.innerHTML = ottelijat.xp[7].toFixed(0).toLocaleString();
-    islamMakhachevXpThreshold!.innerHTML = ottelijat.xpThreshold[7].toFixed(0).toLocaleString();
-    islamMakhachevLevel!.innerHTML = ottelijat.level[7].toFixed(0).toLocaleString();
-
-    maxHollowayXp!.innerHTML = ottelijat.xp[8].toFixed(0).toLocaleString();
-    maxHollowayXpThreshold!.innerHTML = ottelijat.xpThreshold[8].toFixed(0).toLocaleString();
-    maxHollowayLevel!.innerHTML = ottelijat.level[8].toFixed(0).toLocaleString();
-
-    tomAspinallXp!.innerHTML = ottelijat.xp[9].toFixed(0).toLocaleString();
-    tomAspinallXpThreshold!.innerHTML = ottelijat.xpThreshold[9].toFixed(0).toLocaleString();
-    tomAspinallLevel!.innerHTML = ottelijat.level[9].toFixed(0).toLocaleString();
-
-    israelAdesanyaXp!.innerHTML = ottelijat.xp[10].toFixed(0).toLocaleString();
-    israelAdesanyaXpThreshold!.innerHTML = ottelijat.xpThreshold[10].toFixed(0).toLocaleString();
-    israelAdesanyaLevel!.innerHTML = ottelijat.level[10].toFixed(0).toLocaleString();
-
-    charlesOliveiraXp!.innerHTML = ottelijat.xp[11].toFixed(0).toLocaleString();
-    charlesOliveiraXpThreshold!.innerHTML = ottelijat.xpThreshold[11].toFixed(0).toLocaleString();
-    charlesOliveiraLevel!.innerHTML = ottelijat.level[11].toFixed(0).toLocaleString();
-
-    hampaita!.innerHTML = game.hampaita.toFixed(0).toLocaleString();
-    hampaitaPerSekuntiElement!.innerHTML = game.hampaitaPerSekunti.toFixed(0).toLocaleString();
-    avaaSatunnainenHinta!.innerHTML = shop.avaaSatunnainenHinta.toFixed(0).toLocaleString();
-    //avaaValitsemaHinta!.innerHTML = shop.avaaValitsemaHinta.toFixed(0).toLocaleString();
-};
+let colbyCovingtonInterval: NodeJS.Timeout | null = null;
+let kamaruUsmanInterval: NodeJS.Timeout | null = null;
+let shavkatRakhmonovInterval: NodeJS.Timeout | null = null;
+let seanOmalleyInterval: NodeJS.Timeout | null = null;
+let jonJonesInterval: NodeJS.Timeout | null = null;
+let alexanderVolkanovskiInterval: NodeJS.Timeout | null = null;
+let alexPereiraInterval: NodeJS.Timeout | null = null;
+let islamMakhachevInterval: NodeJS.Timeout | null = null;
+let maxHollowayInterval: NodeJS.Timeout | null = null;
+let tomAspinallInterval: NodeJS.Timeout | null = null;
+let israelAdesanyaInterval: NodeJS.Timeout | null = null;
+let charlesOliveiraInterval: NodeJS.Timeout | null = null;
 
 setInterval(() => {
   let totalPower = 0;
@@ -644,6 +586,10 @@ setInterval(() => {
 }, 100);
 
 setInterval(() => {
+  updateUpgrades();
+}, 10_0000)
+
+setInterval(() => {
   saveGame();
 }, 30_000);
 
@@ -656,15 +602,12 @@ function avaaSatunnainen() {
     const randomIndex = Math.floor(Math.random() * (ottelijat.isUnlocked.length - 1));
     if (ottelijat.isUnlocked[randomIndex] === false) {
       ottelijat.isUnlocked[randomIndex] = true;
-      console.log("Unlocked", randomIndex);
       saveGame();
     } else {
-      console.log("Already unlocked");
       avaaSatunnainen();
     }
     //window.location.href = "./index.html";
     saveGame();
-    console.log("power", ottelijat.power[randomIndex]);
   }
 };
 
@@ -680,7 +623,7 @@ function avaaValitsema() {
 
 function saveGame() {
     console.log("Saving game");
-    let gameSave = {
+    const gameSave = {
         game: game,
         ottelijat: ottelijat,
         shop: shop
@@ -689,60 +632,203 @@ function saveGame() {
 }
 
 function loadGame() {
-    const gameSave = localStorage.getItem("gameSave");
-    if (gameSave === null) {
-        console.error("No game save found");
-        return;
-    }
-    const parsedGameSave = JSON.parse(gameSave);
-    game = parsedGameSave.game;
-    ottelijat = parsedGameSave.ottelijat;
-    shop = parsedGameSave.shop;
-    updateUi();
-    console.log("Game loaded");
+  const gameSave = localStorage.getItem("gameSave");
+  if (gameSave === null) {
+    console.error("No game save found");
+    return;
+  }
+  const parsedGameSave = JSON.parse(gameSave);
+  game = parsedGameSave.game;
+  ottelijat = parsedGameSave.ottelijat;
+  shop = parsedGameSave.shop;
+  updateUi();
+  console.log("Game loaded");
+  /*if (colbyCovingtonInterval == null) {
+    game.aktiivisiaOttelijoita = 0;
+  }*/
 }
 
 function resetGame() {
-    localStorage.removeItem("gameSave");
-    location.reload();
+  localStorage.removeItem("gameSave");
+  location.reload();
+}
+
+const hampaita = document.getElementById('hampaita') as HTMLElement;
+const hampaitaPerSekuntiElement = document.getElementById('hampaitaPerSekunti') as HTMLElement;
+const save = document.getElementById('save') as HTMLElement;
+const load = document.getElementById('load') as HTMLElement;
+const reset = document.getElementById('reset') as HTMLElement;
+
+const shopElement = document.getElementById('shop') as HTMLElement;
+const shopItems = Array.from(document.querySelectorAll('.shopItem')) as HTMLElement[];
+const avaaSatunnainenElement = document.getElementById('avaaSatunnainen') as HTMLElement;
+const avaaSatunnainenHinta = document.getElementById('avaaSatunnainenHinta') as HTMLElement;
+const avaaValitsemaElement = document.getElementById('avaaValitsema') as HTMLElement;
+//const const avaaValitsemaHinta = document.getElementById('avaaValitsemaHinta');
+
+const colbyCovington = document.getElementById("colbyCovington") as HTMLElement;
+const colbyCovingtonXp = document.getElementById('colbyCovingtonXp') as HTMLElement;
+const colbyCovingtonXpThreshold = document.getElementById('colbyCovingtonXpThreshold') as HTMLElement;
+const colbyCovingtonLevel = document.getElementById('colbyCovingtonLevel') as HTMLElement;
+
+const kamaruUsman = document.getElementById("kamaruUsman") as HTMLElement;
+const kamaruUsmanXp = document.getElementById('kamaruUsmanXp') as HTMLElement;
+const kamaruUsmanXpThreshold = document.getElementById('kamaruUsmanXpThreshold') as HTMLElement;
+const kamaruUsmanLevel = document.getElementById('kamaruUsmanLevel') as HTMLElement;
+
+const shavkatRakhmonov = document.getElementById("shavkatRakhmonov") as HTMLElement;
+const shavkatRakhmonovXp = document.getElementById('shavkatRakhmonovXp') as HTMLElement;
+const shavkatRakhmonovXpThreshold = document.getElementById('shavkatRakhmonovXpThreshold') as HTMLElement;
+const shavkatRakhmonovLevel = document.getElementById('shavkatRakhmonovLevel') as HTMLElement;
+
+const seanOmalley = document.getElementById("seanOmalley") as HTMLElement;
+const seanOmalleyXp = document.getElementById('seanOmalleyXp') as HTMLElement;
+const seanOmalleyXpThreshold = document.getElementById('seanOmalleyXpThreshold') as HTMLElement;
+const seanOmalleyLevel = document.getElementById('seanOmalleyLevel') as HTMLElement;
+
+const jonJones = document.getElementById("jonJones") as HTMLElement;
+const jonJonesXp = document.getElementById('jonJonesXp') as HTMLElement;
+const jonJonesXpThreshold = document.getElementById('jonJonesXpThreshold') as HTMLElement;
+const jonJonesLevel = document.getElementById('jonJonesLevel') as HTMLElement;
+
+const alexanderVolkanovski = document.getElementById("alexanderVolkanovski") as HTMLElement;
+const alexanderVolkanovskiXp = document.getElementById('alexanderVolkanovskiXp') as HTMLElement;
+const alexanderVolkanovskiXpThreshold = document.getElementById('alexanderVolkanovskiXpThreshold') as HTMLElement;
+const alexanderVolkanovskiLevel = document.getElementById('alexanderVolkanovskiLevel') as HTMLElement;
+
+const alexPereira = document.getElementById("alexPereira") as HTMLElement;
+const alexPereiraXp = document.getElementById('alexPereiraXp') as HTMLElement;
+const alexPereiraXpThreshold = document.getElementById('alexPereiraXpThreshold') as HTMLElement;
+const alexPereiraLevel = document.getElementById('alexPereiraLevel') as HTMLElement;
+
+const islamMakhachev = document.getElementById("islamMakhachev") as HTMLElement;
+const islamMakhachevXp = document.getElementById('islamMakhachevXp') as HTMLElement;
+const islamMakhachevXpThreshold = document.getElementById('islamMakhachevXpThreshold') as HTMLElement;
+const islamMakhachevLevel = document.getElementById('islamMakhachevLevel') as HTMLElement;
+
+const maxHolloway = document.getElementById("maxHolloway") as HTMLElement;
+const maxHollowayXp = document.getElementById('maxHollowayXp') as HTMLElement;
+const maxHollowayXpThreshold = document.getElementById('maxHollowayXpThreshold') as HTMLElement;
+const maxHollowayLevel = document.getElementById('maxHollowayLevel') as HTMLElement;
+
+const tomAspinall = document.getElementById("tomAspinall") as HTMLElement;
+const tomAspinallXp = document.getElementById('tomAspinallXp') as HTMLElement;
+const tomAspinallXpThreshold = document.getElementById('tomAspinallXpThreshold') as HTMLElement;
+const tomAspinallLevel = document.getElementById('tomAspinallLevel') as HTMLElement;
+
+const israelAdesanya = document.getElementById("israelAdesanya") as HTMLElement;
+const israelAdesanyaXp = document.getElementById('israelAdesanyaXp') as HTMLElement;
+const israelAdesanyaXpThreshold = document.getElementById('israelAdesanyaXpThreshold') as HTMLElement;
+const israelAdesanyaLevel = document.getElementById('israelAdesanyaLevel') as HTMLElement;
+
+const charlesOliveira = document.getElementById("charlesOliveira") as HTMLElement;
+const charlesOliveiraXp = document.getElementById('charlesOliveiraXp') as HTMLElement;
+const charlesOliveiraXpThreshold = document.getElementById('charlesOliveiraXpThreshold') as HTMLElement;
+const charlesOliveiraLevel = document.getElementById('charlesOliveiraLevel') as HTMLElement
+
+function updateUi() {
+  colbyCovingtonXp!.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
+  colbyCovingtonXpThreshold!.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
+  colbyCovingtonLevel!.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
+  
+  kamaruUsmanXp!.innerHTML = ottelijat.xp[1].toFixed(0).toLocaleString();
+  kamaruUsmanXpThreshold!.innerHTML = ottelijat.xpThreshold[1].toFixed(0).toLocaleString();
+  kamaruUsmanLevel!.innerHTML = ottelijat.level[1].toFixed(0).toLocaleString();
+
+  shavkatRakhmonovXp!.innerHTML = ottelijat.xp[2].toFixed(0).toLocaleString();
+  shavkatRakhmonovXpThreshold!.innerHTML = ottelijat.xpThreshold[2].toFixed(0).toLocaleString();
+  shavkatRakhmonovLevel!.innerHTML = ottelijat.level[2].toFixed(0).toLocaleString();
+  
+  seanOmalleyXp!.innerHTML = ottelijat.xp[3].toFixed(0).toLocaleString();
+  seanOmalleyXpThreshold!.innerHTML = ottelijat.xpThreshold[3].toFixed(0).toLocaleString();
+  seanOmalleyLevel!.innerHTML = ottelijat.level[3].toFixed(0).toLocaleString();
+
+  jonJonesXp!.innerHTML = ottelijat.xp[4].toFixed(0).toLocaleString();
+  jonJonesXpThreshold!.innerHTML = ottelijat.xpThreshold[4].toFixed(0).toLocaleString();
+  jonJonesLevel!.innerHTML = ottelijat.level[4].toFixed(0).toLocaleString();
+
+  alexanderVolkanovskiXp!.innerHTML = ottelijat.xp[5].toFixed(0).toLocaleString();
+  alexanderVolkanovskiXpThreshold!.innerHTML = ottelijat.xpThreshold[5].toFixed(0).toLocaleString();
+  alexanderVolkanovskiLevel!.innerHTML = ottelijat.level[5].toFixed(0).toLocaleString();
+
+  alexPereiraXp!.innerHTML = ottelijat.xp[6].toFixed(0).toLocaleString();
+  alexPereiraXpThreshold!.innerHTML = ottelijat.xpThreshold[6].toFixed(0).toLocaleString();
+  alexPereiraLevel!.innerHTML = ottelijat.level[6].toFixed(0).toLocaleString();
+
+  islamMakhachevXp!.innerHTML = ottelijat.xp[7].toFixed(0).toLocaleString();
+  islamMakhachevXpThreshold!.innerHTML = ottelijat.xpThreshold[7].toFixed(0).toLocaleString();
+  islamMakhachevLevel!.innerHTML = ottelijat.level[7].toFixed(0).toLocaleString();
+
+  maxHollowayXp!.innerHTML = ottelijat.xp[8].toFixed(0).toLocaleString();
+  maxHollowayXpThreshold!.innerHTML = ottelijat.xpThreshold[8].toFixed(0).toLocaleString();
+  maxHollowayLevel!.innerHTML = ottelijat.level[8].toFixed(0).toLocaleString();
+
+  tomAspinallXp!.innerHTML = ottelijat.xp[9].toFixed(0).toLocaleString();
+  tomAspinallXpThreshold!.innerHTML = ottelijat.xpThreshold[9].toFixed(0).toLocaleString();
+  tomAspinallLevel!.innerHTML = ottelijat.level[9].toFixed(0).toLocaleString();
+
+  israelAdesanyaXp!.innerHTML = ottelijat.xp[10].toFixed(0).toLocaleString();
+  israelAdesanyaXpThreshold!.innerHTML = ottelijat.xpThreshold[10].toFixed(0).toLocaleString();
+  israelAdesanyaLevel!.innerHTML = ottelijat.level[10].toFixed(0).toLocaleString();
+
+  charlesOliveiraXp!.innerHTML = ottelijat.xp[11].toFixed(0).toLocaleString();
+  charlesOliveiraXpThreshold!.innerHTML = ottelijat.xpThreshold[11].toFixed(0).toLocaleString();
+  charlesOliveiraLevel!.innerHTML = ottelijat.level[11].toFixed(0).toLocaleString();
+
+  hampaita!.innerHTML = game.hampaita.toFixed(0).toLocaleString();
+  hampaitaPerSekuntiElement!.innerHTML = game.hampaitaPerSekunti.toFixed(0).toLocaleString();
+  avaaSatunnainenHinta!.innerHTML = shop.avaaSatunnainenHinta.toFixed(0).toLocaleString()
+  //avaaValitsemaHinta!.innerHTML = shop.avaaValitsemaHinta.toFixed(0).toLocaleString();
+}
+
+function updateUpgrades() {
+  document.getElementById("upgradeContainer")!.innerHTML = "";
+  for (let i = 0; i < upgrades.nimi.length; i++) {
+    if (!upgrades.ostettu[i]) {
+      if (upgrades.tag[i] == "pelle" && ottelijat.pelleCount[upgrades.ottelijaIndex[i]] >= upgrades.vaatimus[i]) {
+        document.getElementById("upgrade container")!.innerHTML += '<img src="images/' + upgrades.kuva[i] + '" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick=""upgrades.purcha('+i+')">'; + upgrades.nimi[i] + '">';
+      }
+    }
+  }
 }
 
 shopElement!.addEventListener("click", (() => {
-    shopItems.forEach(item => {
-        item.style.display = item.style.display === 'none' ? 'block' : 'none';
-    });
+  shopItems.forEach(item => {
+    item.style.display = item.style.display === 'none' ? 'block' : 'none';
+  });
 }));
 
 colbyCovington!.addEventListener("click", (() => {
-    if (!colbyCovingtonInterval) {
-        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-          colbyCovingtonInterval = setInterval(() => {
-            game.aktiivisiaOttelijoita++;
-              if (ottelijat.progress[0] >= 100) {
-                  ottelijat.progress[0] = 0;
-                  ottelijat.xp[0] += 1;
-                  updateUi();
-                  if (ottelijat.xp[0] >= ottelijat.xpThreshold[0]) {
-                      ottelijat.xp[0] = 0;
-                      ottelijat.xpThreshold[0] *= 1.2;
-                      ottelijat.level[0] += 1;
-                  };
-                  game.hampaita += ottelijat.power[0];
-                  updateUi();
-              } else {
-                  ottelijat.progress[0] += ottelijat.step[0]
-                  document.getElementById('colbyCovingtonBar')!.style.width = `${ottelijat.progress[0]}%`
-              }}, 10);
-              updateUi();
-          }
-        }
+  if (!colbyCovingtonInterval) {
+    if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+      game.aktiivisiaOttelijoita++;
+      colbyCovingtonInterval = setInterval(() => {
+        if (ottelijat.progress[0] >= 100) {
+          ottelijat.progress[0] = 0;
+          ottelijat.xp[0] += 1;
+          updateUi();
+          if (ottelijat.xp[0] >= ottelijat.xpThreshold[0]) {
+            ottelijat.xp[0] = 0;
+            ottelijat.xpThreshold[0] *= 1.2;
+            ottelijat.level[0] += 1;
+            };
+          game.hampaita += ottelijat.power[0];
+          updateUi();
+          } else {
+            ottelijat.progress[0] += ottelijat.step[0]
+            document.getElementById('colbyCovingtonBar')!.style.width = `${ottelijat.progress[0]}%`
+            }
+        }, 10);
+        updateUi();
+      }
+    }
 }));
 
 kamaruUsman!.addEventListener("click", (() => {
     if (!kamaruUsmanInterval) {
         if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+          game.aktiivisiaOttelijoita++;
           kamaruUsmanInterval = setInterval(() => {
-            game.aktiivisiaOttelijoita++;
               if (ottelijat.progress[1] >= 100) {
                   ottelijat.progress[1] = 0;
                   ottelijat.xp[1] += 1;
@@ -766,8 +852,8 @@ kamaruUsman!.addEventListener("click", (() => {
 shavkatRakhmonov!.addEventListener("click", (() => {
     if (!shavkatRakhmonovInterval) {
         if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+          game.aktiivisiaOttelijoita++;
           shavkatRakhmonovInterval = setInterval(() => {
-            game.aktiivisiaOttelijoita++;
               if (ottelijat.progress[2] >= 100) {
                   ottelijat.progress[2] = 0;
                   ottelijat.xp[2] += 1;
@@ -791,8 +877,8 @@ shavkatRakhmonov!.addEventListener("click", (() => {
 seanOmalley!.addEventListener("click", (() => {
     if (!seanOmalleyInterval) {
         if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+          game.aktiivisiaOttelijoita++;
           seanOmalleyInterval = setInterval(() => {
-            game.aktiivisiaOttelijoita++;
               if (ottelijat.progress[3] >= 100) {
                   ottelijat.progress[3] = 0;
                   ottelijat.xp[3] += 1;
@@ -816,8 +902,8 @@ seanOmalley!.addEventListener("click", (() => {
 jonJones!.addEventListener("click", (() => {
     if (!jonJonesInterval) {
         if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+          game.aktiivisiaOttelijoita++;
           jonJonesInterval = setInterval(() => {
-            game.aktiivisiaOttelijoita++;
               if (ottelijat.progress[4] >= 100) {
                   ottelijat.progress[4] = 0;
                   ottelijat.xp[4] += 1;
@@ -841,8 +927,8 @@ jonJones!.addEventListener("click", (() => {
 alexanderVolkanovski!.addEventListener("click", (() => {
     if (!alexanderVolkanovskiInterval) {
         if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+          game.aktiivisiaOttelijoita++;
           alexanderVolkanovskiInterval = setInterval(() => {
-            game.aktiivisiaOttelijoita++;
               if (ottelijat.progress[5] >= 100) {
                   ottelijat.progress[5] = 0;
                   ottelijat.xp[5] += 1;
@@ -866,8 +952,8 @@ alexanderVolkanovski!.addEventListener("click", (() => {
 alexPereira!.addEventListener("click", (() => {
     if (!alexPereiraInterval) {
         if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+          game.aktiivisiaOttelijoita++;
           alexPereiraInterval = setInterval(() => {
-            game.aktiivisiaOttelijoita++;
               if (ottelijat.progress[6] >= 100) {
                   ottelijat.progress[6] = 0;
                   ottelijat.xp[6] += 1;
@@ -891,8 +977,8 @@ alexPereira!.addEventListener("click", (() => {
 islamMakhachev!.addEventListener("click", (() => {
     if (!islamMakhachevInterval) {
         if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+          game.aktiivisiaOttelijoita++;
           islamMakhachevInterval = setInterval(() => {
-            game.aktiivisiaOttelijoita++;
               if (ottelijat.progress[7] >= 100) {
                   ottelijat.progress[7] = 0;
                   ottelijat.xp[7] += 1;
@@ -916,8 +1002,8 @@ islamMakhachev!.addEventListener("click", (() => {
 maxHolloway!.addEventListener("click", (() => {
     if (!maxHollowayInterval) {
         if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+          game.aktiivisiaOttelijoita++;
           maxHollowayInterval = setInterval(() => {
-            game.aktiivisiaOttelijoita++;
               if (ottelijat.progress[8] >= 100) {
                   ottelijat.progress[8] = 0;
                   ottelijat.xp[8] += 1;
@@ -941,8 +1027,8 @@ maxHolloway!.addEventListener("click", (() => {
 tomAspinall!.addEventListener("click", (() => {
     if (!tomAspinallInterval) {
         if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+          game.aktiivisiaOttelijoita++;
           tomAspinallInterval = setInterval(() => {
-            game.aktiivisiaOttelijoita++;
               if (ottelijat.progress[9] >= 100) {
                   ottelijat.progress[9] = 0;
                   ottelijat.xp[9] += 1;
@@ -966,8 +1052,8 @@ tomAspinall!.addEventListener("click", (() => {
 israelAdesanya!.addEventListener("click", (() => {
     if (!israelAdesanyaInterval) {
         if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+          game.aktiivisiaOttelijoita++;
           israelAdesanyaInterval = setInterval(() => {
-            game.aktiivisiaOttelijoita++;
               if (ottelijat.progress[10] >= 100) {
                   ottelijat.progress[10] = 0;
                   ottelijat.xp[10] += 1;
@@ -991,8 +1077,8 @@ israelAdesanya!.addEventListener("click", (() => {
 charlesOliveira!.addEventListener("click", (() => {
     if (!charlesOliveiraInterval) {
         if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
+          game.aktiivisiaOttelijoita++;
           charlesOliveiraInterval = setInterval(() => {
-            game.aktiivisiaOttelijoita++;
               if (ottelijat.progress[11] >= 100) {
                   ottelijat.progress[11] = 0;
                   ottelijat.xp[11] += 1;
@@ -1014,27 +1100,28 @@ charlesOliveira!.addEventListener("click", (() => {
 }));
 
 save!.addEventListener("click", (() => {
-    saveGame();
+  saveGame();
 }));
 
 load!.addEventListener("click", (() => {
-    loadGame();
+  loadGame();
 }));
 
 reset!.addEventListener("click", (() => {
-    resetGame();
+  resetGame();
 }));
 
 avaaSatunnainenElement!.addEventListener("click", (() => {
-    avaaSatunnainen();
-    updateUi();
+  avaaSatunnainen();
+  updateUi();
 }));
 
 avaaValitsemaElement!.addEventListener("click", (() => {
-    avaaValitsema();
+  avaaValitsema();
 }));
 
 window.onload = function() {
     loadGame();
+    game.aktiivisiaOttelijoita = 0;
     //updateUi();
 }
