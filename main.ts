@@ -1298,46 +1298,68 @@ function updateUi() {
   kamaruUsmanXp!.innerHTML = ottelijat.xp[1].toFixed(0).toLocaleString();
   kamaruUsmanXpThreshold!.innerHTML = ottelijat.xpThreshold[1].toFixed(0).toLocaleString();
   kamaruUsmanLevel!.innerHTML = ottelijat.level[1].toFixed(0).toLocaleString();
+  kamaruUsmanPower!.innerHTML = ottelijat.power[1].toFixed(0).toLocaleString();
+  kamaruUsmanSpeed!.innerHTML = ottelijat.speed[1].toFixed(0).toLocaleString();
 
   shavkatRakhmonovXp!.innerHTML = ottelijat.xp[2].toFixed(0).toLocaleString();
   shavkatRakhmonovXpThreshold!.innerHTML = ottelijat.xpThreshold[2].toFixed(0).toLocaleString();
   shavkatRakhmonovLevel!.innerHTML = ottelijat.level[2].toFixed(0).toLocaleString();
+  shavkatRakhmonovPower!.innerHTML = ottelijat.power[2].toFixed(0).toLocaleString();
+  shavkatRakhmonovSpeed!.innerHTML = ottelijat.speed[2].toFixed(0).toLocaleString();
   
   seanOmalleyXp!.innerHTML = ottelijat.xp[3].toFixed(0).toLocaleString();
   seanOmalleyXpThreshold!.innerHTML = ottelijat.xpThreshold[3].toFixed(0).toLocaleString();
   seanOmalleyLevel!.innerHTML = ottelijat.level[3].toFixed(0).toLocaleString();
+  seanOmalleyPower!.innerHTML = ottelijat.power[3].toFixed(0).toLocaleString();
+  seanOmalleySpeed!.innerHTML = ottelijat.speed[3].toFixed(0).toLocaleString();
 
   jonJonesXp!.innerHTML = ottelijat.xp[4].toFixed(0).toLocaleString();
   jonJonesXpThreshold!.innerHTML = ottelijat.xpThreshold[4].toFixed(0).toLocaleString();
   jonJonesLevel!.innerHTML = ottelijat.level[4].toFixed(0).toLocaleString();
+  jonJonesPower!.innerHTML = ottelijat.power[4].toFixed(0).toLocaleString();
+  jonJonesSpeed!.innerHTML = ottelijat.speed[4].toFixed(0).toLocaleString();
 
   alexanderVolkanovskiXp!.innerHTML = ottelijat.xp[5].toFixed(0).toLocaleString();
   alexanderVolkanovskiXpThreshold!.innerHTML = ottelijat.xpThreshold[5].toFixed(0).toLocaleString();
   alexanderVolkanovskiLevel!.innerHTML = ottelijat.level[5].toFixed(0).toLocaleString();
+  alexanderVolkanovskiPower!.innerHTML = ottelijat.power[5].toFixed(0).toLocaleString();
+  alexanderVolkanovskiSpeed!.innerHTML = ottelijat.speed[5].toFixed(0).toLocaleString();
 
   alexPereiraXp!.innerHTML = ottelijat.xp[6].toFixed(0).toLocaleString();
   alexPereiraXpThreshold!.innerHTML = ottelijat.xpThreshold[6].toFixed(0).toLocaleString();
   alexPereiraLevel!.innerHTML = ottelijat.level[6].toFixed(0).toLocaleString();
+  alexPereiraPower!.innerHTML = ottelijat.power[6].toFixed(0).toLocaleString();
+  alexPereiraSpeed!.innerHTML = ottelijat.speed[6].toFixed(0).toLocaleString();
 
   islamMakhachevXp!.innerHTML = ottelijat.xp[7].toFixed(0).toLocaleString();
   islamMakhachevXpThreshold!.innerHTML = ottelijat.xpThreshold[7].toFixed(0).toLocaleString();
   islamMakhachevLevel!.innerHTML = ottelijat.level[7].toFixed(0).toLocaleString();
+  islamMakhachevPower!.innerHTML = ottelijat.power[7].toFixed(0).toLocaleString();
+  islamMakhachevSpeed!.innerHTML = ottelijat.speed[7].toFixed(0).toLocaleString();
 
   maxHollowayXp!.innerHTML = ottelijat.xp[8].toFixed(0).toLocaleString();
   maxHollowayXpThreshold!.innerHTML = ottelijat.xpThreshold[8].toFixed(0).toLocaleString();
   maxHollowayLevel!.innerHTML = ottelijat.level[8].toFixed(0).toLocaleString();
+  maxHollowayPower!.innerHTML = ottelijat.power[8].toFixed(0).toLocaleString();
+  maxHollowaySpeed!.innerHTML = ottelijat.speed[8].toFixed(0).toLocaleString();
 
   tomAspinallXp!.innerHTML = ottelijat.xp[9].toFixed(0).toLocaleString();
   tomAspinallXpThreshold!.innerHTML = ottelijat.xpThreshold[9].toFixed(0).toLocaleString();
   tomAspinallLevel!.innerHTML = ottelijat.level[9].toFixed(0).toLocaleString();
+  tomAspinallPower!.innerHTML = ottelijat.power[9].toFixed(0).toLocaleString();
+  tomAspinallSpeed!.innerHTML = ottelijat.speed[9].toFixed(0).toLocaleString();
 
   israelAdesanyaXp!.innerHTML = ottelijat.xp[10].toFixed(0).toLocaleString();
   israelAdesanyaXpThreshold!.innerHTML = ottelijat.xpThreshold[10].toFixed(0).toLocaleString();
   israelAdesanyaLevel!.innerHTML = ottelijat.level[10].toFixed(0).toLocaleString();
+  israelAdesanyaPower!.innerHTML = ottelijat.power[10].toFixed(0).toLocaleString();
+  israelAdesanyaSpeed!.innerHTML = ottelijat.speed[10].toFixed(0).toLocaleString();
 
   charlesOliveiraXp!.innerHTML = ottelijat.xp[11].toFixed(0).toLocaleString();
   charlesOliveiraXpThreshold!.innerHTML = ottelijat.xpThreshold[11].toFixed(0).toLocaleString();
   charlesOliveiraLevel!.innerHTML = ottelijat.level[11].toFixed(0).toLocaleString();
+  charlesOliveiraPower!.innerHTML = ottelijat.power[11].toFixed(0).toLocaleString();
+  charlesOliveiraSpeed!.innerHTML = ottelijat.speed[11].toFixed(0).toLocaleString();
 
   hampaita!.innerHTML = game.hampaita.toFixed(0).toLocaleString();
   hampaitaPerSekuntiElement!.innerHTML = game.hampaitaPerSekunti.toFixed(0).toLocaleString();
@@ -1431,56 +1453,78 @@ const kamaruUsman = document.getElementById("kamaruUsman") as HTMLElement;
 const kamaruUsmanXp = document.getElementById('kamaruUsmanXp') as HTMLElement;
 const kamaruUsmanXpThreshold = document.getElementById('kamaruUsmanXpThreshold') as HTMLElement;
 const kamaruUsmanLevel = document.getElementById('kamaruUsmanLevel') as HTMLElement;
+const kamaruUsmanPower = document.getElementById('kamaruUsmanPower') as HTMLElement;
+const kamaruUsmanSpeed = document.getElementById('kamaruUsmanSpeed') as HTMLElement;
 
 const shavkatRakhmonov = document.getElementById("shavkatRakhmonov") as HTMLElement;
 const shavkatRakhmonovXp = document.getElementById('shavkatRakhmonovXp') as HTMLElement;
 const shavkatRakhmonovXpThreshold = document.getElementById('shavkatRakhmonovXpThreshold') as HTMLElement;
 const shavkatRakhmonovLevel = document.getElementById('shavkatRakhmonovLevel') as HTMLElement;
+const shavkatRakhmonovPower = document.getElementById('shavkatRakhmonovPower') as HTMLElement;
+const shavkatRakhmonovSpeed = document.getElementById('shavkatRakhmonovSpeed') as HTMLElement;
 
 const seanOmalley = document.getElementById("seanOmalley") as HTMLElement;
 const seanOmalleyXp = document.getElementById('seanOmalleyXp') as HTMLElement;
 const seanOmalleyXpThreshold = document.getElementById('seanOmalleyXpThreshold') as HTMLElement;
 const seanOmalleyLevel = document.getElementById('seanOmalleyLevel') as HTMLElement;
+const seanOmalleyPower = document.getElementById('seanOmalleyPower') as HTMLElement;
+const seanOmalleySpeed = document.getElementById('seanOmalleySpeed') as HTMLElement;
 
 const jonJones = document.getElementById("jonJones") as HTMLElement;
 const jonJonesXp = document.getElementById('jonJonesXp') as HTMLElement;
 const jonJonesXpThreshold = document.getElementById('jonJonesXpThreshold') as HTMLElement;
 const jonJonesLevel = document.getElementById('jonJonesLevel') as HTMLElement;
+const jonJonesPower = document.getElementById('jonJonesPower') as HTMLElement;
+const jonJonesSpeed = document.getElementById('jonJonesSpeed') as HTMLElement;
 
 const alexanderVolkanovski = document.getElementById("alexanderVolkanovski") as HTMLElement;
 const alexanderVolkanovskiXp = document.getElementById('alexanderVolkanovskiXp') as HTMLElement;
 const alexanderVolkanovskiXpThreshold = document.getElementById('alexanderVolkanovskiXpThreshold') as HTMLElement;
 const alexanderVolkanovskiLevel = document.getElementById('alexanderVolkanovskiLevel') as HTMLElement;
+const alexanderVolkanovskiPower = document.getElementById('alexanderVolkanovskiPower') as HTMLElement;
+const alexanderVolkanovskiSpeed = document.getElementById('alexanderVolkanovskiSpeed') as HTMLElement;
 
 const alexPereira = document.getElementById("alexPereira") as HTMLElement;
 const alexPereiraXp = document.getElementById('alexPereiraXp') as HTMLElement;
 const alexPereiraXpThreshold = document.getElementById('alexPereiraXpThreshold') as HTMLElement;
 const alexPereiraLevel = document.getElementById('alexPereiraLevel') as HTMLElement;
+const alexPereiraPower = document.getElementById('alexPereiraPower') as HTMLElement;
+const alexPereiraSpeed = document.getElementById('alexPereiraSpeed') as HTMLElement;
 
 const islamMakhachev = document.getElementById("islamMakhachev") as HTMLElement;
 const islamMakhachevXp = document.getElementById('islamMakhachevXp') as HTMLElement;
 const islamMakhachevXpThreshold = document.getElementById('islamMakhachevXpThreshold') as HTMLElement;
 const islamMakhachevLevel = document.getElementById('islamMakhachevLevel') as HTMLElement;
+const islamMakhachevPower = document.getElementById('islamMakhachevPower') as HTMLElement;
+const islamMakhachevSpeed = document.getElementById('islamMakhachevSpeed') as HTMLElement;
 
 const maxHolloway = document.getElementById("maxHolloway") as HTMLElement;
 const maxHollowayXp = document.getElementById('maxHollowayXp') as HTMLElement;
 const maxHollowayXpThreshold = document.getElementById('maxHollowayXpThreshold') as HTMLElement;
 const maxHollowayLevel = document.getElementById('maxHollowayLevel') as HTMLElement;
+const maxHollowayPower = document.getElementById('maxHollowayPower') as HTMLElement;
+const maxHollowaySpeed = document.getElementById('maxHollowaySpeed') as HTMLElement;
 
 const tomAspinall = document.getElementById("tomAspinall") as HTMLElement;
 const tomAspinallXp = document.getElementById('tomAspinallXp') as HTMLElement;
 const tomAspinallXpThreshold = document.getElementById('tomAspinallXpThreshold') as HTMLElement;
 const tomAspinallLevel = document.getElementById('tomAspinallLevel') as HTMLElement;
+const tomAspinallPower = document.getElementById('tomAspinallPower') as HTMLElement;
+const tomAspinallSpeed = document.getElementById('tomAspinallSpeed') as HTMLElement;
 
 const israelAdesanya = document.getElementById("israelAdesanya") as HTMLElement;
 const israelAdesanyaXp = document.getElementById('israelAdesanyaXp') as HTMLElement;
 const israelAdesanyaXpThreshold = document.getElementById('israelAdesanyaXpThreshold') as HTMLElement;
 const israelAdesanyaLevel = document.getElementById('israelAdesanyaLevel') as HTMLElement;
+const israelAdesanyaPower = document.getElementById('israelAdesanyaPower') as HTMLElement;
+const israelAdesanyaSpeed = document.getElementById('israelAdesanyaSpeed') as HTMLElement;
 
 const charlesOliveira = document.getElementById("charlesOliveira") as HTMLElement;
 const charlesOliveiraXp = document.getElementById('charlesOliveiraXp') as HTMLElement;
 const charlesOliveiraXpThreshold = document.getElementById('charlesOliveiraXpThreshold') as HTMLElement;
 const charlesOliveiraLevel = document.getElementById('charlesOliveiraLevel') as HTMLElement
+const charlesOliveiraPower = document.getElementById('charlesOliveiraPower') as HTMLElement;
+const charlesOliveiraSpeed = document.getElementById('charlesOliveiraSpeed') as HTMLElement;
 
 shopElement!.addEventListener("click", (() => {
   shopItems.forEach(item => {
