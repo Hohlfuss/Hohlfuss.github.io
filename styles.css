@@ -234,3 +234,24 @@ nav {
   height: 100vh;
   width: 40px;
 }
+
+#upgradeContainer {
+  display: flex;
+  height: 100%;
+  width: 60%;
+  margin-left: 20%;
+  font-family: "Bebas Neue", sans-serif;
+  color: white;
+  margin-top: 0;
+  background-color: rgba(0, 0, 139, 0);
+  border-radius: 10px;
+  z-index: 2;
+  user-select: none;
+}
+
+#upgradeContainer img {
+  display: flex;
+  width: 150px;
+  height: 150px;
+  user-select: none;
+}

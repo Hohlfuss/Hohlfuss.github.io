@@ -1,9 +1,9 @@
 var game = {
-    version: "0.0.5",
+    version: "0.0.7",
     hampaita: 0,
     hampaitaPerSekunti: 0,
     aktiivisiaOttelijoita: 0,
-    maxOttelijat: 2
+    maxOttelijat: 1
 };
 var ottelijat = {
     nimi: [
@@ -258,6 +258,12 @@ var ottelijat = {
         0.1,
         0.1
     ],
+    pelleCount: 0,
+    niceGuyCount: 0,
+    dagestanGoblinCount: 0,
+    afrikanMafiaCount: 0,
+    lookingAssCount: 0,
+    chadCount: 0,
     stats: {
         wins: [
             17,
@@ -344,9 +350,6 @@ var ottelijat = {
             0
         ]
     },
-    pelleCount: [
-        0,
-    ],
     tags: {
         pelle: [
             true,
@@ -424,8 +427,8 @@ var ottelijat = {
             true,
             false,
             true,
-            true,
             false,
+            true,
             false,
             false,
             false,
@@ -436,56 +439,307 @@ var ottelijat = {
 };
 var shop = {
     avaaSatunnainenHinta: 10,
-    avaaValitsemaHinta: 100
+    avaaValitsemaHinta: 100,
+    lisääTrainereitaHinta: 50
 };
 var upgrades = {
     nimi: [
         "Pelle Tier 1 Hanskat",
-        "Kamaru Usman Tier 1 Hanskat",
-        "Shavkat Rakhmonov Tier 1 Hanskat",
-        "Sean O'malley Tier 1 Hanskat",
-        "Jon Jones Tier 1 Hanskat",
-        "Alexander Volkanovski Tier 1 Hanskat",
-        "Alex Pereira Tier 1 Hanskat",
-        "Islam Makhachev Tier 1 Hanskat",
-        "Max Holloway Tier 1 Hanskat",
-        "Tom Aspinall Tier 1 Hanskat",
-        "Israel Adesanya Tier 1 Hanskat",
-        "Charles Oliveira Tier 1 Hanskat",
+        "Niceguy Tier 1 Hanskat",
+        "Dagestangoblin Tier 1 Hanskat",
+        "Afrikanmafia Tier 1 Hanskat",
+        "Lookingass Tier 1 Hanskat",
+        "Chad Tier 1 Hanskat",
+        "Pelle Tier 2 Hanskat",
+        "Niceguy Tier 2 Hanskat",
+        "Dagestangoblin Tier 2 Hanskat",
+        "Afrikanmafia Tier 2 Hanskat",
+        "Lookingass Tier 2 Hanskat",
+        "Chad Tier 2 Hanskat",
+        "Pelle Tier 3 Hanskat",
+        "Niceguy Tier 3 Hanskat",
+        "Dagestangoblin Tier 3 Hanskat",
+        "Afrikanmafia Tier 3 Hanskat",
+        "Lookingass Tier 3 Hanskat",
+        "Chad Tier 3 Hanskat",
+        "Pelle Tier 4 Hanskat",
+        "Niceguy Tier 4 Hanskat",
+        "Dagestangoblin Tier 4 Hanskat",
+        "Afrikanmafia Tier 4 Hanskat",
+        "Lookingass Tier 4 Hanskat",
+        "Chad Tier 4 Hanskat",
     ],
     kuvaus: [
         "Pellet 2x nopeempia",
+        "Niceguyt 2x nopeempia",
+        "Dagestangoblinit 2x nopeempia",
+        "Afrikanmafia 2x nopeempia",
+        "Lookingass 2x nopeempia",
+        "Chad 2x nopeempia",
+        "Pellet 2x nopeempia",
+        "Niceguyt 2x nopeempia",
+        "Dagestangoblinit 2x nopeempia",
+        "Afrikanmafia 2x nopeempia",
+        "Lookingass 2x nopeempia",
+        "Chad 2x nopeempia",
+        "Pellet 2x nopeempia",
+        "Niceguyt 2x nopeempia",
+        "Dagestangoblinit 2x nopeempia",
+        "Afrikanmafia 2x nopeempia",
+        "Lookingass 2x nopeempia",
+        "Chad 2x nopeempia",
+        "Pellet 2x nopeempia",
+        "Niceguyt 2x nopeempia",
+        "Dagestangoblinit 2x nopeempia",
+        "Afrikanmafia 2x nopeempia",
+        "Lookingass 2x nopeempia",
+        "Chad 2x nopeempia",
     ],
     kuva: [
-        "hanskat.png",
+        "t1Hanskat.png",
+        "t1Hanskat.png",
+        "t1Hanskat.png",
+        "t1Hanskat.png",
+        "t1Hanskat.png",
+        "t1Hanskat.png",
+        "t2Hanskat.png",
+        "t2Hanskat.png",
+        "t2Hanskat.png",
+        "t2Hanskat.png",
+        "t2Hanskat.png",
+        "t2Hanskat.png",
+        "t3Hanskat.png",
+        "t3Hanskat.png",
+        "t3Hanskat.png",
+        "t3Hanskat.png",
+        "t3Hanskat.png",
+        "t3Hanskat.png",
+        "t4Hanskat.png",
+        "t4Hanskat.png",
+        "t4Hanskat.png",
+        "t4Hanskat.png",
+        "t4Hanskat.png",
+        "t4Hanskat.png",
     ],
     tyyppi: [
+        "ottelija",
+        "ottelija",
+        "ottelija",
+        "ottelija",
+        "ottelija",
+        "ottelija",
+        "ottelija",
+        "ottelija",
+        "ottelija",
+        "ottelija",
+        "ottelija",
+        "ottelija",
+        "ottelija",
+        "ottelija",
+        "ottelija",
+        "ottelija",
+        "ottelija",
+        "ottelija",
+        "ottelija",
+        "ottelija",
+        "ottelija",
+        "ottelija",
+        "ottelija",
         "ottelija",
     ],
     hinta: [
         600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        1800,
+        1800,
+        1800,
+        1800,
+        1800,
+        1800,
+        5400,
+        5400,
+        5400,
+        5400,
+        5400,
+        5400,
+        16200,
+        16200,
+        16200,
+        16200,
+        16200,
+        16200,
     ],
     ottelijaIndex: [
         0 && 3 && 4 && 10,
+        1 && 5 && 9 && 11,
+        2 && 7,
+        1 && 10,
+        3 && 7,
+        2 && 4 && 6,
+        0 && 3 && 4 && 10,
+        1 && 5 && 9 && 11,
+        2 && 7,
+        1 && 10,
+        3 && 7,
+        2 && 4 && 6,
+        0 && 3 && 4 && 10,
+        1 && 5 && 9 && 11,
+        2 && 7,
+        1 && 10,
+        3 && 7,
+        2 && 4 && 6,
+        0 && 3 && 4 && 10,
+        1 && 5 && 9 && 11,
+        2 && 7,
+        1 && 10,
+        3 && 7,
+        2 && 4 && 6,
     ],
     tag: [
         "pelle",
+        "niceGuy",
+        "dagestanGoblinit",
+        "afrikanMafia",
+        "lookingAss",
+        "chad",
+        "pelle",
+        "niceGuy",
+        "dagestanGoblinit",
+        "afrikanMafia",
+        "lookingAss",
+        "chad",
+        "pelle",
+        "niceGuy",
+        "dagestanGoblinit",
+        "afrikanMafia",
+        "lookingAss",
+        "chad",
+        "pelle",
+        "niceGuy",
+        "dagestanGoblinit",
+        "afrikanMafia",
+        "lookingAss",
+        "chad",
     ],
     vaatimus: [
         5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
     ],
     bonus: [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
         2,
     ],
     ostettu: [
         false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
     ],
     osta: function (index) {
         if (!this.ostettu[index] && game.hampaita >= this.hinta[index]) {
-            if (this.tag[index] === "pelle" && ottelijat.pelleCount[this.ottelijaIndex[index]] >= this.vaatimus[index]) {
+            if (this.tag[index] === "pelle" && ottelijat.pelleCount >= this.vaatimus[index]) {
                 game.hampaita -= this.hinta[index];
                 ottelijat.step[this.ottelijaIndex[index]] *= this.bonus[index];
                 this.ostettu[index] = true;
+                updateUpgrades();
+            }
+            if (this.tag[index] === "niceGuy" && ottelijat.niceGuyCount >= this.vaatimus[index]) {
+                game.hampaita -= this.hinta[index];
+                ottelijat.step[this.ottelijaIndex[index]] *= this.bonus[index];
+                this.ostettu[index] = true;
+                updateUpgrades();
+            }
+            if (this.tag[index] === "dagestanGoblinit" && ottelijat.dagestanGoblinCount >= this.vaatimus[index]) {
+                game.hampaita -= this.hinta[index];
+                ottelijat.step[this.ottelijaIndex[index]] *= this.bonus[index];
+                this.ostettu[index] = true;
+                updateUpgrades();
+            }
+            if (this.tag[index] === "afrikanMafia" && ottelijat.afrikanMafiaCount >= this.vaatimus[index]) {
+                game.hampaita -= this.hinta[index];
+                ottelijat.step[this.ottelijaIndex[index]] *= this.bonus[index];
+                this.ostettu[index] = true;
+                updateUpgrades();
+            }
+            if (this.tag[index] === "lookingAss" && ottelijat.lookingAssCount >= this.vaatimus[index]) {
+                game.hampaita -= this.hinta[index];
+                ottelijat.step[this.ottelijaIndex[index]] *= this.bonus[index];
+                this.ostettu[index] = true;
+                updateUpgrades();
+            }
+            if (this.tag[index] === "chad" && ottelijat.chadCount >= this.vaatimus[index]) {
+                game.hampaita -= this.hinta[index];
+                ottelijat.step[this.ottelijaIndex[index]] *= this.bonus[index];
+                this.ostettu[index] = true;
+                updateUpgrades();
             }
         }
     }
@@ -523,7 +777,8 @@ function avaaSatunnainen() {
     if (game.hampaita >= shop.avaaSatunnainenHinta) {
         game.hampaita -= shop.avaaSatunnainenHinta;
         shop.avaaSatunnainenHinta *= 10;
-        shop.avaaValitsemaHinta *= 5;
+        shop.avaaValitsemaHinta *= 1.1;
+        shop.lisääTrainereitaHinta *= 1.1;
         var randomIndex = Math.floor(Math.random() * (ottelijat.isUnlocked.length - 1));
         if (ottelijat.isUnlocked[randomIndex] === false) {
             ottelijat.isUnlocked[randomIndex] = true;
@@ -541,9 +796,73 @@ function avaaValitsema() {
     if (game.hampaita >= shop.avaaValitsemaHinta) {
         game.hampaita -= shop.avaaValitsemaHinta;
         shop.avaaValitsemaHinta *= 10;
-        shop.avaaSatunnainenHinta *= 5;
+        shop.avaaSatunnainenHinta *= 1.1;
+        shop.lisääTrainereitaHinta *= 1.1;
         window.location.href = "./lukitutOttelijat.html";
         saveGame();
+    }
+}
+function lisääTrainereita() {
+    if (game.hampaita >= shop.lisääTrainereitaHinta) {
+        game.hampaita -= shop.lisääTrainereitaHinta;
+        game.maxOttelijat += 1;
+        shop.lisääTrainereitaHinta *= 10;
+        shop.avaaSatunnainenHinta *= 1.1;
+        shop.lisääTrainereitaHinta *= 1.1;
+        saveGame();
+    }
+}
+function updateUi() {
+    colbyCovingtonXp.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
+    colbyCovingtonXpThreshold.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
+    colbyCovingtonLevel.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
+    kamaruUsmanXp.innerHTML = ottelijat.xp[1].toFixed(0).toLocaleString();
+    kamaruUsmanXpThreshold.innerHTML = ottelijat.xpThreshold[1].toFixed(0).toLocaleString();
+    kamaruUsmanLevel.innerHTML = ottelijat.level[1].toFixed(0).toLocaleString();
+    shavkatRakhmonovXp.innerHTML = ottelijat.xp[2].toFixed(0).toLocaleString();
+    shavkatRakhmonovXpThreshold.innerHTML = ottelijat.xpThreshold[2].toFixed(0).toLocaleString();
+    shavkatRakhmonovLevel.innerHTML = ottelijat.level[2].toFixed(0).toLocaleString();
+    seanOmalleyXp.innerHTML = ottelijat.xp[3].toFixed(0).toLocaleString();
+    seanOmalleyXpThreshold.innerHTML = ottelijat.xpThreshold[3].toFixed(0).toLocaleString();
+    seanOmalleyLevel.innerHTML = ottelijat.level[3].toFixed(0).toLocaleString();
+    jonJonesXp.innerHTML = ottelijat.xp[4].toFixed(0).toLocaleString();
+    jonJonesXpThreshold.innerHTML = ottelijat.xpThreshold[4].toFixed(0).toLocaleString();
+    jonJonesLevel.innerHTML = ottelijat.level[4].toFixed(0).toLocaleString();
+    alexanderVolkanovskiXp.innerHTML = ottelijat.xp[5].toFixed(0).toLocaleString();
+    alexanderVolkanovskiXpThreshold.innerHTML = ottelijat.xpThreshold[5].toFixed(0).toLocaleString();
+    alexanderVolkanovskiLevel.innerHTML = ottelijat.level[5].toFixed(0).toLocaleString();
+    alexPereiraXp.innerHTML = ottelijat.xp[6].toFixed(0).toLocaleString();
+    alexPereiraXpThreshold.innerHTML = ottelijat.xpThreshold[6].toFixed(0).toLocaleString();
+    alexPereiraLevel.innerHTML = ottelijat.level[6].toFixed(0).toLocaleString();
+    islamMakhachevXp.innerHTML = ottelijat.xp[7].toFixed(0).toLocaleString();
+    islamMakhachevXpThreshold.innerHTML = ottelijat.xpThreshold[7].toFixed(0).toLocaleString();
+    islamMakhachevLevel.innerHTML = ottelijat.level[7].toFixed(0).toLocaleString();
+    maxHollowayXp.innerHTML = ottelijat.xp[8].toFixed(0).toLocaleString();
+    maxHollowayXpThreshold.innerHTML = ottelijat.xpThreshold[8].toFixed(0).toLocaleString();
+    maxHollowayLevel.innerHTML = ottelijat.level[8].toFixed(0).toLocaleString();
+    tomAspinallXp.innerHTML = ottelijat.xp[9].toFixed(0).toLocaleString();
+    tomAspinallXpThreshold.innerHTML = ottelijat.xpThreshold[9].toFixed(0).toLocaleString();
+    tomAspinallLevel.innerHTML = ottelijat.level[9].toFixed(0).toLocaleString();
+    israelAdesanyaXp.innerHTML = ottelijat.xp[10].toFixed(0).toLocaleString();
+    israelAdesanyaXpThreshold.innerHTML = ottelijat.xpThreshold[10].toFixed(0).toLocaleString();
+    israelAdesanyaLevel.innerHTML = ottelijat.level[10].toFixed(0).toLocaleString();
+    charlesOliveiraXp.innerHTML = ottelijat.xp[11].toFixed(0).toLocaleString();
+    charlesOliveiraXpThreshold.innerHTML = ottelijat.xpThreshold[11].toFixed(0).toLocaleString();
+    charlesOliveiraLevel.innerHTML = ottelijat.level[11].toFixed(0).toLocaleString();
+    hampaita.innerHTML = game.hampaita.toFixed(0).toLocaleString();
+    hampaitaPerSekuntiElement.innerHTML = game.hampaitaPerSekunti.toFixed(0).toLocaleString();
+    avaaSatunnainenHinta.innerHTML = shop.avaaSatunnainenHinta.toFixed(0).toLocaleString();
+    //avaaValitsemaHinta!.innerHTML = shop.avaaValitsemaHinta.toFixed(0).toLocaleString();
+}
+function updateUpgrades() {
+    document.getElementById("upgradeContainer").innerHTML = "";
+    for (var i = 0; i < upgrades.nimi.length; i++) {
+        if (!upgrades.ostettu[i]) {
+            if (upgrades.tag[i] == "pelle" && ottelijat.pelleCount >= upgrades.vaatimus[i]) {
+                document.getElementById("upgradeContainer").innerHTML += '<img src="./assets/' + upgrades.kuva[i] + '" title="' + upgrades.nimi[i] + ' &#10; ' + upgrades.kuvaus[i] + ' &#10; (' + upgrades.hinta[i] + ' hammasta)" onclick="upgrades.osta(' + i + ')">';
+                +upgrades.nimi[i] + '">';
+            }
+        }
     }
 }
 function saveGame() {
@@ -585,6 +904,7 @@ var shopItems = Array.from(document.querySelectorAll('.shopItem'));
 var avaaSatunnainenElement = document.getElementById('avaaSatunnainen');
 var avaaSatunnainenHinta = document.getElementById('avaaSatunnainenHinta');
 var avaaValitsemaElement = document.getElementById('avaaValitsema');
+var lisääTrainereitaElement = document.getElementById('lisääTrainereita');
 //const const avaaValitsemaHinta = document.getElementById('avaaValitsemaHinta');
 var colbyCovington = document.getElementById("colbyCovington");
 var colbyCovingtonXp = document.getElementById('colbyCovingtonXp');
@@ -634,59 +954,6 @@ var charlesOliveira = document.getElementById("charlesOliveira");
 var charlesOliveiraXp = document.getElementById('charlesOliveiraXp');
 var charlesOliveiraXpThreshold = document.getElementById('charlesOliveiraXpThreshold');
 var charlesOliveiraLevel = document.getElementById('charlesOliveiraLevel');
-function updateUi() {
-    colbyCovingtonXp.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
-    colbyCovingtonXpThreshold.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
-    colbyCovingtonLevel.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
-    kamaruUsmanXp.innerHTML = ottelijat.xp[1].toFixed(0).toLocaleString();
-    kamaruUsmanXpThreshold.innerHTML = ottelijat.xpThreshold[1].toFixed(0).toLocaleString();
-    kamaruUsmanLevel.innerHTML = ottelijat.level[1].toFixed(0).toLocaleString();
-    shavkatRakhmonovXp.innerHTML = ottelijat.xp[2].toFixed(0).toLocaleString();
-    shavkatRakhmonovXpThreshold.innerHTML = ottelijat.xpThreshold[2].toFixed(0).toLocaleString();
-    shavkatRakhmonovLevel.innerHTML = ottelijat.level[2].toFixed(0).toLocaleString();
-    seanOmalleyXp.innerHTML = ottelijat.xp[3].toFixed(0).toLocaleString();
-    seanOmalleyXpThreshold.innerHTML = ottelijat.xpThreshold[3].toFixed(0).toLocaleString();
-    seanOmalleyLevel.innerHTML = ottelijat.level[3].toFixed(0).toLocaleString();
-    jonJonesXp.innerHTML = ottelijat.xp[4].toFixed(0).toLocaleString();
-    jonJonesXpThreshold.innerHTML = ottelijat.xpThreshold[4].toFixed(0).toLocaleString();
-    jonJonesLevel.innerHTML = ottelijat.level[4].toFixed(0).toLocaleString();
-    alexanderVolkanovskiXp.innerHTML = ottelijat.xp[5].toFixed(0).toLocaleString();
-    alexanderVolkanovskiXpThreshold.innerHTML = ottelijat.xpThreshold[5].toFixed(0).toLocaleString();
-    alexanderVolkanovskiLevel.innerHTML = ottelijat.level[5].toFixed(0).toLocaleString();
-    alexPereiraXp.innerHTML = ottelijat.xp[6].toFixed(0).toLocaleString();
-    alexPereiraXpThreshold.innerHTML = ottelijat.xpThreshold[6].toFixed(0).toLocaleString();
-    alexPereiraLevel.innerHTML = ottelijat.level[6].toFixed(0).toLocaleString();
-    islamMakhachevXp.innerHTML = ottelijat.xp[7].toFixed(0).toLocaleString();
-    islamMakhachevXpThreshold.innerHTML = ottelijat.xpThreshold[7].toFixed(0).toLocaleString();
-    islamMakhachevLevel.innerHTML = ottelijat.level[7].toFixed(0).toLocaleString();
-    maxHollowayXp.innerHTML = ottelijat.xp[8].toFixed(0).toLocaleString();
-    maxHollowayXpThreshold.innerHTML = ottelijat.xpThreshold[8].toFixed(0).toLocaleString();
-    maxHollowayLevel.innerHTML = ottelijat.level[8].toFixed(0).toLocaleString();
-    tomAspinallXp.innerHTML = ottelijat.xp[9].toFixed(0).toLocaleString();
-    tomAspinallXpThreshold.innerHTML = ottelijat.xpThreshold[9].toFixed(0).toLocaleString();
-    tomAspinallLevel.innerHTML = ottelijat.level[9].toFixed(0).toLocaleString();
-    israelAdesanyaXp.innerHTML = ottelijat.xp[10].toFixed(0).toLocaleString();
-    israelAdesanyaXpThreshold.innerHTML = ottelijat.xpThreshold[10].toFixed(0).toLocaleString();
-    israelAdesanyaLevel.innerHTML = ottelijat.level[10].toFixed(0).toLocaleString();
-    charlesOliveiraXp.innerHTML = ottelijat.xp[11].toFixed(0).toLocaleString();
-    charlesOliveiraXpThreshold.innerHTML = ottelijat.xpThreshold[11].toFixed(0).toLocaleString();
-    charlesOliveiraLevel.innerHTML = ottelijat.level[11].toFixed(0).toLocaleString();
-    hampaita.innerHTML = game.hampaita.toFixed(0).toLocaleString();
-    hampaitaPerSekuntiElement.innerHTML = game.hampaitaPerSekunti.toFixed(0).toLocaleString();
-    avaaSatunnainenHinta.innerHTML = shop.avaaSatunnainenHinta.toFixed(0).toLocaleString();
-    //avaaValitsemaHinta!.innerHTML = shop.avaaValitsemaHinta.toFixed(0).toLocaleString();
-}
-function updateUpgrades() {
-    document.getElementById("upgradeContainer").innerHTML = "";
-    for (var i = 0; i < upgrades.nimi.length; i++) {
-        if (!upgrades.ostettu[i]) {
-            if (upgrades.tag[i] == "pelle" && ottelijat.pelleCount[upgrades.ottelijaIndex[i]] >= upgrades.vaatimus[i]) {
-                document.getElementById("upgrade container").innerHTML += '<img src="images/' + upgrades.kuva[i] + '" title="' + upgrades.nimi[i] + ' &#10; ' + upgrades.kuvaus[i] + ' &#10; (' + upgrades.hinta[i] + ' hammasta)" onclick=""upgrades.purcha(' + i + ')">';
-                +upgrades.nimi[i] + '">';
-            }
-        }
-    }
-}
 shopElement.addEventListener("click", (function () {
     shopItems.forEach(function (item) {
         item.style.display = item.style.display === 'none' ? 'block' : 'none';
@@ -705,6 +972,7 @@ colbyCovington.addEventListener("click", (function () {
                         ottelijat.xp[0] = 0;
                         ottelijat.xpThreshold[0] *= 1.2;
                         ottelijat.level[0] += 1;
+                        ottelijat.pelleCount++;
                     }
                     ;
                     game.hampaita += ottelijat.power[0];
@@ -717,6 +985,11 @@ colbyCovington.addEventListener("click", (function () {
             }, 10);
             updateUi();
         }
+    }
+    else {
+        clearInterval(colbyCovingtonInterval);
+        colbyCovingtonInterval = null;
+        game.aktiivisiaOttelijoita--;
     }
 }));
 kamaruUsman.addEventListener("click", (function () {
@@ -732,9 +1005,11 @@ kamaruUsman.addEventListener("click", (function () {
                         ottelijat.xp[1] = 0;
                         ottelijat.xpThreshold[1] *= 1.2;
                         ottelijat.level[1] += 1;
+                        ottelijat.niceGuyCount++;
+                        ottelijat.afrikanMafiaCount++;
                     }
                     ;
-                    game.hampaita += ottelijat.power[1];
+                    game.hampaita += ottelijat.power[0];
                     updateUi();
                 }
                 else {
@@ -744,6 +1019,11 @@ kamaruUsman.addEventListener("click", (function () {
             }, 10);
             updateUi();
         }
+    }
+    else {
+        clearInterval(kamaruUsmanInterval);
+        kamaruUsmanInterval = null;
+        game.aktiivisiaOttelijoita--;
     }
 }));
 shavkatRakhmonov.addEventListener("click", (function () {
@@ -759,9 +1039,11 @@ shavkatRakhmonov.addEventListener("click", (function () {
                         ottelijat.xp[2] = 0;
                         ottelijat.xpThreshold[2] *= 1.2;
                         ottelijat.level[2] += 1;
+                        ottelijat.dagestanGoblinCount++;
+                        ottelijat.chadCount++;
                     }
                     ;
-                    game.hampaita += ottelijat.power[2];
+                    game.hampaita += ottelijat.power[0];
                     updateUi();
                 }
                 else {
@@ -771,6 +1053,11 @@ shavkatRakhmonov.addEventListener("click", (function () {
             }, 10);
             updateUi();
         }
+    }
+    else {
+        clearInterval(shavkatRakhmonovInterval);
+        shavkatRakhmonovInterval = null;
+        game.aktiivisiaOttelijoita--;
     }
 }));
 seanOmalley.addEventListener("click", (function () {
@@ -786,6 +1073,8 @@ seanOmalley.addEventListener("click", (function () {
                         ottelijat.xp[3] = 0;
                         ottelijat.xpThreshold[3] *= 1.2;
                         ottelijat.level[3] += 1;
+                        ottelijat.pelleCount++;
+                        ottelijat.lookingAssCount++;
                     }
                     ;
                     game.hampaita += ottelijat.power[3];
@@ -798,6 +1087,11 @@ seanOmalley.addEventListener("click", (function () {
             }, 10);
             updateUi();
         }
+    }
+    else {
+        clearInterval(seanOmalleyInterval);
+        seanOmalleyInterval = null;
+        game.aktiivisiaOttelijoita--;
     }
 }));
 jonJones.addEventListener("click", (function () {
@@ -813,6 +1107,8 @@ jonJones.addEventListener("click", (function () {
                         ottelijat.xp[4] = 0;
                         ottelijat.xpThreshold[4] *= 1.2;
                         ottelijat.level[4] += 1;
+                        ottelijat.pelleCount++;
+                        ottelijat.chadCount++;
                     }
                     ;
                     game.hampaita += ottelijat.power[4];
@@ -825,6 +1121,11 @@ jonJones.addEventListener("click", (function () {
             }, 10);
             updateUi();
         }
+    }
+    else {
+        clearInterval(jonJonesInterval);
+        jonJonesInterval = null;
+        game.aktiivisiaOttelijoita--;
     }
 }));
 alexanderVolkanovski.addEventListener("click", (function () {
@@ -840,6 +1141,7 @@ alexanderVolkanovski.addEventListener("click", (function () {
                         ottelijat.xp[5] = 0;
                         ottelijat.xpThreshold[5] *= 1.2;
                         ottelijat.level[5] += 1;
+                        ottelijat.niceGuyCount++;
                     }
                     ;
                     game.hampaita += ottelijat.power[5];
@@ -852,6 +1154,11 @@ alexanderVolkanovski.addEventListener("click", (function () {
             }, 10);
             updateUi();
         }
+    }
+    else {
+        clearInterval(alexanderVolkanovskiInterval);
+        alexanderVolkanovskiInterval = null;
+        game.aktiivisiaOttelijoita--;
     }
 }));
 alexPereira.addEventListener("click", (function () {
@@ -867,6 +1174,7 @@ alexPereira.addEventListener("click", (function () {
                         ottelijat.xp[6] = 0;
                         ottelijat.xpThreshold[6] *= 1.2;
                         ottelijat.level[6] += 1;
+                        ottelijat.chadCount++;
                     }
                     ;
                     game.hampaita += ottelijat.power[6];
@@ -879,6 +1187,11 @@ alexPereira.addEventListener("click", (function () {
             }, 10);
             updateUi();
         }
+    }
+    else {
+        clearInterval(alexPereiraInterval);
+        alexPereiraInterval = null;
+        game.aktiivisiaOttelijoita--;
     }
 }));
 islamMakhachev.addEventListener("click", (function () {
@@ -894,6 +1207,8 @@ islamMakhachev.addEventListener("click", (function () {
                         ottelijat.xp[7] = 0;
                         ottelijat.xpThreshold[7] *= 1.2;
                         ottelijat.level[7] += 1;
+                        ottelijat.dagestanGoblinCount++;
+                        ottelijat.lookingAssCount++;
                     }
                     ;
                     game.hampaita += ottelijat.power[7];
@@ -906,6 +1221,11 @@ islamMakhachev.addEventListener("click", (function () {
             }, 10);
             updateUi();
         }
+    }
+    else {
+        clearInterval(islamMakhachevInterval);
+        islamMakhachevInterval = null;
+        game.aktiivisiaOttelijoita--;
     }
 }));
 maxHolloway.addEventListener("click", (function () {
@@ -934,6 +1254,11 @@ maxHolloway.addEventListener("click", (function () {
             updateUi();
         }
     }
+    else {
+        clearInterval(maxHollowayInterval);
+        maxHollowayInterval = null;
+        game.aktiivisiaOttelijoita--;
+    }
 }));
 tomAspinall.addEventListener("click", (function () {
     if (!tomAspinallInterval) {
@@ -948,6 +1273,7 @@ tomAspinall.addEventListener("click", (function () {
                         ottelijat.xp[9] = 0;
                         ottelijat.xpThreshold[9] *= 1.2;
                         ottelijat.level[9] += 1;
+                        ottelijat.niceGuyCount++;
                     }
                     ;
                     game.hampaita += ottelijat.power[9];
@@ -960,6 +1286,11 @@ tomAspinall.addEventListener("click", (function () {
             }, 10);
             updateUi();
         }
+    }
+    else {
+        clearInterval(tomAspinallInterval);
+        tomAspinallInterval = null;
+        game.aktiivisiaOttelijoita--;
     }
 }));
 israelAdesanya.addEventListener("click", (function () {
@@ -975,6 +1306,8 @@ israelAdesanya.addEventListener("click", (function () {
                         ottelijat.xp[10] = 0;
                         ottelijat.xpThreshold[10] *= 1.2;
                         ottelijat.level[10] += 1;
+                        ottelijat.pelleCount++;
+                        ottelijat.afrikanMafiaCount++;
                     }
                     ;
                     game.hampaita += ottelijat.power[10];
@@ -987,6 +1320,11 @@ israelAdesanya.addEventListener("click", (function () {
             }, 10);
             updateUi();
         }
+    }
+    else {
+        clearInterval(israelAdesanyaInterval);
+        israelAdesanyaInterval = null;
+        game.aktiivisiaOttelijoita--;
     }
 }));
 charlesOliveira.addEventListener("click", (function () {
@@ -1002,6 +1340,7 @@ charlesOliveira.addEventListener("click", (function () {
                         ottelijat.xp[11] = 0;
                         ottelijat.xpThreshold[11] *= 1.2;
                         ottelijat.level[11] += 1;
+                        ottelijat.niceGuyCount++;
                     }
                     ;
                     game.hampaita += ottelijat.power[11];
@@ -1014,6 +1353,11 @@ charlesOliveira.addEventListener("click", (function () {
             }, 10);
             updateUi();
         }
+    }
+    else {
+        clearInterval(charlesOliveiraInterval);
+        charlesOliveiraInterval = null;
+        game.aktiivisiaOttelijoita--;
     }
 }));
 save.addEventListener("click", (function () {
@@ -1031,6 +1375,9 @@ avaaSatunnainenElement.addEventListener("click", (function () {
 }));
 avaaValitsemaElement.addEventListener("click", (function () {
     avaaValitsema();
+}));
+lisääTrainereitaElement.addEventListener("click", (function () {
+    lisääTrainereita();
 }));
 window.onload = function () {
     loadGame();

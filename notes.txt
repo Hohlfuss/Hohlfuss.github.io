@@ -15,7 +15,11 @@ alotellaan upgradeja uudestaan
 
 0.0.6
 
+0.0.7
+trainereitten pysäyttäminen toimii
+lisäsin shop itemin ostaa lisää trainereita
+lisäsin kasan upgradeja
+
 todo:
 
   -valitse ostettava
-  -tagi bonukset

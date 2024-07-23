@@ -1,4 +1,4 @@
-class Ottelija {
+/*class Ottelija {
     wins: number;
     losses: number;
     nc: number;
@@ -95,4 +95,4 @@ class Ottelija {
     }
 }
 
-//const ottelija1 = new Ottelija ()
+//const ottelija1 = new Ottelija ()*/
