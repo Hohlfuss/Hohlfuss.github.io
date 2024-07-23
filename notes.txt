@@ -23,6 +23,9 @@ lisäsin kasan upgradeja
 0.0.8
 upgradeja nii perkeleesti
 
+0.0.9
+speed ja power upgradet toimii
+
 todo:
 
   -valitse ostettava

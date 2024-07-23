@@ -1,5 +1,5 @@
 var game = {
-    version: "0.0.8",
+    version: "0.0.9",
     hampaita: 0,
     hampaitaPerSekunti: 0,
     aktiivisiaOttelijoita: 0,
@@ -258,6 +258,20 @@ var ottelijat = {
         0.1,
         0.1
     ],
+    speed: [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+    ],
     pelleCount: 0,
     niceGuyCount: 0,
     dagestanGoblinCount: 0,
@@ -445,30 +459,6 @@ var shop = {
 };
 var upgrades = {
     nimi: [
-        "Pelle Tier 1 Hanskat",
-        "Niceguy Tier 1 Hanskat",
-        "Dagestangoblin Tier 1 Hanskat",
-        "Afrikanmafia Tier 1 Hanskat",
-        "Lookingass Tier 1 Hanskat",
-        "Chad Tier 1 Hanskat",
-        "Pelle Tier 2 Hanskat",
-        "Niceguy Tier 2 Hanskat",
-        "Dagestangoblin Tier 2 Hanskat",
-        "Afrikanmafia Tier 2 Hanskat",
-        "Lookingass Tier 2 Hanskat",
-        "Chad Tier 2 Hanskat",
-        "Pelle Tier 3 Hanskat",
-        "Niceguy Tier 3 Hanskat",
-        "Dagestangoblin Tier 3 Hanskat",
-        "Afrikanmafia Tier 3 Hanskat",
-        "Lookingass Tier 3 Hanskat",
-        "Chad Tier 3 Hanskat",
-        "Pelle Tier 4 Hanskat",
-        "Niceguy Tier 4 Hanskat",
-        "Dagestangoblin Tier 4 Hanskat",
-        "Afrikanmafia Tier 4 Hanskat",
-        "Lookingass Tier 4 Hanskat",
-        "Chad Tier 4 Hanskat",
         "Pelle Tier 1 Boxerit",
         "Niceguy Tier 1 Boxerit",
         "Dagestangoblin Tier 1 Boxerit",
@@ -493,6 +483,30 @@ var upgrades = {
         "Afrikanmafia Tier 4 Boxerit",
         "Lookingass Tier 4 Boxerit",
         "Chad Tier 4 Boxerit",
+        "Pelle Tier 1 Hanskat",
+        "Niceguy Tier 1 Hanskat",
+        "Dagestangoblin Tier 1 Hanskat",
+        "Afrikanmafia Tier 1 Hanskat",
+        "Lookingass Tier 1 Hanskat",
+        "Chad Tier 1 Hanskat",
+        "Pelle Tier 2 Hanskat",
+        "Niceguy Tier 2 Hanskat",
+        "Dagestangoblin Tier 2 Hanskat",
+        "Afrikanmafia Tier 2 Hanskat",
+        "Lookingass Tier 2 Hanskat",
+        "Chad Tier 2 Hanskat",
+        "Pelle Tier 3 Hanskat",
+        "Niceguy Tier 3 Hanskat",
+        "Dagestangoblin Tier 3 Hanskat",
+        "Afrikanmafia Tier 3 Hanskat",
+        "Lookingass Tier 3 Hanskat",
+        "Chad Tier 3 Hanskat",
+        "Pelle Tier 4 Hanskat",
+        "Niceguy Tier 4 Hanskat",
+        "Dagestangoblin Tier 4 Hanskat",
+        "Afrikanmafia Tier 4 Hanskat",
+        "Lookingass Tier 4 Hanskat",
+        "Chad Tier 4 Hanskat",
     ],
     kuvaus: [
         "Pellet 2x nopeempia",
@@ -545,30 +559,6 @@ var upgrades = {
         "Chad 2x power",
     ],
     kuva: [
-        "t1Hanskat.png",
-        "t1Hanskat.png",
-        "t1Hanskat.png",
-        "t1Hanskat.png",
-        "t1Hanskat.png",
-        "t1Hanskat.png",
-        "t2Hanskat.png",
-        "t2Hanskat.png",
-        "t2Hanskat.png",
-        "t2Hanskat.png",
-        "t2Hanskat.png",
-        "t2Hanskat.png",
-        "t3Hanskat.png",
-        "t3Hanskat.png",
-        "t3Hanskat.png",
-        "t3Hanskat.png",
-        "t3Hanskat.png",
-        "t3Hanskat.png",
-        "t4Hanskat.png",
-        "t4Hanskat.png",
-        "t4Hanskat.png",
-        "t4Hanskat.png",
-        "t4Hanskat.png",
-        "t4Hanskat.png",
         "t1Boxerit.png",
         "t1Boxerit.png",
         "t1Boxerit.png",
@@ -593,106 +583,130 @@ var upgrades = {
         "t4Boxerit.png",
         "t4Boxerit.png",
         "t4Boxerit.png",
+        "t1Hanskat.png",
+        "t1Hanskat.png",
+        "t1Hanskat.png",
+        "t1Hanskat.png",
+        "t1Hanskat.png",
+        "t1Hanskat.png",
+        "t2Hanskat.png",
+        "t2Hanskat.png",
+        "t2Hanskat.png",
+        "t2Hanskat.png",
+        "t2Hanskat.png",
+        "t2Hanskat.png",
+        "t3Hanskat.png",
+        "t3Hanskat.png",
+        "t3Hanskat.png",
+        "t3Hanskat.png",
+        "t3Hanskat.png",
+        "t3Hanskat.png",
+        "t4Hanskat.png",
+        "t4Hanskat.png",
+        "t4Hanskat.png",
+        "t4Hanskat.png",
+        "t4Hanskat.png",
+        "t4Hanskat.png",
     ],
     tyyppi: [
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
-        "ottelija",
+        "nopeus",
+        "nopeus",
+        "nopeus",
+        "nopeus",
+        "nopeus",
+        "nopeus",
+        "nopeus",
+        "nopeus",
+        "nopeus",
+        "nopeus",
+        "nopeus",
+        "nopeus",
+        "nopeus",
+        "nopeus",
+        "nopeus",
+        "nopeus",
+        "nopeus",
+        "nopeus",
+        "nopeus",
+        "nopeus",
+        "nopeus",
+        "nopeus",
+        "nopeus",
+        "nopeus",
+        "power",
+        "power",
+        "power",
+        "power",
+        "power",
+        "power",
+        "power",
+        "power",
+        "power",
+        "power",
+        "power",
+        "power",
+        "power",
+        "power",
+        "power",
+        "power",
+        "power",
+        "power",
+        "power",
+        "power",
+        "power",
+        "power",
+        "power",
+        "power",
     ],
     hinta: [
-        600,
-        600,
-        600,
-        600,
-        600,
-        600,
-        1800,
-        1800,
-        1800,
-        1800,
-        1800,
-        1800,
-        5400,
-        5400,
-        5400,
-        5400,
-        5400,
-        5400,
-        16200,
-        16200,
-        16200,
-        16200,
-        16200,
-        16200,
-        600,
-        600,
-        600,
-        600,
-        600,
-        600,
-        1800,
-        1800,
-        1800,
-        1800,
-        1800,
-        1800,
-        5400,
-        5400,
-        5400,
-        5400,
-        5400,
-        5400,
-        16200,
-        16200,
-        16200,
-        16200,
-        16200,
-        16200,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        180,
+        180,
+        180,
+        180,
+        180,
+        180,
+        540,
+        540,
+        540,
+        540,
+        540,
+        540,
+        1620,
+        1620,
+        1620,
+        1620,
+        1620,
+        1620,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        240,
+        240,
+        240,
+        240,
+        240,
+        240,
+        720,
+        720,
+        720,
+        720,
+        720,
+        720,
+        2160,
+        2160,
+        2160,
+        2160,
+        2160,
+        2160,
     ],
     ottelijaIndex: [
         [0, 3, 4, 10],
@@ -929,51 +943,127 @@ var upgrades = {
     osta: function (index) {
         if (!this.ostettu[index] && game.hampaita >= this.hinta[index]) {
             if (this.tag[index] === "pelle" && ottelijat.pelleCount >= this.vaatimus[index]) {
-                game.hampaita -= this.hinta[index];
-                ottelijat.step[0] *= this.bonus[index];
-                ottelijat.step[3] *= this.bonus[index];
-                ottelijat.step[4] *= this.bonus[index];
-                ottelijat.step[10] *= this.bonus[index];
-                this.ostettu[index] = true;
-                updateUpgrades();
+                if (this.tyyppi[index] === "nopeus") {
+                    game.hampaita -= this.hinta[index];
+                    ottelijat.step[0] *= this.bonus[index];
+                    ottelijat.speed[0] *= this.bonus[index];
+                    ottelijat.step[3] *= this.bonus[index];
+                    ottelijat.speed[3] *= this.bonus[index];
+                    ottelijat.step[4] *= this.bonus[index];
+                    ottelijat.speed[4] *= this.bonus[index];
+                    ottelijat.step[10] *= this.bonus[index];
+                    ottelijat.speed[10] *= this.bonus[index];
+                    this.ostettu[index] = true;
+                    updateUpgrades();
+                }
+                if (this.tyyppi[index] === "power") {
+                    game.hampaita -= this.hinta[index];
+                    ottelijat.power[0] *= this.bonus[index];
+                    ottelijat.power[3] *= this.bonus[index];
+                    ottelijat.power[4] *= this.bonus[index];
+                    ottelijat.power[10] *= this.bonus[index];
+                    this.ostettu[index] = true;
+                    updateUpgrades();
+                }
             }
             if (this.tag[index] === "niceGuy" && ottelijat.niceGuyCount >= this.vaatimus[index]) {
-                game.hampaita -= this.hinta[index];
-                ottelijat.step[1] *= this.bonus[index];
-                ottelijat.step[5] *= this.bonus[index];
-                ottelijat.step[9] *= this.bonus[index];
-                ottelijat.step[11] *= this.bonus[index];
-                this.ostettu[index] = true;
-                updateUpgrades();
+                if (this.tyyppi[index] === "nopeus") {
+                    game.hampaita -= this.hinta[index];
+                    ottelijat.step[1] *= this.bonus[index];
+                    ottelijat.speed[1] *= this.bonus[index];
+                    ottelijat.step[5] *= this.bonus[index];
+                    ottelijat.speed[5] *= this.bonus[index];
+                    ottelijat.step[9] *= this.bonus[index];
+                    ottelijat.speed[9] *= this.bonus[index];
+                    ottelijat.step[11] *= this.bonus[index];
+                    ottelijat.speed[11] *= this.bonus[index];
+                    this.ostettu[index] = true;
+                    updateUpgrades();
+                }
+                if (this.tyyppi[index] === "power") {
+                    game.hampaita -= this.hinta[index];
+                    ottelijat.power[1] *= this.bonus[index];
+                    ottelijat.power[5] *= this.bonus[index];
+                    ottelijat.power[9] *= this.bonus[index];
+                    ottelijat.power[11] *= this.bonus[index];
+                    this.ostettu[index] = true;
+                    updateUpgrades();
+                }
             }
             if (this.tag[index] === "dagestanGoblinit" && ottelijat.dagestanGoblinCount >= this.vaatimus[index]) {
-                game.hampaita -= this.hinta[index];
-                ottelijat.step[2] *= this.bonus[index];
-                ottelijat.step[7] *= this.bonus[index];
-                this.ostettu[index] = true;
-                updateUpgrades();
+                if (this.tyyppi[index] === "nopeus") {
+                    game.hampaita -= this.hinta[index];
+                    ottelijat.step[2] *= this.bonus[index];
+                    ottelijat.speed[2] *= this.bonus[index];
+                    ottelijat.step[7] *= this.bonus[index];
+                    ottelijat.speed[7] *= this.bonus[index];
+                    this.ostettu[index] = true;
+                    updateUpgrades();
+                }
+                if (this.tyyppi[index] === "power") {
+                    game.hampaita -= this.hinta[index];
+                    ottelijat.power[2] *= this.bonus[index];
+                    ottelijat.power[7] *= this.bonus[index];
+                    this.ostettu[index] = true;
+                    updateUpgrades();
+                }
             }
             if (this.tag[index] === "afrikanMafia" && ottelijat.afrikanMafiaCount >= this.vaatimus[index]) {
-                game.hampaita -= this.hinta[index];
-                ottelijat.step[1] *= this.bonus[index];
-                ottelijat.step[10] *= this.bonus[index];
-                this.ostettu[index] = true;
-                updateUpgrades();
+                if (this.tyyppi[index] === "nopeus") {
+                    game.hampaita -= this.hinta[index];
+                    ottelijat.step[1] *= this.bonus[index];
+                    ottelijat.speed[1] *= this.bonus[index];
+                    ottelijat.step[10] *= this.bonus[index];
+                    ottelijat.speed[10] *= this.bonus[index];
+                    this.ostettu[index] = true;
+                    updateUpgrades();
+                }
+                if (this.tyyppi[index] === "power") {
+                    game.hampaita -= this.hinta[index];
+                    ottelijat.power[1] *= this.bonus[index];
+                    ottelijat.power[10] *= this.bonus[index];
+                    this.ostettu[index] = true;
+                    updateUpgrades();
+                }
             }
             if (this.tag[index] === "lookingAss" && ottelijat.lookingAssCount >= this.vaatimus[index]) {
-                game.hampaita -= this.hinta[index];
-                ottelijat.step[3] *= this.bonus[index];
-                ottelijat.step[7] *= this.bonus[index];
-                this.ostettu[index] = true;
-                updateUpgrades();
+                if (this.tyyppi[index] === "nopeus") {
+                    game.hampaita -= this.hinta[index];
+                    ottelijat.step[3] *= this.bonus[index];
+                    ottelijat.speed[3] *= this.bonus[index];
+                    ottelijat.step[7] *= this.bonus[index];
+                    ottelijat.speed[7] *= this.bonus[index];
+                    this.ostettu[index] = true;
+                    updateUpgrades();
+                }
+                if (this.tyyppi[index] === "power") {
+                    game.hampaita -= this.hinta[index];
+                    ottelijat.power[3] *= this.bonus[index];
+                    ottelijat.power[7] *= this.bonus[index];
+                    this.ostettu[index] = true;
+                    updateUpgrades();
+                }
             }
             if (this.tag[index] === "chad" && ottelijat.chadCount >= this.vaatimus[index]) {
-                game.hampaita -= this.hinta[index];
-                ottelijat.step[2] *= this.bonus[index];
-                ottelijat.step[4] *= this.bonus[index];
-                ottelijat.step[6] *= this.bonus[index];
-                this.ostettu[index] = true;
-                updateUpgrades();
+                if (this.tyyppi[index] === "nopeus") {
+                    game.hampaita -= this.hinta[index];
+                    ottelijat.step[2] *= this.bonus[index];
+                    ottelijat.speed[2] *= this.bonus[index];
+                    ottelijat.step[4] *= this.bonus[index];
+                    ottelijat.speed[4] *= this.bonus[index];
+                    ottelijat.step[6] *= this.bonus[index];
+                    ottelijat.speed[6] *= this.bonus[index];
+                    this.ostettu[index] = true;
+                    updateUpgrades();
+                }
+                if (this.tyyppi[index] === "power") {
+                    game.hampaita -= this.hinta[index];
+                    ottelijat.power[2] *= this.bonus[index];
+                    ottelijat.power[4] *= this.bonus[index];
+                    ottelijat.power[6] *= this.bonus[index];
+                    this.ostettu[index] = true;
+                    updateUpgrades();
+                }
             }
         }
     }
@@ -1010,7 +1100,7 @@ setInterval(function () {
 function avaaSatunnainen() {
     if (game.hampaita >= shop.avaaSatunnainenHinta) {
         game.hampaita -= shop.avaaSatunnainenHinta;
-        shop.avaaSatunnainenHinta *= 7;
+        shop.avaaSatunnainenHinta *= 4;
         shop.avaaValitsemaHinta *= 1.1;
         shop.lisääTrainereitaHinta *= 1.1;
         var randomIndex = Math.floor(Math.random() * (ottelijat.isUnlocked.length));
@@ -1027,21 +1117,21 @@ function avaaSatunnainen() {
     }
 }
 ;
-function avaaValitsema() {
-    if (game.hampaita >= shop.avaaValitsemaHinta) {
-        game.hampaita -= shop.avaaValitsemaHinta;
-        shop.avaaValitsemaHinta *= 10;
-        shop.avaaSatunnainenHinta *= 1.1;
-        shop.lisääTrainereitaHinta *= 1.1;
-        window.location.href = "./lukitutOttelijat.html";
-        saveGame();
-    }
-}
+/*function avaaValitsema() {
+  if (game.hampaita >= shop.avaaValitsemaHinta) {
+    game.hampaita -= shop.avaaValitsemaHinta;
+    shop.avaaValitsemaHinta *= 10;
+    shop.avaaSatunnainenHinta *= 1.1;
+    shop.lisääTrainereitaHinta *= 1.1;
+    window.location.href = "./lukitutOttelijat.html";
+    saveGame();
+  }
+}*/
 function lisääTrainereita() {
     if (game.hampaita >= shop.lisääTrainereitaHinta) {
         game.hampaita -= shop.lisääTrainereitaHinta;
         game.maxOttelijat += 1;
-        shop.lisääTrainereitaHinta *= 8;
+        shop.lisääTrainereitaHinta *= 5;
         shop.avaaSatunnainenHinta *= 1.1;
         shop.lisääTrainereitaHinta *= 1.1;
         saveGame();
@@ -1051,6 +1141,8 @@ function updateUi() {
     colbyCovingtonXp.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
     colbyCovingtonXpThreshold.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
     colbyCovingtonLevel.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
+    colbyCovingtonPower.innerHTML = ottelijat.power[0].toFixed(0).toLocaleString();
+    colbyCovingtonSpeed.innerHTML = ottelijat.speed[0].toFixed(0).toLocaleString();
     kamaruUsmanXp.innerHTML = ottelijat.xp[1].toFixed(0).toLocaleString();
     kamaruUsmanXpThreshold.innerHTML = ottelijat.xpThreshold[1].toFixed(0).toLocaleString();
     kamaruUsmanLevel.innerHTML = ottelijat.level[1].toFixed(0).toLocaleString();
@@ -1126,7 +1218,8 @@ function saveGame() {
     var gameSave = {
         game: game,
         ottelijat: ottelijat,
-        shop: shop
+        shop: shop,
+        upgrades: upgrades
     };
     localStorage.setItem("gameSave", JSON.stringify(gameSave));
 }
@@ -1140,11 +1233,9 @@ function loadGame() {
     game = parsedGameSave.game;
     ottelijat = parsedGameSave.ottelijat;
     shop = parsedGameSave.shop;
+    upgrades = parsedGameSave.upgrades;
     updateUi();
     console.log("Game loaded");
-    /*if (colbyCovingtonInterval == null) {
-      game.aktiivisiaOttelijoita = 0;
-    }*/
 }
 function resetGame() {
     localStorage.removeItem("gameSave");
@@ -1159,14 +1250,16 @@ var shopElement = document.getElementById('shop');
 var shopItems = Array.from(document.querySelectorAll('.shopItem'));
 var avaaSatunnainenElement = document.getElementById('avaaSatunnainen');
 var avaaSatunnainenHinta = document.getElementById('avaaSatunnainenHinta');
-var avaaValitsemaElement = document.getElementById('avaaValitsema');
+//const avaaValitsemaElement = document.getElementById('avaaValitsema') as HTMLElement;
+//const avaaValitsemaHinta = document.getElementById('avaaValitsemaHinta');
 var lisääTrainereitaElement = document.getElementById('lisääTrainereita');
 var lisääTrainereitaHinta = document.getElementById('lisääTrainereitaHinta');
-//const const avaaValitsemaHinta = document.getElementById('avaaValitsemaHinta');
 var colbyCovington = document.getElementById("colbyCovington");
 var colbyCovingtonXp = document.getElementById('colbyCovingtonXp');
 var colbyCovingtonXpThreshold = document.getElementById('colbyCovingtonXpThreshold');
 var colbyCovingtonLevel = document.getElementById('colbyCovingtonLevel');
+var colbyCovingtonPower = document.getElementById('colbyCovingtonPower');
+var colbyCovingtonSpeed = document.getElementById('colbyCovingtonSpeed');
 var kamaruUsman = document.getElementById("kamaruUsman");
 var kamaruUsmanXp = document.getElementById('kamaruUsmanXp');
 var kamaruUsmanXpThreshold = document.getElementById('kamaruUsmanXpThreshold');
@@ -1230,6 +1323,7 @@ colbyCovington.addEventListener("click", (function () {
                         ottelijat.xpThreshold[0] *= 1.2;
                         ottelijat.level[0] += 1;
                         ottelijat.pelleCount++;
+                        updateUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[0];
@@ -1264,6 +1358,7 @@ kamaruUsman.addEventListener("click", (function () {
                         ottelijat.level[1] += 1;
                         ottelijat.niceGuyCount++;
                         ottelijat.afrikanMafiaCount++;
+                        updateUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[0];
@@ -1298,6 +1393,7 @@ shavkatRakhmonov.addEventListener("click", (function () {
                         ottelijat.level[2] += 1;
                         ottelijat.dagestanGoblinCount++;
                         ottelijat.chadCount++;
+                        updateUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[0];
@@ -1332,6 +1428,7 @@ seanOmalley.addEventListener("click", (function () {
                         ottelijat.level[3] += 1;
                         ottelijat.pelleCount++;
                         ottelijat.lookingAssCount++;
+                        updateUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[3];
@@ -1366,6 +1463,7 @@ jonJones.addEventListener("click", (function () {
                         ottelijat.level[4] += 1;
                         ottelijat.pelleCount++;
                         ottelijat.chadCount++;
+                        updateUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[4];
@@ -1399,6 +1497,7 @@ alexanderVolkanovski.addEventListener("click", (function () {
                         ottelijat.xpThreshold[5] *= 1.2;
                         ottelijat.level[5] += 1;
                         ottelijat.niceGuyCount++;
+                        updateUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[5];
@@ -1432,6 +1531,7 @@ alexPereira.addEventListener("click", (function () {
                         ottelijat.xpThreshold[6] *= 1.2;
                         ottelijat.level[6] += 1;
                         ottelijat.chadCount++;
+                        updateUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[6];
@@ -1466,6 +1566,7 @@ islamMakhachev.addEventListener("click", (function () {
                         ottelijat.level[7] += 1;
                         ottelijat.dagestanGoblinCount++;
                         ottelijat.lookingAssCount++;
+                        updateUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[7];
@@ -1498,6 +1599,8 @@ maxHolloway.addEventListener("click", (function () {
                         ottelijat.xp[8] = 0;
                         ottelijat.xpThreshold[8] *= 1.2;
                         ottelijat.level[8] += 1;
+                        ottelijat.chadCount++;
+                        updateUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[8];
@@ -1531,6 +1634,7 @@ tomAspinall.addEventListener("click", (function () {
                         ottelijat.xpThreshold[9] *= 1.2;
                         ottelijat.level[9] += 1;
                         ottelijat.niceGuyCount++;
+                        updateUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[9];
@@ -1565,6 +1669,7 @@ israelAdesanya.addEventListener("click", (function () {
                         ottelijat.level[10] += 1;
                         ottelijat.pelleCount++;
                         ottelijat.afrikanMafiaCount++;
+                        updateUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[10];
@@ -1598,6 +1703,7 @@ charlesOliveira.addEventListener("click", (function () {
                         ottelijat.xpThreshold[11] *= 1.2;
                         ottelijat.level[11] += 1;
                         ottelijat.niceGuyCount++;
+                        updateUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[11];
@@ -1630,9 +1736,9 @@ avaaSatunnainenElement.addEventListener("click", (function () {
     avaaSatunnainen();
     updateUi();
 }));
-avaaValitsemaElement.addEventListener("click", (function () {
-    avaaValitsema();
-}));
+/*avaaValitsemaElement!.addEventListener("click", (() => {
+  avaaValitsema();
+}));*/
 lisääTrainereitaElement.addEventListener("click", (function () {
     lisääTrainereita();
 }));
