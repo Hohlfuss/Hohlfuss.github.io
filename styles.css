@@ -131,6 +131,7 @@ header {
     margin-top: 0%;
     background-color: rgba(99, 99, 99, 0.5);
     height: 60px;
+    z-index: 1000;
 }
 
 header p {

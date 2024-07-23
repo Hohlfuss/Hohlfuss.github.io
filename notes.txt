@@ -20,6 +20,9 @@ trainereitten pysäyttäminen toimii
 lisäsin shop itemin ostaa lisää trainereita
 lisäsin kasan upgradeja
 
+0.0.8
+upgradeja nii perkeleesti
+
 todo:
 
   -valitse ostettava
