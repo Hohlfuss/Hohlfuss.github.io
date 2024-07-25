@@ -1,6 +1,6 @@
 var game = {
-    version: "0.0.9",
-    hampaita: 0,
+    version: "0.0.10",
+    hampaita: 2,
     hampaitaPerSekunti: 0,
     aktiivisiaOttelijoita: 0,
     maxOttelijat: 1
@@ -77,7 +77,7 @@ var ottelijat = {
         1
     ],
     isUnlocked: [
-        true,
+        false,
         false,
         false,
         false,
@@ -453,9 +453,9 @@ var ottelijat = {
     }
 };
 var shop = {
-    avaaSatunnainenHinta: 10,
+    avaaSatunnainenHinta: 1,
     avaaValitsemaHinta: 100,
-    lisääTrainereitaHinta: 50
+    lisääTrainereitaHinta: 5
 };
 var upgrades = {
     nimi: [
@@ -708,32 +708,35 @@ var upgrades = {
         2160,
         2160,
     ],
-    ottelijaIndex: [
-        [0, 3, 4, 10],
-        1 && 5 && 9 && 11,
-        2 && 7,
-        1 && 10,
-        3 && 7,
-        2 && 4 && 6,
-        0 && 3 && 4 && 10,
-        1 && 5 && 9 && 11,
-        2 && 7,
-        1 && 10,
-        3 && 7,
-        2 && 4 && 6,
-        0 && 3 && 4 && 10,
-        1 && 5 && 9 && 11,
-        2 && 7,
-        1 && 10,
-        3 && 7,
-        2 && 4 && 6,
-        0 && 3 && 4 && 10,
-        1 && 5 && 9 && 11,
-        2 && 7,
-        1 && 10,
-        3 && 7,
-        2 && 4 && 6,
-    ],
+    /*ottelijaIndex: [
+      [0, 3, 4, 10],
+      1 && 5 && 9 && 11,
+      2 && 7,
+      1 && 10,
+      3 && 7,
+      2 && 4 && 6,
+      
+      0 && 3 && 4 && 10,
+      1 && 5 && 9 && 11,
+      2 && 7,
+      1 && 10,
+      3 && 7,
+      2 && 4 && 6,
+      
+      0 && 3 && 4 && 10,
+      1 && 5 && 9 && 11,
+      2 && 7,
+      1 && 10,
+      3 && 7,
+      2 && 4 && 6,
+      
+      0 && 3 && 4 && 10,
+      1 && 5 && 9 && 11,
+      2 && 7,
+      1 && 10,
+      3 && 7,
+      2 && 4 && 6,
+    ],*/
     pellet: [
         0,
         3,
@@ -940,133 +943,133 @@ var upgrades = {
         false,
         false,
     ],
-    osta: function (index) {
-        if (!this.ostettu[index] && game.hampaita >= this.hinta[index]) {
-            if (this.tag[index] === "pelle" && ottelijat.pelleCount >= this.vaatimus[index]) {
-                if (this.tyyppi[index] === "nopeus") {
-                    game.hampaita -= this.hinta[index];
-                    ottelijat.step[0] *= this.bonus[index];
-                    ottelijat.speed[0] *= this.bonus[index];
-                    ottelijat.step[3] *= this.bonus[index];
-                    ottelijat.speed[3] *= this.bonus[index];
-                    ottelijat.step[4] *= this.bonus[index];
-                    ottelijat.speed[4] *= this.bonus[index];
-                    ottelijat.step[10] *= this.bonus[index];
-                    ottelijat.speed[10] *= this.bonus[index];
-                    this.ostettu[index] = true;
-                    updateUpgrades();
-                }
-                if (this.tyyppi[index] === "power") {
-                    game.hampaita -= this.hinta[index];
-                    ottelijat.power[0] *= this.bonus[index];
-                    ottelijat.power[3] *= this.bonus[index];
-                    ottelijat.power[4] *= this.bonus[index];
-                    ottelijat.power[10] *= this.bonus[index];
-                    this.ostettu[index] = true;
-                    updateUpgrades();
-                }
-            }
-            if (this.tag[index] === "niceGuy" && ottelijat.niceGuyCount >= this.vaatimus[index]) {
-                if (this.tyyppi[index] === "nopeus") {
-                    game.hampaita -= this.hinta[index];
-                    ottelijat.step[1] *= this.bonus[index];
-                    ottelijat.speed[1] *= this.bonus[index];
-                    ottelijat.step[5] *= this.bonus[index];
-                    ottelijat.speed[5] *= this.bonus[index];
-                    ottelijat.step[9] *= this.bonus[index];
-                    ottelijat.speed[9] *= this.bonus[index];
-                    ottelijat.step[11] *= this.bonus[index];
-                    ottelijat.speed[11] *= this.bonus[index];
-                    this.ostettu[index] = true;
-                    updateUpgrades();
-                }
-                if (this.tyyppi[index] === "power") {
-                    game.hampaita -= this.hinta[index];
-                    ottelijat.power[1] *= this.bonus[index];
-                    ottelijat.power[5] *= this.bonus[index];
-                    ottelijat.power[9] *= this.bonus[index];
-                    ottelijat.power[11] *= this.bonus[index];
-                    this.ostettu[index] = true;
-                    updateUpgrades();
-                }
-            }
-            if (this.tag[index] === "dagestanGoblinit" && ottelijat.dagestanGoblinCount >= this.vaatimus[index]) {
-                if (this.tyyppi[index] === "nopeus") {
-                    game.hampaita -= this.hinta[index];
-                    ottelijat.step[2] *= this.bonus[index];
-                    ottelijat.speed[2] *= this.bonus[index];
-                    ottelijat.step[7] *= this.bonus[index];
-                    ottelijat.speed[7] *= this.bonus[index];
-                    this.ostettu[index] = true;
-                    updateUpgrades();
-                }
-                if (this.tyyppi[index] === "power") {
-                    game.hampaita -= this.hinta[index];
-                    ottelijat.power[2] *= this.bonus[index];
-                    ottelijat.power[7] *= this.bonus[index];
-                    this.ostettu[index] = true;
-                    updateUpgrades();
-                }
-            }
-            if (this.tag[index] === "afrikanMafia" && ottelijat.afrikanMafiaCount >= this.vaatimus[index]) {
-                if (this.tyyppi[index] === "nopeus") {
-                    game.hampaita -= this.hinta[index];
-                    ottelijat.step[1] *= this.bonus[index];
-                    ottelijat.speed[1] *= this.bonus[index];
-                    ottelijat.step[10] *= this.bonus[index];
-                    ottelijat.speed[10] *= this.bonus[index];
-                    this.ostettu[index] = true;
-                    updateUpgrades();
-                }
-                if (this.tyyppi[index] === "power") {
-                    game.hampaita -= this.hinta[index];
-                    ottelijat.power[1] *= this.bonus[index];
-                    ottelijat.power[10] *= this.bonus[index];
-                    this.ostettu[index] = true;
-                    updateUpgrades();
-                }
-            }
-            if (this.tag[index] === "lookingAss" && ottelijat.lookingAssCount >= this.vaatimus[index]) {
-                if (this.tyyppi[index] === "nopeus") {
-                    game.hampaita -= this.hinta[index];
-                    ottelijat.step[3] *= this.bonus[index];
-                    ottelijat.speed[3] *= this.bonus[index];
-                    ottelijat.step[7] *= this.bonus[index];
-                    ottelijat.speed[7] *= this.bonus[index];
-                    this.ostettu[index] = true;
-                    updateUpgrades();
-                }
-                if (this.tyyppi[index] === "power") {
-                    game.hampaita -= this.hinta[index];
-                    ottelijat.power[3] *= this.bonus[index];
-                    ottelijat.power[7] *= this.bonus[index];
-                    this.ostettu[index] = true;
-                    updateUpgrades();
-                }
-            }
-            if (this.tag[index] === "chad" && ottelijat.chadCount >= this.vaatimus[index]) {
-                if (this.tyyppi[index] === "nopeus") {
-                    game.hampaita -= this.hinta[index];
-                    ottelijat.step[2] *= this.bonus[index];
-                    ottelijat.speed[2] *= this.bonus[index];
-                    ottelijat.step[4] *= this.bonus[index];
-                    ottelijat.speed[4] *= this.bonus[index];
-                    ottelijat.step[6] *= this.bonus[index];
-                    ottelijat.speed[6] *= this.bonus[index];
-                    this.ostettu[index] = true;
-                    updateUpgrades();
-                }
-                if (this.tyyppi[index] === "power") {
-                    game.hampaita -= this.hinta[index];
-                    ottelijat.power[2] *= this.bonus[index];
-                    ottelijat.power[4] *= this.bonus[index];
-                    ottelijat.power[6] *= this.bonus[index];
-                    this.ostettu[index] = true;
-                    updateUpgrades();
-                }
-            }
+    /*osta: function(index) {
+      if (!this.ostettu[index] && game.hampaita >= this.hinta[index]) {
+        if (this.tag[index] === "pelle" && ottelijat.pelleCount >= this.vaatimus[index]) {
+          if (this.tyyppi[index] === "nopeus") {
+            game.hampaita -= this.hinta[index];
+            ottelijat.step[0] *= this.bonus[index];
+            ottelijat.speed[0] *= this.bonus[index];
+            ottelijat.step[3] *= this.bonus[index];
+            ottelijat.speed[3] *= this.bonus[index];
+            ottelijat.step[4] *= this.bonus[index];
+            ottelijat.speed[4] *= this.bonus[index];
+            ottelijat.step[10] *= this.bonus[index];
+            ottelijat.speed[10] *= this.bonus[index];
+            this.ostettu[index] = true;
+            updateUpgrades();
+          }
+          if (this.tyyppi[index] === "power") {
+            game.hampaita -= this.hinta[index];
+            ottelijat.power[0] *= this.bonus[index];
+            ottelijat.power[3] *= this.bonus[index];
+            ottelijat.power[4] *= this.bonus[index];
+            ottelijat.power[10] *= this.bonus[index];
+            this.ostettu[index] = true;
+            updateUpgrades();
+          }
         }
-    }
+        if (this.tag[index] === "niceGuy" && ottelijat.niceGuyCount >= this.vaatimus[index]) {
+          if (this.tyyppi[index] === "nopeus") {
+            game.hampaita -= this.hinta[index];
+            ottelijat.step[1] *= this.bonus[index];
+            ottelijat.speed[1] *= this.bonus[index];
+            ottelijat.step[5] *= this.bonus[index];
+            ottelijat.speed[5] *= this.bonus[index];
+            ottelijat.step[9] *= this.bonus[index];
+            ottelijat.speed[9] *= this.bonus[index];
+            ottelijat.step[11] *= this.bonus[index];
+            ottelijat.speed[11] *= this.bonus[index];
+            this.ostettu[index] = true;
+            updateUpgrades();
+          }
+          if (this.tyyppi[index] === "power") {
+            game.hampaita -= this.hinta[index];
+            ottelijat.power[1] *= this.bonus[index];
+            ottelijat.power[5] *= this.bonus[index];
+            ottelijat.power[9] *= this.bonus[index];
+            ottelijat.power[11] *= this.bonus[index];
+            this.ostettu[index] = true;
+            updateUpgrades();
+          }
+        }
+        if (this.tag[index] === "dagestanGoblinit" && ottelijat.dagestanGoblinCount >= this.vaatimus[index]) {
+          if (this.tyyppi[index] === "nopeus") {
+            game.hampaita -= this.hinta[index];
+            ottelijat.step[2] *= this.bonus[index];
+            ottelijat.speed[2] *= this.bonus[index];
+            ottelijat.step[7] *= this.bonus[index];
+            ottelijat.speed[7] *= this.bonus[index];
+            this.ostettu[index] = true;
+            updateUpgrades();
+          }
+          if (this.tyyppi[index] === "power") {
+            game.hampaita -= this.hinta[index];
+            ottelijat.power[2] *= this.bonus[index];
+            ottelijat.power[7] *= this.bonus[index];
+            this.ostettu[index] = true;
+            updateUpgrades();
+          }
+        }
+        if (this.tag[index] === "afrikanMafia" && ottelijat.afrikanMafiaCount >= this.vaatimus[index]) {
+          if (this.tyyppi[index] === "nopeus") {
+            game.hampaita -= this.hinta[index];
+            ottelijat.step[1] *= this.bonus[index];
+            ottelijat.speed[1] *= this.bonus[index];
+            ottelijat.step[10] *= this.bonus[index];
+            ottelijat.speed[10] *= this.bonus[index];
+            this.ostettu[index] = true;
+            updateUpgrades();
+          }
+          if (this.tyyppi[index] === "power") {
+            game.hampaita -= this.hinta[index];
+            ottelijat.power[1] *= this.bonus[index];
+            ottelijat.power[10] *= this.bonus[index];
+            this.ostettu[index] = true;
+            updateUpgrades();
+          }
+        }
+        if (this.tag[index] === "lookingAss" && ottelijat.lookingAssCount >= this.vaatimus[index]) {
+          if (this.tyyppi[index] === "nopeus") {
+            game.hampaita -= this.hinta[index];
+            ottelijat.step[3] *= this.bonus[index];
+            ottelijat.speed[3] *= this.bonus[index];
+            ottelijat.step[7] *= this.bonus[index];
+            ottelijat.speed[7] *= this.bonus[index];
+            this.ostettu[index] = true;
+            updateUpgrades();
+          }
+          if (this.tyyppi[index] === "power") {
+            game.hampaita -= this.hinta[index];
+            ottelijat.power[3] *= this.bonus[index];
+            ottelijat.power[7] *= this.bonus[index];
+            this.ostettu[index] = true;
+            updateUpgrades();
+          }
+        }
+        if (this.tag[index] === "chad" && ottelijat.chadCount >= this.vaatimus[index]) {
+          if (this.tyyppi[index] === "nopeus") {
+            game.hampaita -= this.hinta[index];
+            ottelijat.step[2] *= this.bonus[index];
+            ottelijat.speed[2] *= this.bonus[index];
+            ottelijat.step[4] *= this.bonus[index];
+            ottelijat.speed[4] *= this.bonus[index];
+            ottelijat.step[6] *= this.bonus[index];
+            ottelijat.speed[6] *= this.bonus[index];
+            this.ostettu[index] = true;
+            updateUpgrades();
+          }
+          if (this.tyyppi[index] === "power") {
+            game.hampaita -= this.hinta[index];
+            ottelijat.power[2] *= this.bonus[index];
+            ottelijat.power[4] *= this.bonus[index];
+            ottelijat.power[6] *= this.bonus[index];
+            this.ostettu[index] = true;
+            updateUpgrades();
+          }
+        }
+      }
+    }*/
 };
 var colbyCovingtonInterval = null;
 var kamaruUsmanInterval = null;
@@ -1093,16 +1096,143 @@ setInterval(function () {
 }, 100);
 setInterval(function () {
     updateUpgrades();
-}, 100000);
+}, 10000);
 setInterval(function () {
     saveGame();
 }, 30000);
+function osta(index) {
+    if (!upgrades.ostettu[index] && game.hampaita >= upgrades.hinta[index]) {
+        if (upgrades.tag[index] === "pelle" && ottelijat.pelleCount >= upgrades.vaatimus[index]) {
+            if (upgrades.tyyppi[index] === "nopeus") {
+                game.hampaita -= upgrades.hinta[index];
+                ottelijat.step[0] *= upgrades.bonus[index];
+                ottelijat.speed[0] *= upgrades.bonus[index];
+                ottelijat.step[3] *= upgrades.bonus[index];
+                ottelijat.speed[3] *= upgrades.bonus[index];
+                ottelijat.step[4] *= upgrades.bonus[index];
+                ottelijat.speed[4] *= upgrades.bonus[index];
+                ottelijat.step[10] *= upgrades.bonus[index];
+                ottelijat.speed[10] *= upgrades.bonus[index];
+                upgrades.ostettu[index] = true;
+                updateUpgrades();
+            }
+            if (upgrades.tyyppi[index] === "power") {
+                game.hampaita -= upgrades.hinta[index];
+                ottelijat.power[0] *= upgrades.bonus[index];
+                ottelijat.power[3] *= upgrades.bonus[index];
+                ottelijat.power[4] *= upgrades.bonus[index];
+                ottelijat.power[10] *= upgrades.bonus[index];
+                upgrades.ostettu[index] = true;
+                updateUpgrades();
+            }
+        }
+        if (upgrades.tag[index] === "niceGuy" && ottelijat.niceGuyCount >= upgrades.vaatimus[index]) {
+            if (upgrades.tyyppi[index] === "nopeus") {
+                game.hampaita -= upgrades.hinta[index];
+                ottelijat.step[1] *= upgrades.bonus[index];
+                ottelijat.speed[1] *= upgrades.bonus[index];
+                ottelijat.step[5] *= upgrades.bonus[index];
+                ottelijat.speed[5] *= upgrades.bonus[index];
+                ottelijat.step[9] *= upgrades.bonus[index];
+                ottelijat.speed[9] *= upgrades.bonus[index];
+                ottelijat.step[11] *= upgrades.bonus[index];
+                ottelijat.speed[11] *= upgrades.bonus[index];
+                upgrades.ostettu[index] = true;
+                updateUpgrades();
+            }
+            if (upgrades.tyyppi[index] === "power") {
+                game.hampaita -= upgrades.hinta[index];
+                ottelijat.power[1] *= upgrades.bonus[index];
+                ottelijat.power[5] *= upgrades.bonus[index];
+                ottelijat.power[9] *= upgrades.bonus[index];
+                ottelijat.power[11] *= upgrades.bonus[index];
+                upgrades.ostettu[index] = true;
+                updateUpgrades();
+            }
+        }
+        if (upgrades.tag[index] === "dagestanGoblinit" && ottelijat.dagestanGoblinCount >= upgrades.vaatimus[index]) {
+            if (upgrades.tyyppi[index] === "nopeus") {
+                game.hampaita -= upgrades.hinta[index];
+                ottelijat.step[2] *= upgrades.bonus[index];
+                ottelijat.speed[2] *= upgrades.bonus[index];
+                ottelijat.step[7] *= upgrades.bonus[index];
+                ottelijat.speed[7] *= upgrades.bonus[index];
+                upgrades.ostettu[index] = true;
+                updateUpgrades();
+            }
+            if (upgrades.tyyppi[index] === "power") {
+                game.hampaita -= upgrades.hinta[index];
+                ottelijat.power[2] *= upgrades.bonus[index];
+                ottelijat.power[7] *= upgrades.bonus[index];
+                upgrades.ostettu[index] = true;
+                updateUpgrades();
+            }
+        }
+        if (upgrades.tag[index] === "afrikanMafia" && ottelijat.afrikanMafiaCount >= upgrades.vaatimus[index]) {
+            if (upgrades.tyyppi[index] === "nopeus") {
+                game.hampaita -= upgrades.hinta[index];
+                ottelijat.step[1] *= upgrades.bonus[index];
+                ottelijat.speed[1] *= upgrades.bonus[index];
+                ottelijat.step[10] *= upgrades.bonus[index];
+                ottelijat.speed[10] *= upgrades.bonus[index];
+                upgrades.ostettu[index] = true;
+                updateUpgrades();
+            }
+            if (upgrades.tyyppi[index] === "power") {
+                game.hampaita -= upgrades.hinta[index];
+                ottelijat.power[1] *= upgrades.bonus[index];
+                ottelijat.power[10] *= upgrades.bonus[index];
+                upgrades.ostettu[index] = true;
+                updateUpgrades();
+            }
+        }
+        if (upgrades.tag[index] === "lookingAss" && ottelijat.lookingAssCount >= upgrades.vaatimus[index]) {
+            if (upgrades.tyyppi[index] === "nopeus") {
+                game.hampaita -= upgrades.hinta[index];
+                ottelijat.step[3] *= upgrades.bonus[index];
+                ottelijat.speed[3] *= upgrades.bonus[index];
+                ottelijat.step[7] *= upgrades.bonus[index];
+                ottelijat.speed[7] *= upgrades.bonus[index];
+                upgrades.ostettu[index] = true;
+                updateUpgrades();
+            }
+            if (upgrades.tyyppi[index] === "power") {
+                game.hampaita -= upgrades.hinta[index];
+                ottelijat.power[3] *= upgrades.bonus[index];
+                ottelijat.power[7] *= upgrades.bonus[index];
+                upgrades.ostettu[index] = true;
+                updateUpgrades();
+            }
+        }
+        if (upgrades.tag[index] === "chad" && ottelijat.chadCount >= upgrades.vaatimus[index]) {
+            if (upgrades.tyyppi[index] === "nopeus") {
+                game.hampaita -= upgrades.hinta[index];
+                ottelijat.step[2] *= upgrades.bonus[index];
+                ottelijat.speed[2] *= upgrades.bonus[index];
+                ottelijat.step[4] *= upgrades.bonus[index];
+                ottelijat.speed[4] *= upgrades.bonus[index];
+                ottelijat.step[6] *= upgrades.bonus[index];
+                ottelijat.speed[6] *= upgrades.bonus[index];
+                upgrades.ostettu[index] = true;
+                updateUpgrades();
+            }
+            if (upgrades.tyyppi[index] === "power") {
+                game.hampaita -= upgrades.hinta[index];
+                ottelijat.power[2] *= upgrades.bonus[index];
+                ottelijat.power[4] *= upgrades.bonus[index];
+                ottelijat.power[6] *= upgrades.bonus[index];
+                upgrades.ostettu[index] = true;
+                updateUpgrades();
+            }
+        }
+    }
+}
 function avaaSatunnainen() {
     if (game.hampaita >= shop.avaaSatunnainenHinta) {
         game.hampaita -= shop.avaaSatunnainenHinta;
-        shop.avaaSatunnainenHinta *= 4;
-        shop.avaaValitsemaHinta *= 1.1;
-        shop.lisääTrainereitaHinta *= 1.1;
+        shop.avaaSatunnainenHinta *= 5;
+        //shop.avaaValitsemaHinta *= 1.1;
+        //shop.lisääTrainereitaHinta *= 1.1;
         var randomIndex = Math.floor(Math.random() * (ottelijat.isUnlocked.length));
         if (ottelijat.isUnlocked[randomIndex] === false) {
             ottelijat.isUnlocked[randomIndex] = true;
@@ -1131,9 +1261,9 @@ function lisääTrainereita() {
     if (game.hampaita >= shop.lisääTrainereitaHinta) {
         game.hampaita -= shop.lisääTrainereitaHinta;
         game.maxOttelijat += 1;
-        shop.lisääTrainereitaHinta *= 5;
-        shop.avaaSatunnainenHinta *= 1.1;
-        shop.lisääTrainereitaHinta *= 1.1;
+        shop.lisääTrainereitaHinta *= 9;
+        //shop.avaaSatunnainenHinta *= 1.1;
+        //shop.lisääTrainereitaHinta *= 1.1;
         saveGame();
     }
 }
@@ -1209,27 +1339,27 @@ function updateUpgrades() {
     for (var i = 0; i < upgrades.nimi.length; i++) {
         if (!upgrades.ostettu[i]) {
             if (upgrades.tag[i] == "pelle" && ottelijat.pelleCount >= upgrades.vaatimus[i]) {
-                document.getElementById("upgradeContainer").innerHTML += '<img src="./assets/' + upgrades.kuva[i] + '" title="' + upgrades.nimi[i] + ' &#10; ' + upgrades.kuvaus[i] + ' &#10; (' + upgrades.hinta[i] + ' hammasta)" onclick="upgrades.osta(' + i + ')">';
+                document.getElementById("upgradeContainer").innerHTML += '<img draggable="false" src="./assets/' + upgrades.kuva[i] + '" title="' + upgrades.nimi[i] + ' &#10; ' + upgrades.kuvaus[i] + ' &#10; (' + upgrades.hinta[i] + ' hammasta)" onclick="osta(' + i + ')">';
                 +upgrades.nimi[i] + '">';
             }
             if (upgrades.tag[i] == "niceGuy" && ottelijat.niceGuyCount >= upgrades.vaatimus[i]) {
-                document.getElementById("upgradeContainer").innerHTML += '<img src="./assets/' + upgrades.kuva[i] + '" title="' + upgrades.nimi[i] + ' &#10; ' + upgrades.kuvaus[i] + ' &#10; (' + upgrades.hinta[i] + ' hammasta)" onclick="upgrades.osta(' + i + ')">';
+                document.getElementById("upgradeContainer").innerHTML += '<img draggable="false" src="./assets/' + upgrades.kuva[i] + '" title="' + upgrades.nimi[i] + ' &#10; ' + upgrades.kuvaus[i] + ' &#10; (' + upgrades.hinta[i] + ' hammasta)" onclick="osta(' + i + ')">';
                 +upgrades.nimi[i] + '">';
             }
             if (upgrades.tag[i] == "dagestanGoblinit" && ottelijat.dagestanGoblinCount >= upgrades.vaatimus[i]) {
-                document.getElementById("upgradeContainer").innerHTML += '<img src="./assets/' + upgrades.kuva[i] + '" title="' + upgrades.nimi[i] + ' &#10; ' + upgrades.kuvaus[i] + ' &#10; (' + upgrades.hinta[i] + ' hammasta)" onclick="upgrades.osta(' + i + ')">';
+                document.getElementById("upgradeContainer").innerHTML += '<img draggable="false" src="./assets/' + upgrades.kuva[i] + '" title="' + upgrades.nimi[i] + ' &#10; ' + upgrades.kuvaus[i] + ' &#10; (' + upgrades.hinta[i] + ' hammasta)" onclick="osta(' + i + ')">';
                 +upgrades.nimi[i] + '">';
             }
             if (upgrades.tag[i] == "afrikanMafia" && ottelijat.afrikanMafiaCount >= upgrades.vaatimus[i]) {
-                document.getElementById("upgradeContainer").innerHTML += '<img src="./assets/' + upgrades.kuva[i] + '" title="' + upgrades.nimi[i] + ' &#10; ' + upgrades.kuvaus[i] + ' &#10; (' + upgrades.hinta[i] + ' hammasta)" onclick="upgrades.osta(' + i + ')">';
+                document.getElementById("upgradeContainer").innerHTML += '<img draggable="false" src="./assets/' + upgrades.kuva[i] + '" title="' + upgrades.nimi[i] + ' &#10; ' + upgrades.kuvaus[i] + ' &#10; (' + upgrades.hinta[i] + ' hammasta)" onclick="osta(' + i + ')">';
                 +upgrades.nimi[i] + '">';
             }
             if (upgrades.tag[i] == "lookingAss" && ottelijat.lookingAssCount >= upgrades.vaatimus[i]) {
-                document.getElementById("upgradeContainer").innerHTML += '<img src="./assets/' + upgrades.kuva[i] + '" title="' + upgrades.nimi[i] + ' &#10; ' + upgrades.kuvaus[i] + ' &#10; (' + upgrades.hinta[i] + ' hammasta)" onclick="upgrades.osta(' + i + ')">';
+                document.getElementById("upgradeContainer").innerHTML += '<img draggable="false" src="./assets/' + upgrades.kuva[i] + '" title="' + upgrades.nimi[i] + ' &#10; ' + upgrades.kuvaus[i] + ' &#10; (' + upgrades.hinta[i] + ' hammasta)" onclick="osta(' + i + ')">';
                 +upgrades.nimi[i] + '">';
             }
             if (upgrades.tag[i] == "chad" && ottelijat.chadCount >= upgrades.vaatimus[i]) {
-                document.getElementById("upgradeContainer").innerHTML += '<img src="./assets/' + upgrades.kuva[i] + '" title="' + upgrades.nimi[i] + ' &#10; ' + upgrades.kuvaus[i] + ' &#10; (' + upgrades.hinta[i] + ' hammasta)" onclick="upgrades.osta(' + i + ')">';
+                document.getElementById("upgradeContainer").innerHTML += '<img draggable="false" src="./assets/' + upgrades.kuva[i] + '" title="' + upgrades.nimi[i] + ' &#10; ' + upgrades.kuvaus[i] + ' &#10; (' + upgrades.hinta[i] + ' hammasta)" onclick="osta(' + i + ')">';
                 +upgrades.nimi[i] + '">';
             }
         }
@@ -1266,7 +1396,7 @@ function resetGame() {
 var hampaita = document.getElementById('hampaita');
 var hampaitaPerSekuntiElement = document.getElementById('hampaitaPerSekunti');
 var save = document.getElementById('save');
-var load = document.getElementById('load');
+//const load = document.getElementById('load') as HTMLElement;
 var reset = document.getElementById('reset');
 var shopElement = document.getElementById('shop');
 var shopItems = Array.from(document.querySelectorAll('.shopItem'));
@@ -1770,9 +1900,9 @@ charlesOliveira.addEventListener("click", (function () {
 save.addEventListener("click", (function () {
     saveGame();
 }));
-load.addEventListener("click", (function () {
-    loadGame();
-}));
+/*load!.addEventListener("click", (() => {
+  loadGame();
+}));*/
 reset.addEventListener("click", (function () {
     resetGame();
 }));

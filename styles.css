@@ -112,6 +112,7 @@ h2 {
     z-index: 1;
 }
 
+#colbyCovingtonContainer,
 #kamaruUsmanContainer,
 #shavkatRakhmonovContainer,
 #seanOmalleyContainer,
@@ -218,7 +219,7 @@ a, button {
   font-size: 10px;
   height: 40px;
   width: 40px;
-  margin-top: 50px;
+  margin-top: 40px;
 }
 
 nav {

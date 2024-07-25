@@ -26,6 +26,11 @@ upgradeja nii perkeleesti
 0.0.9
 speed ja power upgradet toimii
 
+0.0.11
+tosi hyvässä tilassa
+
 todo:
 
   -valitse ostettava
+  -offlinegains
+  -softreset system
