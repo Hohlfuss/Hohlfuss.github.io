@@ -32,6 +32,9 @@ tosi hyvässä tilassa
 0.1.0
 numeroiden formatointia ja offlinegains
 
+0.1.1
+numero kikkailua
+
 todo:
 
   -valitse ostettava

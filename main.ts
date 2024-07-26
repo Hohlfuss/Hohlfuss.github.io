@@ -72,8 +72,8 @@ type Upgrades = {
 }
 
 let game: Game = {
-  version: "0.1.0",
-  hampaita: 2,
+  version: "0.1.1",
+  hampaita: 1,
   hampaitaPerSekunti: 0,
   aktiivisiaOttelijoita: 0,
   maxOttelijat: 1
@@ -1346,8 +1346,8 @@ function updateUi() {
   charlesOliveiraPower!.innerHTML = ottelijat.power[11].toFixed(0).toLocaleString();
   charlesOliveiraSpeed!.innerHTML = ottelijat.speed[11].toFixed(0).toLocaleString();
 
-  hampaita!.innerHTML = new Intl.NumberFormat().format(game.hampaita);
-  hampaitaPerSekuntiElement!.innerHTML = game.hampaitaPerSekunti.toFixed(2).toLocaleString();
+  hampaita!.innerHTML = new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 0 }).format(game.hampaita);
+  hampaitaPerSekuntiElement!.innerHTML = new Intl.NumberFormat().format(game.hampaitaPerSekunti);
   avaaSatunnainenHinta!.innerHTML = new Intl.NumberFormat().format(shop.avaaSatunnainenHinta);
   lisääTrainereitaHinta!.innerHTML = new Intl.NumberFormat().format(shop.lisääTrainereitaHinta);
   //avaaValitsemaHinta!.innerHTML = shop.avaaValitsemaHinta.toFixed(0).toLocaleString();
