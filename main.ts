@@ -72,7 +72,7 @@ type Upgrades = {
 }
 
 let game: Game = {
-  version: "0.0.11",
+  version: "0.1.0",
   hampaita: 2,
   hampaitaPerSekunti: 0,
   aktiivisiaOttelijoita: 0,
@@ -517,7 +517,7 @@ let ottelijat: Ottelijat = {
 let shop: Shop = {
   avaaSatunnainenHinta: 1,
   avaaValitsemaHinta: 100,
-  lisääTrainereitaHinta: 5
+  lisääTrainereitaHinta: 25
 }
 
 let upgrades: Upgrades = {
@@ -1042,6 +1042,8 @@ let upgrades: Upgrades = {
   ]
 }
 
+let lastPlayed = 0;
+
 let colbyCovingtonInterval: NodeJS.Timeout | null = null;
 let kamaruUsmanInterval: NodeJS.Timeout | null = null;
 let shavkatRakhmonovInterval: NodeJS.Timeout | null = null;
@@ -1060,7 +1062,9 @@ setInterval(() => {
   for (let i = 0; i < ottelijat.isUnlocked.length; i++) {
     if (ottelijat.isUnlocked[i] === true) {
       document.getElementById!(ottelijat.id[i] + "Container")!.style.display = "block";
-      totalPower += ottelijat.power[i] / 10;
+      if (ottelijat.isActive[i] === true) {
+        totalPower += (ottelijat.power[i] * ottelijat.speed[i]) / 10;
+      }
     }
   }
   game.hampaitaPerSekunti = totalPower
@@ -1074,6 +1078,30 @@ setInterval(() => {
 setInterval(() => {
   saveGame();
 }, 30_000);
+
+const threshold = 1e6;
+// Function to format number in scientific notation (optional, can be outside)
+function formatNumber(number: number) {
+  if (Math.abs(number) >= threshold) {
+    const exponent = Math.floor(Math.log10(Math.abs(number)));
+    const mantissa = (number / Math.pow(10, exponent)).toFixed(2);
+    return `${mantissa}e+${exponent}`;
+  } else {
+    return number.toLocaleString(); // Display normal number format otherwise
+  }
+}
+
+function offlineGains() {
+	let now = Date.now();
+	let offlineTime = now - lastPlayed;
+	//let reducedProductionRate = 0.0008;
+	let offlineProgress = offlineTime// * reducedProductionRate;
+	let offlineHampaita = game.hampaitaPerSekunti * offlineProgress / 2000;
+  
+  alert(`Offline tienaus ${Math.round(offlineHampaita).toLocaleString()} hampaita!`);
+  game.hampaita += offlineHampaita;
+  document.getElementById("hampaita")!.innerHTML = Math.round(game.hampaita).toLocaleString();
+}
 
 function osta(index: number) {
   if (!upgrades.ostettu[index] && game.hampaita >= upgrades.hinta[index]) {
@@ -1318,10 +1346,10 @@ function updateUi() {
   charlesOliveiraPower!.innerHTML = ottelijat.power[11].toFixed(0).toLocaleString();
   charlesOliveiraSpeed!.innerHTML = ottelijat.speed[11].toFixed(0).toLocaleString();
 
-  hampaita!.innerHTML = game.hampaita.toFixed(0).toLocaleString();
-  hampaitaPerSekuntiElement!.innerHTML = game.hampaitaPerSekunti.toFixed(0).toLocaleString();
-  avaaSatunnainenHinta!.innerHTML = shop.avaaSatunnainenHinta.toFixed(0).toLocaleString();
-  lisääTrainereitaHinta!.innerHTML = shop.lisääTrainereitaHinta.toFixed(0).toLocaleString();
+  hampaita!.innerHTML = new Intl.NumberFormat().format(game.hampaita);
+  hampaitaPerSekuntiElement!.innerHTML = game.hampaitaPerSekunti.toFixed(2).toLocaleString();
+  avaaSatunnainenHinta!.innerHTML = new Intl.NumberFormat().format(shop.avaaSatunnainenHinta);
+  lisääTrainereitaHinta!.innerHTML = new Intl.NumberFormat().format(shop.lisääTrainereitaHinta);
   //avaaValitsemaHinta!.innerHTML = shop.avaaValitsemaHinta.toFixed(0).toLocaleString();
 }
 
@@ -1354,6 +1382,7 @@ function updateUpgrades() {
 function saveGame() {
     console.log("Saving game");
     const gameSave = {
+        lastPlayed: new Date().getTime(),
         game: game,
         ottelijat: ottelijat,
         shop: shop,
@@ -1370,6 +1399,7 @@ function loadGame() {
   }
   const parsedGameSave = JSON.parse(gameSave);
 
+  lastPlayed = parsedGameSave.lastPlayed;
   game = parsedGameSave.game;
   ottelijat = parsedGameSave.ottelijat;
   shop = parsedGameSave.shop;
@@ -1493,6 +1523,7 @@ colbyCovington!.addEventListener("click", (() => {
   if (!colbyCovingtonInterval) {
     if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
       game.aktiivisiaOttelijoita++;
+      ottelijat.isActive[0] = true;
       colbyCovingtonInterval = setInterval(() => {
         if (ottelijat.progress[0] >= 100) {
           ottelijat.progress[0] = 0;
@@ -1519,6 +1550,8 @@ colbyCovington!.addEventListener("click", (() => {
       clearInterval(colbyCovingtonInterval);
       colbyCovingtonInterval = null;
       game.aktiivisiaOttelijoita--;
+      ottelijat.isActive[0] = false;
+      updateUi();
     }
 }));
 
@@ -1526,6 +1559,7 @@ kamaruUsman!.addEventListener("click", (() => {
   if (!kamaruUsmanInterval) {
     if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
       game.aktiivisiaOttelijoita++;
+      ottelijat.isActive[1] = true;
       kamaruUsmanInterval = setInterval(() => {
         if (ottelijat.progress[1] >= 100) {
           ottelijat.progress[1] = 0;
@@ -1553,6 +1587,8 @@ kamaruUsman!.addEventListener("click", (() => {
       clearInterval(kamaruUsmanInterval);
       kamaruUsmanInterval = null;
       game.aktiivisiaOttelijoita--;
+      ottelijat.isActive[1] = false;
+      updateUi();
     }
 }));
 
@@ -1560,6 +1596,7 @@ shavkatRakhmonov!.addEventListener("click", (() => {
   if (!shavkatRakhmonovInterval) {
     if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
       game.aktiivisiaOttelijoita++;
+      ottelijat.isActive[2] = true;
       shavkatRakhmonovInterval = setInterval(() => {
         if (ottelijat.progress[2] >= 100) {
           ottelijat.progress[2] = 0;
@@ -1587,6 +1624,8 @@ shavkatRakhmonov!.addEventListener("click", (() => {
       clearInterval(shavkatRakhmonovInterval);
       shavkatRakhmonovInterval = null;
       game.aktiivisiaOttelijoita--;
+      ottelijat.isActive[2] = false;
+      updateUi();
     }
 }));
 
@@ -1594,6 +1633,7 @@ seanOmalley!.addEventListener("click", (() => {
   if (!seanOmalleyInterval) {
     if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
       game.aktiivisiaOttelijoita++;
+      ottelijat.isActive[3] = true;
       seanOmalleyInterval = setInterval(() => {
         if (ottelijat.progress[3] >= 100) {
           ottelijat.progress[3] = 0;
@@ -1622,6 +1662,8 @@ seanOmalley!.addEventListener("click", (() => {
       clearInterval(seanOmalleyInterval);
       seanOmalleyInterval = null;
       game.aktiivisiaOttelijoita--;
+      ottelijat.isActive[3] = false;
+      updateUi();
     }
 }));
 
@@ -1629,6 +1671,7 @@ jonJones!.addEventListener("click", (() => {
   if (!jonJonesInterval) {
     if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
       game.aktiivisiaOttelijoita++;
+      ottelijat.isActive[4] = true;
       jonJonesInterval = setInterval(() => {
         if (ottelijat.progress[4] >= 100) {
           ottelijat.progress[4] = 0;
@@ -1657,6 +1700,8 @@ jonJones!.addEventListener("click", (() => {
       clearInterval(jonJonesInterval);
       jonJonesInterval = null;
       game.aktiivisiaOttelijoita--;
+      ottelijat.isActive[4] = false;
+      updateUi();
     }
 }));
 
@@ -1664,6 +1709,7 @@ alexanderVolkanovski!.addEventListener("click", (() => {
   if (!alexanderVolkanovskiInterval) {
     if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
       game.aktiivisiaOttelijoita++;
+      ottelijat.isActive[5] = true;
       alexanderVolkanovskiInterval = setInterval(() => {
         if (ottelijat.progress[5] >= 100) {
           ottelijat.progress[5] = 0;
@@ -1690,6 +1736,8 @@ alexanderVolkanovski!.addEventListener("click", (() => {
       clearInterval(alexanderVolkanovskiInterval);
       alexanderVolkanovskiInterval = null;
       game.aktiivisiaOttelijoita--;
+      ottelijat.isActive[5] = false;
+      updateUi();
     }
 }));
 
@@ -1697,6 +1745,7 @@ alexPereira!.addEventListener("click", (() => {
   if (!alexPereiraInterval) {
     if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
       game.aktiivisiaOttelijoita++;
+      ottelijat.isActive[6] = true;
       alexPereiraInterval = setInterval(() => {
         if (ottelijat.progress[6] >= 100) {
           ottelijat.progress[6] = 0;
@@ -1724,6 +1773,8 @@ alexPereira!.addEventListener("click", (() => {
       clearInterval(alexPereiraInterval);
       alexPereiraInterval = null;
       game.aktiivisiaOttelijoita--;
+      ottelijat.isActive[6] = false;
+      updateUi();
     }
 }));
 
@@ -1731,6 +1782,7 @@ islamMakhachev!.addEventListener("click", (() => {
   if (!islamMakhachevInterval) {
     if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
       game.aktiivisiaOttelijoita++;
+      ottelijat.isActive[7] = true;
       islamMakhachevInterval = setInterval(() => {
         if (ottelijat.progress[7] >= 100) {
           ottelijat.progress[7] = 0;
@@ -1759,6 +1811,8 @@ islamMakhachev!.addEventListener("click", (() => {
       clearInterval(islamMakhachevInterval);
       islamMakhachevInterval = null;
       game.aktiivisiaOttelijoita--;
+      ottelijat.isActive[7] = false;
+      updateUi();
     }
 }));
 
@@ -1766,6 +1820,7 @@ maxHolloway!.addEventListener("click", (() => {
   if (!maxHollowayInterval) {
     if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
       game.aktiivisiaOttelijoita++;
+      ottelijat.isActive[8] = true;
       maxHollowayInterval = setInterval(() => {
         if (ottelijat.progress[8] >= 100) {
           ottelijat.progress[8] = 0;
@@ -1792,6 +1847,7 @@ maxHolloway!.addEventListener("click", (() => {
       clearInterval(maxHollowayInterval);
       maxHollowayInterval = null;
       game.aktiivisiaOttelijoita--;
+      ottelijat.isActive[8] = false;
     }
 }));
 
@@ -1799,6 +1855,7 @@ tomAspinall!.addEventListener("click", (() => {
   if (!tomAspinallInterval) {
     if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
       game.aktiivisiaOttelijoita++;
+      ottelijat.isActive[9] = true;
       tomAspinallInterval = setInterval(() => {
         if (ottelijat.progress[9] >= 100) {
           ottelijat.progress[9] = 0;
@@ -1826,6 +1883,8 @@ tomAspinall!.addEventListener("click", (() => {
       clearInterval(tomAspinallInterval);
       tomAspinallInterval = null;
       game.aktiivisiaOttelijoita--;
+      ottelijat.isActive[9] = false;
+      updateUi();
     }
 }));
 
@@ -1833,6 +1892,7 @@ israelAdesanya!.addEventListener("click", (() => {
   if (!israelAdesanyaInterval) {
     if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
       game.aktiivisiaOttelijoita++;
+      ottelijat.isActive[10] = true;
       israelAdesanyaInterval = setInterval(() => {
         if (ottelijat.progress[10] >= 100) {
           ottelijat.progress[10] = 0;
@@ -1860,6 +1920,8 @@ israelAdesanya!.addEventListener("click", (() => {
       clearInterval(israelAdesanyaInterval);
       israelAdesanyaInterval = null;
       game.aktiivisiaOttelijoita--;
+      ottelijat.isActive[10] = false;
+      updateUi();
     }
 }));
 
@@ -1867,6 +1929,7 @@ charlesOliveira!.addEventListener("click", (() => {
   if (!charlesOliveiraInterval) {
     if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
       game.aktiivisiaOttelijoita++;
+      ottelijat.isActive[11] = true;
       charlesOliveiraInterval = setInterval(() => {
         if (ottelijat.progress[11] >= 100) {
           ottelijat.progress[11] = 0;
@@ -1893,6 +1956,8 @@ charlesOliveira!.addEventListener("click", (() => {
       clearInterval(charlesOliveiraInterval);
       charlesOliveiraInterval = null;
       game.aktiivisiaOttelijoita--;
+      ottelijat.isActive[11] = false;
+      updateUi();
     }
 }));
 
@@ -1924,6 +1989,10 @@ lisääTrainereitaElement!.addEventListener("click", (() => {
 window.onload = function() {
   updateUpgrades();
   loadGame();
+  offlineGains();
   game.aktiivisiaOttelijoita = 0;
-  //updateUi();
+  for (let i = 0; i < ottelijat.isActive.length; i++) {
+  ottelijat.isActive[i] = false;
+  }
+  updateUi();
 }
