@@ -1,10 +1,11 @@
 
 type Game = {
-    version: string
-    hampaita: number
-    hampaitaPerSekunti: number
-    aktiivisiaOttelijoita: number
-    maxOttelijat: number
+    version: string;
+    hampaita: number;
+    hampaitaPerSekunti: number;
+    activeTrainers: number;
+    maxTrainers: number;
+    freeTrainers: number;
 }
 
 type Ottelijat = {
@@ -72,11 +73,12 @@ type Upgrades = {
 }
 
 let game: Game = {
-  version: "0.1.1",
+  version: "0.1.2",
   hampaita: 1,
   hampaitaPerSekunti: 0,
-  aktiivisiaOttelijoita: 0,
-  maxOttelijat: 1
+  activeTrainers: 0,
+  maxTrainers: 1,
+  freeTrainers: 0
 }
 
 let ottelijat: Ottelijat = {
@@ -1079,18 +1081,6 @@ setInterval(() => {
   saveGame();
 }, 30_000);
 
-const threshold = 1e6;
-// Function to format number in scientific notation (optional, can be outside)
-function formatNumber(number: number) {
-  if (Math.abs(number) >= threshold) {
-    const exponent = Math.floor(Math.log10(Math.abs(number)));
-    const mantissa = (number / Math.pow(10, exponent)).toFixed(2);
-    return `${mantissa}e+${exponent}`;
-  } else {
-    return number.toLocaleString(); // Display normal number format otherwise
-  }
-}
-
 function offlineGains() {
 	let now = Date.now();
 	let offlineTime = now - lastPlayed;
@@ -1103,6 +1093,7 @@ function offlineGains() {
   document.getElementById("hampaita")!.innerHTML = Math.round(game.hampaita).toLocaleString();
 }
 
+// @ts-ignore
 function osta(index: number) {
   if (!upgrades.ostettu[index] && game.hampaita >= upgrades.hinta[index]) {
     if (upgrades.tag[index] === "pelle" && ottelijat.pelleCount >= upgrades.vaatimus[index]) {
@@ -1265,7 +1256,7 @@ function avaaSatunnainen() {
 function lisääTrainereita() {
   if (game.hampaita >= shop.lisääTrainereitaHinta) {
     game.hampaita -= shop.lisääTrainereitaHinta;
-    game.maxOttelijat += 1;
+    game.maxTrainers += 1;
     shop.lisääTrainereitaHinta *= 9;
     //shop.avaaSatunnainenHinta *= 1.1;
     //shop.lisääTrainereitaHinta *= 1.1;
@@ -1351,6 +1342,7 @@ function updateUi() {
   avaaSatunnainenHinta!.innerHTML = new Intl.NumberFormat().format(shop.avaaSatunnainenHinta);
   lisääTrainereitaHinta!.innerHTML = new Intl.NumberFormat().format(shop.lisääTrainereitaHinta);
   //avaaValitsemaHinta!.innerHTML = shop.avaaValitsemaHinta.toFixed(0).toLocaleString();
+  trainers!.innerHTML = (game.maxTrainers - game.activeTrainers).toLocaleString();
 }
 
 function updateUpgrades() {
@@ -1358,22 +1350,106 @@ function updateUpgrades() {
   for (let i = 0; i < upgrades.nimi.length; i++) {
     if (!upgrades.ostettu[i]) {
       if (upgrades.tag[i] == "pelle" && ottelijat.pelleCount >= upgrades.vaatimus[i]) {
-        document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
+        document.getElementById("upgradeContainer")!.innerHTML += `
+        <div class="upgrade-container">
+          <img
+          draggable="false"
+          src="./assets/${upgrades.kuva[i]}"
+          alt="${upgrades.nimi[i]}"
+          >
+          <div class="upgrade-title"
+          onclick="osta(${i})">
+            <span>${upgrades.kuvaus[i]}</span>
+            <span>(${upgrades.hinta[i]} hammasta)</span>
+          </div>
+        </div>
+        `;
+        //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
       }
       if (upgrades.tag[i] == "niceGuy" && ottelijat.niceGuyCount >= upgrades.vaatimus[i]) {
-        document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
+        `
+        <div class="upgrade-container">
+          <img
+          draggable="false"
+          src="./assets/${upgrades.kuva[i]}"
+          alt="${upgrades.nimi[i]}"
+          >
+          <div class="upgrade-title"
+          onclick="osta(${i})">
+            <span>${upgrades.kuvaus[i]}</span>
+            <span>(${upgrades.hinta[i]} hammasta)</span>
+          </div>
+        </div>
+        `;
+        //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
       }
       if (upgrades.tag[i] == "dagestanGoblinit" && ottelijat.dagestanGoblinCount >= upgrades.vaatimus[i]) {
-        document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
+        `
+        <div class="upgrade-container">
+          <img
+          draggable="false"
+          src="./assets/${upgrades.kuva[i]}"
+          alt="${upgrades.nimi[i]}"
+          >
+          <div class="upgrade-title"
+          onclick="osta(${i})">
+            <span>${upgrades.kuvaus[i]}</span>
+            <span>(${upgrades.hinta[i]} hammasta)</span>
+          </div>
+        </div>
+        `;
+        //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
       }
       if (upgrades.tag[i] == "afrikanMafia" && ottelijat.afrikanMafiaCount >= upgrades.vaatimus[i]) {
-        document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
+        `
+        <div class="upgrade-container">
+          <img
+          draggable="false"
+          src="./assets/${upgrades.kuva[i]}"
+          alt="${upgrades.nimi[i]}"
+          >
+          <div class="upgrade-title"
+          onclick="osta(${i})">
+            <span>${upgrades.kuvaus[i]}</span>
+            <span>(${upgrades.hinta[i]} hammasta)</span>
+          </div>
+        </div>
+        `;
+        //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
       }
       if (upgrades.tag[i] == "lookingAss" && ottelijat.lookingAssCount >= upgrades.vaatimus[i]) {
-        document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
+        `
+        <div class="upgrade-container">
+          <img
+          draggable="false"
+          src="./assets/${upgrades.kuva[i]}"
+          alt="${upgrades.nimi[i]}"
+          >
+          <div class="upgrade-title"
+          onclick="osta(${i})">
+            <span>${upgrades.kuvaus[i]}</span>
+            <span>(${upgrades.hinta[i]} hammasta)</span>
+          </div>
+        </div>
+        `;
+        //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
       }
       if (upgrades.tag[i] == "chad" && ottelijat.chadCount >= upgrades.vaatimus[i]) {
-        document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
+        `
+        <div class="upgrade-container">
+          <img
+          draggable="false"
+          src="./assets/${upgrades.kuva[i]}"
+          alt="${upgrades.nimi[i]}"
+          >
+          <div class="upgrade-title"
+          onclick="osta(${i})">
+            <span>${upgrades.kuvaus[i]}</span>
+            <span>(${upgrades.hinta[i]} hammasta)</span>
+          </div>
+        </div>
+        `;
+        //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
       }
     }
   }
@@ -1419,6 +1495,7 @@ const hampaitaPerSekuntiElement = document.getElementById('hampaitaPerSekunti') 
 const save = document.getElementById('save') as HTMLElement;
 //const load = document.getElementById('load') as HTMLElement;
 const reset = document.getElementById('reset') as HTMLElement;
+const trainers = document.getElementById("trainers") as HTMLParagraphElement;
 
 const shopElement = document.getElementById('shop') as HTMLElement;
 const shopItems = Array.from(document.querySelectorAll('.shopItem')) as HTMLElement[];
@@ -1521,8 +1598,8 @@ shopElement!.addEventListener("click", (() => {
 
 colbyCovington!.addEventListener("click", (() => {
   if (!colbyCovingtonInterval) {
-    if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-      game.aktiivisiaOttelijoita++;
+    if (game.maxTrainers > game.activeTrainers) {
+      game.activeTrainers++;
       ottelijat.isActive[0] = true;
       colbyCovingtonInterval = setInterval(() => {
         if (ottelijat.progress[0] >= 100) {
@@ -1549,7 +1626,7 @@ colbyCovington!.addEventListener("click", (() => {
     } else {
       clearInterval(colbyCovingtonInterval);
       colbyCovingtonInterval = null;
-      game.aktiivisiaOttelijoita--;
+      game.activeTrainers--;
       ottelijat.isActive[0] = false;
       updateUi();
     }
@@ -1557,8 +1634,8 @@ colbyCovington!.addEventListener("click", (() => {
 
 kamaruUsman!.addEventListener("click", (() => {
   if (!kamaruUsmanInterval) {
-    if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-      game.aktiivisiaOttelijoita++;
+    if (game.maxTrainers > game.activeTrainers) {
+      game.activeTrainers++;
       ottelijat.isActive[1] = true;
       kamaruUsmanInterval = setInterval(() => {
         if (ottelijat.progress[1] >= 100) {
@@ -1586,7 +1663,7 @@ kamaruUsman!.addEventListener("click", (() => {
     } else {
       clearInterval(kamaruUsmanInterval);
       kamaruUsmanInterval = null;
-      game.aktiivisiaOttelijoita--;
+      game.activeTrainers--;
       ottelijat.isActive[1] = false;
       updateUi();
     }
@@ -1594,8 +1671,8 @@ kamaruUsman!.addEventListener("click", (() => {
 
 shavkatRakhmonov!.addEventListener("click", (() => {
   if (!shavkatRakhmonovInterval) {
-    if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-      game.aktiivisiaOttelijoita++;
+    if (game.maxTrainers > game.activeTrainers) {
+      game.activeTrainers++;
       ottelijat.isActive[2] = true;
       shavkatRakhmonovInterval = setInterval(() => {
         if (ottelijat.progress[2] >= 100) {
@@ -1623,7 +1700,7 @@ shavkatRakhmonov!.addEventListener("click", (() => {
     } else {
       clearInterval(shavkatRakhmonovInterval);
       shavkatRakhmonovInterval = null;
-      game.aktiivisiaOttelijoita--;
+      game.activeTrainers--;
       ottelijat.isActive[2] = false;
       updateUi();
     }
@@ -1631,8 +1708,8 @@ shavkatRakhmonov!.addEventListener("click", (() => {
 
 seanOmalley!.addEventListener("click", (() => {
   if (!seanOmalleyInterval) {
-    if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-      game.aktiivisiaOttelijoita++;
+    if (game.maxTrainers > game.activeTrainers) {
+      game.activeTrainers++;
       ottelijat.isActive[3] = true;
       seanOmalleyInterval = setInterval(() => {
         if (ottelijat.progress[3] >= 100) {
@@ -1661,7 +1738,7 @@ seanOmalley!.addEventListener("click", (() => {
     } else {
       clearInterval(seanOmalleyInterval);
       seanOmalleyInterval = null;
-      game.aktiivisiaOttelijoita--;
+      game.activeTrainers--;
       ottelijat.isActive[3] = false;
       updateUi();
     }
@@ -1669,8 +1746,8 @@ seanOmalley!.addEventListener("click", (() => {
 
 jonJones!.addEventListener("click", (() => {
   if (!jonJonesInterval) {
-    if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-      game.aktiivisiaOttelijoita++;
+    if (game.maxTrainers > game.activeTrainers) {
+      game.activeTrainers++;
       ottelijat.isActive[4] = true;
       jonJonesInterval = setInterval(() => {
         if (ottelijat.progress[4] >= 100) {
@@ -1699,7 +1776,7 @@ jonJones!.addEventListener("click", (() => {
     } else {
       clearInterval(jonJonesInterval);
       jonJonesInterval = null;
-      game.aktiivisiaOttelijoita--;
+      game.activeTrainers--;
       ottelijat.isActive[4] = false;
       updateUi();
     }
@@ -1707,8 +1784,8 @@ jonJones!.addEventListener("click", (() => {
 
 alexanderVolkanovski!.addEventListener("click", (() => {
   if (!alexanderVolkanovskiInterval) {
-    if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-      game.aktiivisiaOttelijoita++;
+    if (game.maxTrainers > game.activeTrainers) {
+      game.activeTrainers++;
       ottelijat.isActive[5] = true;
       alexanderVolkanovskiInterval = setInterval(() => {
         if (ottelijat.progress[5] >= 100) {
@@ -1735,7 +1812,7 @@ alexanderVolkanovski!.addEventListener("click", (() => {
     } else {
       clearInterval(alexanderVolkanovskiInterval);
       alexanderVolkanovskiInterval = null;
-      game.aktiivisiaOttelijoita--;
+      game.activeTrainers--;
       ottelijat.isActive[5] = false;
       updateUi();
     }
@@ -1743,8 +1820,8 @@ alexanderVolkanovski!.addEventListener("click", (() => {
 
 alexPereira!.addEventListener("click", (() => {
   if (!alexPereiraInterval) {
-    if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-      game.aktiivisiaOttelijoita++;
+    if (game.maxTrainers > game.activeTrainers) {
+      game.activeTrainers++;
       ottelijat.isActive[6] = true;
       alexPereiraInterval = setInterval(() => {
         if (ottelijat.progress[6] >= 100) {
@@ -1772,7 +1849,7 @@ alexPereira!.addEventListener("click", (() => {
     } else {
       clearInterval(alexPereiraInterval);
       alexPereiraInterval = null;
-      game.aktiivisiaOttelijoita--;
+      game.activeTrainers--;
       ottelijat.isActive[6] = false;
       updateUi();
     }
@@ -1780,8 +1857,8 @@ alexPereira!.addEventListener("click", (() => {
 
 islamMakhachev!.addEventListener("click", (() => {
   if (!islamMakhachevInterval) {
-    if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-      game.aktiivisiaOttelijoita++;
+    if (game.maxTrainers > game.activeTrainers) {
+      game.activeTrainers++;
       ottelijat.isActive[7] = true;
       islamMakhachevInterval = setInterval(() => {
         if (ottelijat.progress[7] >= 100) {
@@ -1810,7 +1887,7 @@ islamMakhachev!.addEventListener("click", (() => {
     } else {
       clearInterval(islamMakhachevInterval);
       islamMakhachevInterval = null;
-      game.aktiivisiaOttelijoita--;
+      game.activeTrainers--;
       ottelijat.isActive[7] = false;
       updateUi();
     }
@@ -1818,8 +1895,8 @@ islamMakhachev!.addEventListener("click", (() => {
 
 maxHolloway!.addEventListener("click", (() => {
   if (!maxHollowayInterval) {
-    if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-      game.aktiivisiaOttelijoita++;
+    if (game.maxTrainers > game.activeTrainers) {
+      game.activeTrainers++;
       ottelijat.isActive[8] = true;
       maxHollowayInterval = setInterval(() => {
         if (ottelijat.progress[8] >= 100) {
@@ -1846,15 +1923,15 @@ maxHolloway!.addEventListener("click", (() => {
     } else {
       clearInterval(maxHollowayInterval);
       maxHollowayInterval = null;
-      game.aktiivisiaOttelijoita--;
+      game.activeTrainers--;
       ottelijat.isActive[8] = false;
     }
 }));
 
 tomAspinall!.addEventListener("click", (() => {
   if (!tomAspinallInterval) {
-    if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-      game.aktiivisiaOttelijoita++;
+    if (game.maxTrainers > game.activeTrainers) {
+      game.activeTrainers++;
       ottelijat.isActive[9] = true;
       tomAspinallInterval = setInterval(() => {
         if (ottelijat.progress[9] >= 100) {
@@ -1882,7 +1959,7 @@ tomAspinall!.addEventListener("click", (() => {
     } else {
       clearInterval(tomAspinallInterval);
       tomAspinallInterval = null;
-      game.aktiivisiaOttelijoita--;
+      game.activeTrainers--;
       ottelijat.isActive[9] = false;
       updateUi();
     }
@@ -1890,8 +1967,8 @@ tomAspinall!.addEventListener("click", (() => {
 
 israelAdesanya!.addEventListener("click", (() => {
   if (!israelAdesanyaInterval) {
-    if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-      game.aktiivisiaOttelijoita++;
+    if (game.maxTrainers > game.activeTrainers) {
+      game.activeTrainers++;
       ottelijat.isActive[10] = true;
       israelAdesanyaInterval = setInterval(() => {
         if (ottelijat.progress[10] >= 100) {
@@ -1919,7 +1996,7 @@ israelAdesanya!.addEventListener("click", (() => {
     } else {
       clearInterval(israelAdesanyaInterval);
       israelAdesanyaInterval = null;
-      game.aktiivisiaOttelijoita--;
+      game.activeTrainers--;
       ottelijat.isActive[10] = false;
       updateUi();
     }
@@ -1927,8 +2004,8 @@ israelAdesanya!.addEventListener("click", (() => {
 
 charlesOliveira!.addEventListener("click", (() => {
   if (!charlesOliveiraInterval) {
-    if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-      game.aktiivisiaOttelijoita++;
+    if (game.maxTrainers > game.activeTrainers) {
+      game.activeTrainers++;
       ottelijat.isActive[11] = true;
       charlesOliveiraInterval = setInterval(() => {
         if (ottelijat.progress[11] >= 100) {
@@ -1955,7 +2032,7 @@ charlesOliveira!.addEventListener("click", (() => {
     } else {
       clearInterval(charlesOliveiraInterval);
       charlesOliveiraInterval = null;
-      game.aktiivisiaOttelijoita--;
+      game.activeTrainers--;
       ottelijat.isActive[11] = false;
       updateUi();
     }
@@ -1990,7 +2067,7 @@ window.onload = function() {
   updateUpgrades();
   loadGame();
   offlineGains();
-  game.aktiivisiaOttelijoita = 0;
+  game.activeTrainers = 0;
   for (let i = 0; i < ottelijat.isActive.length; i++) {
   ottelijat.isActive[i] = false;
   }

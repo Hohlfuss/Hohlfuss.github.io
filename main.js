@@ -1,9 +1,10 @@
 var game = {
-    version: "0.1.0",
+    version: "0.1.2",
     hampaita: 1,
     hampaitaPerSekunti: 0,
-    aktiivisiaOttelijoita: 0,
-    maxOttelijat: 1
+    activeTrainers: 0,
+    maxTrainers: 1,
+    freeTrainers: 0
 };
 var ottelijat = {
     nimi: [
@@ -934,18 +935,6 @@ setInterval(function () {
 setInterval(function () {
     saveGame();
 }, 30000);
-var threshold = 1e6;
-// Function to format number in scientific notation (optional, can be outside)
-function formatNumber(number) {
-    if (Math.abs(number) >= threshold) {
-        var exponent = Math.floor(Math.log10(Math.abs(number)));
-        var mantissa = (number / Math.pow(10, exponent)).toFixed(2);
-        return "".concat(mantissa, "e+").concat(exponent);
-    }
-    else {
-        return number.toLocaleString(); // Display normal number format otherwise
-    }
-}
 function offlineGains() {
     var now = Date.now();
     var offlineTime = now - lastPlayed;
@@ -1116,7 +1105,7 @@ function avaaSatunnainen() {
 function lisääTrainereita() {
     if (game.hampaita >= shop.lisääTrainereitaHinta) {
         game.hampaita -= shop.lisääTrainereitaHinta;
-        game.maxOttelijat += 1;
+        game.maxTrainers += 1;
         shop.lisääTrainereitaHinta *= 9;
         //shop.avaaSatunnainenHinta *= 1.1;
         //shop.lisääTrainereitaHinta *= 1.1;
@@ -1189,34 +1178,35 @@ function updateUi() {
     avaaSatunnainenHinta.innerHTML = new Intl.NumberFormat().format(shop.avaaSatunnainenHinta);
     lisääTrainereitaHinta.innerHTML = new Intl.NumberFormat().format(shop.lisääTrainereitaHinta);
     //avaaValitsemaHinta!.innerHTML = shop.avaaValitsemaHinta.toFixed(0).toLocaleString();
+    trainers.innerHTML = (game.maxTrainers - game.activeTrainers).toLocaleString();
 }
 function updateUpgrades() {
     document.getElementById("upgradeContainer").innerHTML = "";
     for (var i = 0; i < upgrades.nimi.length; i++) {
         if (!upgrades.ostettu[i]) {
             if (upgrades.tag[i] == "pelle" && ottelijat.pelleCount >= upgrades.vaatimus[i]) {
-                document.getElementById("upgradeContainer").innerHTML += '<img draggable="false" src="./assets/' + upgrades.kuva[i] + '" title="' + upgrades.nimi[i] + ' &#10; ' + upgrades.kuvaus[i] + ' &#10; (' + upgrades.hinta[i] + ' hammasta)" onclick="osta(' + i + ')">';
-                +upgrades.nimi[i] + '">';
+                document.getElementById("upgradeContainer").innerHTML += "\n        <div class=\"upgrade-container\">\n          <img\n          draggable=\"false\"\n          src=\"./assets/".concat(upgrades.kuva[i], "\"\n          alt=\"").concat(upgrades.nimi[i], "\"\n          >\n          <div class=\"upgrade-title\"\n          onclick=\"osta(").concat(i, ")\">\n            <span>").concat(upgrades.kuvaus[i], "</span>\n            <span>(").concat(upgrades.hinta[i], " hammasta)</span>\n          </div>\n        </div>\n        ");
+                //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
             }
             if (upgrades.tag[i] == "niceGuy" && ottelijat.niceGuyCount >= upgrades.vaatimus[i]) {
-                document.getElementById("upgradeContainer").innerHTML += '<img draggable="false" src="./assets/' + upgrades.kuva[i] + '" title="' + upgrades.nimi[i] + ' &#10; ' + upgrades.kuvaus[i] + ' &#10; (' + upgrades.hinta[i] + ' hammasta)" onclick="osta(' + i + ')">';
-                +upgrades.nimi[i] + '">';
+                "\n        <div class=\"upgrade-container\">\n          <img\n          draggable=\"false\"\n          src=\"./assets/".concat(upgrades.kuva[i], "\"\n          alt=\"").concat(upgrades.nimi[i], "\"\n          >\n          <div class=\"upgrade-title\"\n          onclick=\"osta(").concat(i, ")\">\n            <span>").concat(upgrades.kuvaus[i], "</span>\n            <span>(").concat(upgrades.hinta[i], " hammasta)</span>\n          </div>\n        </div>\n        ");
+                //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
             }
             if (upgrades.tag[i] == "dagestanGoblinit" && ottelijat.dagestanGoblinCount >= upgrades.vaatimus[i]) {
-                document.getElementById("upgradeContainer").innerHTML += '<img draggable="false" src="./assets/' + upgrades.kuva[i] + '" title="' + upgrades.nimi[i] + ' &#10; ' + upgrades.kuvaus[i] + ' &#10; (' + upgrades.hinta[i] + ' hammasta)" onclick="osta(' + i + ')">';
-                +upgrades.nimi[i] + '">';
+                "\n        <div class=\"upgrade-container\">\n          <img\n          draggable=\"false\"\n          src=\"./assets/".concat(upgrades.kuva[i], "\"\n          alt=\"").concat(upgrades.nimi[i], "\"\n          >\n          <div class=\"upgrade-title\"\n          onclick=\"osta(").concat(i, ")\">\n            <span>").concat(upgrades.kuvaus[i], "</span>\n            <span>(").concat(upgrades.hinta[i], " hammasta)</span>\n          </div>\n        </div>\n        ");
+                //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
             }
             if (upgrades.tag[i] == "afrikanMafia" && ottelijat.afrikanMafiaCount >= upgrades.vaatimus[i]) {
-                document.getElementById("upgradeContainer").innerHTML += '<img draggable="false" src="./assets/' + upgrades.kuva[i] + '" title="' + upgrades.nimi[i] + ' &#10; ' + upgrades.kuvaus[i] + ' &#10; (' + upgrades.hinta[i] + ' hammasta)" onclick="osta(' + i + ')">';
-                +upgrades.nimi[i] + '">';
+                "\n        <div class=\"upgrade-container\">\n          <img\n          draggable=\"false\"\n          src=\"./assets/".concat(upgrades.kuva[i], "\"\n          alt=\"").concat(upgrades.nimi[i], "\"\n          >\n          <div class=\"upgrade-title\"\n          onclick=\"osta(").concat(i, ")\">\n            <span>").concat(upgrades.kuvaus[i], "</span>\n            <span>(").concat(upgrades.hinta[i], " hammasta)</span>\n          </div>\n        </div>\n        ");
+                //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
             }
             if (upgrades.tag[i] == "lookingAss" && ottelijat.lookingAssCount >= upgrades.vaatimus[i]) {
-                document.getElementById("upgradeContainer").innerHTML += '<img draggable="false" src="./assets/' + upgrades.kuva[i] + '" title="' + upgrades.nimi[i] + ' &#10; ' + upgrades.kuvaus[i] + ' &#10; (' + upgrades.hinta[i] + ' hammasta)" onclick="osta(' + i + ')">';
-                +upgrades.nimi[i] + '">';
+                "\n        <div class=\"upgrade-container\">\n          <img\n          draggable=\"false\"\n          src=\"./assets/".concat(upgrades.kuva[i], "\"\n          alt=\"").concat(upgrades.nimi[i], "\"\n          >\n          <div class=\"upgrade-title\"\n          onclick=\"osta(").concat(i, ")\">\n            <span>").concat(upgrades.kuvaus[i], "</span>\n            <span>(").concat(upgrades.hinta[i], " hammasta)</span>\n          </div>\n        </div>\n        ");
+                //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
             }
             if (upgrades.tag[i] == "chad" && ottelijat.chadCount >= upgrades.vaatimus[i]) {
-                document.getElementById("upgradeContainer").innerHTML += '<img draggable="false" src="./assets/' + upgrades.kuva[i] + '" title="' + upgrades.nimi[i] + ' &#10; ' + upgrades.kuvaus[i] + ' &#10; (' + upgrades.hinta[i] + ' hammasta)" onclick="osta(' + i + ')">';
-                +upgrades.nimi[i] + '">';
+                "\n        <div class=\"upgrade-container\">\n          <img\n          draggable=\"false\"\n          src=\"./assets/".concat(upgrades.kuva[i], "\"\n          alt=\"").concat(upgrades.nimi[i], "\"\n          >\n          <div class=\"upgrade-title\"\n          onclick=\"osta(").concat(i, ")\">\n            <span>").concat(upgrades.kuvaus[i], "</span>\n            <span>(").concat(upgrades.hinta[i], " hammasta)</span>\n          </div>\n        </div>\n        ");
+                //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
             }
         }
     }
@@ -1256,6 +1246,7 @@ var hampaitaPerSekuntiElement = document.getElementById('hampaitaPerSekunti');
 var save = document.getElementById('save');
 //const load = document.getElementById('load') as HTMLElement;
 var reset = document.getElementById('reset');
+var trainers = document.getElementById("trainers");
 var shopElement = document.getElementById('shop');
 var shopItems = Array.from(document.querySelectorAll('.shopItem'));
 var avaaSatunnainenElement = document.getElementById('avaaSatunnainen');
@@ -1343,8 +1334,8 @@ shopElement.addEventListener("click", (function () {
 }));
 colbyCovington.addEventListener("click", (function () {
     if (!colbyCovingtonInterval) {
-        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-            game.aktiivisiaOttelijoita++;
+        if (game.maxTrainers > game.activeTrainers) {
+            game.activeTrainers++;
             ottelijat.isActive[0] = true;
             colbyCovingtonInterval = setInterval(function () {
                 if (ottelijat.progress[0] >= 100) {
@@ -1374,15 +1365,15 @@ colbyCovington.addEventListener("click", (function () {
     else {
         clearInterval(colbyCovingtonInterval);
         colbyCovingtonInterval = null;
-        game.aktiivisiaOttelijoita--;
+        game.activeTrainers--;
         ottelijat.isActive[0] = false;
         updateUi();
     }
 }));
 kamaruUsman.addEventListener("click", (function () {
     if (!kamaruUsmanInterval) {
-        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-            game.aktiivisiaOttelijoita++;
+        if (game.maxTrainers > game.activeTrainers) {
+            game.activeTrainers++;
             ottelijat.isActive[1] = true;
             kamaruUsmanInterval = setInterval(function () {
                 if (ottelijat.progress[1] >= 100) {
@@ -1413,15 +1404,15 @@ kamaruUsman.addEventListener("click", (function () {
     else {
         clearInterval(kamaruUsmanInterval);
         kamaruUsmanInterval = null;
-        game.aktiivisiaOttelijoita--;
+        game.activeTrainers--;
         ottelijat.isActive[1] = false;
         updateUi();
     }
 }));
 shavkatRakhmonov.addEventListener("click", (function () {
     if (!shavkatRakhmonovInterval) {
-        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-            game.aktiivisiaOttelijoita++;
+        if (game.maxTrainers > game.activeTrainers) {
+            game.activeTrainers++;
             ottelijat.isActive[2] = true;
             shavkatRakhmonovInterval = setInterval(function () {
                 if (ottelijat.progress[2] >= 100) {
@@ -1452,15 +1443,15 @@ shavkatRakhmonov.addEventListener("click", (function () {
     else {
         clearInterval(shavkatRakhmonovInterval);
         shavkatRakhmonovInterval = null;
-        game.aktiivisiaOttelijoita--;
+        game.activeTrainers--;
         ottelijat.isActive[2] = false;
         updateUi();
     }
 }));
 seanOmalley.addEventListener("click", (function () {
     if (!seanOmalleyInterval) {
-        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-            game.aktiivisiaOttelijoita++;
+        if (game.maxTrainers > game.activeTrainers) {
+            game.activeTrainers++;
             ottelijat.isActive[3] = true;
             seanOmalleyInterval = setInterval(function () {
                 if (ottelijat.progress[3] >= 100) {
@@ -1492,15 +1483,15 @@ seanOmalley.addEventListener("click", (function () {
     else {
         clearInterval(seanOmalleyInterval);
         seanOmalleyInterval = null;
-        game.aktiivisiaOttelijoita--;
+        game.activeTrainers--;
         ottelijat.isActive[3] = false;
         updateUi();
     }
 }));
 jonJones.addEventListener("click", (function () {
     if (!jonJonesInterval) {
-        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-            game.aktiivisiaOttelijoita++;
+        if (game.maxTrainers > game.activeTrainers) {
+            game.activeTrainers++;
             ottelijat.isActive[4] = true;
             jonJonesInterval = setInterval(function () {
                 if (ottelijat.progress[4] >= 100) {
@@ -1532,15 +1523,15 @@ jonJones.addEventListener("click", (function () {
     else {
         clearInterval(jonJonesInterval);
         jonJonesInterval = null;
-        game.aktiivisiaOttelijoita--;
+        game.activeTrainers--;
         ottelijat.isActive[4] = false;
         updateUi();
     }
 }));
 alexanderVolkanovski.addEventListener("click", (function () {
     if (!alexanderVolkanovskiInterval) {
-        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-            game.aktiivisiaOttelijoita++;
+        if (game.maxTrainers > game.activeTrainers) {
+            game.activeTrainers++;
             ottelijat.isActive[5] = true;
             alexanderVolkanovskiInterval = setInterval(function () {
                 if (ottelijat.progress[5] >= 100) {
@@ -1570,15 +1561,15 @@ alexanderVolkanovski.addEventListener("click", (function () {
     else {
         clearInterval(alexanderVolkanovskiInterval);
         alexanderVolkanovskiInterval = null;
-        game.aktiivisiaOttelijoita--;
+        game.activeTrainers--;
         ottelijat.isActive[5] = false;
         updateUi();
     }
 }));
 alexPereira.addEventListener("click", (function () {
     if (!alexPereiraInterval) {
-        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-            game.aktiivisiaOttelijoita++;
+        if (game.maxTrainers > game.activeTrainers) {
+            game.activeTrainers++;
             ottelijat.isActive[6] = true;
             alexPereiraInterval = setInterval(function () {
                 if (ottelijat.progress[6] >= 100) {
@@ -1609,15 +1600,15 @@ alexPereira.addEventListener("click", (function () {
     else {
         clearInterval(alexPereiraInterval);
         alexPereiraInterval = null;
-        game.aktiivisiaOttelijoita--;
+        game.activeTrainers--;
         ottelijat.isActive[6] = false;
         updateUi();
     }
 }));
 islamMakhachev.addEventListener("click", (function () {
     if (!islamMakhachevInterval) {
-        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-            game.aktiivisiaOttelijoita++;
+        if (game.maxTrainers > game.activeTrainers) {
+            game.activeTrainers++;
             ottelijat.isActive[7] = true;
             islamMakhachevInterval = setInterval(function () {
                 if (ottelijat.progress[7] >= 100) {
@@ -1649,15 +1640,15 @@ islamMakhachev.addEventListener("click", (function () {
     else {
         clearInterval(islamMakhachevInterval);
         islamMakhachevInterval = null;
-        game.aktiivisiaOttelijoita--;
+        game.activeTrainers--;
         ottelijat.isActive[7] = false;
         updateUi();
     }
 }));
 maxHolloway.addEventListener("click", (function () {
     if (!maxHollowayInterval) {
-        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-            game.aktiivisiaOttelijoita++;
+        if (game.maxTrainers > game.activeTrainers) {
+            game.activeTrainers++;
             ottelijat.isActive[8] = true;
             maxHollowayInterval = setInterval(function () {
                 if (ottelijat.progress[8] >= 100) {
@@ -1687,14 +1678,14 @@ maxHolloway.addEventListener("click", (function () {
     else {
         clearInterval(maxHollowayInterval);
         maxHollowayInterval = null;
-        game.aktiivisiaOttelijoita--;
+        game.activeTrainers--;
         ottelijat.isActive[8] = false;
     }
 }));
 tomAspinall.addEventListener("click", (function () {
     if (!tomAspinallInterval) {
-        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-            game.aktiivisiaOttelijoita++;
+        if (game.maxTrainers > game.activeTrainers) {
+            game.activeTrainers++;
             ottelijat.isActive[9] = true;
             tomAspinallInterval = setInterval(function () {
                 if (ottelijat.progress[9] >= 100) {
@@ -1725,15 +1716,15 @@ tomAspinall.addEventListener("click", (function () {
     else {
         clearInterval(tomAspinallInterval);
         tomAspinallInterval = null;
-        game.aktiivisiaOttelijoita--;
+        game.activeTrainers--;
         ottelijat.isActive[9] = false;
         updateUi();
     }
 }));
 israelAdesanya.addEventListener("click", (function () {
     if (!israelAdesanyaInterval) {
-        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-            game.aktiivisiaOttelijoita++;
+        if (game.maxTrainers > game.activeTrainers) {
+            game.activeTrainers++;
             ottelijat.isActive[10] = true;
             israelAdesanyaInterval = setInterval(function () {
                 if (ottelijat.progress[10] >= 100) {
@@ -1764,15 +1755,15 @@ israelAdesanya.addEventListener("click", (function () {
     else {
         clearInterval(israelAdesanyaInterval);
         israelAdesanyaInterval = null;
-        game.aktiivisiaOttelijoita--;
+        game.activeTrainers--;
         ottelijat.isActive[10] = false;
         updateUi();
     }
 }));
 charlesOliveira.addEventListener("click", (function () {
     if (!charlesOliveiraInterval) {
-        if (game.maxOttelijat > game.aktiivisiaOttelijoita) {
-            game.aktiivisiaOttelijoita++;
+        if (game.maxTrainers > game.activeTrainers) {
+            game.activeTrainers++;
             ottelijat.isActive[11] = true;
             charlesOliveiraInterval = setInterval(function () {
                 if (ottelijat.progress[11] >= 100) {
@@ -1802,7 +1793,7 @@ charlesOliveira.addEventListener("click", (function () {
     else {
         clearInterval(charlesOliveiraInterval);
         charlesOliveiraInterval = null;
-        game.aktiivisiaOttelijoita--;
+        game.activeTrainers--;
         ottelijat.isActive[11] = false;
         updateUi();
     }
@@ -1830,7 +1821,7 @@ window.onload = function () {
     updateUpgrades();
     loadGame();
     offlineGains();
-    game.aktiivisiaOttelijoita = 0;
+    game.activeTrainers = 0;
     for (var i = 0; i < ottelijat.isActive.length; i++) {
         ottelijat.isActive[i] = false;
     }

@@ -35,8 +35,11 @@ numeroiden formatointia ja offlinegains
 0.1.1
 numero kikkailua
 
+0.1.2
+vedin uusiks upgare napit ja niiden ostamisen 
+pääsin myös eroon ku se herjas siitä osta funktiosta.
+
 todo:
 
   -valitse ostettava
-  -offlinegains
   -softreset system
