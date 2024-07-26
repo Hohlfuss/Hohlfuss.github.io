@@ -39,6 +39,10 @@ numero kikkailua
 vedin uusiks upgare napit ja niiden ostamisen 
 pääsin myös eroon ku se herjas siitä osta funktiosta.
 
+0.1.3
+korjasin ottelijan oston että se ensin tarkistaa onko ulocked
+parantelin upgradenappeja
+
 todo:
 
   -valitse ostettava
