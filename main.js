@@ -1,10 +1,27 @@
 var game = {
-    version: "0.1.3",
+    version: "0.1.6",
     hampaita: 1,
     hampaitaPerSekunti: 0,
+    verta: 0,
     activeTrainers: 0,
     maxTrainers: 1,
-    freeTrainers: 0
+    freeTrainers: 0,
+    rebirths: 0,
+    veriKerroin: 0.000001,
+    avaaSatunnainenHinta: 1,
+    avaaValitsemaHinta: 100,
+    lisääTrainereitaHinta: 100,
+    rebirthFor: 0,
+    shopOpen: false,
+    pelleCount: 0,
+    niceGuyCount: 0,
+    dagestanCount: 0,
+    afrikanMafiaCount: 0,
+    lookingAssCount: 0,
+    chadCount: 0,
+    championCount: 0,
+    totalCount: 0,
+    lastPlayed: 0,
 };
 var ottelijat = {
     nimi: [
@@ -133,19 +150,19 @@ var ottelijat = {
         0,
         0
     ],
-    intervalId: [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12
+    interval: [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
     ],
     xp: [
         0,
@@ -259,14 +276,20 @@ var ottelijat = {
         1,
         1
     ],
-    pelleCount: 0,
-    niceGuyCount: 0,
-    dagestanCount: 0,
-    afrikanMafiaCount: 0,
-    lookingAssCount: 0,
-    chadCount: 0,
-    championCount: 0,
-    totalCount: 0,
+    divEl: [
+        document.getElementById("colbyCovington"),
+        document.getElementById("kamaruUsman"),
+        document.getElementById("shavkatRakhmonov"),
+        document.getElementById("seanOmalley"),
+        document.getElementById("jonJones"),
+        document.getElementById("alexanderVolkanovski"),
+        document.getElementById("alexPereira"),
+        document.getElementById("islamMakhachev"),
+        document.getElementById("maxHolloway"),
+        document.getElementById("tomAspinall"),
+        document.getElementById("israelAdesanya"),
+        document.getElementById("charlesOliveira")
+    ],
     stats: {
         wins: [
             17,
@@ -440,11 +463,6 @@ var ottelijat = {
         ]
     }
 };
-var shop = {
-    avaaSatunnainenHinta: 1,
-    avaaValitsemaHinta: 100,
-    lisääTrainereitaHinta: 25
-};
 var upgrades = {
     nimi: [
         "Pelle Tier 1 Boxerit",
@@ -497,54 +515,54 @@ var upgrades = {
         "Chaditäijät Tier 4 Hanskat",
     ],
     kuvaus: [
-        "Pelletäijät 2x &#x1F9B6;",
-        "Niceguyt 2x&#x1F9B6;",
-        "dagestanit 2x&#x1F9B6;",
-        "Afrikanmafia 2x&#x1F9B6;",
-        "Lookingass 2x&#x1F9B6;",
-        "Chaditäijät 2x &#x1F9B6;",
-        "Pelletäijät 2x &#x1F9B6;",
-        "Niceguyt 2x&#x1F9B6;",
-        "dagestanit 2x&#x1F9B6;",
-        "Afrikanmafia 2x&#x1F9B6;",
-        "Lookingass 2x&#x1F9B6;",
-        "Chaditäijät 2x &#x1F9B6;",
-        "Pelletäijät 2x &#x1F9B6;",
-        "Niceguyt 2x&#x1F9B6;",
-        "dagestanit 2x&#x1F9B6;",
-        "Afrikanmafia 2x&#x1F9B6;",
-        "Lookingass 2x&#x1F9B6;",
-        "Chaditäijät 2x &#x1F9B6;",
-        "Pelletäijät 2x &#x1F9B6;",
-        "Niceguyt 2x&#x1F9B6;",
-        "dagestanit 2x&#x1F9B6;",
-        "Afrikanmafia 2x&#x1F9B6;",
-        "Lookingass 2x&#x1F9B6;",
-        "Chaditäijät 2x &#x1F9B6;",
-        "Pelletäijät 2x &#x1F4AA;",
-        "Niceguyt 2x&#x1F4AA;",
-        "dagestanit 2x&#x1F4AA;",
-        "Afrikanmafia 2x&#x1F4AA;",
-        "Lookingass 2x&#x1F4AA;",
-        "Chaditäijät 2x &#x1F4AA;",
-        "Pelletäijät 2x &#x1F4AA;",
-        "Niceguyt 2x&#x1F4AA;",
-        "dagestanit 2x&#x1F4AA;",
-        "Afrikanmafia 2x&#x1F4AA;",
-        "Lookingass 2x&#x1F4AA;",
-        "Chaditäijät 2x &#x1F4AA;",
-        "Pelletäijät 2x &#x1F4AA;",
-        "Niceguyt 2x&#x1F4AA;",
-        "dagestanit 2x&#x1F4AA;",
-        "Afrikanmafia 2x&#x1F4AA;",
-        "Lookingass 2x&#x1F4AA;",
-        "Chaditäijät 2x &#x1F4AA;",
-        "Pelletäijät 2x &#x1F4AA;",
-        "Niceguyt 2x&#x1F4AA;",
-        "dagestanit 2x&#x1F4AA;",
-        "Afrikanmafia 2x&#x1F4AA;",
-        "Lookingass 2x&#x1F4AA;",
-        "Chaditäijät 2x &#x1F4AA;",
+        "Pelletäijät 2x nopeus",
+        "Niceguyt 2x nopeus",
+        "dagestanit 2x nopeus",
+        "Afrikanmafia 2x nopeus",
+        "Lookingass 2x nopeus",
+        "Chaditäijät 2x nopeus",
+        "Pelletäijät 2x power",
+        "Niceguyt 2x power",
+        "dagestanit 2x power",
+        "Afrikanmafia 2x power",
+        "Lookingass 2x power",
+        "Chaditäijät 2x power",
+        "Pelletäijät 2x power",
+        "Niceguyt 2x power",
+        "dagestanit 2x power",
+        "Afrikanmafia 2x power",
+        "Lookingass 2x power",
+        "Chaditäijät 2x power",
+        "Pelletäijät 2x power",
+        "Niceguyt 2x power",
+        "dagestanit 2x power",
+        "Afrikanmafia 2x power",
+        "Lookingass 2x power",
+        "Chaditäijät 2x power",
+        "Pelletäijät 2x nopeus",
+        "Niceguyt 2x nopeus",
+        "dagestanit 2x nopeus",
+        "Afrikanmafia 2x nopeus",
+        "Lookingass 2x nopeus",
+        "Chaditäijät 2x nopeus",
+        "Pelletäijät 2x nopeus",
+        "Niceguyt 2x nopeus",
+        "dagestanit 2x nopeus",
+        "Afrikanmafia 2x nopeus",
+        "Lookingass 2x nopeus",
+        "Chaditäijät 2x nopeus",
+        "Pelletäijät 2x nopeus",
+        "Niceguyt 2x nopeus",
+        "dagestanit 2x nopeus",
+        "Afrikanmafia 2x nopeus",
+        "Lookingass 2x nopeus",
+        "Chaditäijät 2x nopeus",
+        "Pelletäijät 2x nopeus",
+        "Niceguyt 2x nopeus",
+        "dagestanit 2x nopeus",
+        "Afrikanmafia 2x nopeus",
+        "Lookingass 2x nopeus",
+        "Chaditäijät 2x nopeus",
     ],
     kuva: [
         "t1Boxerit.png",
@@ -695,12 +713,6 @@ var upgrades = {
         2160,
         2160,
         2160,
-    ],
-    pellet: [
-        0,
-        3,
-        4,
-        10
     ],
     tag: [
         "pelle",
@@ -901,21 +913,147 @@ var upgrades = {
         false,
         false,
         false,
+    ],
+    fighters: [
+        [0, 3, 4, 10],
+        [1, 5, 9, 11],
+        [2, 7],
+        [1, 10],
+        [3, 7],
+        [2, 4, 6],
+        [0, 3, 4, 10],
+        [1, 5, 9, 11],
+        [2, 7],
+        [1, 10],
+        [3, 7],
+        [2, 4, 6],
+        [0, 3, 4, 10],
+        [1, 5, 9, 11],
+        [2, 7],
+        [1, 10],
+        [3, 7],
+        [2, 4, 6],
+        [0, 3, 4, 10],
+        [1, 5, 9, 11],
+        [2, 7],
+        [1, 10],
+        [3, 7],
+        [2, 4, 6],
+        [0, 3, 4, 10],
+        [1, 5, 9, 11],
+        [2, 7],
+        [1, 10],
+        [3, 7],
+        [2, 4, 6],
+        [0, 3, 4, 10],
+        [1, 5, 9, 11],
+        [2, 7],
+        [1, 10],
+        [3, 7],
+        [2, 4, 6],
+        [0, 3, 4, 10],
+        [1, 5, 9, 11],
+        [2, 7],
+        [1, 10],
+        [3, 7],
+        [2, 4, 6],
+        [0, 3, 4, 10],
+        [1, 5, 9, 11],
+        [2, 7],
+        [1, 10],
+        [3, 7],
+        [2, 4, 6],
     ]
 };
-var lastPlayed = 0;
-var colbyCovingtonInterval = null;
-var kamaruUsmanInterval = null;
-var shavkatRakhmonovInterval = null;
-var seanOmalleyInterval = null;
-var jonJonesInterval = null;
-var alexanderVolkanovskiInterval = null;
-var alexPereiraInterval = null;
-var islamMakhachevInterval = null;
-var maxHollowayInterval = null;
-var tomAspinallInterval = null;
-var israelAdesanyaInterval = null;
-var charlesOliveiraInterval = null;
+var elements = {
+    colbyCovington: document.getElementById("colbyCovington"),
+    colbyCovingtonXp: document.getElementById('colbyCovingtonXp'),
+    colbyCovingtonXpThreshold: document.getElementById('colbyCovingtonXpThreshold'),
+    colbyCovingtonPower: document.getElementById('colbyCovingtonPower'),
+    colbyCovingtonSpeed: document.getElementById('colbyCovingtonSpeed'),
+    colbyCovingtonLevel: document.getElementById('colbyCovingtonLevel'),
+    kamaruUsman: document.getElementById("kamaruUsman"),
+    kamaruUsmanXp: document.getElementById('kamaruUsmanXp'),
+    kamaruUsmanXpThreshold: document.getElementById('kamaruUsmanXpThreshold'),
+    kamaruUsmanPower: document.getElementById('kamaruUsmanPower'),
+    kamaruUsmanSpeed: document.getElementById('kamaruUsmanSpeed'),
+    kamaruUsmanLevel: document.getElementById('kamaruUsmanLevel'),
+    shavkatRakhmonov: document.getElementById("shavkatRakhmonov"),
+    shavkatRakhmonovXp: document.getElementById('shavkatRakhmonovXp'),
+    shavkatRakhmonovXpThreshold: document.getElementById('shavkatRakhmonovXpThreshold'),
+    shavkatRakhmonovPower: document.getElementById('shavkatRakhmonovPower'),
+    shavkatRakhmonovSpeed: document.getElementById('shavkatRakhmonovSpeed'),
+    shavkatRakhmonovLevel: document.getElementById('shavkatRakhmonovLevel'),
+    seanOmalley: document.getElementById("seanOmalley"),
+    seanOmalleyXp: document.getElementById('seanOmalleyXp'),
+    seanOmalleyXpThreshold: document.getElementById('seanOmalleyXpThreshold'),
+    seanOmalleyPower: document.getElementById('seanOmalleyPower'),
+    seanOmalleySpeed: document.getElementById('seanOmalleySpeed'),
+    seanOmalleyLevel: document.getElementById('seanOmalleyLevel'),
+    jonJones: document.getElementById("jonJones"),
+    jonJonesXp: document.getElementById('jonJonesXp'),
+    jonJonesXpThreshold: document.getElementById('jonJonesXpThreshold'),
+    jonJonesPower: document.getElementById('jonJonesPower'),
+    jonJonesSpeed: document.getElementById('jonJonesSpeed'),
+    jonJonesLevel: document.getElementById('jonJonesLevel'),
+    alexanderVolkanovski: document.getElementById("alexanderVolkanovski"),
+    alexanderVolkanovskiXp: document.getElementById('alexanderVolkanovskiXp'),
+    alexanderVolkanovskiXpThreshold: document.getElementById('alexanderVolkanovskiXpThreshold'),
+    alexanderVolkanovskiPower: document.getElementById('alexanderVolkanovskiPower'),
+    alexanderVolkanovskiSpeed: document.getElementById('alexanderVolkanovskiSpeed'),
+    alexanderVolkanovskiLevel: document.getElementById('alexanderVolkanovskiLevel'),
+    alexPereira: document.getElementById("alexPereira"),
+    alexPereiraXp: document.getElementById('alexPereiraXp'),
+    alexPereiraXpThreshold: document.getElementById('alexPereiraXpThreshold'),
+    alexPereiraPower: document.getElementById('alexPereiraPower'),
+    alexPereiraSpeed: document.getElementById('alexPereiraSpeed'),
+    alexPereiraLevel: document.getElementById('alexPereiraLevel'),
+    islamMakhachev: document.getElementById("islamMakhachev"),
+    islamMakhachevXp: document.getElementById('islamMakhachevXp'),
+    islamMakhachevXpThreshold: document.getElementById('islamMakhachevXpThreshold'),
+    islamMakhachevPower: document.getElementById('islamMakhachevPower'),
+    islamMakhachevSpeed: document.getElementById('islamMakhachevSpeed'),
+    islamMakhachevLevel: document.getElementById('islamMakhachevLevel'),
+    maxHolloway: document.getElementById("maxHolloway"),
+    maxHollowayXp: document.getElementById('maxHollowayXp'),
+    maxHollowayXpThreshold: document.getElementById('maxHollowayXpThreshold'),
+    maxHollowayPower: document.getElementById('maxHollowayPower'),
+    maxHollowaySpeed: document.getElementById('maxHollowaySpeed'),
+    maxHollowayLevel: document.getElementById('maxHollowayLevel'),
+    tomAspinall: document.getElementById("tomAspinall"),
+    tomAspinallXp: document.getElementById('tomAspinallXp'),
+    tomAspinallXpThreshold: document.getElementById('tomAspinallXpThreshold'),
+    tomAspinallPower: document.getElementById('tomAspinallPower'),
+    tomAspinallSpeed: document.getElementById('tomAspinallSpeed'),
+    tomAspinallLevel: document.getElementById('tomAspinallLevel'),
+    israelAdesanya: document.getElementById("israelAdesanya"),
+    israelAdesanyaXp: document.getElementById('israelAdesanyaXp'),
+    israelAdesanyaXpThreshold: document.getElementById('israelAdesanyaXpThreshold'),
+    israelAdesanyaPower: document.getElementById('israelAdesanyaPower'),
+    israelAdesanyaSpeed: document.getElementById('israelAdesanyaSpeed'),
+    israelAdesanyaLevel: document.getElementById('israelAdesanyaLevel'),
+    charlesOliveira: document.getElementById("charlesOliveira"),
+    charlesOliveiraXp: document.getElementById('charlesOliveiraXp'),
+    charlesOliveiraXpThreshold: document.getElementById('charlesOliveiraXpThreshold'),
+    charlesOliveiraPower: document.getElementById('charlesOliveiraPower'),
+    charlesOliveiraSpeed: document.getElementById('charlesOliveiraSpeed'),
+    charlesOliveiraLevel: document.getElementById('charlesOliveiraLevel'),
+    hampaitaEl: document.getElementById('hampaita'),
+    hampaitaPerSekuntiEl: document.getElementById('hampaitaPerSekunti'),
+    trainersEl: document.getElementById("trainers"),
+    shopItemsArr: Array.from(document.querySelectorAll('.shopItem')),
+    avaaSatunnainenHintaEl: document.getElementById('avaaSatunnainenHinta'),
+    lisääTrainereitaHintaEl: document.getElementById('lisääTrainereitaHinta'),
+    rebirthForEl: document.getElementById('rebirthFor'),
+    upgradeEl: document.getElementById('upgradeContainer'),
+    shopButton: document.getElementById('shop'),
+    avaaSatunnainenButton: document.getElementById('avaaSatunnainen'),
+    lisääTrainereitaButton: document.getElementById('lisääTrainereita'),
+    rebirthButton: document.getElementById('rebirth'),
+    resetButton: document.getElementById('reset'),
+    saveButton: document.getElementById('save'),
+    loadButton: document.getElementById('load')
+};
 setInterval(function () {
     var totalPower = 0;
     for (var i = 0; i < ottelijat.isUnlocked.length; i++) {
@@ -925,293 +1063,268 @@ setInterval(function () {
                 totalPower += (ottelijat.power[i] * ottelijat.speed[i]) / 10;
             }
         }
+        else {
+            document.getElementById(ottelijat.id[i] + "Container").style.display = "none";
+        }
     }
     game.hampaitaPerSekunti = totalPower;
     updateUi();
 }, 100);
 setInterval(function () {
-    updateUpgrades();
+    renderUpgrades();
 }, 10000);
 setInterval(function () {
     saveGame();
 }, 30000);
-function offlineGains() {
-    var now = Date.now();
-    var offlineTime = now - lastPlayed;
+/*function offlineGains() {
+    const now = Date.now();
+    const offlineTime = now - game.lastPlayed;
     //let reducedProductionRate = 0.0008;
-    var offlineProgress = offlineTime; // * reducedProductionRate;
-    var offlineHampaita = game.hampaitaPerSekunti * offlineProgress / 2000;
-    alert("Offline tienaus ".concat(Math.round(offlineHampaita).toLocaleString(), " hampaita!"));
-    game.hampaita += offlineHampaita;
-    document.getElementById("hampaita").innerHTML = Math.round(game.hampaita).toLocaleString();
-}
-// @ts-ignore
+    const offlineProgress = offlineTime// * reducedProductionRate;
+    const offlineHampaita = game.hampaitaPerSekunti * offlineProgress / 2000;
+  
+  alert(`Offline tienaus ${Math.round(offlineHampaita).toLocaleString()} hampaita!`);
+  game.hampaita += offlineHampaita;
+  document.getElementById("hampaita")!.innerHTML = Math.round(game.hampaita).toLocaleString();
+}*/
 function osta(index) {
-    if (!upgrades.ostettu[index] && game.hampaita >= upgrades.hinta[index]) {
-        if (upgrades.tag[index] === "pelle" && ottelijat.pelleCount >= upgrades.vaatimus[index]) {
-            if (upgrades.tyyppi[index] === "nopeus") {
-                game.hampaita -= upgrades.hinta[index];
-                ottelijat.step[0] *= upgrades.bonus[index];
-                ottelijat.speed[0] *= upgrades.bonus[index];
-                ottelijat.step[3] *= upgrades.bonus[index];
-                ottelijat.speed[3] *= upgrades.bonus[index];
-                ottelijat.step[4] *= upgrades.bonus[index];
-                ottelijat.speed[4] *= upgrades.bonus[index];
-                ottelijat.step[10] *= upgrades.bonus[index];
-                ottelijat.speed[10] *= upgrades.bonus[index];
-                upgrades.ostettu[index] = true;
-                updateUpgrades();
-            }
-            if (upgrades.tyyppi[index] === "power") {
-                game.hampaita -= upgrades.hinta[index];
-                ottelijat.power[0] *= upgrades.bonus[index];
-                ottelijat.power[3] *= upgrades.bonus[index];
-                ottelijat.power[4] *= upgrades.bonus[index];
-                ottelijat.power[10] *= upgrades.bonus[index];
-                upgrades.ostettu[index] = true;
-                updateUpgrades();
-            }
+    if (!upgrades.ostettu[index] && upgrades.tyyppi[index] === "nopeus") {
+        if (game.hampaita >= upgrades.hinta[index]) {
+            game.hampaita -= upgrades.hinta[index];
+            console.log("asd" + index);
+            upgrades.fighters[index].forEach(function (fighterIndex) {
+                console.log("asd" + fighterIndex);
+                ottelijat.step[fighterIndex] *= upgrades.bonus[index];
+                ottelijat.speed[fighterIndex] *= upgrades.bonus[index];
+            });
+            upgrades.ostettu[index] = true;
+            renderUpgrades();
         }
-        if (upgrades.tag[index] === "niceGuy" && ottelijat.niceGuyCount >= upgrades.vaatimus[index]) {
-            if (upgrades.tyyppi[index] === "nopeus") {
-                game.hampaita -= upgrades.hinta[index];
-                ottelijat.step[1] *= upgrades.bonus[index];
-                ottelijat.speed[1] *= upgrades.bonus[index];
-                ottelijat.step[5] *= upgrades.bonus[index];
-                ottelijat.speed[5] *= upgrades.bonus[index];
-                ottelijat.step[9] *= upgrades.bonus[index];
-                ottelijat.speed[9] *= upgrades.bonus[index];
-                ottelijat.step[11] *= upgrades.bonus[index];
-                ottelijat.speed[11] *= upgrades.bonus[index];
-                upgrades.ostettu[index] = true;
-                updateUpgrades();
-            }
-            if (upgrades.tyyppi[index] === "power") {
-                game.hampaita -= upgrades.hinta[index];
-                ottelijat.power[1] *= upgrades.bonus[index];
-                ottelijat.power[5] *= upgrades.bonus[index];
-                ottelijat.power[9] *= upgrades.bonus[index];
-                ottelijat.power[11] *= upgrades.bonus[index];
-                upgrades.ostettu[index] = true;
-                updateUpgrades();
-            }
+    }
+    if (!upgrades.ostettu[index] && upgrades.tyyppi[index] === "power") {
+        console.log("power valittu");
+        if (game.hampaita >= upgrades.hinta[index]) {
+            console.log("oli hampaita");
+            game.hampaita -= upgrades.hinta[index];
+            console.log("hampaat minustettu");
+            console.log("index" + index);
+            upgrades.fighters[index].forEach(function (fighterIndex) {
+                console.log("fighterIndex" + fighterIndex);
+                console.log("foreach block");
+                ottelijat.power[fighterIndex] *= upgrades.bonus[index];
+            });
+            upgrades.ostettu[index] = true;
+            renderUpgrades();
         }
-        if (upgrades.tag[index] === "dagestanit" && ottelijat.dagestanCount >= upgrades.vaatimus[index]) {
-            if (upgrades.tyyppi[index] === "nopeus") {
-                game.hampaita -= upgrades.hinta[index];
-                ottelijat.step[2] *= upgrades.bonus[index];
-                ottelijat.speed[2] *= upgrades.bonus[index];
-                ottelijat.step[7] *= upgrades.bonus[index];
-                ottelijat.speed[7] *= upgrades.bonus[index];
-                upgrades.ostettu[index] = true;
-                updateUpgrades();
-            }
-            if (upgrades.tyyppi[index] === "power") {
-                game.hampaita -= upgrades.hinta[index];
-                ottelijat.power[2] *= upgrades.bonus[index];
-                ottelijat.power[7] *= upgrades.bonus[index];
-                upgrades.ostettu[index] = true;
-                updateUpgrades();
-            }
+    }
+}
+function renderUpgrades() {
+    if (!elements.upgradeEl)
+        return;
+    elements.upgradeEl.innerHTML = '';
+    var _loop_1 = function (i) {
+        if (upgrades.ostettu[i])
+            return "continue";
+        if ((upgrades.tag[i] === 'pelle' && game.pelleCount >= upgrades.vaatimus[i]) ||
+            (upgrades.tag[i] === 'niceGuy' && game.niceGuyCount >= upgrades.vaatimus[i]) ||
+            (upgrades.tag[i] === 'dagestanit' && game.dagestanCount >= upgrades.vaatimus[i]) ||
+            (upgrades.tag[i] === 'afrikanMafia' && game.afrikanMafiaCount >= upgrades.vaatimus[i]) ||
+            (upgrades.tag[i] === 'lookingAss' && game.lookingAssCount >= upgrades.vaatimus[i]) ||
+            (upgrades.tag[i] === 'chad' && game.chadCount >= upgrades.vaatimus[i])) {
+            var upgradeDiv = document.createElement('div');
+            upgradeDiv.classList.add('upgrade-container');
+            var img = document.createElement('img');
+            img.setAttribute('draggable', 'false');
+            img.src = "./assets/".concat(upgrades.kuva[i]);
+            img.alt = upgrades.nimi[i];
+            var titleDiv = document.createElement('div');
+            titleDiv.className = 'upgrade-title';
+            var descriptionSpan = document.createElement('span');
+            descriptionSpan.textContent = upgrades.kuvaus[i];
+            var priceSpan = document.createElement('span');
+            priceSpan.textContent = "(".concat(upgrades.hinta[i], " hammasta)");
+            titleDiv.appendChild(descriptionSpan);
+            titleDiv.appendChild(priceSpan);
+            upgradeDiv.appendChild(img);
+            upgradeDiv.appendChild(titleDiv);
+            titleDiv.addEventListener('click', function () { return osta(i); });
+            elements.upgradeEl.appendChild(upgradeDiv);
         }
-        if (upgrades.tag[index] === "afrikanMafia" && ottelijat.afrikanMafiaCount >= upgrades.vaatimus[index]) {
-            if (upgrades.tyyppi[index] === "nopeus") {
-                game.hampaita -= upgrades.hinta[index];
-                ottelijat.step[1] *= upgrades.bonus[index];
-                ottelijat.speed[1] *= upgrades.bonus[index];
-                ottelijat.step[10] *= upgrades.bonus[index];
-                ottelijat.speed[10] *= upgrades.bonus[index];
-                upgrades.ostettu[index] = true;
-                updateUpgrades();
-            }
-            if (upgrades.tyyppi[index] === "power") {
-                game.hampaita -= upgrades.hinta[index];
-                ottelijat.power[1] *= upgrades.bonus[index];
-                ottelijat.power[10] *= upgrades.bonus[index];
-                upgrades.ostettu[index] = true;
-                updateUpgrades();
-            }
-        }
-        if (upgrades.tag[index] === "lookingAss" && ottelijat.lookingAssCount >= upgrades.vaatimus[index]) {
-            if (upgrades.tyyppi[index] === "nopeus") {
-                game.hampaita -= upgrades.hinta[index];
-                ottelijat.step[3] *= upgrades.bonus[index];
-                ottelijat.speed[3] *= upgrades.bonus[index];
-                ottelijat.step[7] *= upgrades.bonus[index];
-                ottelijat.speed[7] *= upgrades.bonus[index];
-                upgrades.ostettu[index] = true;
-                updateUpgrades();
-            }
-            if (upgrades.tyyppi[index] === "power") {
-                game.hampaita -= upgrades.hinta[index];
-                ottelijat.power[3] *= upgrades.bonus[index];
-                ottelijat.power[7] *= upgrades.bonus[index];
-                upgrades.ostettu[index] = true;
-                updateUpgrades();
-            }
-        }
-        if (upgrades.tag[index] === "chad" && ottelijat.chadCount >= upgrades.vaatimus[index]) {
-            if (upgrades.tyyppi[index] === "nopeus") {
-                game.hampaita -= upgrades.hinta[index];
-                ottelijat.step[2] *= upgrades.bonus[index];
-                ottelijat.speed[2] *= upgrades.bonus[index];
-                ottelijat.step[4] *= upgrades.bonus[index];
-                ottelijat.speed[4] *= upgrades.bonus[index];
-                ottelijat.step[6] *= upgrades.bonus[index];
-                ottelijat.speed[6] *= upgrades.bonus[index];
-                upgrades.ostettu[index] = true;
-                updateUpgrades();
-            }
-            if (upgrades.tyyppi[index] === "power") {
-                game.hampaita -= upgrades.hinta[index];
-                ottelijat.power[2] *= upgrades.bonus[index];
-                ottelijat.power[4] *= upgrades.bonus[index];
-                ottelijat.power[6] *= upgrades.bonus[index];
-                upgrades.ostettu[index] = true;
-                updateUpgrades();
-            }
-        }
+    };
+    for (var i = 0; i < upgrades.nimi.length; i++) {
+        _loop_1(i);
     }
 }
 function avaaSatunnainen() {
-    var randomIndex = Math.floor(Math.random() * (ottelijat.isUnlocked.length));
-    if (ottelijat.isUnlocked[randomIndex] === false && game.hampaita >= shop.avaaSatunnainenHinta) {
+    var randomIndex = Math.floor(Math.random() * (ottelijat.nimi.length));
+    if (!ottelijat.isUnlocked[randomIndex] && game.hampaita >= game.avaaSatunnainenHinta) {
         ottelijat.isUnlocked[randomIndex] = true;
-        game.hampaita -= shop.avaaSatunnainenHinta;
-        shop.avaaSatunnainenHinta *= 5;
+        game.hampaita -= game.avaaSatunnainenHinta;
+        game.avaaSatunnainenHinta *= 5;
+        console.log("Avattu satunnaisesti" + ottelijat.nimi[randomIndex]);
         saveGame();
+    }
+    else if (game.hampaita < game.avaaSatunnainenHinta) {
+        console.log("ei ollu varaa");
+        return;
     }
     else {
+        console.log("oli avattu jo");
         avaaSatunnainen();
-    }
-    //window.location.href = "./index.html";
-    console.log("Avattu satunnaisesti" + ottelijat.nimi[randomIndex]);
-    saveGame();
-    /*if (game.hampaita >= shop.avaaSatunnainenHinta) {
-    game.hampaita -= shop.avaaSatunnainenHinta;
-    shop.avaaSatunnainenHinta *= 5;
-    //shop.avaaValitsemaHinta *= 1.1;
-    //shop.lisääTrainereitaHinta *= 1.1;*/
-}
-;
-/*function avaaValitsema() {
-  if (game.hampaita >= shop.avaaValitsemaHinta) {
-    game.hampaita -= shop.avaaValitsemaHinta;
-    shop.avaaValitsemaHinta *= 10;
-    shop.avaaSatunnainenHinta *= 1.1;
-    shop.lisääTrainereitaHinta *= 1.1;
-    window.location.href = "./lukitutOttelijat.html";
-    saveGame();
-  }
-}*/
-function lisääTrainereita() {
-    if (game.hampaita >= shop.lisääTrainereitaHinta) {
-        game.hampaita -= shop.lisääTrainereitaHinta;
-        game.maxTrainers += 1;
-        shop.lisääTrainereitaHinta *= 9;
-        //shop.avaaSatunnainenHinta *= 1.1;
-        //shop.lisääTrainereitaHinta *= 1.1;
         saveGame();
     }
 }
-function updateUi() {
-    colbyCovingtonXp.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
-    colbyCovingtonXpThreshold.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
-    colbyCovingtonLevel.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
-    colbyCovingtonPower.innerHTML = ottelijat.power[0].toFixed(0).toLocaleString();
-    colbyCovingtonSpeed.innerHTML = ottelijat.speed[0].toFixed(0).toLocaleString();
-    kamaruUsmanXp.innerHTML = ottelijat.xp[1].toFixed(0).toLocaleString();
-    kamaruUsmanXpThreshold.innerHTML = ottelijat.xpThreshold[1].toFixed(0).toLocaleString();
-    kamaruUsmanLevel.innerHTML = ottelijat.level[1].toFixed(0).toLocaleString();
-    kamaruUsmanPower.innerHTML = ottelijat.power[1].toFixed(0).toLocaleString();
-    kamaruUsmanSpeed.innerHTML = ottelijat.speed[1].toFixed(0).toLocaleString();
-    shavkatRakhmonovXp.innerHTML = ottelijat.xp[2].toFixed(0).toLocaleString();
-    shavkatRakhmonovXpThreshold.innerHTML = ottelijat.xpThreshold[2].toFixed(0).toLocaleString();
-    shavkatRakhmonovLevel.innerHTML = ottelijat.level[2].toFixed(0).toLocaleString();
-    shavkatRakhmonovPower.innerHTML = ottelijat.power[2].toFixed(0).toLocaleString();
-    shavkatRakhmonovSpeed.innerHTML = ottelijat.speed[2].toFixed(0).toLocaleString();
-    seanOmalleyXp.innerHTML = ottelijat.xp[3].toFixed(0).toLocaleString();
-    seanOmalleyXpThreshold.innerHTML = ottelijat.xpThreshold[3].toFixed(0).toLocaleString();
-    seanOmalleyLevel.innerHTML = ottelijat.level[3].toFixed(0).toLocaleString();
-    seanOmalleyPower.innerHTML = ottelijat.power[3].toFixed(0).toLocaleString();
-    seanOmalleySpeed.innerHTML = ottelijat.speed[3].toFixed(0).toLocaleString();
-    jonJonesXp.innerHTML = ottelijat.xp[4].toFixed(0).toLocaleString();
-    jonJonesXpThreshold.innerHTML = ottelijat.xpThreshold[4].toFixed(0).toLocaleString();
-    jonJonesLevel.innerHTML = ottelijat.level[4].toFixed(0).toLocaleString();
-    jonJonesPower.innerHTML = ottelijat.power[4].toFixed(0).toLocaleString();
-    jonJonesSpeed.innerHTML = ottelijat.speed[4].toFixed(0).toLocaleString();
-    alexanderVolkanovskiXp.innerHTML = ottelijat.xp[5].toFixed(0).toLocaleString();
-    alexanderVolkanovskiXpThreshold.innerHTML = ottelijat.xpThreshold[5].toFixed(0).toLocaleString();
-    alexanderVolkanovskiLevel.innerHTML = ottelijat.level[5].toFixed(0).toLocaleString();
-    alexanderVolkanovskiPower.innerHTML = ottelijat.power[5].toFixed(0).toLocaleString();
-    alexanderVolkanovskiSpeed.innerHTML = ottelijat.speed[5].toFixed(0).toLocaleString();
-    alexPereiraXp.innerHTML = ottelijat.xp[6].toFixed(0).toLocaleString();
-    alexPereiraXpThreshold.innerHTML = ottelijat.xpThreshold[6].toFixed(0).toLocaleString();
-    alexPereiraLevel.innerHTML = ottelijat.level[6].toFixed(0).toLocaleString();
-    alexPereiraPower.innerHTML = ottelijat.power[6].toFixed(0).toLocaleString();
-    alexPereiraSpeed.innerHTML = ottelijat.speed[6].toFixed(0).toLocaleString();
-    islamMakhachevXp.innerHTML = ottelijat.xp[7].toFixed(0).toLocaleString();
-    islamMakhachevXpThreshold.innerHTML = ottelijat.xpThreshold[7].toFixed(0).toLocaleString();
-    islamMakhachevLevel.innerHTML = ottelijat.level[7].toFixed(0).toLocaleString();
-    islamMakhachevPower.innerHTML = ottelijat.power[7].toFixed(0).toLocaleString();
-    islamMakhachevSpeed.innerHTML = ottelijat.speed[7].toFixed(0).toLocaleString();
-    maxHollowayXp.innerHTML = ottelijat.xp[8].toFixed(0).toLocaleString();
-    maxHollowayXpThreshold.innerHTML = ottelijat.xpThreshold[8].toFixed(0).toLocaleString();
-    maxHollowayLevel.innerHTML = ottelijat.level[8].toFixed(0).toLocaleString();
-    maxHollowayPower.innerHTML = ottelijat.power[8].toFixed(0).toLocaleString();
-    maxHollowaySpeed.innerHTML = ottelijat.speed[8].toFixed(0).toLocaleString();
-    tomAspinallXp.innerHTML = ottelijat.xp[9].toFixed(0).toLocaleString();
-    tomAspinallXpThreshold.innerHTML = ottelijat.xpThreshold[9].toFixed(0).toLocaleString();
-    tomAspinallLevel.innerHTML = ottelijat.level[9].toFixed(0).toLocaleString();
-    tomAspinallPower.innerHTML = ottelijat.power[9].toFixed(0).toLocaleString();
-    tomAspinallSpeed.innerHTML = ottelijat.speed[9].toFixed(0).toLocaleString();
-    israelAdesanyaXp.innerHTML = ottelijat.xp[10].toFixed(0).toLocaleString();
-    israelAdesanyaXpThreshold.innerHTML = ottelijat.xpThreshold[10].toFixed(0).toLocaleString();
-    israelAdesanyaLevel.innerHTML = ottelijat.level[10].toFixed(0).toLocaleString();
-    israelAdesanyaPower.innerHTML = ottelijat.power[10].toFixed(0).toLocaleString();
-    israelAdesanyaSpeed.innerHTML = ottelijat.speed[10].toFixed(0).toLocaleString();
-    charlesOliveiraXp.innerHTML = ottelijat.xp[11].toFixed(0).toLocaleString();
-    charlesOliveiraXpThreshold.innerHTML = ottelijat.xpThreshold[11].toFixed(0).toLocaleString();
-    charlesOliveiraLevel.innerHTML = ottelijat.level[11].toFixed(0).toLocaleString();
-    charlesOliveiraPower.innerHTML = ottelijat.power[11].toFixed(0).toLocaleString();
-    charlesOliveiraSpeed.innerHTML = ottelijat.speed[11].toFixed(0).toLocaleString();
-    hampaita.innerHTML = new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 0 }).format(game.hampaita);
-    hampaitaPerSekuntiElement.innerHTML = new Intl.NumberFormat().format(game.hampaitaPerSekunti);
-    avaaSatunnainenHinta.innerHTML = new Intl.NumberFormat().format(shop.avaaSatunnainenHinta);
-    lisääTrainereitaHinta.innerHTML = new Intl.NumberFormat().format(shop.lisääTrainereitaHinta);
-    //avaaValitsemaHinta!.innerHTML = shop.avaaValitsemaHinta.toFixed(0).toLocaleString();
-    trainers.innerHTML = (game.maxTrainers - game.activeTrainers).toLocaleString();
-}
-function updateUpgrades() {
-    document.getElementById("upgradeContainer").innerHTML = "";
-    for (var i = 0; i < upgrades.nimi.length; i++) {
-        if (!upgrades.ostettu[i]) {
-            if (upgrades.tag[i] == "pelle" && ottelijat.pelleCount >= upgrades.vaatimus[i]) {
-                document.getElementById("upgradeContainer").innerHTML += "\n        <div class=\"upgrade-container\">\n          <img\n          draggable=\"false\"\n          src=\"./assets/".concat(upgrades.kuva[i], "\"\n          alt=\"").concat(upgrades.nimi[i], "\"\n          >\n          <div class=\"upgrade-title\"\n          onclick=\"osta(").concat(i, ")\">\n            <span>").concat(upgrades.kuvaus[i], "</span>\n            <span>(").concat(upgrades.hinta[i], " hammasta)</span>\n          </div>\n        </div>\n        ");
-                //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
-            }
-            if (upgrades.tag[i] == "niceGuy" && ottelijat.niceGuyCount >= upgrades.vaatimus[i]) {
-                document.getElementById("upgradeContainer").innerHTML += "\n        <div class=\"upgrade-container\">\n          <img\n          draggable=\"false\"\n          src=\"./assets/".concat(upgrades.kuva[i], "\"\n          alt=\"").concat(upgrades.nimi[i], "\"\n          >\n          <div class=\"upgrade-title\"\n          onclick=\"osta(").concat(i, ")\">\n            <span>").concat(upgrades.kuvaus[i], "</span>\n            <span>(").concat(upgrades.hinta[i], " hammasta)</span>\n          </div>\n        </div>\n        ");
-                //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
-            }
-            if (upgrades.tag[i] == "dagestanit" && ottelijat.dagestanCount >= upgrades.vaatimus[i]) {
-                document.getElementById("upgradeContainer").innerHTML += "\n        <div class=\"upgrade-container\">\n          <img\n          draggable=\"false\"\n          src=\"./assets/".concat(upgrades.kuva[i], "\"\n          alt=\"").concat(upgrades.nimi[i], "\"\n          >\n          <div class=\"upgrade-title\"\n          onclick=\"osta(").concat(i, ")\">\n            <span>").concat(upgrades.kuvaus[i], "</span>\n            <span>(").concat(upgrades.hinta[i], " hammasta)</span>\n          </div>\n        </div>\n        ");
-                //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
-            }
-            if (upgrades.tag[i] == "afrikanMafia" && ottelijat.afrikanMafiaCount >= upgrades.vaatimus[i]) {
-                document.getElementById("upgradeContainer").innerHTML += "\n        <div class=\"upgrade-container\">\n          <img\n          draggable=\"false\"\n          src=\"./assets/".concat(upgrades.kuva[i], "\"\n          alt=\"").concat(upgrades.nimi[i], "\"\n          >\n          <div class=\"upgrade-title\"\n          onclick=\"osta(").concat(i, ")\">\n            <span>").concat(upgrades.kuvaus[i], "</span>\n            <span>(").concat(upgrades.hinta[i], " hammasta)</span>\n          </div>\n        </div>\n        ");
-                //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
-            }
-            if (upgrades.tag[i] == "lookingAss" && ottelijat.lookingAssCount >= upgrades.vaatimus[i]) {
-                document.getElementById("upgradeContainer").innerHTML += "\n        <div class=\"upgrade-container\">\n          <img\n          draggable=\"false\"\n          src=\"./assets/".concat(upgrades.kuva[i], "\"\n          alt=\"").concat(upgrades.nimi[i], "\"\n          >\n          <div class=\"upgrade-title\"\n          onclick=\"osta(").concat(i, ")\">\n            <span>").concat(upgrades.kuvaus[i], "</span>\n            <span>(").concat(upgrades.hinta[i], " hammasta)</span>\n          </div>\n        </div>\n        ");
-                //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
-            }
-            if (upgrades.tag[i] == "chad" && ottelijat.chadCount >= upgrades.vaatimus[i]) {
-                document.getElementById("upgradeContainer").innerHTML += "\n        <div class=\"upgrade-container\">\n          <img\n          draggable=\"false\"\n          src=\"./assets/".concat(upgrades.kuva[i], "\"\n          alt=\"").concat(upgrades.nimi[i], "\"\n          >\n          <div class=\"upgrade-title\"\n          onclick=\"osta(").concat(i, ")\">\n            <span>").concat(upgrades.kuvaus[i], "</span>\n            <span>(").concat(upgrades.hinta[i], " hammasta)</span>\n          </div>\n        </div>\n        ");
-                //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
-            }
-        }
+;
+function lisääTrainereita() {
+    if (game.hampaita >= game.lisääTrainereitaHinta) {
+        game.hampaita -= game.lisääTrainereitaHinta;
+        game.maxTrainers += 1;
+        game.lisääTrainereitaHinta *= 9;
+        //game.avaaSatunnainenHinta *= 1.1;
+        //game.lisääTrainereitaHinta *= 1.1;
+        saveGame();
     }
+}
+/*function renderUpgrades() {
+  document.getElementById("upgradeContainer")!.innerHTML = "";
+  for (let i = 0; i < upgrades.nimi.length; i++) {
+    if (!upgrades.ostettu[i]) {
+      if (upgrades.tag[i] == "pelle" && game.pelleCount >= upgrades.vaatimus[i]) {
+        document.getElementById("upgradeContainer")!.innerHTML += `
+        <div class="upgrade-container">
+          <img
+          draggable="false"
+          src="./assets/${upgrades.kuva[i]}"
+          alt="${upgrades.nimi[i]}"
+          >
+          <div class="upgrade-title"
+          onclick="osta(${i})">
+            <span>${upgrades.kuvaus[i]}</span>
+            <span>(${upgrades.hinta[i]} hammasta)</span>
+          </div>
+        </div>
+        `;
+        //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
+      }
+      if (upgrades.tag[i] == "niceGuy" && game.niceGuyCount >= upgrades.vaatimus[i]) {
+        document.getElementById("upgradeContainer")!.innerHTML += `
+        <div class="upgrade-container">
+          <img
+          draggable="false"
+          src="./assets/${upgrades.kuva[i]}"
+          alt="${upgrades.nimi[i]}"
+          >
+          <div class="upgrade-title"
+          onclick="osta(${i})">
+            <span>${upgrades.kuvaus[i]}</span>
+            <span>(${upgrades.hinta[i]} hammasta)</span>
+          </div>
+        </div>
+        `;
+        //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
+      }
+      if (upgrades.tag[i] == "dagestanit" && game.dagestanCount >= upgrades.vaatimus[i]) {
+        document.getElementById("upgradeContainer")!.innerHTML += `
+        <div class="upgrade-container">
+          <img
+          draggable="false"
+          src="./assets/${upgrades.kuva[i]}"
+          alt="${upgrades.nimi[i]}"
+          >
+          <div class="upgrade-title"
+          onclick="osta(${i})">
+            <span>${upgrades.kuvaus[i]}</span>
+            <span>(${upgrades.hinta[i]} hammasta)</span>
+          </div>
+        </div>
+        `;
+        //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
+      }
+      if (upgrades.tag[i] == "afrikanMafia" && game.afrikanMafiaCount >= upgrades.vaatimus[i]) {
+        document.getElementById("upgradeContainer")!.innerHTML += `
+        <div class="upgrade-container">
+          <img
+          draggable="false"
+          src="./assets/${upgrades.kuva[i]}"
+          alt="${upgrades.nimi[i]}"
+          >
+          <div class="upgrade-title"
+          onclick="osta(${i})">
+            <span>${upgrades.kuvaus[i]}</span>
+            <span>(${upgrades.hinta[i]} hammasta)</span>
+          </div>
+        </div>
+        `;
+        //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
+      }
+      if (upgrades.tag[i] == "lookingAss" && game.lookingAssCount >= upgrades.vaatimus[i]) {
+        document.getElementById("upgradeContainer")!.innerHTML += `
+        <div class="upgrade-container">
+          <img
+          draggable="false"
+          src="./assets/${upgrades.kuva[i]}"
+          alt="${upgrades.nimi[i]}"
+          >
+          <div class="upgrade-title"
+          onclick="osta(${i})">
+            <span>${upgrades.kuvaus[i]}</span>
+            <span>(${upgrades.hinta[i]} hammasta)</span>
+          </div>
+        </div>
+        `;
+        //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
+      }
+      if (upgrades.tag[i] == "chad" && game.chadCount >= upgrades.vaatimus[i]) {
+        document.getElementById("upgradeContainer")!.innerHTML += `
+        <div class="upgrade-container">
+          <img
+          draggable="false"
+          src="./assets/${upgrades.kuva[i]}"
+          alt="${upgrades.nimi[i]}"
+          >
+          <div class="upgrade-title"
+          onclick="osta(${i})">
+            <span>${upgrades.kuvaus[i]}</span>
+            <span>(${upgrades.hinta[i]} hammasta)</span>
+          </div>
+        </div>
+        `;
+        //document.getElementById("upgradeContainer")!.innerHTML += '<img draggable="false" src="./assets/'+upgrades.kuva[i]+'" title="'+upgrades.nimi[i]+' &#10; '+upgrades.kuvaus[i]+' &#10; ('+upgrades.hinta[i]+' hammasta)" onclick="osta('+i+')">'; + upgrades.nimi[i]+'">';
+      }
+    }
+  }
+}*/
+function rebirth() {
+    game.verta = game.hampaita * game.veriKerroin;
+    game.rebirths++;
+    game.hampaita = 1;
+    game.hampaitaPerSekunti = 0;
+    game.maxTrainers = 1;
+    game.activeTrainers = 0;
+    game.freeTrainers = 1;
+    game.avaaSatunnainenHinta = 1;
+    game.lisääTrainereitaHinta = 100;
+    game.afrikanMafiaCount = 0;
+    game.dagestanCount = 0;
+    game.lookingAssCount = 0;
+    game.niceGuyCount = 0;
+    game.pelleCount = 0;
+    game.chadCount = 0;
+    game.totalCount = 0;
+    for (var i = 0; i < ottelijat.isUnlocked.length; i++) {
+        ottelijat.isUnlocked[i] = false;
+        ottelijat.isActive[i] = false;
+        ottelijat.power[i] = 1;
+        ottelijat.speed[i] = 1;
+        ottelijat.level[i] = 0;
+        ottelijat.progress[i] = 0;
+        ottelijat.step[i] = 0.1;
+        ottelijat.xp[i] = 0;
+        ottelijat.xpThreshold[i] = 5;
+        ottelijat.interval[i] = null;
+    }
+    updateUi();
+    saveGame();
 }
 function saveGame() {
     console.log("Saving game");
@@ -1219,7 +1332,6 @@ function saveGame() {
         lastPlayed: new Date().getTime(),
         game: game,
         ottelijat: ottelijat,
-        shop: shop,
         upgrades: upgrades
     };
     localStorage.setItem("gameSave", JSON.stringify(gameSave));
@@ -1231,10 +1343,9 @@ function loadGame() {
         return;
     }
     var parsedGameSave = JSON.parse(gameSave);
-    lastPlayed = parsedGameSave.lastPlayed;
+    game.lastPlayed = parsedGameSave.lastPlayed;
     game = parsedGameSave.game;
     ottelijat = parsedGameSave.ottelijat;
-    shop = parsedGameSave.shop;
     upgrades = parsedGameSave.upgrades;
     updateUi();
     console.log("Game loaded");
@@ -1243,103 +1354,80 @@ function resetGame() {
     localStorage.removeItem("gameSave");
     location.reload();
 }
-var hampaita = document.getElementById('hampaita');
-var hampaitaPerSekuntiElement = document.getElementById('hampaitaPerSekunti');
-var save = document.getElementById('save');
-//const load = document.getElementById('load') as HTMLElement;
-var reset = document.getElementById('reset');
-var trainers = document.getElementById("trainers");
-var shopElement = document.getElementById('shop');
-var shopItems = Array.from(document.querySelectorAll('.shopItem'));
-var avaaSatunnainenElement = document.getElementById('avaaSatunnainen');
-var avaaSatunnainenHinta = document.getElementById('avaaSatunnainenHinta');
-//const avaaValitsemaElement = document.getElementById('avaaValitsema') as HTMLElement;
-//const avaaValitsemaHinta = document.getElementById('avaaValitsemaHinta');
-var lisääTrainereitaElement = document.getElementById('lisääTrainereita');
-var lisääTrainereitaHinta = document.getElementById('lisääTrainereitaHinta');
-var colbyCovington = document.getElementById("colbyCovington");
-var colbyCovingtonXp = document.getElementById('colbyCovingtonXp');
-var colbyCovingtonXpThreshold = document.getElementById('colbyCovingtonXpThreshold');
-var colbyCovingtonLevel = document.getElementById('colbyCovingtonLevel');
-var colbyCovingtonPower = document.getElementById('colbyCovingtonPower');
-var colbyCovingtonSpeed = document.getElementById('colbyCovingtonSpeed');
-var kamaruUsman = document.getElementById("kamaruUsman");
-var kamaruUsmanXp = document.getElementById('kamaruUsmanXp');
-var kamaruUsmanXpThreshold = document.getElementById('kamaruUsmanXpThreshold');
-var kamaruUsmanLevel = document.getElementById('kamaruUsmanLevel');
-var kamaruUsmanPower = document.getElementById('kamaruUsmanPower');
-var kamaruUsmanSpeed = document.getElementById('kamaruUsmanSpeed');
-var shavkatRakhmonov = document.getElementById("shavkatRakhmonov");
-var shavkatRakhmonovXp = document.getElementById('shavkatRakhmonovXp');
-var shavkatRakhmonovXpThreshold = document.getElementById('shavkatRakhmonovXpThreshold');
-var shavkatRakhmonovLevel = document.getElementById('shavkatRakhmonovLevel');
-var shavkatRakhmonovPower = document.getElementById('shavkatRakhmonovPower');
-var shavkatRakhmonovSpeed = document.getElementById('shavkatRakhmonovSpeed');
-var seanOmalley = document.getElementById("seanOmalley");
-var seanOmalleyXp = document.getElementById('seanOmalleyXp');
-var seanOmalleyXpThreshold = document.getElementById('seanOmalleyXpThreshold');
-var seanOmalleyLevel = document.getElementById('seanOmalleyLevel');
-var seanOmalleyPower = document.getElementById('seanOmalleyPower');
-var seanOmalleySpeed = document.getElementById('seanOmalleySpeed');
-var jonJones = document.getElementById("jonJones");
-var jonJonesXp = document.getElementById('jonJonesXp');
-var jonJonesXpThreshold = document.getElementById('jonJonesXpThreshold');
-var jonJonesLevel = document.getElementById('jonJonesLevel');
-var jonJonesPower = document.getElementById('jonJonesPower');
-var jonJonesSpeed = document.getElementById('jonJonesSpeed');
-var alexanderVolkanovski = document.getElementById("alexanderVolkanovski");
-var alexanderVolkanovskiXp = document.getElementById('alexanderVolkanovskiXp');
-var alexanderVolkanovskiXpThreshold = document.getElementById('alexanderVolkanovskiXpThreshold');
-var alexanderVolkanovskiLevel = document.getElementById('alexanderVolkanovskiLevel');
-var alexanderVolkanovskiPower = document.getElementById('alexanderVolkanovskiPower');
-var alexanderVolkanovskiSpeed = document.getElementById('alexanderVolkanovskiSpeed');
-var alexPereira = document.getElementById("alexPereira");
-var alexPereiraXp = document.getElementById('alexPereiraXp');
-var alexPereiraXpThreshold = document.getElementById('alexPereiraXpThreshold');
-var alexPereiraLevel = document.getElementById('alexPereiraLevel');
-var alexPereiraPower = document.getElementById('alexPereiraPower');
-var alexPereiraSpeed = document.getElementById('alexPereiraSpeed');
-var islamMakhachev = document.getElementById("islamMakhachev");
-var islamMakhachevXp = document.getElementById('islamMakhachevXp');
-var islamMakhachevXpThreshold = document.getElementById('islamMakhachevXpThreshold');
-var islamMakhachevLevel = document.getElementById('islamMakhachevLevel');
-var islamMakhachevPower = document.getElementById('islamMakhachevPower');
-var islamMakhachevSpeed = document.getElementById('islamMakhachevSpeed');
-var maxHolloway = document.getElementById("maxHolloway");
-var maxHollowayXp = document.getElementById('maxHollowayXp');
-var maxHollowayXpThreshold = document.getElementById('maxHollowayXpThreshold');
-var maxHollowayLevel = document.getElementById('maxHollowayLevel');
-var maxHollowayPower = document.getElementById('maxHollowayPower');
-var maxHollowaySpeed = document.getElementById('maxHollowaySpeed');
-var tomAspinall = document.getElementById("tomAspinall");
-var tomAspinallXp = document.getElementById('tomAspinallXp');
-var tomAspinallXpThreshold = document.getElementById('tomAspinallXpThreshold');
-var tomAspinallLevel = document.getElementById('tomAspinallLevel');
-var tomAspinallPower = document.getElementById('tomAspinallPower');
-var tomAspinallSpeed = document.getElementById('tomAspinallSpeed');
-var israelAdesanya = document.getElementById("israelAdesanya");
-var israelAdesanyaXp = document.getElementById('israelAdesanyaXp');
-var israelAdesanyaXpThreshold = document.getElementById('israelAdesanyaXpThreshold');
-var israelAdesanyaLevel = document.getElementById('israelAdesanyaLevel');
-var israelAdesanyaPower = document.getElementById('israelAdesanyaPower');
-var israelAdesanyaSpeed = document.getElementById('israelAdesanyaSpeed');
-var charlesOliveira = document.getElementById("charlesOliveira");
-var charlesOliveiraXp = document.getElementById('charlesOliveiraXp');
-var charlesOliveiraXpThreshold = document.getElementById('charlesOliveiraXpThreshold');
-var charlesOliveiraLevel = document.getElementById('charlesOliveiraLevel');
-var charlesOliveiraPower = document.getElementById('charlesOliveiraPower');
-var charlesOliveiraSpeed = document.getElementById('charlesOliveiraSpeed');
-shopElement.addEventListener("click", (function () {
-    shopItems.forEach(function (item) {
-        item.style.display = item.style.display === 'none' ? 'block' : 'none';
-    });
-}));
-colbyCovington.addEventListener("click", (function () {
-    if (!colbyCovingtonInterval) {
+function updateUi() {
+    elements.colbyCovingtonXp.innerHTML = ottelijat.xp[0].toFixed(0).toLocaleString();
+    elements.colbyCovingtonXpThreshold.innerHTML = ottelijat.xpThreshold[0].toFixed(0).toLocaleString();
+    elements.colbyCovingtonLevel.innerHTML = ottelijat.level[0].toFixed(0).toLocaleString();
+    elements.colbyCovingtonPower.innerHTML = ottelijat.power[0].toFixed(0).toLocaleString();
+    elements.colbyCovingtonSpeed.innerHTML = ottelijat.speed[0].toFixed(0).toLocaleString();
+    elements.kamaruUsmanXp.innerHTML = ottelijat.xp[1].toFixed(0).toLocaleString();
+    elements.kamaruUsmanXpThreshold.innerHTML = ottelijat.xpThreshold[1].toFixed(0).toLocaleString();
+    elements.kamaruUsmanLevel.innerHTML = ottelijat.level[1].toFixed(0).toLocaleString();
+    elements.kamaruUsmanPower.innerHTML = ottelijat.power[1].toFixed(0).toLocaleString();
+    elements.kamaruUsmanSpeed.innerHTML = ottelijat.speed[1].toFixed(0).toLocaleString();
+    elements.shavkatRakhmonovXp.innerHTML = ottelijat.xp[2].toFixed(0).toLocaleString();
+    elements.shavkatRakhmonovXpThreshold.innerHTML = ottelijat.xpThreshold[2].toFixed(0).toLocaleString();
+    elements.shavkatRakhmonovLevel.innerHTML = ottelijat.level[2].toFixed(0).toLocaleString();
+    elements.shavkatRakhmonovPower.innerHTML = ottelijat.power[2].toFixed(0).toLocaleString();
+    elements.shavkatRakhmonovSpeed.innerHTML = ottelijat.speed[2].toFixed(0).toLocaleString();
+    elements.seanOmalleyXp.innerHTML = ottelijat.xp[3].toFixed(0).toLocaleString();
+    elements.seanOmalleyXpThreshold.innerHTML = ottelijat.xpThreshold[3].toFixed(0).toLocaleString();
+    elements.seanOmalleyLevel.innerHTML = ottelijat.level[3].toFixed(0).toLocaleString();
+    elements.seanOmalleyPower.innerHTML = ottelijat.power[3].toFixed(0).toLocaleString();
+    elements.seanOmalleySpeed.innerHTML = ottelijat.speed[3].toFixed(0).toLocaleString();
+    elements.jonJonesXp.innerHTML = ottelijat.xp[4].toFixed(0).toLocaleString();
+    elements.jonJonesXpThreshold.innerHTML = ottelijat.xpThreshold[4].toFixed(0).toLocaleString();
+    elements.jonJonesLevel.innerHTML = ottelijat.level[4].toFixed(0).toLocaleString();
+    elements.jonJonesPower.innerHTML = ottelijat.power[4].toFixed(0).toLocaleString();
+    elements.jonJonesSpeed.innerHTML = ottelijat.speed[4].toFixed(0).toLocaleString();
+    elements.alexanderVolkanovskiXp.innerHTML = ottelijat.xp[5].toFixed(0).toLocaleString();
+    elements.alexanderVolkanovskiXpThreshold.innerHTML = ottelijat.xpThreshold[5].toFixed(0).toLocaleString();
+    elements.alexanderVolkanovskiLevel.innerHTML = ottelijat.level[5].toFixed(0).toLocaleString();
+    elements.alexanderVolkanovskiPower.innerHTML = ottelijat.power[5].toFixed(0).toLocaleString();
+    elements.alexanderVolkanovskiSpeed.innerHTML = ottelijat.speed[5].toFixed(0).toLocaleString();
+    elements.alexPereiraXp.innerHTML = ottelijat.xp[6].toFixed(0).toLocaleString();
+    elements.alexPereiraXpThreshold.innerHTML = ottelijat.xpThreshold[6].toFixed(0).toLocaleString();
+    elements.alexPereiraLevel.innerHTML = ottelijat.level[6].toFixed(0).toLocaleString();
+    elements.alexPereiraPower.innerHTML = ottelijat.power[6].toFixed(0).toLocaleString();
+    elements.alexPereiraSpeed.innerHTML = ottelijat.speed[6].toFixed(0).toLocaleString();
+    elements.islamMakhachevXp.innerHTML = ottelijat.xp[7].toFixed(0).toLocaleString();
+    elements.islamMakhachevXpThreshold.innerHTML = ottelijat.xpThreshold[7].toFixed(0).toLocaleString();
+    elements.islamMakhachevLevel.innerHTML = ottelijat.level[7].toFixed(0).toLocaleString();
+    elements.islamMakhachevPower.innerHTML = ottelijat.power[7].toFixed(0).toLocaleString();
+    elements.islamMakhachevSpeed.innerHTML = ottelijat.speed[7].toFixed(0).toLocaleString();
+    elements.maxHollowayXp.innerHTML = ottelijat.xp[8].toFixed(0).toLocaleString();
+    elements.maxHollowayXpThreshold.innerHTML = ottelijat.xpThreshold[8].toFixed(0).toLocaleString();
+    elements.maxHollowayLevel.innerHTML = ottelijat.level[8].toFixed(0).toLocaleString();
+    elements.maxHollowayPower.innerHTML = ottelijat.power[8].toFixed(0).toLocaleString();
+    elements.maxHollowaySpeed.innerHTML = ottelijat.speed[8].toFixed(0).toLocaleString();
+    elements.tomAspinallXp.innerHTML = ottelijat.xp[9].toFixed(0).toLocaleString();
+    elements.tomAspinallXpThreshold.innerHTML = ottelijat.xpThreshold[9].toFixed(0).toLocaleString();
+    elements.tomAspinallLevel.innerHTML = ottelijat.level[9].toFixed(0).toLocaleString();
+    elements.tomAspinallPower.innerHTML = ottelijat.power[9].toFixed(0).toLocaleString();
+    elements.tomAspinallSpeed.innerHTML = ottelijat.speed[9].toFixed(0).toLocaleString();
+    elements.israelAdesanyaXp.innerHTML = ottelijat.xp[10].toFixed(0).toLocaleString();
+    elements.israelAdesanyaXpThreshold.innerHTML = ottelijat.xpThreshold[10].toFixed(0).toLocaleString();
+    elements.israelAdesanyaLevel.innerHTML = ottelijat.level[10].toFixed(0).toLocaleString();
+    elements.israelAdesanyaPower.innerHTML = ottelijat.power[10].toFixed(0).toLocaleString();
+    elements.israelAdesanyaSpeed.innerHTML = ottelijat.speed[10].toFixed(0).toLocaleString();
+    elements.charlesOliveiraXp.innerHTML = ottelijat.xp[11].toFixed(0).toLocaleString();
+    elements.charlesOliveiraXpThreshold.innerHTML = ottelijat.xpThreshold[11].toFixed(0).toLocaleString();
+    elements.charlesOliveiraLevel.innerHTML = ottelijat.level[11].toFixed(0).toLocaleString();
+    elements.charlesOliveiraPower.innerHTML = ottelijat.power[11].toFixed(0).toLocaleString();
+    elements.charlesOliveiraSpeed.innerHTML = ottelijat.speed[11].toFixed(0).toLocaleString();
+    elements.hampaitaEl.innerHTML = new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 0 }).format(game.hampaita);
+    elements.hampaitaPerSekuntiEl.innerHTML = new Intl.NumberFormat().format(game.hampaitaPerSekunti);
+    elements.avaaSatunnainenHintaEl.innerHTML = new Intl.NumberFormat().format(game.avaaSatunnainenHinta);
+    elements.lisääTrainereitaHintaEl.innerHTML = new Intl.NumberFormat().format(game.lisääTrainereitaHinta);
+    elements.trainersEl.innerHTML = (game.maxTrainers - game.activeTrainers).toLocaleString();
+    elements.rebirthForEl.innerHTML = (game.hampaita * game.veriKerroin).toLocaleString();
+}
+elements.colbyCovington.addEventListener("click", (function () {
+    if (!ottelijat.interval[0]) {
         if (game.maxTrainers > game.activeTrainers) {
             game.activeTrainers++;
             ottelijat.isActive[0] = true;
-            colbyCovingtonInterval = setInterval(function () {
+            ottelijat.interval[0] = setInterval(function () {
                 if (ottelijat.progress[0] >= 100) {
                     ottelijat.progress[0] = 0;
                     ottelijat.xp[0] += 1;
@@ -1348,9 +1436,9 @@ colbyCovington.addEventListener("click", (function () {
                         ottelijat.xp[0] = 0;
                         ottelijat.xpThreshold[0] *= 1.2;
                         ottelijat.level[0] += 1;
-                        ottelijat.pelleCount++;
-                        ottelijat.totalCount++;
-                        updateUpgrades();
+                        game.pelleCount++;
+                        game.totalCount++;
+                        renderUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[0];
@@ -1365,19 +1453,19 @@ colbyCovington.addEventListener("click", (function () {
         }
     }
     else {
-        clearInterval(colbyCovingtonInterval);
-        colbyCovingtonInterval = null;
+        clearInterval(ottelijat.interval[0]);
+        ottelijat.interval[0] = null;
         game.activeTrainers--;
         ottelijat.isActive[0] = false;
         updateUi();
     }
 }));
-kamaruUsman.addEventListener("click", (function () {
-    if (!kamaruUsmanInterval) {
+elements.kamaruUsman.addEventListener("click", (function () {
+    if (!ottelijat.interval[1]) {
         if (game.maxTrainers > game.activeTrainers) {
             game.activeTrainers++;
             ottelijat.isActive[1] = true;
-            kamaruUsmanInterval = setInterval(function () {
+            ottelijat.interval[1] = setInterval(function () {
                 if (ottelijat.progress[1] >= 100) {
                     ottelijat.progress[1] = 0;
                     ottelijat.xp[1] += 1;
@@ -1386,10 +1474,10 @@ kamaruUsman.addEventListener("click", (function () {
                         ottelijat.xp[1] = 0;
                         ottelijat.xpThreshold[1] *= 1.2;
                         ottelijat.level[1] += 1;
-                        ottelijat.niceGuyCount++;
-                        ottelijat.afrikanMafiaCount++;
-                        ottelijat.totalCount++;
-                        updateUpgrades();
+                        game.niceGuyCount++;
+                        game.afrikanMafiaCount++;
+                        game.totalCount++;
+                        renderUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[0];
@@ -1404,19 +1492,19 @@ kamaruUsman.addEventListener("click", (function () {
         }
     }
     else {
-        clearInterval(kamaruUsmanInterval);
-        kamaruUsmanInterval = null;
+        clearInterval(ottelijat.interval[1]);
+        ottelijat.interval[1] = null;
         game.activeTrainers--;
         ottelijat.isActive[1] = false;
         updateUi();
     }
 }));
-shavkatRakhmonov.addEventListener("click", (function () {
-    if (!shavkatRakhmonovInterval) {
+elements.shavkatRakhmonov.addEventListener("click", (function () {
+    if (!ottelijat.interval[2]) {
         if (game.maxTrainers > game.activeTrainers) {
             game.activeTrainers++;
             ottelijat.isActive[2] = true;
-            shavkatRakhmonovInterval = setInterval(function () {
+            ottelijat.interval[2] = setInterval(function () {
                 if (ottelijat.progress[2] >= 100) {
                     ottelijat.progress[2] = 0;
                     ottelijat.xp[2] += 1;
@@ -1425,10 +1513,10 @@ shavkatRakhmonov.addEventListener("click", (function () {
                         ottelijat.xp[2] = 0;
                         ottelijat.xpThreshold[2] *= 1.2;
                         ottelijat.level[2] += 1;
-                        ottelijat.dagestanCount++;
-                        ottelijat.chadCount++;
-                        ottelijat.totalCount++;
-                        updateUpgrades();
+                        game.dagestanCount++;
+                        game.chadCount++;
+                        game.totalCount++;
+                        renderUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[0];
@@ -1443,19 +1531,19 @@ shavkatRakhmonov.addEventListener("click", (function () {
         }
     }
     else {
-        clearInterval(shavkatRakhmonovInterval);
-        shavkatRakhmonovInterval = null;
+        clearInterval(ottelijat.interval[2]);
+        ottelijat.interval[2] = null;
         game.activeTrainers--;
         ottelijat.isActive[2] = false;
         updateUi();
     }
 }));
-seanOmalley.addEventListener("click", (function () {
-    if (!seanOmalleyInterval) {
+elements.seanOmalley.addEventListener("click", (function () {
+    if (!ottelijat.interval[3]) {
         if (game.maxTrainers > game.activeTrainers) {
             game.activeTrainers++;
             ottelijat.isActive[3] = true;
-            seanOmalleyInterval = setInterval(function () {
+            ottelijat.interval[3] = setInterval(function () {
                 if (ottelijat.progress[3] >= 100) {
                     ottelijat.progress[3] = 0;
                     ottelijat.xp[3] += 1;
@@ -1464,11 +1552,11 @@ seanOmalley.addEventListener("click", (function () {
                         ottelijat.xp[3] = 0;
                         ottelijat.xpThreshold[3] *= 1.2;
                         ottelijat.level[3] += 1;
-                        ottelijat.pelleCount++;
-                        ottelijat.lookingAssCount++;
-                        ottelijat.championCount++;
-                        ottelijat.totalCount++;
-                        updateUpgrades();
+                        game.pelleCount++;
+                        game.lookingAssCount++;
+                        game.championCount++;
+                        game.totalCount++;
+                        renderUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[3];
@@ -1483,19 +1571,19 @@ seanOmalley.addEventListener("click", (function () {
         }
     }
     else {
-        clearInterval(seanOmalleyInterval);
-        seanOmalleyInterval = null;
+        clearInterval(ottelijat.interval[3]);
+        ottelijat.interval[3] = null;
         game.activeTrainers--;
         ottelijat.isActive[3] = false;
         updateUi();
     }
 }));
-jonJones.addEventListener("click", (function () {
-    if (!jonJonesInterval) {
+elements.jonJones.addEventListener("click", (function () {
+    if (!ottelijat.interval[4]) {
         if (game.maxTrainers > game.activeTrainers) {
             game.activeTrainers++;
             ottelijat.isActive[4] = true;
-            jonJonesInterval = setInterval(function () {
+            ottelijat.interval[4] = setInterval(function () {
                 if (ottelijat.progress[4] >= 100) {
                     ottelijat.progress[4] = 0;
                     ottelijat.xp[4] += 1;
@@ -1504,11 +1592,11 @@ jonJones.addEventListener("click", (function () {
                         ottelijat.xp[4] = 0;
                         ottelijat.xpThreshold[4] *= 1.2;
                         ottelijat.level[4] += 1;
-                        ottelijat.pelleCount++;
-                        ottelijat.chadCount++;
-                        ottelijat.championCount++;
-                        ottelijat.totalCount++;
-                        updateUpgrades();
+                        game.pelleCount++;
+                        game.chadCount++;
+                        game.championCount++;
+                        game.totalCount++;
+                        renderUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[4];
@@ -1523,19 +1611,19 @@ jonJones.addEventListener("click", (function () {
         }
     }
     else {
-        clearInterval(jonJonesInterval);
-        jonJonesInterval = null;
+        clearInterval(ottelijat.interval[4]);
+        ottelijat.interval[4] = null;
         game.activeTrainers--;
         ottelijat.isActive[4] = false;
         updateUi();
     }
 }));
-alexanderVolkanovski.addEventListener("click", (function () {
-    if (!alexanderVolkanovskiInterval) {
+elements.alexanderVolkanovski.addEventListener("click", (function () {
+    if (!ottelijat.interval[5]) {
         if (game.maxTrainers > game.activeTrainers) {
             game.activeTrainers++;
             ottelijat.isActive[5] = true;
-            alexanderVolkanovskiInterval = setInterval(function () {
+            ottelijat.interval[5] = setInterval(function () {
                 if (ottelijat.progress[5] >= 100) {
                     ottelijat.progress[5] = 0;
                     ottelijat.xp[5] += 1;
@@ -1544,9 +1632,9 @@ alexanderVolkanovski.addEventListener("click", (function () {
                         ottelijat.xp[5] = 0;
                         ottelijat.xpThreshold[5] *= 1.2;
                         ottelijat.level[5] += 1;
-                        ottelijat.niceGuyCount++;
-                        ottelijat.totalCount++;
-                        updateUpgrades();
+                        game.niceGuyCount++;
+                        game.totalCount++;
+                        renderUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[5];
@@ -1561,19 +1649,19 @@ alexanderVolkanovski.addEventListener("click", (function () {
         }
     }
     else {
-        clearInterval(alexanderVolkanovskiInterval);
-        alexanderVolkanovskiInterval = null;
+        clearInterval(ottelijat.interval[5]);
+        ottelijat.interval[5] = null;
         game.activeTrainers--;
         ottelijat.isActive[5] = false;
         updateUi();
     }
 }));
-alexPereira.addEventListener("click", (function () {
-    if (!alexPereiraInterval) {
+elements.alexPereira.addEventListener("click", (function () {
+    if (!ottelijat.interval[6]) {
         if (game.maxTrainers > game.activeTrainers) {
             game.activeTrainers++;
             ottelijat.isActive[6] = true;
-            alexPereiraInterval = setInterval(function () {
+            ottelijat.interval[6] = setInterval(function () {
                 if (ottelijat.progress[6] >= 100) {
                     ottelijat.progress[6] = 0;
                     ottelijat.xp[6] += 1;
@@ -1582,10 +1670,10 @@ alexPereira.addEventListener("click", (function () {
                         ottelijat.xp[6] = 0;
                         ottelijat.xpThreshold[6] *= 1.2;
                         ottelijat.level[6] += 1;
-                        ottelijat.chadCount++;
-                        ottelijat.championCount += 2;
-                        ottelijat.totalCount++;
-                        updateUpgrades();
+                        game.chadCount++;
+                        game.championCount += 2;
+                        game.totalCount++;
+                        renderUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[6];
@@ -1600,19 +1688,19 @@ alexPereira.addEventListener("click", (function () {
         }
     }
     else {
-        clearInterval(alexPereiraInterval);
-        alexPereiraInterval = null;
+        clearInterval(ottelijat.interval[6]);
+        ottelijat.interval[6] = null;
         game.activeTrainers--;
         ottelijat.isActive[6] = false;
         updateUi();
     }
 }));
-islamMakhachev.addEventListener("click", (function () {
-    if (!islamMakhachevInterval) {
+elements.islamMakhachev.addEventListener("click", (function () {
+    if (!ottelijat.interval[7]) {
         if (game.maxTrainers > game.activeTrainers) {
             game.activeTrainers++;
             ottelijat.isActive[7] = true;
-            islamMakhachevInterval = setInterval(function () {
+            ottelijat.interval[7] = setInterval(function () {
                 if (ottelijat.progress[7] >= 100) {
                     ottelijat.progress[7] = 0;
                     ottelijat.xp[7] += 1;
@@ -1621,11 +1709,11 @@ islamMakhachev.addEventListener("click", (function () {
                         ottelijat.xp[7] = 0;
                         ottelijat.xpThreshold[7] *= 1.2;
                         ottelijat.level[7] += 1;
-                        ottelijat.dagestanCount++;
-                        ottelijat.lookingAssCount++;
-                        ottelijat.championCount++;
-                        ottelijat.totalCount++;
-                        updateUpgrades();
+                        game.dagestanCount++;
+                        game.lookingAssCount++;
+                        game.championCount++;
+                        game.totalCount++;
+                        renderUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[7];
@@ -1640,19 +1728,19 @@ islamMakhachev.addEventListener("click", (function () {
         }
     }
     else {
-        clearInterval(islamMakhachevInterval);
-        islamMakhachevInterval = null;
+        clearInterval(ottelijat.interval[7]);
+        ottelijat.interval[7] = null;
         game.activeTrainers--;
         ottelijat.isActive[7] = false;
         updateUi();
     }
 }));
-maxHolloway.addEventListener("click", (function () {
-    if (!maxHollowayInterval) {
+elements.maxHolloway.addEventListener("click", (function () {
+    if (!ottelijat.interval[8]) {
         if (game.maxTrainers > game.activeTrainers) {
             game.activeTrainers++;
             ottelijat.isActive[8] = true;
-            maxHollowayInterval = setInterval(function () {
+            ottelijat.interval[8] = setInterval(function () {
                 if (ottelijat.progress[8] >= 100) {
                     ottelijat.progress[8] = 0;
                     ottelijat.xp[8] += 1;
@@ -1661,9 +1749,9 @@ maxHolloway.addEventListener("click", (function () {
                         ottelijat.xp[8] = 0;
                         ottelijat.xpThreshold[8] *= 1.2;
                         ottelijat.level[8] += 1;
-                        ottelijat.chadCount++;
-                        ottelijat.totalCount++;
-                        updateUpgrades();
+                        game.chadCount++;
+                        game.totalCount++;
+                        renderUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[8];
@@ -1678,18 +1766,18 @@ maxHolloway.addEventListener("click", (function () {
         }
     }
     else {
-        clearInterval(maxHollowayInterval);
-        maxHollowayInterval = null;
+        clearInterval(ottelijat.interval[8]);
+        ottelijat.interval[8] = null;
         game.activeTrainers--;
         ottelijat.isActive[8] = false;
     }
 }));
-tomAspinall.addEventListener("click", (function () {
-    if (!tomAspinallInterval) {
+elements.tomAspinall.addEventListener("click", (function () {
+    if (!ottelijat.interval[9]) {
         if (game.maxTrainers > game.activeTrainers) {
             game.activeTrainers++;
             ottelijat.isActive[9] = true;
-            tomAspinallInterval = setInterval(function () {
+            ottelijat.interval[9] = setInterval(function () {
                 if (ottelijat.progress[9] >= 100) {
                     ottelijat.progress[9] = 0;
                     ottelijat.xp[9] += 1;
@@ -1698,10 +1786,10 @@ tomAspinall.addEventListener("click", (function () {
                         ottelijat.xp[9] = 0;
                         ottelijat.xpThreshold[9] *= 1.2;
                         ottelijat.level[9] += 1;
-                        ottelijat.niceGuyCount++;
-                        ottelijat.championCount++;
-                        ottelijat.totalCount++;
-                        updateUpgrades();
+                        game.niceGuyCount++;
+                        game.championCount++;
+                        game.totalCount++;
+                        renderUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[9];
@@ -1716,19 +1804,19 @@ tomAspinall.addEventListener("click", (function () {
         }
     }
     else {
-        clearInterval(tomAspinallInterval);
-        tomAspinallInterval = null;
+        clearInterval(ottelijat.interval[9]);
+        ottelijat.interval[9] = null;
         game.activeTrainers--;
         ottelijat.isActive[9] = false;
         updateUi();
     }
 }));
-israelAdesanya.addEventListener("click", (function () {
-    if (!israelAdesanyaInterval) {
+elements.israelAdesanya.addEventListener("click", (function () {
+    if (!ottelijat.interval[10]) {
         if (game.maxTrainers > game.activeTrainers) {
             game.activeTrainers++;
             ottelijat.isActive[10] = true;
-            israelAdesanyaInterval = setInterval(function () {
+            ottelijat.interval[10] = setInterval(function () {
                 if (ottelijat.progress[10] >= 100) {
                     ottelijat.progress[10] = 0;
                     ottelijat.xp[10] += 1;
@@ -1737,10 +1825,10 @@ israelAdesanya.addEventListener("click", (function () {
                         ottelijat.xp[10] = 0;
                         ottelijat.xpThreshold[10] *= 1.2;
                         ottelijat.level[10] += 1;
-                        ottelijat.pelleCount++;
-                        ottelijat.afrikanMafiaCount++;
-                        ottelijat.totalCount++;
-                        updateUpgrades();
+                        game.pelleCount++;
+                        game.afrikanMafiaCount++;
+                        game.totalCount++;
+                        renderUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[10];
@@ -1755,19 +1843,19 @@ israelAdesanya.addEventListener("click", (function () {
         }
     }
     else {
-        clearInterval(israelAdesanyaInterval);
-        israelAdesanyaInterval = null;
+        clearInterval(ottelijat.interval[10]);
+        ottelijat.interval[10] = null;
         game.activeTrainers--;
         ottelijat.isActive[10] = false;
         updateUi();
     }
 }));
-charlesOliveira.addEventListener("click", (function () {
-    if (!charlesOliveiraInterval) {
+elements.charlesOliveira.addEventListener("click", (function () {
+    if (!ottelijat.interval[11]) {
         if (game.maxTrainers > game.activeTrainers) {
             game.activeTrainers++;
             ottelijat.isActive[11] = true;
-            charlesOliveiraInterval = setInterval(function () {
+            ottelijat.interval[11] = setInterval(function () {
                 if (ottelijat.progress[11] >= 100) {
                     ottelijat.progress[11] = 0;
                     ottelijat.xp[11] += 1;
@@ -1776,9 +1864,9 @@ charlesOliveira.addEventListener("click", (function () {
                         ottelijat.xp[11] = 0;
                         ottelijat.xpThreshold[11] *= 1.2;
                         ottelijat.level[11] += 1;
-                        ottelijat.niceGuyCount++;
-                        ottelijat.totalCount++;
-                        updateUpgrades();
+                        game.niceGuyCount++;
+                        game.totalCount++;
+                        renderUpgrades();
                     }
                     ;
                     game.hampaita += ottelijat.power[11];
@@ -1793,39 +1881,59 @@ charlesOliveira.addEventListener("click", (function () {
         }
     }
     else {
-        clearInterval(charlesOliveiraInterval);
-        charlesOliveiraInterval = null;
+        clearInterval(ottelijat.interval[11]);
+        ottelijat.interval[11] = null;
         game.activeTrainers--;
         ottelijat.isActive[11] = false;
         updateUi();
     }
 }));
-save.addEventListener("click", (function () {
+elements.saveButton.addEventListener("click", (function () {
     saveGame();
 }));
-/*load!.addEventListener("click", (() => {
+/*elements.loadButton!.addEventListener("click", (() => {
   loadGame();
 }));*/
-reset.addEventListener("click", (function () {
+elements.resetButton.addEventListener("click", (function () {
     resetGame();
 }));
-avaaSatunnainenElement.addEventListener("click", (function () {
+elements.shopButton.addEventListener("click", function () {
+    game.shopOpen = !game.shopOpen;
+    elements.shopItemsArr.forEach(function (item) {
+        item.style.display = game.shopOpen ? 'block' : 'none';
+    });
+});
+elements.avaaSatunnainenButton.addEventListener("click", (function () {
     avaaSatunnainen();
     updateUi();
 }));
-/*avaaValitsemaElement!.addEventListener("click", (() => {
-  avaaValitsema();
-}));*/
-lisääTrainereitaElement.addEventListener("click", (function () {
+elements.lisääTrainereitaButton.addEventListener("click", (function () {
     lisääTrainereita();
 }));
+elements.rebirthButton.addEventListener("click", (function () {
+    rebirth();
+}));
 window.onload = function () {
-    updateUpgrades();
+    game.shopOpen = false;
+    elements.shopItemsArr.forEach(function (item) {
+        item.style.display = "none";
+    });
+    renderUpgrades();
     loadGame();
-    offlineGains();
-    game.activeTrainers = 0;
+    //offlineGains();
+    updateUi();
+    elements.trainersEl.innerHTML = game.maxTrainers.toString();
+};
+window.addEventListener('beforeunload', function () {
+    //game.activeTrainers = 0;
     for (var i = 0; i < ottelijat.isActive.length; i++) {
+        var intervalId = ottelijat.interval[i];
+        if (intervalId !== null && intervalId !== undefined) {
+            clearInterval(intervalId);
+        }
+        ottelijat.interval[i] = null;
+        game.activeTrainers = 0;
         ottelijat.isActive[i] = false;
     }
-    updateUi();
-};
+    saveGame();
+});

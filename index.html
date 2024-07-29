@@ -10,7 +10,7 @@
 <body>
 
     <nav>
-        <p>v0.1.0</p>
+        <p>v0.1.6</p>
         <a href="./index.html" class="navigointi">Koti</a>
         <!--<a href="./lukitutOttelijat.html" class="navigointi">Lukitut</a>-->
         <button id="save">Save</button>
@@ -27,9 +27,10 @@
 
     <div id="shop">
         <h1>Shop</h1>
-        <p class="shopItem" id="avaaSatunnainen">Unlock: <span id="avaaSatunnainenHinta">10</span>&#x1F9B7;</p>
+        <p class="shopItem" id="avaaSatunnainen">Unlock: <span id="avaaSatunnainenHinta">1</span>&#x1F9B7;</p>
         <!--<p class="shopItem" id="avaaValitsema">Avaa valitsema ottelija: <span id="avaaValitsemaHinta">100</span>&#x1F9B7;</p>-->
         <p class="shopItem" id="lisääTrainereita">Trainer: <span id="lisääTrainereitaHinta">50</span>&#x1F9B7;</p>
+        <button class="shopItem" id="rebirth">Rebirth (<span id="rebirthFor"></span>)</button>
     </div>
 
     <div id="upgradeContainer">
@@ -37,7 +38,7 @@
     </div>
 
     <div id="app">
-        <div class="ottelijaContainer" id="colbyCovingtonContainer">
+        <div data-index="0" class="ottelijaContainer" id="colbyCovingtonContainer">
             <div class="ottelija" id="colbyCovington">
                 <img src="./assets/colbyCovington.png" alt="">
                 <div class="ottelijaInfo" id="colbyCovingtonInfo">
@@ -54,7 +55,7 @@
                 <div id="colbyCovingtonBar"></div>
             </div>
         </div>
-        <div class="ottelijaContainer" id="kamaruUsmanContainer">
+        <div class="ottelijaContainer" id="kamaruUsmanContainer" data-index="1">
             <div class="ottelija" id="kamaruUsman">
                 <img src="./assets/kamaruUsman.png" alt="">
                 <div class="ottelijaInfo" id="kamaruUsmanInfo">
@@ -71,7 +72,7 @@
                 <div id="kamaruUsmanBar"></div>
             </div>
         </div>
-        <div class="ottelijaContainer" id="shavkatRakhmonovContainer">
+        <div class="ottelijaContainer" id="shavkatRakhmonovContainer" data-index="2">
             <div class="ottelija" id="shavkatRakhmonov">
                 <img src="./assets/shavkatRakhmonov.png" alt="">
                 <div class="ottelijaInfo" id="shavkatRakhmonovInfo">
@@ -88,7 +89,7 @@
                 <div id="shavkatRakhmonovBar"></div>
             </div>
         </div>
-        <div class="ottelijaContainer" id="seanOmalleyContainer">
+        <div class="ottelijaContainer" id="seanOmalleyContainer" data-index="3">
             <div class="ottelija" id="seanOmalley">
                 <img src="./assets/seanOmalley.png" alt="">
                 <div class="ottelijaInfo" id="seanOmalleyInfo">
@@ -105,7 +106,7 @@
                 <div id="seanOmalleyBar"></div>
             </div>
         </div>
-        <div class="ottelijaContainer" id="jonJonesContainer">
+        <div class="ottelijaContainer" id="jonJonesContainer" data-index="4">
             <div class="ottelija" id="jonJones">
                 <img src="./assets/jonJones.png" alt="">
                 <div class="ottelijaInfo" id="jonJonesInfo">
@@ -122,7 +123,7 @@
                 <div id="jonJonesBar"></div>
             </div>
         </div>
-        <div class="ottelijaContainer" id="alexanderVolkanovskiContainer">
+        <div class="ottelijaContainer" id="alexanderVolkanovskiContainer" data-index="5">
             <div class="ottelija" id="alexanderVolkanovski">
                 <img src="./assets/alexanderVolkanovski.png" alt="">
                 <div class="ottelijaInfo" id="alexanderVolkanovskiInfo">
@@ -139,7 +140,7 @@
                 <div id="alexanderVolkanovskiBar"></div>
             </div>
         </div>
-        <div class="ottelijaContainer" id="alexPereiraContainer">
+        <div class="ottelijaContainer" id="alexPereiraContainer" data-index="6">
             <div class="ottelija" id="alexPereira">
                 <img src="./assets/alexPereira.png" alt="">
                 <div class="ottelijaInfo" id="alexPereiraInfo">
@@ -156,7 +157,7 @@
                 <div id="alexPereiraBar"></div>
             </div>
         </div>
-        <div class="ottelijaContainer" id="islamMakhachevContainer">
+        <div class="ottelijaContainer" id="islamMakhachevContainer" data-index="7">
             <div class="ottelija" id="islamMakhachev">
                 <img src="./assets/islamMakhachev.png" alt="">
                 <div class="ottelijaInfo" id="islamMakhachevInfo">
@@ -173,7 +174,7 @@
                 <div id="islamMakhachevBar"></div>
             </div>
         </div>
-        <div class="ottelijaContainer" id="maxHollowayContainer">
+        <div class="ottelijaContainer" id="maxHollowayContainer" data-index="8">
             <div class="ottelija" id="maxHolloway">
                 <img src="./assets/maxHolloway.png" alt="">
                 <div class="ottelijaInfo" id="maxHollowayInfo">
@@ -190,7 +191,7 @@
                 <div id="maxHollowayBar"></div>
             </div>
         </div>
-        <div class="ottelijaContainer" id="tomAspinallContainer">
+        <div class="ottelijaContainer" id="tomAspinallContainer" data-index="9">
             <div class="ottelija" id="tomAspinall">
                 <img src="./assets/tomAspinall.png" alt="">
                 <div class="ottelijaInfo" id="tomAspinallInfo">
@@ -207,7 +208,7 @@
                 <div id="tomAspinallBar"></div>
             </div>
         </div>
-        <div class="ottelijaContainer" id="israelAdesanyaContainer">
+        <div class="ottelijaContainer" id="israelAdesanyaContainer" data-index="10">
             <div class="ottelija" id="israelAdesanya">
                 <img src="./assets/israelAdesanya.png" alt="">
                 <div class="ottelijaInfo" id="israelAdesanyaInfo">
@@ -224,7 +225,7 @@
                 <div id="israelAdesanyaBar"></div>
             </div>
         </div>
-        <div class="ottelijaContainer" id="charlesOliveiraContainer">
+        <div class="ottelijaContainer" id="charlesOliveiraContainer" data-index="11">
             <div class="ottelija" id="charlesOliveira">
                 <img src="./assets/charlesOliveira.png" alt="">
                 <div class="ottelijaInfo" id="charlesOliveiraInfo">

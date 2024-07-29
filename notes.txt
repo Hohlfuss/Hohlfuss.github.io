@@ -43,6 +43,17 @@ pääsin myös eroon ku se herjas siitä osta funktiosta.
 korjasin ottelijan oston että se ensin tarkistaa onko ulocked
 parantelin upgradenappeja
 
+0.1.4
+koodin siivoomista 
+ja sain rebithiä alkuun
+
+0.1.5
+perseilly koko yön.
+
+0.1.6
+kojasin upgradet ja niiden ostamis function on optimoitu.
+korjasin sen oudon tainer bugin ku päivitti sivun.
+
 todo:
 
   -valitse ostettava
